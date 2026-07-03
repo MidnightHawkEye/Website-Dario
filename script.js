@@ -23,7 +23,7 @@ function scrollToSection(id) {
 
 /* Tipping intro Text */
 
-const text = "Automation Specialist | JavaScript Developer | Future Pentester";
+const text = "Building systems. Breaking limits. Learning code.";
 let i = 0;
 
 function typeWriter() {
