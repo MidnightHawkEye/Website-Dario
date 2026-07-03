@@ -1,7 +1,7 @@
 window.onload = () => {
     gsap.to("#loader", {
         opacity:0,
-        duration:2.5,
+        duration:1.5,
         onComplete: () => {
             document.getElementById("loader").style.display = "none";
         }

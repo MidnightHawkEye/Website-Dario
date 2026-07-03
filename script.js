@@ -36,26 +36,3 @@ function typeWriter() {
 
 typeWriter();
 
-/*--------------------- EmailJS ---------------------*/
-
-emailjs.init({
-    publicKey: "D5nlmTR93lnLoD6jw"
-});
-
-document.getElementById("contact-form").addEventListener("submit", function(e) {
-    e.preventDefault();
-
-    emailjs.sendForm(
-        "service_rqtw9ef",
-        "template_8nufkke",
-        this
-    )
-    .then(() => {
-        alert("Thanks for contacting DARIO.exe. System received.");
-        this.reset();
-    })
-    .catch((error) => {
-        alert("Transmission failed ❌");
-        console.log(error);
-    });
-});

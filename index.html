@@ -12,16 +12,14 @@
 
 <div class="matrix-bg"></div>
 
-<header>
-
-    <input type="text" name="website" id="website" style="display:none;">
-    
-    <div id="loader">
+<div id="loader">
         <h1>INITIALIZING DARIO.exe</h1>
     </div>
 
+<header>
+    
     <nav>
-        <div class="logo">DARIO.exe</div>
+        <div class="logo"><h2>DARIO.exe</h2></div>
         <ul>
             <li><a href="#about">About</a></li>
             <li><a href="#skills">Skills</a></li>
@@ -38,8 +36,10 @@
         <h1 class="glitch" data-text="DARIO">DARIO</h1>
         <p id="typing"></p>
         <button onclick="scrollToSection('about')">ENTER SYSTEM</button>
-        <div class="hero-description">
-</div>
+        <div class="hero-description"><br>
+            <p>Industrial automation specialist transitioning into software engineering and cybersecurity.
+            Building systems, writing code and creating the future.</p>
+        </div>
     </div>
 </section>
 
@@ -49,7 +49,7 @@
     </div>
 
     <div class="about-right">
-        <h2>About Me Who Am I</h2>
+        <h2>Who Am I</h2>
         <br>
 
     <p>
@@ -92,24 +92,55 @@
         <div class="card">
             <h3>JavaScript</h3>
             <br>
-                <p>Learning core logic, DOM manipulation,
-                APIs and building interactive web applications.</p>
-        </div>
-        <div class="card">HTML / CSS</div>
-        <div class="card">PLC Automation</div>
-        <div class="card">Cybersecurity</div>
-        <div class="card">GitHub</div>
-        <div class="card">Networking</div>
+                <p>Learning core logic, DOM manipulation, APIs and building interactive web applications.</p></div>
+        <div class="card">
+            <h3>HTML / CSS</h3>
+            <br>
+                <p>Building responsive layouts and UI systems.</p></div>
+        <div class="card">
+            <h3>PLC Automation</h3>
+            <br>
+                <p>Developing and maintaining industrial automation systems, optimizing processes and controlling real-world machinery.</p></div>
+        <div class="card"><h3>Cybersecurity</h3>
+            <br>
+            <p>Exploring offensive and defensive security concepts, networking fundamentals and system vulnerabilities.</p></div>
+        <div class="card"><h3>GitHub</h3>
+            <br>
+            <p>Managing projects, version control and deployment workflows for scalable and maintainable development.</p></div>
+        <div class="card"><h3>Networking</h3>
+            <br>
+            <p>Understanding network architecture, protocols, IP structures and communication between digital systems.</p></div>
     </div>
 </section>
 
 <section id="projects" class="section">
     <h2>Projects</h2>
     <div class="project-grid">
-        <div class="project-card">This Website</div>
-        <div class="project-card">ClubChecker</div>
-        <div class="project-card">Comic Calculator</div>
-        <div class="project-card">Game Of Life</div>
+        <div class="project-card">
+            <h3>DARIO.exe</h3>
+            <br>
+            <p>Personal hacker-style portfolio website with animations, contact system and matrix effects.</p>
+            <br>
+            <a href="https://github.com/MidnightHawkEye/Website-Dario" target="_blank" class="project-link">View Project</a></div>
+        <div class="project-card">
+            <h3>ClubCheck</h3>
+            <br>
+            <p>A guest tracking web application designed to manage entries, count visitors and simplify event attendance</p>
+            <br>
+            <a href="https://midnighthawkeye.github.io/ClubCheck/" target="_blank" class="project-link">View Project</a></p></div>
+        <div class="project-card">
+            <h3>Comic Calculator</h3>
+            <br>
+            <p>An interactive calculator with animated UI, operation history and custom logic handling for a playful user experience.</p>
+            <br>
+            <a href="https://midnighthawkeye.github.io/ComicCalculator/" target="_blank" class="project-link">View Project</a></p></div>
+        <div class="project-card">
+            <h3>Game Of Life</h3>
+            <br>
+            <p>A simulation of Conway’s Game of Life built with JavaScript, visualizing evolving patterns through algorithmic logic.</p>
+            <br>
+            <a href="https://midnighthawkeye.github.io/game-of-life/" target="_blank" class="project-link">View Project</a>
+            </p></div>
     </div>
 </section>
 
@@ -123,6 +154,7 @@
 <section id="contact" class="section">
     <h2>Contact Terminal</h2>
     <form id="contact-form">
+        <input type="text" name="website" id="website" style="display:none;">
         <input type="text" name="name" placeholder="Name" required>
         <input type="email" name="email" placeholder="Email" required>
         <textarea name="message" placeholder="Your message" required></textarea>
@@ -131,10 +163,14 @@
 </section>
 
 <canvas id="matrix"></canvas>
+
+
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script src="script.js"></script>
 <script src="matrix.js"></script>
 <script src="loader.js"></script>
 <script src="spamprotection.js"></script>
+
+
 </body>
 </html>
