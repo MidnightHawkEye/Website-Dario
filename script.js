@@ -36,3 +36,23 @@ function typeWriter() {
 
 typeWriter();
 
+
+
+/*--------------------- Skills Bar Loader ---------------------*/
+
+gsap.utils.toArray(".skill-fill").forEach((bar) => {
+    let targetWidth = bar.style.width;
+
+    gsap.fromTo(
+        bar,
+        { width: "0%" },
+        {
+            width: targetWidth,
+            duration: 2,
+            scrollTrigger: {
+                trigger: bar,
+                start: "top 85%"
+            }
+        }
+    );
+});

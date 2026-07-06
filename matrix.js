@@ -1,12 +1,12 @@
-const canvas = document.getElementById("matrix");
-const ctx = canvas.getContext("2d");
+const matrixCanvas = document.getElementById("matrix");
+const matrixCtx = matrixCanvas.getContext("2d");
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+matrixCanvas.width = window.innerWidth;
+matrixCanvas.height = window.innerHeight;
 
 const letters = "01アイウエオカキクケコサシスセソABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const fontSize = 16;
-const columns = canvas.width / fontSize;
+const columns = matrixCanvas.width / fontSize;
 const drops = [];
 
 for (let i = 0; i < columns; i++) {
@@ -14,18 +14,18 @@ for (let i = 0; i < columns; i++) {
 }
 
 function drawMatrix() {
-    ctx.fillStyle = "rgba(0,0,0,0.08)";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    matrixCtx.fillStyle = "rgba(0,0,0,0.08)";
+    matrixCtx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
 
-    ctx.fillStyle = "#00ff88";
-    ctx.font = fontSize + "px monospace";
+    matrixCtx.fillStyle = "#00ff88";
+    matrixCtx.font = fontSize + "px monospace";
 
     for (let i = 0; i < drops.length; i++) {
         const text = letters[Math.floor(Math.random() * letters.length)];
 
-        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        matrixCtx.fillText(text, i * fontSize, drops[i] * fontSize);
 
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+        if (drops[i] * fontSize > matrixCanvas.height && Math.random() > 0.975) {
             drops[i] = 0;
         }
 
