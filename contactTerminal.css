@@ -1,0 +1,10 @@
+/*--------------------- Contact Terminal ---------------------*/
+
+.transit-button {
+    margin-top:20px;
+    padding:15px 30px;
+    background:transparent;
+    border:1px solid #00ff88;
+    color:#00ff88;
+    cursor:pointer;
+}

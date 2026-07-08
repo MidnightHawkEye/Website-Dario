@@ -1,0 +1,24 @@
+/*--------------------- Nav Bar Hover ---------------------*/
+
+nav {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position: relative;
+    z-index: 9999;
+}
+
+nav ul {
+    display:flex;
+    list-style:none;
+    gap:30px;
+}
+
+nav a {
+    color:#00ff88;
+    text-decoration:none;
+}
+
+nav a:hover {
+    text-shadow: 0 0 2px #b9fede;
+}

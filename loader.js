@@ -1,3 +1,6 @@
+
+/*--------------------- Loader ---------------------*/
+
 window.onload = () => {
     gsap.to("#loader", {
         opacity:0,

@@ -21,7 +21,7 @@ function scrollToSection(id) {
     });
 }
 
-/* Tipping intro Text */
+/*--------------------- Tipping intro Text ---------------------*/
 
 const text = "Building systems. Breaking limits. Learning code.";
 let i = 0;

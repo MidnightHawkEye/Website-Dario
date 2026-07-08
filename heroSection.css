@@ -1,0 +1,241 @@
+/*--------------------- Hero Section ---------------------*/
+
+.hero-description {
+    margin-top: 25px;
+    max-width: 700px;
+    line-height: 1.7;
+}
+
+.hero h1 {
+    font-size: 8rem;
+    font-weight: bold;
+    position: relative;
+    color: #00ff88;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+}
+
+.glitch {
+    position: relative;
+    animation: flicker 3s infinite;
+}
+
+.glitch::before,
+.glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+}
+
+.glitch::before {
+    left: 2px;
+    text-shadow: -2px 0 rgba(0,255,100,0.6);
+    clip-path: inset(0 0 50% 0);
+    animation: glitchTop 2s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+    left: -2px;
+    text-shadow: 2px 0 rgba(0,255,100,0.4);
+    clip-path: inset(50% 0 0 0);
+    animation: glitchBottom 1.5s infinite linear alternate-reverse;
+}
+
+@keyframes glitchTop {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, -2px); }
+    40% { transform: translate(2px, 2px); }
+    60% { transform: translate(-1px, 1px); }
+    100% { transform: translate(0); }
+}
+
+@keyframes glitchBottom {
+    0% { transform: translate(0); }
+    20% { transform: translate(2px, 2px); }
+    40% { transform: translate(-2px, -1px); }
+    60% { transform: translate(1px, -2px); }
+    100% { transform: translate(0); }
+}
+
+@keyframes flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.96; }
+}
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+    overflow:hidden;
+}
+/*
+.hero {
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}*/
+
+/*--------------------- Hero Button ---------------------*/
+
+.hero-button.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.hero-button {
+    margin-top:20px;
+    padding:15px 30px;
+    background:transparent;
+    border:1px solid #00ff88;
+    color:#00ff88;
+    cursor:pointer;
+    opacity:0;
+    transform:translateY(20px);
+    transition:all .8s ease;
+}
+
+/*--------------------- Enter Button Bar Hover ---------------------*/
+
+button:hover {
+    box-shadow: 0 0 20px #00ff88;
+    transform: scale(1.05);
+}
+
+/*--------------------- Hero Picture ---------------------*/
+
+.hero-content{
+    width:min(1400px,90%);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:80px;
+    position:relative;
+    z-index:2;
+}
+
+.hero-left{
+    flex:1;
+}
+
+.hero-right{
+    flex:1;
+    display:flex;
+    justify-content:center;
+}
+
+.hero-image{
+    width:100%;
+    max-width:700px;
+    border-radius:18px;
+    filter:
+        drop-shadow(0 0 40px rgba(0,255,136,.35));
+    animation:
+        heroReveal 1.5s ease forwards,
+        floatHero 6s ease-in-out infinite;
+    opacity:0;
+    transform:translateX(60px);
+    animation-delay:1.5s;
+}
+
+/*--------------------- Hero Picture floating Animation ---------------------*/
+
+@keyframes floatHero{
+    0%{
+        transform:translateY(0px);
+    }
+    50%{
+        transform:translateY(-12px);
+    }
+    100%{
+        transform:translateY(0px);
+    }
+}
+
+@media(max-width:900px){
+
+    .hero-content{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .hero-right{
+        margin-top:40px;
+    }
+
+    .hero-image{
+        max-width:450px;
+    }
+}
+
+@keyframes heroReveal{
+    to{
+        opacity:1;
+        transform:translateX(0);
+    }
+}
+
+/*--------------------- Under news ---------------------*/
+
+.hero-status{
+    margin-top:35px;
+}
+
+.status-line{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:18px;
+}
+
+.status-dot{
+    width:12px;
+    height:12px;
+    border-radius:50%;
+    background:#00ff88;
+    box-shadow:
+        0 0 8px #00ff88,
+        0 0 18px #00ff88;
+    animation:pulseStatus 2s infinite;
+}
+
+@keyframes pulseStatus{
+    0%{
+        transform:scale(1);
+        opacity:1;
+    }
+
+    50%{
+        transform:scale(1.25);
+        opacity:.6;
+    }
+
+    100%{
+        transform:scale(1);
+        opacity:1;
+    }
+}
+
+.status-text{
+    color:#00ff88;
+    font-size:.95rem;
+    letter-spacing:3px;
+    font-family:monospace;
+}
+
+.hero-motto{
+    color:#8c8c8c;
+    font-size:1rem;
+    line-height:1.8;
+    font-family:monospace;
+}
+
+.green-dot{
+    color:#00ff88;
+}

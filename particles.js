@@ -26,39 +26,37 @@ class Particle{
     constructor(){
 
         this.x = Math.random()*particleCanvas.width;
-
         this.y = Math.random()*particleCanvas.height;
 
         const random = Math.random();
 
-        if(random < 0.70){
+            if(random < 0.70){
 
-            // little particles
-            this.type = "small";
-            this.radius = Math.random()*1.5+1.2;
-            this.opacity = 0.12;
-            this.speedY = Math.random()*0.12+0.03;
+                // little particles
+                this.type = "small";
+                this.radius = Math.random()*1.5+1.2;
+                this.opacity = 0.12;
+                this.speedY = Math.random()*0.12+0.03;
 
-        }else if(random < 0.95){
+            }else if(random < 0.95){
 
-            // middle particles
-            this.type = "medium";
-            this.radius = Math.random()*2+2;
-            this.opacity = 0.35;
-            this.speedY = Math.random()*0.18+0.05;
+                // middle particles
+                this.type = "medium";
+                this.radius = Math.random()*2+2;
+                this.opacity = 0.35;
+                this.speedY = Math.random()*0.18+0.05;
 
-        }else{
+            }else{
 
-            // big particles
-            this.type = "large";
-            this.radius = Math.random()*2+3;
-            this.opacity = 0.3;
-            this.speedY = Math.random()*0.08+0.02;
+                // big particles
+                this.type = "large";
+                this.radius = Math.random()*2+3;
+                this.opacity = 0.3;
+                this.speedY = Math.random()*0.08+0.02;
 
-        }
+            }
 
         this.angle = Math.random() * Math.PI * 2;
-
         this.speedX = (Math.random() - 0.5) * 0.3;
 
         /*--------------------- Position Memory ---------------------*/
@@ -76,40 +74,38 @@ class Particle{
 
         let glowRadius;
 
-    if(this.type==="small"){
-        glowRadius=this.radius*3;
+        if(this.type==="small"){
+            glowRadius=this.radius*3;
 
-    }else if(this.type==="medium"){
-        glowRadius=this.radius*5;
+        }else if(this.type==="medium"){
+            glowRadius=this.radius*5;
 
-    }else{
-        glowRadius=this.radius*8;
-    }
+        }else{
+            glowRadius=this.radius*8;
+        }
 
 
     const gradient = particleCtx.createRadialGradient(
-    this.x,
-    this.y,
-    0,
-    this.x,
-    this.y,
-    glowRadius
-    );
+        this.x,
+        this.y,
+        0,
+        this.x,
+        this.y,
+        glowRadius
+        );
 
     gradient.addColorStop(0, `rgba(120,255,180,${this.opacity})`);
     gradient.addColorStop(1, "rgba(0,255,136,0)");
-
     particleCtx.beginPath();
-
     particleCtx.fillStyle = gradient;
 
     particleCtx.arc(
-    this.x,
-    this.y,
-    glowRadius,
-    0,
-    Math.PI * 2
-    );
+        this.x,
+        this.y,
+        glowRadius,
+        0,
+        Math.PI * 2
+        );
 
     particleCtx.fill();
     }
@@ -119,27 +115,21 @@ class Particle{
     update(){
 
     this.y-=this.speedY;
-
     this.x += Math.sin(this.angle) * 0.25;
-
     this.angle += 0.01;
-
     this.x += this.speedX;
 
         if(this.y<0){
-
             this.y=particleCanvas.height;
             this.x=Math.random()*particleCanvas.width;
         }
 
         if(this.x < 0){
-
-        this.x = particleCanvas.width;
+            this.x = particleCanvas.width;
         }
 
         if(this.x > particleCanvas.width){
-
-        this.x = 0;
+            this.x = 0;
         }
 
     const dx = mouse.x - this.x;
@@ -148,12 +138,9 @@ class Particle{
     const distance = Math.sqrt(dx * dx + dy * dy);
 
         if (distance < 150) {
-
-        this.x -= dx * 0.002;
-        this.y -= dy * 0.002;
-
+            this.x -= dx * 0.002;
+            this.y -= dy * 0.002;
         }
-
 
     this.draw();
 
@@ -183,12 +170,10 @@ function animate(){
     );
 
     particles.forEach(particle=>{
-
         particle.update();
-
     });
-    connectParticles();
 
+    connectParticles();
     requestAnimationFrame(animate);
 
 }
@@ -208,27 +193,27 @@ function connectParticles() {
 
             const distance = Math.sqrt(dx * dx + dy * dy);
 
-            if (distance < 120) {
+                if (distance < 120) {
 
-                const alpha = (1 - distance / 140) * 0.35;
+                    const alpha = (1 - distance / 140) * 0.35;
 
-                particleCtx.beginPath();
+                    particleCtx.beginPath();
 
-                particleCtx.moveTo(
-                    particles[a].x,
-                    particles[a].y
-                );
+                    particleCtx.moveTo(
+                        particles[a].x,
+                        particles[a].y
+                    );
 
-                particleCtx.lineTo(
-                    particles[b].x,
-                    particles[b].y
-                );
+                    particleCtx.lineTo(
+                        particles[b].x,
+                        particles[b].y
+                    );
 
-                particleCtx.strokeStyle = `rgba(0,255,136,${alpha})`;
+                    particleCtx.strokeStyle = `rgba(0,255,136,${alpha})`;
 
-                particleCtx.lineWidth = 0.8;
+                    particleCtx.lineWidth = 0.8;
 
-                particleCtx.stroke();
+                    particleCtx.stroke();
 
             }
 
@@ -244,7 +229,6 @@ function connectParticles() {
 window.addEventListener("resize",()=>{
 
     particleCanvas.width=window.innerWidth;
-
     particleCanvas.height=window.innerHeight;
 
 });

@@ -1,0 +1,74 @@
+/*--------------------- Fade UP ---------------------*/
+
+.fade-up{
+    opacity:0;
+    transform:translateY(80px);
+    transition:
+        opacity .9s ease,
+        transform .9s ease;
+}
+
+.fade-up.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/*--------------------- Fade Left ---------------------*/
+
+.fade-left{
+    opacity:0;
+    transform:translateX(-80px);
+    transition:
+        opacity .9s ease,
+        transform .9s ease;
+}
+
+.fade-left.show{
+    opacity:1;
+    transform:translateX(0);
+}
+
+/*--------------------- Fade Right ---------------------*/
+
+.fade-right{
+    opacity:0;
+    transform:translateX(80px);
+    transition:
+        opacity .9s ease,
+        transform .9s ease;
+}
+
+.fade-right.show{
+    opacity:1;
+    transform:translateX(0);
+}
+
+/*--------------------- Zoom ---------------------*/
+
+.zoom{
+    opacity:0;
+    transform:scale(.85);
+    transition:
+        opacity .8s ease,
+        transform .8s ease;
+}
+
+.zoom.show{
+    opacity:1;
+    transform:scale(1);
+}
+
+/*--------------------- Blur ---------------------*/
+
+.blur{
+    opacity:0;
+    filter:blur(12px);
+    transition:
+        opacity .9s ease,
+        filter .9s ease;
+}
+
+.blur.show{
+    opacity:1;
+    filter:blur(0);
+}
