@@ -5,7 +5,6 @@ nav {
     justify-content:space-between;
     align-items:center;
     position: relative;
-    z-index: 9999;
 }
 
 nav ul {
@@ -22,3 +21,39 @@ nav a {
 nav a:hover {
     text-shadow: 0 0 2px #b9fede;
 }
+
+/*--------------------- Sticky Nav Bar ---------------------*/
+
+
+/*--------------------- Navigation Nav Bar ---------------------*/
+
+nav a.active{
+    color:#00ff88;
+    text-shadow:
+        0 0 10px #00ff88;
+}
+
+/*--------------------- Arrow Nav Bar ---------------------*/
+
+nav a.active::before{
+    content:"● ";
+    color:#00ff88;
+}
+
+/*--------------------- %-List Nav Bar ---------------------*/
+
+#progress-bar{
+    bottom:-3px;
+    position:absolute;
+    left:0;
+    bottom:0;
+    width:0%;
+    height:3px;
+    background:#00ff88;
+    box-shadow:
+        0 0 10px #00ff88,
+        0 0 20px rgba(0,255,136,.7);
+        
+}
+
+
