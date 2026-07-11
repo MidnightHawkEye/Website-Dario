@@ -57,3 +57,44 @@ nav a.active::before{
 }
 
 
+/*--------------------- Logo Status ---------------------*/
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.logo-dot{
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    background:#4a4a4a;
+    transition:
+        background-color .4s ease,
+        box-shadow .4s ease,
+        transform .4s ease;
+}
+
+.logo-dot.active{
+    background:#00ff88;
+    box-shadow:
+        0 0 10px #00ff88,
+        0 0 20px rgba(0,255,136,.8);
+    animation:pulseLogo 2s infinite;
+}
+
+@keyframes pulseLogo{
+    0%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.2);
+    }
+    
+    100%{
+        transform:scale(1);
+    }
+}
+

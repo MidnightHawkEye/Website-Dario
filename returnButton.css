@@ -1,0 +1,85 @@
+
+   
+/*--------------------- Return To System ---------------------*/
+
+#return-button{
+    position:fixed;
+    right:30px;
+    bottom:30px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:14px 20px;
+    border:1px solid #00ff88;
+    background:rgba(0,0,0,.85);
+    color:#00ff88;
+    font-family:monospace;
+    cursor:pointer;
+    opacity:0;
+    transform:translateY(20px);
+    pointer-events:none;
+    transition:
+        opacity .35s ease,
+        transform .35s ease,
+        box-shadow .35s ease;
+
+    z-index:9999;
+}
+
+#return-button.show{
+    opacity:1;
+    transform:translateY(0);
+    pointer-events:auto;
+}
+
+#return-button:hover{
+    box-shadow:
+        0 0 12px #00ff88,
+        0 0 24px rgba(0,255,136,.6);
+
+    transform:translateY(-4px);
+}
+
+/*--------------------- Terminal Message ---------------------*/
+
+#system-message{
+
+    position:fixed;
+    right:30px;
+    bottom:100px;
+    min-width:280px;
+    padding:14px 18px;
+    border:1px solid #00ff88;
+    background:rgba(0,0,0,.92);
+    color:#00ff88;
+    font-family:monospace;
+    font-size:15px;
+    opacity:0;
+    transform:translateY(20px);
+    transition:
+        opacity .35s ease,
+        transform .35s ease;
+
+    pointer-events:none;
+    z-index:99999;
+}
+
+#system-message.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.terminal-cursor{
+    animation:blinkCursor .8s infinite;
+}
+
+@keyframes blinkCursor{
+
+    0%,50%{
+        opacity:1;
+    }
+
+    51%,100%{
+        opacity:0;
+    }
+}
