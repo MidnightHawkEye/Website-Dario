@@ -1,10 +1,5 @@
-/*--------------------- Hero Section ---------------------*/
 
-.hero-description {
-    margin-top: 25px;
-    max-width: 700px;
-    line-height: 1.7;
-}
+/*--------------------- Hero Section ---------------------*/
 
 .hero h1 {
     font-size: 8rem;
@@ -73,14 +68,6 @@
     position:relative;
     overflow:hidden;
 }
-/*
-.hero {
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-}*/
 
 /*--------------------- Hero Button ---------------------*/
 

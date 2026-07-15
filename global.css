@@ -93,18 +93,6 @@ input, textarea {
 
 /*--------------------- Typing text ---------------------*/
 
-#typing-text::after{
-    content:"|";
-    animation:blink 0.8s infinite;
-
-}
-
-@keyframes blink{
-    50%{
-        opacity:0;
-    }
-}
-
 .terminal-intro{
     margin-top:25px;
     font-size:1.2rem;
@@ -122,20 +110,4 @@ input, textarea {
     50%{
         opacity:0;
     }
-}
-
-/*--------------------- Scrolling Animation ---------------------*/
-
-.hidden{
-    opacity:0;
-    transform:translateY(80px);
-    transition:
-        opacity .9s ease,
-        transform .9s ease;
-
-}
-
-.show{
-    opacity:1;
-    transform:translateY(0);
 }

@@ -30,9 +30,8 @@ function drawMatrix() {
             if (drops[i] * fontSize > matrixCanvas.height && Math.random() > 0.975) {
                 drops[i] = 0;
             }
-
+            
         drops[i]++;
-        
     }
 }
 

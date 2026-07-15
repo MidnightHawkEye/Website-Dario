@@ -10,6 +10,8 @@ window.addEventListener("scroll", () => {
     }
 });
 
+
+
 const systemMessage =
 document.getElementById("system-message");
 

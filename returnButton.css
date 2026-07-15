@@ -1,5 +1,4 @@
 
-   
 /*--------------------- Return To System ---------------------*/
 
 #return-button{
@@ -22,7 +21,6 @@
         opacity .35s ease,
         transform .35s ease,
         box-shadow .35s ease;
-
     z-index:9999;
 }
 
@@ -36,7 +34,6 @@
     box-shadow:
         0 0 12px #00ff88,
         0 0 24px rgba(0,255,136,.6);
-
     transform:translateY(-4px);
 }
 
@@ -59,7 +56,6 @@
     transition:
         opacity .35s ease,
         transform .35s ease;
-
     pointer-events:none;
     z-index:99999;
 }
@@ -74,11 +70,10 @@
 }
 
 @keyframes blinkCursor{
-
+    
     0%,50%{
         opacity:1;
     }
-
     51%,100%{
         opacity:0;
     }

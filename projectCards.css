@@ -1,3 +1,4 @@
+
 /*--------------------- Hover Effects Project ---------------------*/
 
 .project-card {
@@ -48,8 +49,7 @@
     opacity: 0.9;
 }
 
-.cards,
-.project-grid {
+.cards {
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
     gap:20px;
@@ -61,36 +61,6 @@
     transform:translateY(-10px);
     box-shadow:0 0 20px #00ff88;
 }
-
-/*--------------------- Project & Timeline ---------------------*/
-
-.card,
-.timeline-item {
-    padding:20px;
-    border:1px solid #00ff88;
-    transition:0.3s;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /*--------------------- Projects New ---------------------*/
 
@@ -133,6 +103,16 @@
     line-height:1.8;
 }
 
+/*--------------------- Info Boxes ---------------------*/
+
+.info-value{
+    color:#00ff88;
+    font-size:1rem;
+    font-weight:700;
+}
+
+/*--------------------- Project Terminal ---------------------*/
+
 .project-info{
     display:flex;
     gap:20px;
@@ -147,11 +127,7 @@
     margin-bottom:10px;
 }
 
-.info-value{
-    color:#00ff88;
-    font-size:1rem;
-    font-weight:700;
-}
+
 
 /*--------------------- Projects Terminal next Projects ---------------------*/
 
@@ -164,7 +140,7 @@
     font-family:monospace;
 }
 
-/*--------------------- Button to Github ---------------------*/
+/*--------------------- Github Button ---------------------*/
 
 .github-btn {
     display: flex;

@@ -1,5 +1,5 @@
 /*--------------------- Contact Terminal ---------------------*/
-
+/*
 .transit-button {
     margin-top:20px;
     padding:15px 30px;
@@ -7,4 +7,156 @@
     border:1px solid #00ff88;
     color:#00ff88;
     cursor:pointer;
+}
+*/
+
+/*
+/*--------------------- Terminal Status ---------------------*/
+/*
+.terminal-status{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:35px;
+    padding:15px 20px;
+    border:1px solid rgba(0,255,136,.25);
+    border-radius:10px;
+    background:rgba(0,255,136,.05);
+}
+
+.terminal-status-left{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:#00ff88;
+    font-family:monospace;
+}
+
+.terminal-status-right{
+    color:#8b8b8b;
+    font-size:.9rem;
+}
+
+.terminal-footer{
+    margin-top:25px;
+    padding:18px;
+    border-left:3px solid #00ff88;
+    background:rgba(0,255,136,.05);
+    color:#00ff88;
+    font-family:monospace;
+}
+
+
+*/
+/*--------------------- Contact ---------------------*/
+
+.contact-button{
+    width:100%;
+    padding:18px;
+    border:1px solid rgba(0,255,136,.35);
+    border-radius:10px;
+    background:rgba(0,255,136,.05);
+    color:#00ff88;
+    font-family:monospace;
+    font-size:1rem;
+    cursor:pointer;
+    transition:
+    transform 0.35s ease,
+    border-color 0.35s ease,
+    background 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.contact-button:hover{
+    transform:translateY(-4px);
+    border-color:#00ff88;
+    background:rgba(0,255,136,.12);
+    box-shadow:
+        0 0 15px rgba(0,255,136,.35),
+        0 0 35px rgba(0,255,136,.15);
+}
+
+.contact-form label{
+    display:block;
+    margin-bottom:10px;
+    color:#00ff88;
+    font-family:monospace;
+    font-size:.8rem;
+    letter-spacing:2px;
+}
+
+/*--------------------- Contact Section ---------------------*/
+
+.contact-section {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/*--------------------- Contact Form ---------------------*/
+
+.contact-form {
+    padding: 30px;
+    border: 1px solid rgba(0, 255, 136, 0.25);
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.55);
+}
+
+.form-group {
+    margin-bottom: 24px;
+}
+
+.contact-form label {
+    display: block;
+    margin-bottom: 10px;
+    color: #00ff88;
+    font-family: monospace;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 15px 16px;
+    border: 1px solid rgba(0, 255, 136, 0.25);
+    border-radius: 8px;
+    outline: none;
+    background: rgba(0, 0, 0, 0.75);
+    color: #ffffff;
+    font-family: monospace;
+    font-size: 1rem;
+    transition:
+        border-color 0.3s ease,
+        box-shadow 0.3s ease,
+        background 0.3s ease;
+}
+
+.contact-form textarea {
+    min-height: 170px;
+    resize: vertical;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: #00ff88;
+    background: rgba(0, 255, 136, 0.035);
+    box-shadow:
+        0 0 12px rgba(0, 255, 136, 0.2),
+        inset 0 0 10px rgba(0, 255, 136, 0.03);
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+    color: #666;
+}
+
+
+/*--------------------- Honeypot ---------------------*/
+
+.honeypot {
+    position: absolute !important;
+    left: -9999px !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
 }

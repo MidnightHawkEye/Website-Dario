@@ -6,23 +6,11 @@
     gap:80px;
 }
 
-.about-left img {
-    width:350px;
-    border:2px solid #00ff88;
-    box-shadow:0 0 25px #00ff88;
-}
-
 .about-stats{
     display:flex;
     flex-direction:column;
     gap:25px;
     margin-top:40px;
-}
-
-.stats {
-    display:flex;
-    gap:40px;
-    margin-top:30px;
 }
 
 /*--------------------- About Image ---------------------*/

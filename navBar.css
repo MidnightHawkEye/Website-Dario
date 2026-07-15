@@ -23,9 +23,6 @@ nav a:hover {
     text-shadow: 0 0 2px #b9fede;
 }
 
-/*--------------------- Sticky Nav Bar ---------------------*/
-
-
 /*--------------------- Navigation Nav Bar ---------------------*/
 
 nav a.active{
@@ -54,7 +51,6 @@ nav a.active::before{
     box-shadow:
         0 0 10px #00ff88,
         0 0 20px rgba(0,255,136,.7);
-        
 }
 
 

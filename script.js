@@ -21,23 +21,6 @@ function scrollToSection(id) {
     });
 }
 
-/*--------------------- Tipping intro Text ---------------------*/
-
-const text = "Building systems. Breaking limits. Learning code.";
-let i = 0;
-
-function typeWriter() {
-    if (i < text.length) {
-        document.getElementById("typing").innerHTML += text.charAt(i);
-        i++;
-        setTimeout(typeWriter, 50);
-    }
-}
-
-typeWriter();
-
-
-
 /*--------------------- Skills Bar Loader ---------------------*/
 
 gsap.utils.toArray(".skill-fill").forEach((bar) => {
