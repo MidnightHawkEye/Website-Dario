@@ -3,19 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>DARIO.exe</title>
-<link rel="stylesheet" href="global.css">
-<link rel="stylesheet" href="animations.css">
-<link rel="stylesheet" href="navBar.css">
-<link rel="stylesheet" href="heroSection.css">
-<link rel="stylesheet" href="aboutme.css">
-<link rel="stylesheet" href="skills.css">
-<link rel="stylesheet" href="projectCards.css">
-<link rel="stylesheet" href="contactTerminal.css">
-<link rel="stylesheet" href="returnButton.css">
+
+<link rel="stylesheet" href="css/global.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/navBar.css">
+<link rel="stylesheet" href="css/heroSection.css">
+<link rel="stylesheet" href="css/aboutme.css">
+<link rel="stylesheet" href="css/skills.css">
+<link rel="stylesheet" href="css/projectCards.css">
+<link rel="stylesheet" href="css/contactTerminal.css">
+<link rel="stylesheet" href="css/returnButton.css">
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-
 
 </head>
 <body>
@@ -29,13 +31,11 @@
 
 <!--------------------- Nav Bar --------------------->
 
-<header>
-    
+<header> 
     <nav><div class="logo">
             <span id="logo-dot" class="logo-dot"></span>
             <span class="logo-text">DARIO.exe</span>
         </div>
-        <!--<div class="logo"><h2>DARIO.exe</h2></div>-->
         <ul>
             <li><a href="#about">About</a></li>
             <li><a href="#skills">Skills</a></li>
@@ -49,35 +49,28 @@
 <!--------------------- Hero --------------------->
 
 <section id="hero" class="hero">
-    <div class="overlay"></div>
+    <div class="hero-overlay"></div>
     <div class="hero-content">
-        <!-- Linke Seite -->
-        <div class="hero-left">
-            <h1 class="glitch" data-text="DARIO.exe">DARIO.exe</h1>
-            <div class="terminal-intro">
-                <span id="typing-text"></span>
-                <span class="cursor">█</span>
-            </div>
-            <button class="hero-button"onclick="scrollToSection('about')">ENTER SYSTEM</button>
+        <p class="hero-kicker">&gt; INITIALIZING SYSTEM...</p>
+        <h1 class="glitch" data-text="DARIO.exe">DARIO.exe</h1>
+        <div class="terminal-intro">
+            <span id="typing-text"></span>
+            <span class="cursor">█</span>
         </div>
-        <div class="hero-status">
-            <div class="status-line">
-                <span class="status-dot"></span>
-                <span class="status-text">SYSTEM ONLINE</span>
-            </div>
-                <p class="hero-motto">
-                    Building systems<span class="green-dot">.</span><br>
-                    Breaking limits<span class="green-dot">.</span><br>
-                    Learning code<span class="green-dot">.</span></p>
+        <button class="hero-button" onclick="scrollToSection('about')">&gt; ENTER SYSTEM</button>
+        <p class="hero-motto">
+            Building systems<span class="green-dot">.</span><br>
+            Breaking limits<span class="green-dot">.</span><br>
+            Learning code<span class="green-dot">.</span>
+        </p>
+    </div>
+    <div class="scroll-hint">
+        <div class="hero-system-status">
+            <span class="hero-status-dot"></span>
+            <span class="hero-status-text">SYSTEM ONLINE</span>
         </div>
-
-        <!-- Rechte Seite -->
-        <div class="hero-right">
-            <img
-                src="assets/dario-hero.jpg"
-                alt="Dario Hero"
-                class="hero-image">
-        </div>
+        <span>SCROLL TO CONTINUE</span>
+        <span class="scroll-arrow">↓</span>
     </div>
 </section>
 
@@ -85,7 +78,7 @@
 
 <section id="about" class="section about-section">
 <div class="about-image-wrapper">
-    <img src="assets/Dario 2.png" alt="Profile">
+    <img src="assets/Dario-profile.png" alt="Portrait od Dario">
     <div class="status-badge">
         <span class="status-dot"></span>
         <span class="status-text">Status: Online</span>
@@ -180,8 +173,6 @@
 
         </article>
 
-
-        <!-- JavaScript -->
         <article class="skill-card zoom">
 
             <div class="skill-card-header">
@@ -214,8 +205,6 @@
 
         </article>
 
-
-        <!-- Responsive Web Design -->
         <article class="skill-card zoom">
 
             <div class="skill-card-header">
@@ -248,8 +237,6 @@
 
         </article>
 
-
-        <!-- UI / UX Design -->
         <article class="skill-card zoom">
 
             <div class="skill-card-header">
@@ -282,8 +269,6 @@
 
         </article>
 
-
-        <!-- UI Animations -->
         <article class="skill-card zoom">
 
             <div class="skill-card-header">
@@ -316,8 +301,6 @@
 
         </article>
 
-
-        <!-- Problem Solving -->
         <article class="skill-card zoom">
 
             <div class="skill-card-header">
@@ -398,7 +381,8 @@
 
 <!--------------------- Contact --------------------->
 
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script> 
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>emailjs.init("D5nlmTR93lnLoD6jw");</script>
 <section id="contact" class="section contact-section">
     <div class="section-heading fade-up">
         <p class="section-label">SECURE CONNECTION</p>
@@ -463,20 +447,6 @@
     </div>
 </section>
 
-<!--
-<section id="contact" class="section terminal">
-    <h2>COMMUNICATION TERMINAL</h2>
-    <br>
-    <form id="contact-form" class="blur">
-        <input type="text" name="website" id="website" style="display:none;">
-        <input type="text" name="name" placeholder="Name" required>
-        <input type="email" name="email" placeholder="Email" required>
-        <textarea name="message" placeholder="Your message" required></textarea>
-    <button type="submit" class="transit-button">Transmit</button>
-</form>
-</section>
--->
-
 <!--------------------- Return Button --------------------->
 
 <button id="return-button" onclick="returnToSystem()">
@@ -491,15 +461,16 @@
 <canvas id="matrix"></canvas>
 <canvas id="particles"></canvas>
 
-<script src="script.js"></script>
-<script src="matrix.js"></script>
-<script src="particles.js"></script>
-<script src="loader.js"></script>
-<script src="spamprotection.js"></script>
-<script src="typingtext.js"></script>
-<script src="scrollAnimation.js"></script>
-<script src="navigation.js"></script>
-<script src="progressBar.js"></script>
-<script src="returnButton.js"></script>
+<script src="js/gsapAnimations.js"></script>
+<script src="js/matrix.js"></script>
+<script src="js/particles.js"></script>
+<script src="js/loader.js"></script>
+<script src="js/spamprotection.js"></script>
+<script src="js/typingtext.js"></script>
+<script src="js/scrollAnimation.js"></script>
+<script src="js/navigation.js"></script>
+<script src="js/progressBar.js"></script>
+<script src="js/returnButton.js"></script>
+
 </body>
 </html>

@@ -1,4 +1,3 @@
-
 /*--------------------- Animation ---------------------*/
 
 const animatedElements =

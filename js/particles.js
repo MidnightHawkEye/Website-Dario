@@ -1,4 +1,3 @@
-
 /*--------------------- Mouse Movement ---------------------*/
 
 const mouse = {
@@ -141,22 +140,17 @@ class Particle{
             this.x -= dx * 0.002;
             this.y -= dy * 0.002;
         }
-
     this.draw();
-
 }
 }
-
 
 /*--------------------- Particle Creating many Particles ---------------------*/
 
 const particles=[];
 
-for(let i=0;i<60;i++){
-
-    particles.push(new Particle());
-
-}
+    for(let i=0;i<60;i++){
+        particles.push(new Particle());
+    }
 
 /*--------------------- Particle Animates ---------------------*/
 
@@ -175,7 +169,6 @@ function animate(){
 
     connectParticles();
     requestAnimationFrame(animate);
-
 }
 
 animate();
@@ -214,15 +207,10 @@ function connectParticles() {
                     particleCtx.lineWidth = 0.8;
 
                     particleCtx.stroke();
-
             }
-
         }
-
     }
-
 }
-
 
 /*--------------------- Particle Resize ---------------------*/
 
@@ -230,5 +218,4 @@ window.addEventListener("resize",()=>{
 
     particleCanvas.width=window.innerWidth;
     particleCanvas.height=window.innerHeight;
-
 });

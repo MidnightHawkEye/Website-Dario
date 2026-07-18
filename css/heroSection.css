@@ -1,0 +1,284 @@
+/*--------------------- Hero Dario.exe Glitch ---------------------*/
+
+.glitch {
+    position: relative;
+    animation: flicker 3s infinite;
+}
+
+.glitch::before,
+.glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+}
+
+.glitch::before {
+    left: 2px;
+    text-shadow: -2px 0 rgba(0,255,100,0.6);
+    clip-path: inset(0 0 50% 0);
+    animation: glitchTop 2s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+    left: -2px;
+    text-shadow: 2px 0 rgba(0,255,100,0.4);
+    clip-path: inset(50% 0 0 0);
+    animation: glitchBottom 1.5s infinite linear alternate-reverse;
+}
+
+@keyframes glitchTop {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, -2px); }
+    40% { transform: translate(2px, 2px); }
+    60% { transform: translate(-1px, 1px); }
+    100% { transform: translate(0); }
+}
+
+@keyframes glitchBottom {
+    0% { transform: translate(0); }
+    20% { transform: translate(2px, 2px); }
+    40% { transform: translate(-2px, -1px); }
+    60% { transform: translate(1px, -2px); }
+    100% { transform: translate(0); }
+}
+
+@keyframes flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.96; }
+}
+
+/*--------------------- Minimal Hero ---------------------*/
+
+.hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 140px 24px 90px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(0, 255, 136, 0.08),
+            transparent 48%
+        ),
+        linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.15),
+            rgba(0, 0, 0, 0.55)
+        );
+    pointer-events: none;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    width: min(760px, 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hero-kicker{
+    margin-bottom:30px;
+    font-size:.72rem;
+    letter-spacing:5px;
+    text-transform:uppercase;
+    opacity:.65;
+}
+
+.hero h1 {
+    margin: 0;
+    font-size: clamp(5.5rem, 14vw, 10rem);
+    font-weight: 800;
+    line-height: 0.9;
+    letter-spacing: -0.08em;
+    color: #ffffff;
+    text-shadow:
+        0 0 25px rgba(0,255,136,.18),
+        0 0 60px rgba(0,255,136,.08);
+}
+
+.terminal-intro {
+    min-height: 170px;
+    margin-top: 55px;
+    margin-bottom: 35px;
+    color: #00ff88;
+    font-family: monospace;
+    font-size: 1.05rem;
+    line-height: 1.9;
+    white-space: pre-line;
+}
+
+.hero-motto {
+    margin-top: 30px;
+    margin-bottom: 0;
+    color: #7e7e7e;
+    font-family: monospace;
+    font-size: 0.88rem;
+    line-height: 1.8;
+    letter-spacing: 1px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
+}
+
+.hero-motto.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.green-dot {
+    color: #00ff88;
+}
+
+/*--------------------- Hero Button ---------------------*/
+
+.hero-button {
+    min-width: 290px;
+    padding: 13px 34px;
+    border: 1px solid rgba(0, 255, 136, 0.4);
+    border-radius: 10px;
+    background: rgba(0, 255, 136, 0.05);
+    color: #00ff88;
+    font-family: monospace;
+    font-size: 1.05rem;
+    letter-spacing: 1px;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+    transition:
+        opacity 0.8s ease,
+        transform 0.35s ease,
+        border-color 0.35s ease,
+        background 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+.hero-button.show {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.hero-button.show:hover {
+    transform: translateY(-4px);
+    border-color: #00ff88;
+    background: rgba(0, 255, 136, 0.11);
+    box-shadow:
+        0 0 15px rgba(0, 255, 136, 0.32),
+        0 0 35px rgba(0, 255, 136, 0.14);
+}
+
+/*--------------------- Hero Status ---------------------*/
+
+.status-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #00ff88;
+    box-shadow:
+        0 0 8px #00ff88,
+        0 0 16px rgba(0, 255, 136, 0.7);
+    animation: heroStatusPulse 2s infinite;
+}
+
+@keyframes heroStatusPulse {
+    50% {
+        opacity: 0.55;
+        transform: scale(1.2);
+    }
+}
+
+/*--------------------- Scroll Hint ---------------------*/
+
+.scroll-hint {
+    position: absolute;
+    left: 50%;
+    bottom: 24px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+    transform: translateX(-50%);
+    color: #686868;
+    font-family: monospace;
+    font-size: 0.68rem;
+    letter-spacing: 2px;
+}
+
+.scroll-arrow {
+    color: #00ff88;
+    font-size: 1rem;
+    animation: scrollArrow 1.6s ease-in-out infinite;
+}
+
+@keyframes scrollArrow {
+    50% {
+        transform: translateY(7px);
+        opacity: 0.45;
+    }
+}
+
+/*--------------------- Responsive ---------------------*/
+
+@media (max-width: 700px) {
+    .hero {
+        padding-top: 120px;
+    }
+
+    .hero h1 {
+        font-size: clamp(3.5rem, 18vw, 6rem);
+    }
+
+    .terminal-intro {
+        min-height: 170px;
+    }
+
+    .hero-button {
+        width: 100%;
+        min-width: 0;
+    }
+}
+
+/*--------------------- Hero Status ---------------------*/
+
+.hero-system-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    margin-bottom: 4px;
+}
+
+.hero-status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #00ff88;
+    box-shadow:
+        0 0 7px #00ff88,
+        0 0 14px rgba(0, 255, 136, 0.65);
+    animation: heroStatusPulse 2s infinite;
+}
+
+.hero-status-text {
+    color: #00ff88;
+    font-family: monospace;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+}
