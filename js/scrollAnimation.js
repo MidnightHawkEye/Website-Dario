@@ -2,7 +2,7 @@
 
 const animatedElements =
 document.querySelectorAll(
-".fade-up,.fade-left,.fade-right,.zoom,.blur"
+".fade-up,.fade-right,.zoom,.blur"
 );
 
 const observer = new IntersectionObserver((entries) => {
@@ -23,12 +23,4 @@ const observer = new IntersectionObserver((entries) => {
 
 animatedElements.forEach(element=>{
 observer.observe(element);
-});
-
-/*--------------------- Animation Cards ---------------------*/
-
-const cards = document.querySelectorAll(".card");
-
-cards.forEach((card,index)=>{
-    card.style.transitionDelay = `${index*100}ms`;
 });

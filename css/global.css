@@ -4,7 +4,6 @@
     box-sizing:border-box;
     scroll-behavior:smooth;
     font-family: monospace;
-    ;
 }
 
 body {
@@ -14,16 +13,15 @@ body {
 }
 
 header {
-    position:fixed;
-    width:100%;
-    padding:20px 50px;
-    background:rgba(0,0,0,0.8);
-    backdrop-filter: blur(8px);
-    z-index: 1000;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    overflow: hidden;
+    padding: 20px 50px;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    overflow: visible;
 }
 
 .section {
@@ -36,14 +34,6 @@ form {
     flex-direction:column;
     gap:20px;
 }
-
-input, textarea {
-    padding:15px;
-    background:black;
-    border:1px solid #00ff88;
-    color:white;
-}
-
 
 /*--------------------- Matrix ---------------------*/
 
@@ -92,15 +82,6 @@ input, textarea {
 }
 
 /*--------------------- Typing text ---------------------*/
-
-.terminal-intro{
-    margin-top:25px;
-    font-size:1.2rem;
-    color:#00ff88;
-    font-family:monospace;
-    min-height:160px;
-    white-space:pre-line;
-}
 
 .cursor{
     animation:blink .8s infinite;

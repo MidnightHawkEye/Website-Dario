@@ -31,16 +31,32 @@
 
 <!--------------------- Nav Bar --------------------->
 
-<header> 
-    <nav><div class="logo">
+<header>
+    <nav>
+        <div class="logo">
             <span id="logo-dot" class="logo-dot"></span>
             <span class="logo-text">DARIO.exe</span>
         </div>
-        <ul>
+        <button
+            class="menu-toggle"
+            type="button"
+            aria-label="Open navigation"
+            aria-expanded="false"
+            aria-controls="nav-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <div class="mobile-menu-overlay"></div>
+        <ul id="nav-menu" class="nav-menu">
             <li><a href="#about">About</a></li>
             <li><a href="#skills">Skills</a></li>
             <li><a href="#projects">Projects</a></li>
             <li><a href="#contact">Contact</a></li>
+            <li class="mobile-menu-status">
+                <span class="mobile-status-dot"></span>
+                SYSTEM ONLINE
+            </li>
         </ul>
     </nav>
     <div id="progress-bar"></div>
@@ -78,7 +94,7 @@
 
 <section id="about" class="section about-section">
 <div class="about-image-wrapper">
-    <img src="assets/Dario-profile.png" alt="Portrait od Dario">
+    <img src="assets/Dario-profile.png" alt="Portrait of Dario">
     <div class="status-badge">
         <span class="status-dot"></span>
         <span class="status-text">Status: Online</span>
@@ -360,7 +376,7 @@
         <div class="project-info">
             <div class="info-box">
                 <span class="info-title">CURRENT VERSION</span>
-                <span class="info-value">v1.0</span>
+                <span class="info-value">v1.1</span>
             </div>
             <div class="info-box">
                 <span class="info-title">STATUS</span><span class="info-value">Building...</span>
@@ -369,8 +385,9 @@
             <a
                 href="https://github.com/MidnightHawkEye"
                 target="_blank"
+                rel="noopener noreferrer"
                 class="github-btn">
-               <span>> VIEW SOURCE</span>
+               <span>&gt; VIEW SOURCE</span>
                <span class="arrow">→</span>
             </a>
     </div>
@@ -415,6 +432,7 @@
                 id="contact-name"
                 name="name"
                 placeholder="> Enter your name"
+                autocomplete="name"
                 required
             >
         </div>
@@ -425,6 +443,7 @@
                 id="contact-email"
                 name="email"
                 placeholder="> Enter your email"
+                autocomplete="email"
                 required
             >
         </div>
@@ -471,6 +490,13 @@
 <script src="js/navigation.js"></script>
 <script src="js/progressBar.js"></script>
 <script src="js/returnButton.js"></script>
+
+
+<!--Copyright © 2026 Dario Hasler. All rights reserved.
+
+This source code is publicly available for viewing and educational
+reference only. Copying, modification, redistribution, publication,
+or commercial use is not permitted without prior written permission.-->
 
 </body>
 </html>

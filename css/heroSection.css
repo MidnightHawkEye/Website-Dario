@@ -174,27 +174,19 @@
     pointer-events: auto;
 }
 
-.hero-button.show:hover {
-    transform: translateY(-4px);
-    border-color: #00ff88;
-    background: rgba(0, 255, 136, 0.11);
-    box-shadow:
-        0 0 15px rgba(0, 255, 136, 0.32),
-        0 0 35px rgba(0, 255, 136, 0.14);
+@media (hover: hover) and (pointer: fine) {
+
+    .hero-button.show:hover {
+        transform: translateY(-4px);
+        border-color: #00ff88;
+        background: rgba(0, 255, 136, 0.11);
+        box-shadow:
+            0 0 15px rgba(0, 255, 136, 0.32),
+            0 0 35px rgba(0, 255, 136, 0.14);
+    }
 }
 
 /*--------------------- Hero Status ---------------------*/
-
-.status-dot {
-    width: 9px;
-    height: 9px;
-    border-radius: 50%;
-    background: #00ff88;
-    box-shadow:
-        0 0 8px #00ff88,
-        0 0 16px rgba(0, 255, 136, 0.7);
-    animation: heroStatusPulse 2s infinite;
-}
 
 @keyframes heroStatusPulse {
     50% {
@@ -281,4 +273,42 @@
     font-family: monospace;
     font-size: 0.7rem;
     letter-spacing: 2px;
+}
+
+/*==================================================
+                    MOBILE
+==================================================*/
+
+@media (max-width: 700px) {
+
+    .hero {
+        padding-top: 120px;
+    }
+
+    .hero h1 {
+        font-size: clamp(3.5rem, 18vw, 6rem);
+    }
+
+    .terminal-intro {
+        min-height: 170px;
+    }
+
+    .hero-button {
+        width: 100%;
+        min-width: 0;
+        min-height: 48px;
+        padding: 14px 20px;
+        font-size: 0.95rem;
+        letter-spacing: 1px;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .hero-button.show:active {
+        transform: translateY(0) scale(0.98);
+        border-color: #00ff88;
+        background: rgba(0, 255, 136, 0.15);
+        box-shadow:
+            0 0 12px rgba(0, 255, 136, 0.28);
+    }
 }

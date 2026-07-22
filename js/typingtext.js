@@ -46,11 +46,6 @@ function typeLine() {
 function finishHeroSequence() {
     const button = document.querySelector(".hero-button");
     const motto = document.querySelector(".hero-motto");
-    const cursor = document.querySelector(".cursor");
-
-        if (cursor) {
-            cursor.classList.add("typing-complete");
-        }
 
         if (button) {
             button.classList.add("show");

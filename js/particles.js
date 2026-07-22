@@ -58,11 +58,6 @@ class Particle{
         this.angle = Math.random() * Math.PI * 2;
         this.speedX = (Math.random() - 0.5) * 0.3;
 
-        /*--------------------- Position Memory ---------------------*/
-
-        this.baseX = this.x;
-        this.baseY = this.y;
-
     }
 
     /*--------------------- Particle Drawing ---------------------*/
