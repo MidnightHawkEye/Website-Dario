@@ -45,6 +45,7 @@ const menuToggle = document.querySelector(".menu-toggle");
 const navMenu = document.querySelector(".nav-menu");
 const menuOverlay = document.querySelector(".mobile-menu-overlay");
 
+window.addEventListener("orientationchange", closeMobileMenu);
 
 function openMobileMenu() {
         if (!navMenu || !menuToggle || !menuOverlay) {
