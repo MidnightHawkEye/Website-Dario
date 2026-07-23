@@ -182,13 +182,27 @@ nav a.active::before{
         border-left: 1px solid rgba(0, 255, 136, 0.25);
         box-shadow:
             -15px 0 40px rgba(0, 0, 0, 0.55);
-        transform: translateX(105%);
-        transition: transform 0.4s ease;
+
+        transform: translate3d(calc(100% + 60px), 0, 0);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition:
+            transform 0.4s ease,
+            opacity 0.25s ease,
+            visibility 0s linear 0.4s;      
     }
 
     .nav-menu.open {
-        transform: translateX(0);
-    }
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition:
+        transform 0.4s ease,
+        opacity 0.25s ease,
+        visibility 0s;
+}
 
     .nav-menu li {
         width: 100%;

@@ -6,11 +6,20 @@
     font-family: monospace;
 }
 
-body {
-    background:black;
-    color:#00ff88;
-    overflow-x:hidden;
+html {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
 }
+
+body {
+    width: 100%;
+    max-width: 100%;
+    background: black;
+    color: #00ff88;
+    overflow-x: clip;
+}
+
 
 header {
     position: fixed;
