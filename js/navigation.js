@@ -108,3 +108,19 @@ function closeMobileMenu() {
             closeMobileMenu();
         }
 });
+
+
+/*==================================================
+            RESET AFTER PAGE REFRESH
+==================================================*/
+
+function resetNavigationState() {
+    closeMobileMenu();
+
+    requestAnimationFrame(() => {
+        window.dispatchEvent(new Event("scroll"));
+    });
+}
+
+window.addEventListener("load", resetNavigationState);
+window.addEventListener("pageshow", resetNavigationState);
