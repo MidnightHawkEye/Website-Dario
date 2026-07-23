@@ -76,3 +76,14 @@
         opacity:0;
     }
 }
+
+/*==================================================
+        HIDE RETURN BUTTON ON MOBILE
+==================================================*/
+
+@media (max-width: 900px) {
+
+    #return-button {
+        display: none !important;
+    }
+}

@@ -1,68 +1,15 @@
 const returnButton =
 document.getElementById("return-button");
 
-const heroSection =
-document.getElementById("hero");
+window.addEventListener("scroll", () => {
 
-
-function updateReturnButton() {
-
-    if (!returnButton || !heroSection) {
-        return;
+    if (window.scrollY > 500) {
+        returnButton.classList.add("show");
+    } else {
+        returnButton.classList.remove("show");
     }
-
-    const heroBottom =
-        heroSection.getBoundingClientRect().bottom;
-
-    const heroIsVisible = heroBottom > 0;
-
-    returnButton.classList.toggle(
-        "show",
-        !heroIsVisible
-    );
-}
-
-
-if (returnButton) {
-    returnButton.classList.remove("show");
-}
-
-
-if (returnButton && heroSection) {
-
-    const heroObserver =
-        new IntersectionObserver(([entry]) => {
-
-            returnButton.classList.toggle(
-                "show",
-                !entry.isIntersecting
-            );
-
-        }, {
-            threshold: 0.01
-        });
-
-    heroObserver.observe(heroSection);
-}
-
-
-window.addEventListener("pageshow", () => {
-
-    if (!returnButton) {
-        return;
-    }
-
-    returnButton.classList.remove("show");
-
-    requestAnimationFrame(updateReturnButton);
-
-    setTimeout(updateReturnButton, 300);
 });
 
-
-window.addEventListener("orientationchange", () => {
-    setTimeout(updateReturnButton, 250);
-});
 
 
 const systemMessage =
