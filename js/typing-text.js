@@ -1,4 +1,7 @@
 const terminal = document.getElementById("typing-text");
+const CharacterDelayMs = 35;
+const LineDelayMs = 350;
+const MotteRevealDelayMs = 250;
 
 const lines = [
     "> booting DARIO.exe...",
@@ -31,7 +34,7 @@ function typeLine() {
         if (character < currentLine.length) {
             terminal.append(currentLine.charAt(character));
             character++;
-            setTimeout(typeLine, 35);
+            setTimeout(typeLine, CharacterDelayMs);
             return;
         }
 
@@ -40,7 +43,7 @@ function typeLine() {
     line++;
     character = 0;
 
-    setTimeout(typeLine, 350);
+    setTimeout(typeLine, LineDelayMs);
 }
 
 function finishHeroSequence() {
@@ -55,7 +58,7 @@ function finishHeroSequence() {
         if (motto) {
             motto.classList.add("show");
         }
-    }, 250);
+    }, MotteRevealDelayMs);
 }
 
 typeLine();

@@ -1,4 +1,6 @@
-/*--------------------- Nav Bar Hover ---------------------*/
+/*==================================================
+                    NAVIGATION
+==================================================*/
 
 nav {
     display:flex;
@@ -15,7 +17,7 @@ nav ul {
 }
 
 nav a {
-    color:#00ff88;
+    color:var(--color-accent);
     text-decoration:none;
 }
 
@@ -26,16 +28,13 @@ nav a:hover {
 /*--------------------- Navigation Nav Bar ---------------------*/
 
 nav a.active{
-    color:#00ff88;
     text-shadow:
-        0 0 10px #00ff88;
+        0 0 10px var(--color-accent);
 }
-
-/*--------------------- Arrow Nav Bar ---------------------*/
 
 nav a.active::before{
     content:"● ";
-    color:#00ff88;
+    color:var(--color-accent);
 }
 
 /*--------------------- %-List Nav Bar ---------------------*/
@@ -46,13 +45,11 @@ nav a.active::before{
     bottom:0;
     width:0%;
     height:3px;
-    background:#00ff88;
+    background:var(--color-accent);
     box-shadow:
-        0 0 10px #00ff88,
-        0 0 20px rgba(0,255,136,.7);
+        0 0 10px var(--color-accent),
+        0 0 20px rgba(var(--color-accent-rgb),.7);
 }
-
-/*--------------------- Logo Status ---------------------*/
 
 .logo{
     display:flex;
@@ -72,10 +69,10 @@ nav a.active::before{
 }
 
 .logo-dot.active{
-    background:#00ff88;
+    background:var(--color-accent);
     box-shadow:
-        0 0 10px #00ff88,
-        0 0 20px rgba(0,255,136,.8);
+        0 0 10px var(--color-accent),
+        0 0 20px rgba(var(--color-accent-rgb),.8);
     animation:pulseLogo 2s infinite;
 }
 
@@ -126,9 +123,9 @@ nav a.active::before{
         width: 44px;
         height: 44px;
         padding: 10px;
-        border: 1px solid rgba(0, 255, 136, 0.35);
+        border: 1px solid rgba(var(--color-accent-rgb), 0.35);
         border-radius: 10px;
-        background: rgba(0, 255, 136, 0.04);
+        background: rgba(var(--color-accent-rgb), 0.04);
         cursor: pointer;
         transition: 
             border-color 0.3s ease,
@@ -141,17 +138,14 @@ nav a.active::before{
         width: 100%;
         height: 2px;
         border-radius: 10px;
-        background: #00ff88;
-        transition:
-            transform 0.3s ease,
-            opacity 0.3s ease;
+        background: var(--color-accent);
     }
 
     .menu-toggle:hover {
-        border-color: #00ff88;
-        background: rgba(0, 255, 136, 0.1);
+        border-color: var(--color-accent);
+        background: rgba(var(--color-accent-rgb), 0.1);
         box-shadow:
-            0 0 12px rgba(0, 255, 136, 0.25);
+            0 0 12px rgba(var(--color-accent-rgb), 0.25);
     }
 
 
@@ -172,18 +166,16 @@ nav a.active::before{
         padding: 25px;
         justify-content: flex-start;
         list-style: none;
-        overflow-y: auto;
         background:
             linear-gradient(
                 180deg,
                 rgba(8, 13, 11, 0.98),
                 rgba(2, 5, 4, 0.99)
             );
-        border-left: 1px solid rgba(0, 255, 136, 0.25);
+        border-left: 1px solid rgba(var(--color-accent-rgb), 0.25);
         box-shadow:
             -15px 0 40px rgba(0, 0, 0, 0.55);
 
-        transform: none;
         -webkit-clip-path: inset(0 0 0 100%);
         clip-path: inset(0 0 0 100%);
         opacity: 0;
@@ -198,7 +190,6 @@ nav a.active::before{
     }
 
     .nav-menu.open {
-        transform: none;
         -webkit-clip-path: inset(0);
         clip-path: inset(0);
         opacity: 1;
@@ -221,7 +212,7 @@ nav a.active::before{
         display: block;
         width: 100%;
         padding: 18px 12px;
-        border-bottom: 1px solid rgba(0, 255, 136, 0.12);
+        border-bottom: 1px solid rgba(var(--color-accent-rgb), 0.12);
         font-family: monospace;
         font-size: 1rem;
         letter-spacing: 2px;
@@ -234,12 +225,10 @@ nav a.active::before{
     .nav-menu a:hover,
     .nav-menu a.active {
         padding-left: 20px;
-        background: rgba(0, 255, 136, 0.06);
+        background: rgba(var(--color-accent-rgb), 0.06);
         text-shadow:
-            0 0 10px rgba(0, 255, 136, 0.8);
+            0 0 10px rgba(var(--color-accent-rgb), 0.8);
     }
-
-    /*--------------------- Menu Status ---------------------*/
 
     .mobile-menu-status {
         display: flex;
@@ -247,7 +236,7 @@ nav a.active::before{
         gap: 10px;
         margin-top: auto;
         padding: 18px 12px 5px;
-        color: #00ff88;
+        color: var(--color-accent);
         font-family: monospace;
         font-size: 0.7rem;
         letter-spacing: 2px;
@@ -257,15 +246,12 @@ nav a.active::before{
         width: 8px;
         height: 8px;
         border-radius: 50%;
-        background: #00ff88;
+        background: var(--color-accent);
         box-shadow:
-            0 0 8px #00ff88,
-            0 0 15px rgba(0, 255, 136, 0.7);
+            0 0 8px var(--color-accent),
+            0 0 15px rgba(var(--color-accent-rgb), 0.7);
         animation: pulseLogo 2s infinite;
     }
-
-
-    /*--------------------- Overlay ---------------------*/
 
     .mobile-menu-overlay {
         position: fixed;
@@ -305,10 +291,6 @@ nav a.active::before{
 
     .nav-menu {
         padding: 12px 18px;
-    }
-
-    .nav-menu.open {
-        overflow-y: auto;
     }
 
     .nav-menu a {

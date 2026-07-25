@@ -1,4 +1,6 @@
-/*--------------------- About ---------------------*/
+/*==================================================
+                    ABOUT
+==================================================*/
 
 .about-section {
     display:flex;
@@ -20,16 +22,14 @@
     display:inline-block;
     overflow:hidden;
     border-radius:14px;
-    border:1px solid rgba(0,255,136,.45);
+    border:1px solid rgba(var(--color-accent-rgb),.45);
     box-shadow:
-        0 0 20px rgba(0,255,136,.15);
+        0 0 20px rgba(var(--color-accent-rgb),.15);
     transition:
         transform .35s ease,
         box-shadow .35s ease,
         border-color .35s ease;
 }
-
-/*--------------------- About Image Picture ---------------------*/
 
 .about-image-wrapper img{
     display:block;
@@ -44,14 +44,12 @@
         saturate(.92);
 }
 
-/*--------------------- About Image Hover ---------------------*/
-
 .about-image-wrapper:hover{
     transform:translateY(-6px);
-    border-color:#00ff88;
+    border-color:var(--color-accent);
     box-shadow:
-        0 0 15px #00ff88,
-        0 0 35px rgba(0,255,136,.45);
+        0 0 15px var(--color-accent),
+        0 0 35px rgba(var(--color-accent-rgb),.45);
 }
 
 /*--------------------- About Image Zoom ---------------------*/
@@ -59,8 +57,6 @@
 .about-image-wrapper:hover img{
     transform:scale(1.03);
 }
-
-/*--------------------- About Image Badge ---------------------*/
 
 .status-badge{
     position:absolute;
@@ -70,11 +66,11 @@
     align-items:center;
     gap:10px;
     padding:10px 16px;
-    border:1px solid #00ff88;
+    border:1px solid var(--color-accent);
     border-radius:8px;
     background:rgba(0,0,0,.82);
     backdrop-filter:blur(6px);
-    color:#00ff88;
+    color:var(--color-accent);
     font-size:14px;
     font-family:monospace;
 }
@@ -85,14 +81,12 @@
     width:10px;
     height:10px;
     border-radius:50%;
-    background:#00ff88;
+    background:var(--color-accent);
     box-shadow:
-        0 0 10px #00ff88,
-        0 0 18px rgba(0,255,136,.8);
+        0 0 10px var(--color-accent),
+        0 0 18px rgba(var(--color-accent-rgb),.8);
     animation:statusPulse 2s infinite;
 }
-
-/*--------------------- About Image Animation ---------------------*/
 
 @keyframes statusPulse{
     0%{
@@ -117,23 +111,21 @@
     margin-top:18px;
     font-size:1.35rem;
     font-weight:700;
-    color:#00ff88;
+    color:var(--color-accent);
     letter-spacing:1px;
 }
 
 .stat-sub{
     margin-top:16px;
-    color:#9b9b9b;
+    color: var(--color-text-muted);
     font-size:.95rem;
     line-height:1.6;
 }
 
-/*--------------------- Stat Cards Hover ---------------------*/
-
 .stat-card{
     padding:24px;
     background:rgba(5,10,8,.55);
-    border:1px solid rgba(0,255,136,.25);
+    border:1px solid rgba(var(--color-accent-rgb),.25);
     border-radius:12px;
     transition:
         transform .35s ease,
@@ -143,10 +135,10 @@
 
 .stat-card:hover{
     transform:translateY(-6px);
-    border-color:#00ff88;
+    border-color:var(--color-accent);
     box-shadow:
-        0 0 15px rgba(0,255,136,.30),
-        0 0 35px rgba(0,255,136,.12);
+        0 0 15px rgba(var(--color-accent-rgb),.30),
+        0 0 35px rgba(var(--color-accent-rgb),.12);
 }
 
 

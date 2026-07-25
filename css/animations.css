@@ -1,5 +1,6 @@
-/*--------------------- Fade UP ---------------------*/
-
+/*==================================================
+                SCROLL ANIMATIONS
+==================================================*/
 .fade-up{
     opacity:0;
     transform:translateY(80px);
@@ -12,8 +13,6 @@
     opacity:1;
     transform:translateY(0);
 }
-
-/*--------------------- Fade Right ---------------------*/
 
 .fade-right{
     opacity:0;
@@ -28,8 +27,6 @@
     transform:translateX(0);
 }
 
-/*--------------------- Zoom ---------------------*/
-
 .zoom{
     opacity:0;
     transform:scale(.85);
@@ -42,8 +39,6 @@
     opacity:1;
     transform:scale(1);
 }
-
-/*--------------------- Blur ---------------------*/
 
 .blur{
     opacity:0;

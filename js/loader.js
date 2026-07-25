@@ -4,6 +4,8 @@
 ==================================================*/
 
 const loader = document.getElementById("loader");
+const LoaderRemovalDelay_MS = 700;  // CSS fade-out: 600 ms + 100 ms buffer
+const LoaderFallbackTimeoutMS = 3000;
 
 
 function hideLoader() {
@@ -16,9 +18,9 @@ function hideLoader() {
 
     window.setTimeout(() => {
         loader.style.display = "none";
-    }, 700);
+    }, LoaderRemovalDelay_MS);
 }
 
 window.addEventListener("load", hideLoader);
 window.addEventListener("pageshow", hideLoader);
-window.setTimeout(hideLoader, 3000);
+window.setTimeout(hideLoader, LoaderFallbackTimeoutMS);

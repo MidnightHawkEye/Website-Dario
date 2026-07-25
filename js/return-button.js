@@ -1,9 +1,16 @@
+const ReturnButtonThresholdPx = 500;
+const DefaultTypingSpeedMs = 40;
+const SystemReadyDelayMs = 300;
+const SystemMassageDurationMs = 1200;
+const TopPositionTolerancePx = 5;
+const ScrollCheckIntervalMs =30;
+
 const returnButton =
 document.getElementById("return-button");
 
 window.addEventListener("scroll", () => {
 
-    if (window.scrollY > 500) {
+    if (window.scrollY > ReturnButtonThresholdPx) {
         returnButton.classList.add("show");
     } else {
         returnButton.classList.remove("show");
@@ -19,7 +26,7 @@ const systemText =
 document.getElementById("system-text");
 
 
-function typeMessage(message,speed=40){
+function typeMessage(message,speed=DefaultTypingSpeedMs){
 
     return new Promise(resolve=>{
 
@@ -53,9 +60,9 @@ async function returnToSystem(){
         });
 
     await waitForTop();
-    await sleep(300);
+    await sleep(SystemReadyDelayMs);
     await typeMessage("> System ready.");
-    await sleep(1200);
+    await sleep(SystemMassageDurationMs);
 
     systemMessage.classList.remove("show");
 }
@@ -67,12 +74,12 @@ function waitForTop(){
 
         const check=setInterval(()=>{
 
-                if(window.scrollY<=5){
+                if(window.scrollY<=TopPositionTolerancePx){
                     clearInterval(check);
                     resolve();
                 }
 
-        },30);
+        },ScrollCheckIntervalMs);
     });
 }
 

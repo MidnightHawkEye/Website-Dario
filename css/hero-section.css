@@ -1,4 +1,6 @@
-/*--------------------- Hero Dario.exe Glitch ---------------------*/
+/*==================================================
+                    HERO
+==================================================*/
 
 .glitch {
     position: relative;
@@ -50,7 +52,7 @@
     50% { opacity: 0.96; }
 }
 
-/*--------------------- Minimal Hero ---------------------*/
+/*--------------------- Hero ---------------------*/
 
 .hero {
     position: relative;
@@ -69,7 +71,7 @@
     background:
         radial-gradient(
             circle at center,
-            rgba(0, 255, 136, 0.08),
+            rgba(var(--color-accent-rgb), 0.08),
             transparent 48%
         ),
         linear-gradient(
@@ -103,17 +105,17 @@
     font-weight: 800;
     line-height: 0.9;
     letter-spacing: -0.08em;
-    color: #ffffff;
+    color: var(--color-white);
     text-shadow:
-        0 0 25px rgba(0,255,136,.18),
-        0 0 60px rgba(0,255,136,.08);
+        0 0 25px rgba(var(--color-accent-rgb),.18),
+        0 0 60px rgba(var(--color-accent-rgb),.08);
 }
 
 .terminal-intro {
     min-height: 170px;
     margin-top: 55px;
     margin-bottom: 35px;
-    color: #00ff88;
+    color: var(--color-accent);
     font-family: monospace;
     font-size: 1.05rem;
     line-height: 1.9;
@@ -141,7 +143,7 @@
 }
 
 .green-dot {
-    color: #00ff88;
+    color: var(--color-accent);
 }
 
 /*--------------------- Hero Button ---------------------*/
@@ -149,10 +151,10 @@
 .hero-button {
     min-width: 290px;
     padding: 13px 34px;
-    border: 1px solid rgba(0, 255, 136, 0.4);
+    border: 1px solid rgba(var(--color-accent-rgb), 0.4);
     border-radius: 10px;
-    background: rgba(0, 255, 136, 0.05);
-    color: #00ff88;
+    background: rgba(var(--color-accent-rgb), 0.05);
+    color: var(--color-accent);
     font-family: monospace;
     font-size: 1.05rem;
     letter-spacing: 1px;
@@ -173,20 +175,6 @@
     transform: translateY(0);
     pointer-events: auto;
 }
-
-@media (hover: hover) and (pointer: fine) {
-
-    .hero-button.show:hover {
-        transform: translateY(-4px);
-        border-color: #00ff88;
-        background: rgba(0, 255, 136, 0.11);
-        box-shadow:
-            0 0 15px rgba(0, 255, 136, 0.32),
-            0 0 35px rgba(0, 255, 136, 0.14);
-    }
-}
-
-/*--------------------- Hero Status ---------------------*/
 
 @keyframes heroStatusPulse {
     50% {
@@ -214,7 +202,7 @@
 }
 
 .scroll-arrow {
-    color: #00ff88;
+    color: var(--color-accent);
     font-size: 1rem;
     animation: scrollArrow 1.6s ease-in-out infinite;
 }
@@ -226,33 +214,11 @@
     }
 }
 
-/*--------------------- Responsive ---------------------*/
-
-@media (max-width: 700px) {
-    .hero {
-        padding-top: 120px;
-    }
-
-    .hero h1 {
-        font-size: clamp(3.5rem, 18vw, 6rem);
-    }
-
-    .terminal-intro {
-        min-height: 170px;
-    }
-
-    .hero-button {
-        width: 100%;
-        min-width: 0;
-    }
-}
-
-/*--------------------- Hero Status ---------------------*/
-
 .hero-system-status {
     display: flex;
     align-items: center;
     justify-content: center;
+    
     gap: 9px;
     margin-bottom: 4px;
 }
@@ -261,23 +227,39 @@
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: #00ff88;
+
+    background: var(--color-accent);
     box-shadow:
-        0 0 7px #00ff88,
-        0 0 14px rgba(0, 255, 136, 0.65);
+        0 0 7px var(--color-accent),
+        0 0 14px rgba(var(--color-accent-rgb), 0.65);
+
     animation: heroStatusPulse 2s infinite;
 }
 
 .hero-status-text {
-    color: #00ff88;
+    color: var(--color-accent);
     font-family: monospace;
     font-size: 0.7rem;
     letter-spacing: 2px;
 }
 
+
+
 /*==================================================
                     MOBILE
 ==================================================*/
+
+@media (hover: hover) and (pointer: fine) {
+
+    .hero-button.show:hover {
+        transform: translateY(-4px);
+        border-color: var(--color-accent);
+        background: rgba(var(--color-accent-rgb), 0.11);
+        box-shadow:
+            0 0 15px rgba(var(--color-accent-rgb), 0.32),
+            0 0 35px rgba(var(--color-accent-rgb), 0.14);
+    }
+}
 
 @media (max-width: 700px) {
 
@@ -289,26 +271,26 @@
         font-size: clamp(3.5rem, 18vw, 6rem);
     }
 
-    .terminal-intro {
-        min-height: 170px;
-    }
-
     .hero-button {
         width: 100%;
         min-width: 0;
         min-height: 48px;
+
         padding: 14px 20px;
         font-size: 0.95rem;
-        letter-spacing: 1px;
+
         touch-action: manipulation;
         -webkit-tap-highlight-color: transparent;
     }
 
     .hero-button.show:active {
         transform: translateY(0) scale(0.98);
-        border-color: #00ff88;
-        background: rgba(0, 255, 136, 0.15);
+
+        border-color: var(--color-accent);
+        background: rgba(var(--color-accent-rgb), 0.15);
+
         box-shadow:
-            0 0 12px rgba(0, 255, 136, 0.28);
+            0 0 12px rgba(var(--color-accent-rgb), 0.28);
     }
 }
+

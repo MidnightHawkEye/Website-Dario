@@ -1,4 +1,8 @@
 /*--------------------- Mouse Movement ---------------------*/
+const particleCount = 60;
+const mouseRepelDistancePx = 150;
+const connectionDistancePx = 120;
+const connectionFadeDistancePx = 140;
 
 const mouse = {
     x: window.innerWidth / 2,
@@ -131,7 +135,7 @@ class Particle{
 
     const distance = Math.sqrt(dx * dx + dy * dy);
 
-        if (distance < 150) {
+        if (distance < mouseRepelDistancePx) {
             this.x -= dx * 0.002;
             this.y -= dy * 0.002;
         }
@@ -143,7 +147,7 @@ class Particle{
 
 const particles=[];
 
-    for(let i=0;i<60;i++){
+    for(let i=0;i<particleCount;i++){
         particles.push(new Particle());
     }
 
@@ -181,9 +185,9 @@ function connectParticles() {
 
             const distance = Math.sqrt(dx * dx + dy * dy);
 
-                if (distance < 120) {
+                if (distance < connectionDistancePx) {
 
-                    const alpha = (1 - distance / 140) * 0.35;
+                    const alpha = (1 - distance / connectionFadeDistancePx) * 0.35;
 
                     particleCtx.beginPath();
 

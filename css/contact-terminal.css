@@ -1,13 +1,14 @@
 
-/*--------------------- Contact ---------------------*/
-
+/*==================================================
+                    CONTACT
+==================================================*/
 .contact-button{
     width:100%;
     padding:18px;
-    border:1px solid rgba(0,255,136,.35);
+    border:1px solid rgba(var(--color-accent-rgb),.35);
     border-radius:10px;
-    background:rgba(0,255,136,.05);
-    color:#00ff88;
+    background:rgba(var(--color-accent-rgb),.05);
+    color:var(--color-accent);
     font-family:monospace;
     font-size:1rem;
     cursor:pointer;
@@ -24,18 +25,14 @@
     transform: none;
 }
 
-/*--------------------- Contact Section ---------------------*/
-
 .contact-section {
     max-width: 1000px;
     margin: 0 auto;
 }
 
-/*--------------------- Contact Form ---------------------*/
-
 .contact-form {
     padding: 30px;
-    border: 1px solid rgba(0, 255, 136, 0.25);
+    border: 1px solid rgba(var(--color-accent-rgb), 0.25);
     border-radius: 12px;
     background: rgba(0, 0, 0, 0.55);
 }
@@ -47,7 +44,7 @@
 .contact-form label {
     display: block;
     margin-bottom: 10px;
-    color: #00ff88;
+    color: var(--color-accent);
     font-family: monospace;
     font-size: 0.8rem;
     letter-spacing: 2px;
@@ -56,13 +53,12 @@
 .contact-form input,
 .contact-form textarea {
     width: 100%;
-    box-sizing: border-box;
     padding: 15px 16px;
-    border: 1px solid rgba(0, 255, 136, 0.25);
+    border: 1px solid rgba(var(--color-accent-rgb), 0.25);
     border-radius: 8px;
     outline: none;
     background: rgba(0, 0, 0, 0.75);
-    color: #ffffff;
+    color: var(--color-white);
     font-family: monospace;
     font-size: 1rem;
     transition:
@@ -78,20 +74,17 @@
 
 .contact-form input:focus,
 .contact-form textarea:focus {
-    border-color: #00ff88;
-    background: rgba(0, 255, 136, 0.035);
+    border-color: var(--color-accent);
+    background: rgba(var(--color-accent-rgb), 0.035);
     box-shadow:
-        0 0 12px rgba(0, 255, 136, 0.2),
-        inset 0 0 10px rgba(0, 255, 136, 0.03);
+        0 0 12px rgba(var(--color-accent-rgb), 0.2),
+        inset 0 0 10px rgba(var(--color-accent-rgb), 0.03);
 }
 
 .contact-form input::placeholder,
 .contact-form textarea::placeholder {
-    color: #666;
+    color: var(--color-text-dark);
 }
-
-
-/*--------------------- Honeypot ---------------------*/
 
 .honeypot {
     position: absolute !important;
@@ -109,12 +102,12 @@
     .contact-button:hover {
         transform: translateY(-4px);
 
-        border-color: #00ff88;
-        background: rgba(0, 255, 136, 0.12);
+        border-color: var(--color-accent);
+        background: rgba(var(--color-accent-rgb), 0.12);
 
         box-shadow:
-            0 0 15px rgba(0, 255, 136, 0.35),
-            0 0 35px rgba(0, 255, 136, 0.15);
+            0 0 15px rgba(var(--color-accent-rgb), 0.35),
+            0 0 35px rgba(var(--color-accent-rgb), 0.15);
     }
 }
 
@@ -136,10 +129,10 @@
     .contact-button:active:not(:disabled) {
         transform: scale(0.98);
 
-        border-color: #00ff88;
-        background: rgba(0, 255, 136, 0.15);
+        border-color: var(--color-accent);
+        background: rgba(var(--color-accent-rgb), 0.15);
 
         box-shadow:
-            0 0 12px rgba(0, 255, 136, 0.28);
+            0 0 12px rgba(var(--color-accent-rgb), 0.28);
     }
 }

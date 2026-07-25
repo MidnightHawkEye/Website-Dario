@@ -2,6 +2,8 @@
 
 const contactForm = document.getElementById("contact-form");
 const terminalFooter = document.querySelector(".terminal-footer");
+const SubmitCooldownMs = 30_000;
+const FormResetDelayMs = 3_000;
 
 let lastSubmit = 0;
 
@@ -18,7 +20,7 @@ if (contactForm) {
 
         const now = Date.now();
 
-        if (now - lastSubmit < 30000) {
+        if (now - lastSubmit < SubmitCooldownMs) {
             alert("Please wait 30 seconds before sending another message.");
             return;
         }
@@ -57,7 +59,7 @@ if (contactForm) {
                     terminalFooter.textContent =
                         "> Awaiting secure connection...";
                 }
-            }, 3000);
+            }, FormResetDelayMs);
 
         } catch (error) {
             console.error("EmailJS error:", error);

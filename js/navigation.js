@@ -1,6 +1,8 @@
 
 const sections = document.querySelectorAll("section");
 const navLinks = document.querySelectorAll(".nav-menu a");
+const sectionActivationOffsetPx = 150;
+const mobileBreakpointPx = 900;
 
 
 window.addEventListener("scroll",()=>{
@@ -8,7 +10,7 @@ window.addEventListener("scroll",()=>{
 
     sections.forEach(section=>{
 
-        const sectionTop = section.offsetTop - 150;
+        const sectionTop = section.offsetTop - sectionActivationOffsetPx;
 
             if(window.scrollY >= sectionTop){
                 current = section.getAttribute("id");
@@ -104,7 +106,7 @@ function closeMobileMenu() {
 
 
     window.addEventListener("resize", () => {
-        if (window.innerWidth > 900) {
+        if (window.innerWidth > mobileBreakpointPx) {
             closeMobileMenu();
         }
 });

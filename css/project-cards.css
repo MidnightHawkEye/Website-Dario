@@ -1,8 +1,9 @@
-/*--------------------- Hover Effects Project ---------------------*/
-
+/*==================================================
+                    PROJECTS
+==================================================*/
 .project-card {
     padding: 25px;
-    border: 1px solid #00ff88;
+    border: 1px solid var(--color-accent);
     background: rgba(0, 255, 100, 0.03);
     transition: all 0.35s ease;
     position: relative;
@@ -37,10 +38,6 @@
     opacity: 0.9;
 }
 
-
-
-/*--------------------- Projects New ---------------------*/
-
 .project-header{
     display:flex;
     justify-content:space-between;
@@ -54,9 +51,9 @@
     gap:8px;
     padding:8px 14px;
     border-radius:30px;
-    border:1px solid rgba(0,255,136,.35);
-    background:rgba(0,255,136,.08);
-    color:#00ff88;
+    border:1px solid rgba(var(--color-accent-rgb),.35);
+    background:rgba(var(--color-accent-rgb),.08);
+    color:var(--color-accent);
     font-size:.8rem;
     font-weight:600;
 }
@@ -65,14 +62,12 @@
     width:8px;
     height:8px;
     border-radius:50%;
-    background:#00ff88;
+    background:var(--color-accent);
     box-shadow:
-        0 0 8px #00ff88,
-        0 0 18px rgba(0,255,136,.8);
+        0 0 8px var(--color-accent),
+        0 0 18px rgba(var(--color-accent-rgb),.8);
     animation:statusPulse 2s infinite;
 }
-
-/*--------------------- Projects description ---------------------*/
 
 .project-description{
     margin:25px 0;
@@ -80,15 +75,11 @@
     line-height:1.8;
 }
 
-/*--------------------- Info Boxes ---------------------*/
-
 .info-value{
-    color:#00ff88;
+    color:var(--color-accent);
     font-size:1rem;
     font-weight:700;
 }
-
-/*--------------------- Project Terminal ---------------------*/
 
 .project-info{
     display:flex;
@@ -104,14 +95,12 @@
     margin-bottom:10px;
 }
 
-/*--------------------- Projects Terminal next Projects ---------------------*/
-
 .project-terminal{
     margin-top:25px;
     padding:15px;
-    border-left:3px solid #00ff88;
-    background:rgba(0,255,136,.05);
-    color:#00ff88;
+    border-left:3px solid var(--color-accent);
+    background:rgba(var(--color-accent-rgb),.05);
+    color:var(--color-accent);
     font-family:monospace;
 }
 
@@ -119,7 +108,6 @@
 
 .github-btn {
     display: flex;
-    box-sizing: border-box;
     cursor: pointer;
     justify-content: center;
     align-items: center;
@@ -127,10 +115,10 @@
     width: 100%;
     margin-top: 30px;
     padding: 16px;
-    border: 1px solid rgba(0,255,136,.35);
+    border: 1px solid rgba(var(--color-accent-rgb),.35);
     border-radius: 10px;
-    background: rgba(0,255,136,.05);
-    color: #00ff88;
+    background: rgba(var(--color-accent-rgb),.05);
+    color: var(--color-accent);
     text-decoration: none;
     font-family: monospace;
     font-weight: 300;
@@ -155,7 +143,7 @@
 
     .project-card:hover {
         transform: translateY(-6px);
-        border-color: #00ff88;
+        border-color: var(--color-accent);
         box-shadow:
             0 0 25px rgba(0, 255, 100, 0.45);
     }
@@ -167,11 +155,11 @@
 
     .github-btn:hover {
         transform: translateY(-4px);
-        border-color: #00ff88;
-        background: rgba(0, 255, 136, 0.10);
+        border-color: var(--color-accent);
+        background: rgba(var(--color-accent-rgb), 0.10);
         box-shadow:
-            0 0 15px rgba(0, 255, 136, 0.30),
-            0 0 35px rgba(0, 255, 136, 0.15);
+            0 0 15px rgba(var(--color-accent-rgb), 0.30),
+            0 0 35px rgba(var(--color-accent-rgb), 0.15);
     }
 
     .github-btn:hover .arrow {
