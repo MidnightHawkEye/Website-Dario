@@ -71,7 +71,7 @@ body {
 }
 
 
-header {
+.site-header {
     position: fixed;
     top: 0;
     left: 0;
@@ -157,4 +157,41 @@ form {
     50%{
         opacity:0;
     }
+}
+
+.site-footer {
+    padding: 24px 20px;
+    text-align: center;
+    border-top: 1px solid
+        rgba(var(--color-accent-rgb), 0.2);
+    background: var(--color-background);
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+}
+
+.site-footer p {
+    margin: 0;
+}
+
+.footer-version {
+    margin-top: 8px;
+    color: var(--color-accent);
+    font-family: monospace;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    opacity: 0.75;
+}
+
+.footer-links {
+    margin-top: 8px;
+}
+
+.footer-links a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.25s ease;
+}
+
+.footer-links a:hover {
+    color: var(--color-accent);
 }
