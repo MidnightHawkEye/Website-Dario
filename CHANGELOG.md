@@ -76,4 +76,3 @@ All notable changes to DARIO.exe are documented in this file.
 - Particle background effects
 - Loader animation
 - Return-to-system button
-- Copyright and project information

@@ -46,9 +46,11 @@ Website-Dario/
 ├── privacy.html        # Privacy Policy
 ├── css/                # Stylesheets for layout and components
 ├── js/                 # JavaScript animations and interactions
-├── assets/             # Images and other media files
+├── assets/             # Images and website screenshots
 ├── favicon.ico         # Browser tab icon
 ├── CNAME               # Custom domain configuration
+├── CHANGELOG.md        # Version history
+├── LICENSE.md          # Copyright and usage terms
 └── README.md           # Project documentation
 ```
 
@@ -63,6 +65,30 @@ DARIO.exe is a static website built with HTML, CSS and JavaScript. No package in
 ```bash
 git clone https://github.com/MidnightHawkEye/Website-Dario.git
 ```
+### 2. Open the project folder
+
+```bash
+cd Website-Dario
+```
+
+### 3. Start the website locally
+
+Open the project in Visual Studio Code and start `index.html`
+using the Live Server extension.
+
+Alternatively, `index.html` can be opened directly in a modern
+web browser. Using a local development server is recommended.
+
+### Requirements
+
+- A modern web browser
+- An internet connection for GSAP and EmailJS
+- Visual Studio Code with Live Server is recommended
+
+### Contact Form
+
+The contact form uses EmailJS. A valid EmailJS public key,
+service ID and template ID are required for message delivery.
 
 ## Technologies and Libraries
 
@@ -88,8 +114,28 @@ git clone https://github.com/MidnightHawkEye/Website-Dario.git
   
 ## Preview
 
+### Desktop
+
 ![DARIO.exe desktop preview](assets/screenshots/dario-exe-desktop.png)
+
+### Mobile
+
+![DARIO.exe mobile preview](assets/screenshots/dario-exe-mobile.jpg)
 
 ### Live Demo
 
-[Open DARIO.exe](DEINE-WEBSITE-URL)
+[Open DARIO.exe](https://dario-exe.ch)
+
+### Live Demo
+
+[Open DARIO.exe](https://dario-exe.ch)
+
+## License and Copyright
+
+Copyright © 2026 Dario Hasler. All rights reserved.
+
+This repository is publicly accessible for viewing and educational
+reference purposes only. Copying, modifying, distributing or reusing
+this project without prior written permission is not permitted.
+
+For further information, see the [LICENSE.md](LICENSE.md) file.
