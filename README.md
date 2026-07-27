@@ -12,6 +12,8 @@ DARIO.exe was created to strengthen my frontend development skills and to serve 
 
 The website includes animated sections, interactive navigation, project cards, skill indicators, a contact terminal and several small system-inspired effects.
 
+
+
 ## Features
 
 - Futuristic cyberpunk and terminal-inspired design
@@ -30,3 +32,64 @@ The website includes animated sections, interactive navigation, project cards, s
 - Custom loader animation
 - Privacy Policy page
 - Version number and copyright information in the footer
+
+## Known Issues
+
+- **Opera Mobile:** Pull-to-refresh may interfere with the page's scrolling behaviour.
+- **Microsoft Edge Mobile:** Pull-to-refresh may restore the last viewed section instead of returning to the top of the page.
+
+## Project Structure
+
+```text
+Website-Dario/
+├── index.html          # Main portfolio page
+├── privacy.html        # Privacy Policy
+├── css/                # Stylesheets for layout and components
+├── js/                 # JavaScript animations and interactions
+├── assets/             # Images and other media files
+├── favicon.ico         # Browser tab icon
+├── CNAME               # Custom domain configuration
+└── README.md           # Project documentation
+```
+
+
+
+## Installation and Local Usage
+
+DARIO.exe is a static website built with HTML, CSS and JavaScript. No package installation or build process is required.
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/MidnightHawkEye/Website-Dario.git
+```
+
+## Technologies and Libraries
+
+### Core Technologies
+
+- **HTML5** – Structure and semantic content
+- **CSS3** – Layout, responsive design, animations and visual styling
+- **JavaScript (ES6+)** – Interactions, navigation, animations and form logic
+
+### Libraries and Services
+
+- **GSAP** – Advanced animations
+- **GSAP ScrollTrigger** – Scroll-based animations
+- **EmailJS** – Contact form message delivery
+
+### Development and Deployment
+
+- **Git** – Version control
+- **GitHub** – Repository hosting and project management
+- **GitHub Pages** – Website deployment and hosting
+- **Visual Studio Code** – Development environment
+- **Live Server** – Local development server
+  
+## Preview
+
+![DARIO.exe desktop preview](assets/screenshots/dario-exe-desktop.png)
+
+### Live Demo
+
+[Open DARIO.exe](DEINE-WEBSITE-URL)
