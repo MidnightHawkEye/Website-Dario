@@ -132,7 +132,7 @@ class Particle{
     update(){
 
     this.y-=this.speedY;
-    this.x += Math.sin(this.angle) * 0.25;
+    this.x += Math.sin(this.angle) * 0.05;
     this.angle += 0.01;
     this.x += this.speedX;
 
