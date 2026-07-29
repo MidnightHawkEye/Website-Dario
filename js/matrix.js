@@ -40,4 +40,38 @@ function drawMatrix() {
     }
 }
 
-setInterval(drawMatrix, MatrixIntervalMs);
+let matrixIntervalId = null;
+
+function startMatrixAnimation() {
+    if (
+        matrixIntervalId !== null ||
+        !isTabActive() ||
+        prefersReducedMotion()
+    ) {
+        return;
+    }
+
+    matrixIntervalId = setInterval(
+        drawMatrix,
+        MatrixIntervalMs
+    );
+}
+
+function stopMatrixAnimation() {
+    if (matrixIntervalId === null) {
+        return;
+    }
+
+    clearInterval(matrixIntervalId);
+    matrixIntervalId = null;
+}
+
+document.addEventListener("visibilitychange", () => {
+    if (isTabActive()) {
+        startMatrixAnimation();
+    } else {
+        stopMatrixAnimation();
+    }
+});
+
+startMatrixAnimation();

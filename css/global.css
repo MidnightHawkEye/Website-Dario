@@ -138,6 +138,12 @@ form {
     pointer-events: none;
 }
 
+.loader-title {
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+}
+
 #particles{
     position:fixed;
     inset:0;
@@ -194,4 +200,45 @@ form {
 
 .footer-links a:hover {
     color: var(--color-accent);
+}
+
+/*==================================================
+                    FOCUS STATES
+==================================================*/
+
+:where(a, button):focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
+    box-shadow:
+        0 0 12px
+        rgba(var(--color-accent-rgb), 0.35);
+}
+
+/*==================================================
+                    prefers-reduced-motion
+==================================================*/
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/*==================================================
+                    Animation pause if not on page
+==================================================*/
+
+html.tab-inactive *,
+html.tab-inactive *::before,
+html.tab-inactive *::after {
+    animation-play-state: paused !important;
 }

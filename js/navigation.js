@@ -59,7 +59,7 @@ function openMobileMenu() {
     document.body.classList.add("menu-open");
 
     menuToggle.setAttribute("aria-expanded", "true");
-    menuToggle.setAttribute("aria-label", "Close navigation");
+    menuToggle.setAttribute("aria-label", "Close navigation menu");
 }
 
 
@@ -73,7 +73,7 @@ function closeMobileMenu() {
     document.body.classList.remove("menu-open");
 
     menuToggle.setAttribute("aria-expanded", "false");
-    menuToggle.setAttribute("aria-label", "Open navigation");
+    menuToggle.setAttribute("aria-label", "Open navigation menu");
 }
 
 
@@ -99,10 +99,13 @@ function closeMobileMenu() {
 
 
     document.addEventListener("keydown", event => {
-        if (event.key === "Escape") {
-            closeMobileMenu();
-        }
-    });
+    const isMenuOpen = navMenu?.classList.contains("open");
+
+    if (event.key === "Escape" && isMenuOpen) {
+        closeMobileMenu();
+        menuToggle.focus();
+    }
+});
 
 
     window.addEventListener("resize", () => {

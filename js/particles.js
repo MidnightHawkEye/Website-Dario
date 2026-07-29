@@ -1,8 +1,27 @@
-/*--------------------- Mouse Movement ---------------------*/
-const particleCount = 60;
+/*--------------------- Particle Settings ---------------------*/
+
+const desktopParticleCount = 60;
+const mobileParticleDivider = 3;
+
+const mobileParticleQuery = window.matchMedia(
+    `(max-width: ${mobileBreakpointPx}px)`
+);
+
 const mouseRepelDistancePx = 150;
 const connectionDistancePx = 120;
 const connectionFadeDistancePx = 140;
+
+function getParticleCount() {
+    if (mobileParticleQuery.matches) {
+        return Math.floor(
+            desktopParticleCount / mobileParticleDivider
+        );
+    }
+
+    return desktopParticleCount;
+}
+
+/*--------------------- Mouse Movement ---------------------*/
 
 const mouse = {
     x: window.innerWidth / 2,
@@ -145,16 +164,26 @@ class Particle{
 
 /*--------------------- Particle Creating many Particles ---------------------*/
 
-const particles=[];
+const particles = [];
 
-    for(let i=0;i<particleCount;i++){
-        particles.push(new Particle());
+function adjustParticleCount() {
+    const targetParticleCount = getParticleCount();
+
+    while (particles.length > targetParticleCount) {
+        particles.pop();
     }
 
+    while (particles.length < targetParticleCount) {
+        particles.push(new Particle());
+    }
+}
+
+adjustParticleCount();
 /*--------------------- Particle Animates ---------------------*/
 
-function animate(){
+let particleAnimationFrameId = null;
 
+function animate() {
     particleCtx.clearRect(
         0,
         0,
@@ -162,15 +191,50 @@ function animate(){
         particleCanvas.height
     );
 
-    particles.forEach(particle=>{
+    particles.forEach((particle) => {
         particle.update();
     });
 
     connectParticles();
-    requestAnimationFrame(animate);
+
+    particleAnimationFrameId =
+        requestAnimationFrame(animate);
 }
 
-animate();
+function startParticleAnimation() {
+    if (
+        particleAnimationFrameId !== null ||
+        !isTabActive() ||
+        prefersReducedMotion()
+    ) {
+        return;
+    }
+
+    particleAnimationFrameId =
+        requestAnimationFrame(animate);
+}
+
+function stopParticleAnimation() {
+    if (particleAnimationFrameId === null) {
+        return;
+    }
+
+    cancelAnimationFrame(
+        particleAnimationFrameId
+    );
+
+    particleAnimationFrameId = null;
+}
+
+document.addEventListener("visibilitychange", () => {
+    if (isTabActive()) {
+        startParticleAnimation();
+    } else {
+        stopParticleAnimation();
+    }
+});
+
+startParticleAnimation();
 
 /*--------------------- Connection Particle Animates ---------------------*/
 
@@ -213,8 +277,10 @@ function connectParticles() {
 
 /*--------------------- Particle Resize ---------------------*/
 
-window.addEventListener("resize",()=>{
+window.addEventListener("resize", () => {
 
-    particleCanvas.width=window.innerWidth;
-    particleCanvas.height=window.innerHeight;
+    particleCanvas.width = window.innerWidth;
+    particleCanvas.height = window.innerHeight;
+
+    adjustParticleCount();
 });

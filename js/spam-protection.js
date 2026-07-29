@@ -1,3 +1,4 @@
+
 /*--------------------- Emailjs ---------------------*/
 
 const contactForm = document.getElementById("contact-form");
@@ -66,7 +67,7 @@ if (contactForm) {
 
             if (terminalFooter) {
                 terminalFooter.textContent =
-                    "> Transmission failed. Check system console.";
+                    "> Transmission failed. Please try again later.";
             }
 
             submitButton.disabled = false;

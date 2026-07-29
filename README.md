@@ -116,15 +116,11 @@ service ID and template ID are required for message delivery.
 
 ### Desktop
 
-![DARIO.exe desktop preview](assets/screenshots/dario-exe-desktop.png)
+![DARIO.exe desktop preview](assets/screenshots/dario-exe-desktop.webp)
 
 ### Mobile
 
-![DARIO.exe mobile preview](assets/screenshots/dario-exe-mobile.jpg)
-
-### Live Demo
-
-[Open DARIO.exe](https://dario-exe.ch)
+![DARIO.exe mobile preview](assets/screenshots/dario-exe-mobile.webp)
 
 ### Live Demo
 
