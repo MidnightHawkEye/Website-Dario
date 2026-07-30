@@ -165,4 +165,38 @@
     .github-btn:hover .arrow {
         transform: translateX(6px);
     }
+
+    .project-card:hover .project-tech-tag {
+        background-color: var(--color-accent);
+        color: var(--color-background);
+        box-shadow:
+            0 0 12px rgba(var(--color-accent-rgb), 0.35);
+    }
+}
+
+
+/*==================================================
+                PROJECT TECH TAGS
+==================================================*/
+
+.project-tech-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1rem 0 1.5rem;
+    padding: 0;
+    list-style: none;
+}
+
+.project-tech-tag {
+    padding: 0.35rem 0.7rem;
+    border: 1px solid var(--color-accent);
+    border-radius: 4px;
+    color: var(--color-accent);
+    background-color: transparent;
+    font-size: 0.75rem;
+    line-height: 1;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
 }
