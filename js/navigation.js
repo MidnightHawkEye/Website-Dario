@@ -129,3 +129,17 @@ function resetNavigationState() {
 
 window.addEventListener("load", resetNavigationState);
 window.addEventListener("pageshow", resetNavigationState);
+
+/*==================================================
+        URL-ANKER NACH NAVIGATION ENTFERNEN
+==================================================*/
+
+window.addEventListener("hashchange", () => {
+
+    history.replaceState(
+        null,
+        "",
+        window.location.pathname + window.location.search
+    );
+
+});

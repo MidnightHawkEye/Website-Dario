@@ -3,10 +3,19 @@ const DefaultTypingSpeedMs = 40;
 const SystemReadyDelayMs = 300;
 const SystemMassageDurationMs = 1200;
 const TopPositionTolerancePx = 5;
-const ScrollCheckIntervalMs =30;
+const ScrollCheckIntervalMs = 30;
+const ReturnButtonCooldownMs = 1000;
 
-const returnButton =
-document.getElementById("return-button");
+const returnButton = document.getElementById("return-button");
+const systemMessage = document.getElementById("system-message");
+const systemText = document.getElementById("system-text");
+
+let isReturnToSystemRunning = false;
+
+
+/*==================================================
+            BUTTON EIN- UND AUSBLENDEN
+==================================================*/
 
 window.addEventListener("scroll", () => {
 
@@ -15,79 +24,113 @@ window.addEventListener("scroll", () => {
     } else {
         returnButton.classList.remove("show");
     }
+
 });
 
 
+/*==================================================
+                TEXT SCHREIBEN
+==================================================*/
 
-const systemMessage =
-document.getElementById("system-message");
+function typeMessage(message, speed = DefaultTypingSpeedMs) {
 
-const systemText =
-document.getElementById("system-text");
+    return new Promise((resolve) => {
 
+        systemText.textContent = "";
+        let i = 0;
 
-function typeMessage(message,speed=DefaultTypingSpeedMs){
-
-    return new Promise(resolve=>{
-
-        systemText.textContent="";
-        let i=0;
-
-        const typing=setInterval(()=>{
+        const typing = setInterval(() => {
 
             systemText.textContent += message.charAt(i);
             i++;
 
-                if(i>=message.length){
-                    clearInterval(typing);
-                    resolve();
-                }
+            if (i >= message.length) {
+                clearInterval(typing);
+                resolve();
+            }
 
-        },speed);
+        }, speed);
+
     });
+
 }
 
 
-async function returnToSystem(){
+/*==================================================
+              RETURN TO SYSTEM
+==================================================*/
 
-    systemMessage.classList.add("show");
+async function returnToSystem() {
 
-    await typeMessage("> Returning to system...");
+    // Verhindert, dass die Funktion mehrfach gleichzeitig startet
+    if (isReturnToSystemRunning) {
+        return;
+    }
+
+    isReturnToSystemRunning = true;
+
+    try {
+
+        systemMessage.classList.add("show");
+
+        await typeMessage("> Returning to system...");
 
         window.scrollTo({
-            top:0,
-            behavior:"smooth"
+            top: 0,
+            behavior: "smooth"
         });
 
-    await waitForTop();
-    await sleep(SystemReadyDelayMs);
-    await typeMessage("> System ready.");
-    await sleep(SystemMassageDurationMs);
+        await waitForTop();
+        await sleep(SystemReadyDelayMs);
 
-    systemMessage.classList.remove("show");
+        await typeMessage("> System ready.");
+        await sleep(SystemMassageDurationMs);
+
+        systemMessage.classList.remove("show");
+
+        // Nach dem vollständigen Ablauf noch 5 Sekunden warten
+        await sleep(ReturnButtonCooldownMs);
+
+    } finally {
+
+        systemMessage.classList.remove("show");
+        isReturnToSystemRunning = false;
+
+    }
+
 }
 
 
-function waitForTop(){
+/*==================================================
+            AUF SEITENANFANG WARTEN
+==================================================*/
 
-    return new Promise(resolve=>{
+function waitForTop() {
 
-        const check=setInterval(()=>{
+    return new Promise((resolve) => {
 
-                if(window.scrollY<=TopPositionTolerancePx){
-                    clearInterval(check);
-                    resolve();
-                }
+        const check = setInterval(() => {
 
-        },ScrollCheckIntervalMs);
+            if (window.scrollY <= TopPositionTolerancePx) {
+                clearInterval(check);
+                resolve();
+            }
+
+        }, ScrollCheckIntervalMs);
+
     });
+
 }
 
 
-function sleep(ms){
+/*==================================================
+                    DELAY
+==================================================*/
 
-    return new Promise(resolve=>{
-        setTimeout(resolve,ms);
+function sleep(ms) {
+
+    return new Promise((resolve) => {
+        setTimeout(resolve, ms);
     });
 
 }

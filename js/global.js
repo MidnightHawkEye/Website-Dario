@@ -1,3 +1,22 @@
+if ("scrollRestoration" in history) {
+    history.scrollRestoration = "manual";
+}
+
+
+/*==================================================
+        URL-ANKER NACH NAVIGATION ENTFERNEN
+==================================================*/
+
+window.addEventListener("hashchange", () => {
+
+    history.replaceState(
+        null,
+        "",
+        window.location.pathname + window.location.search
+    );
+
+});
+
 /*==================================================
                 GLOBAL SETTINGS
 ==================================================*/

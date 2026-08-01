@@ -279,8 +279,41 @@ function connectParticles() {
 
 window.addEventListener("resize", () => {
 
-    particleCanvas.width = window.innerWidth;
-    particleCanvas.height = window.innerHeight;
+    const oldWidth = particleCanvas.width;
+    const oldHeight = particleCanvas.height;
+
+    const newWidth = window.innerWidth;
+    const newHeight = window.innerHeight;
+
+    // Vorhandene Partikel proportional auf die neue Fläche verteilen
+    particles.forEach((particle) => {
+
+        if (oldWidth > 0) {
+            particle.x =
+                (particle.x / oldWidth) * newWidth;
+        }
+
+        if (oldHeight > 0) {
+            particle.y =
+                (particle.y / oldHeight) * newHeight;
+        }
+
+    });
+
+    // Canvas an die neue Fenstergröße anpassen
+    particleCanvas.width = newWidth;
+    particleCanvas.height = newHeight;
+
+    // Mausposition innerhalb des neuen Fensters halten
+    mouse.x = Math.max(
+        0,
+        Math.min(mouse.x, newWidth)
+    );
+
+    mouse.y = Math.max(
+        0,
+        Math.min(mouse.y, newHeight)
+    );
 
     adjustParticleCount();
 });
