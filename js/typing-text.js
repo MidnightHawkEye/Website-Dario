@@ -20,6 +20,8 @@ const terminalLines = [
 
 let currentLineIndex = 0;
 let currentCharacterIndex = 0;
+let heroTypingTimeoutId = null;
+let mottoRevealTimeoutId = null;
 
 function typeNextHeroCharacter() {
         if (!heroTerminalOutputElement) {
@@ -38,7 +40,10 @@ function typeNextHeroCharacter() {
                 currentLine.charAt(currentCharacterIndex)
             );
             currentCharacterIndex++;
-            setTimeout(typeNextHeroCharacter, characterDelayMs);
+            heroTypingTimeoutId = setTimeout(
+                typeNextHeroCharacter,
+                characterDelayMs
+            );
             return;
         }
 
@@ -49,10 +54,13 @@ function typeNextHeroCharacter() {
     currentLineIndex++;
     currentCharacterIndex = 0;
 
-    setTimeout(typeNextHeroCharacter, lineDelayMs);
+    heroTypingTimeoutId = setTimeout(
+        typeNextHeroCharacter,
+        lineDelayMs
+    );
 }
 
-function finishHeroSequence() {
+function finishHeroSequence(showImmediately = false) {
     const heroButtonElement =
         document.querySelector(".hero-button");
     const heroMottoElement =
@@ -62,11 +70,52 @@ function finishHeroSequence() {
             heroButtonElement.classList.add("show");
         }
 
-    setTimeout(() => {
+    if (mottoRevealTimeoutId !== null) {
+        clearTimeout(mottoRevealTimeoutId);
+        mottoRevealTimeoutId = null;
+    }
+
+    if (showImmediately) {
         if (heroMottoElement) {
             heroMottoElement.classList.add("show");
         }
+
+        return;
+    }
+
+    mottoRevealTimeoutId = setTimeout(() => {
+        if (heroMottoElement) {
+            heroMottoElement.classList.add("show");
+        }
+
+        mottoRevealTimeoutId = null;
     }, mottoRevealDelayMs);
 }
 
-typeNextHeroCharacter();
+function completeHeroSequenceImmediately() {
+    if (heroTypingTimeoutId !== null) {
+        clearTimeout(heroTypingTimeoutId);
+        heroTypingTimeoutId = null;
+    }
+
+    if (heroTerminalOutputElement) {
+        heroTerminalOutputElement.textContent =
+            terminalLines.join("\n");
+    }
+
+    currentLineIndex = terminalLines.length;
+    currentCharacterIndex = 0;
+    finishHeroSequence(true);
+}
+
+addReducedMotionListener((event) => {
+    if (event.matches) {
+        completeHeroSequenceImmediately();
+    }
+});
+
+if (prefersReducedMotion()) {
+    completeHeroSequenceImmediately();
+} else {
+    typeNextHeroCharacter();
+}

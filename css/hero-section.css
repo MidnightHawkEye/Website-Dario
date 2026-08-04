@@ -89,6 +89,19 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    animation: heroContentIntro 2s ease both;
+}
+
+@keyframes heroContentIntro {
+    from {
+        opacity: 0;
+        transform: translateY(100px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .hero-kicker{

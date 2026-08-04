@@ -34,6 +34,24 @@ function prefersReducedMotion() {
     return reducedMotionQuery.matches;
 }
 
+function addReducedMotionListener(listener) {
+    if (typeof reducedMotionQuery.addEventListener === "function") {
+        reducedMotionQuery.addEventListener("change", listener);
+        return;
+    }
+
+    reducedMotionQuery.addListener(listener);
+}
+
+function removeReducedMotionListener(listener) {
+    if (typeof reducedMotionQuery.removeEventListener === "function") {
+        reducedMotionQuery.removeEventListener("change", listener);
+        return;
+    }
+
+    reducedMotionQuery.removeListener(listener);
+}
+
 
 /*==================================================
                 SCROLL BEHAVIOR

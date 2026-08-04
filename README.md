@@ -21,7 +21,7 @@ The website includes animated sections, interactive navigation, project cards, s
 - Sticky navigation bar with active section highlighting
 - Smooth scrolling between page sections
 - Scroll progress indicator
-- Animated skill bars using GSAP
+- Animated skill bars using native CSS and JavaScript
 - Interactive project cards with GitHub links
 - Responsive layout for desktop, tablet and mobile devices
 - Contact terminal powered by EmailJS
@@ -82,7 +82,7 @@ web browser. Using a local development server is recommended.
 ### Requirements
 
 - A modern web browser
-- An internet connection for GSAP and EmailJS
+- An internet connection for EmailJS contact-form delivery
 - Visual Studio Code with Live Server is recommended
 
 ### Contact Form
@@ -100,8 +100,9 @@ service ID and template ID are required for message delivery.
 
 ### Libraries and Services
 
-- **GSAP** – Advanced animations
-- **GSAP ScrollTrigger** – Scroll-based animations
+- **CSS animations and transitions** – Interface motion and visual feedback
+- **Intersection Observer API** – Scroll-based animation triggers
+- **Canvas API** – Matrix and particle effects
 - **EmailJS** – Contact form message delivery
 
 ### Development and Deployment

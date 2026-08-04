@@ -181,7 +181,21 @@
         );
     box-shadow:
         0 0 10px rgba(var(--color-accent-rgb), 0.75);
-    transition: width 1.5s ease;
+    transition: width 2s ease;
+}
+
+.js-motion .skill-fill {
+    width: 0;
+}
+
+.js-motion .skill-fill.motion-visible {
+    width: var(--skill-level);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .js-motion .skill-fill {
+        width: var(--skill-level);
+    }
 }
 
 .skill-focus {

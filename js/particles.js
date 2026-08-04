@@ -226,6 +226,27 @@ function stopParticleAnimation() {
     particleAnimationFrameId = null;
 }
 
+function clearParticleAnimation() {
+    particleContext.clearRect(
+        0,
+        0,
+        particleCanvas.width,
+        particleCanvas.height
+    );
+}
+
+function updateParticleMotionPreference(event) {
+    if (event.matches) {
+        stopParticleAnimation();
+        clearParticleAnimation();
+        return;
+    }
+
+    startParticleAnimation();
+}
+
+addReducedMotionListener(updateParticleMotionPreference);
+
 document.addEventListener("visibilitychange", () => {
     if (isTabActive()) {
         startParticleAnimation();

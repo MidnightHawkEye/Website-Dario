@@ -40,12 +40,24 @@ window.addEventListener("scroll", () => {
 
 function typeSystemMessage(message, speed = defaultTypingSpeedMs) {
 
+    if (prefersReducedMotion()) {
+        returnStatusTextElement.textContent = message;
+        return Promise.resolve();
+    }
+
     return new Promise((resolve) => {
 
         returnStatusTextElement.textContent = "";
         let characterIndex = 0;
 
         const typingIntervalId = setInterval(() => {
+
+            if (prefersReducedMotion()) {
+                returnStatusTextElement.textContent = message;
+                clearInterval(typingIntervalId);
+                resolve();
+                return;
+            }
 
             returnStatusTextElement.textContent +=
                 message.charAt(characterIndex);
@@ -118,6 +130,16 @@ function waitForPageTop() {
 
         const topCheckIntervalId = setInterval(() => {
 
+            if (
+                prefersReducedMotion() &&
+                window.scrollY > topPositionTolerancePx
+            ) {
+                window.scrollTo({
+                    top: 0,
+                    behavior: "auto"
+                });
+            }
+
             if (window.scrollY <= topPositionTolerancePx) {
                 clearInterval(topCheckIntervalId);
                 resolve();
@@ -136,8 +158,31 @@ function waitForPageTop() {
 
 function delay(ms) {
 
+    if (prefersReducedMotion()) {
+        return Promise.resolve();
+    }
+
     return new Promise((resolve) => {
-        setTimeout(resolve, ms);
+        let timeoutId = null;
+
+        function finishDelay() {
+            if (timeoutId !== null) {
+                clearTimeout(timeoutId);
+                timeoutId = null;
+            }
+
+            removeReducedMotionListener(handleMotionChange);
+            resolve();
+        }
+
+        function handleMotionChange(event) {
+            if (event.matches) {
+                finishDelay();
+            }
+        }
+
+        addReducedMotionListener(handleMotionChange);
+        timeoutId = setTimeout(finishDelay, ms);
     });
 
 }

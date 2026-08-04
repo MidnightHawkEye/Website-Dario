@@ -1,6 +1,19 @@
 /*==================================================
                 SCROLL ANIMATIONS
 ==================================================*/
+.js-motion .section {
+    opacity: 0;
+    transform: translateY(100px);
+    transition:
+        opacity 1.5s ease,
+        transform 1.5s ease;
+}
+
+.js-motion .section.motion-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 .reveal-fade-up{
     opacity:0;
     transform:translateY(80px);
@@ -51,4 +64,20 @@
 .reveal-blur.show{
     opacity:1;
     filter:blur(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .js-motion .section {
+        opacity: 1;
+        transform: none;
+    }
+
+    .reveal-fade-up,
+    .reveal-fade-right,
+    .reveal-zoom,
+    .reveal-blur {
+        opacity: 1;
+        transform: none;
+        filter: none;
+    }
 }

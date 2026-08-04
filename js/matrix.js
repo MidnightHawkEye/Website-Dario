@@ -86,6 +86,27 @@ function stopMatrixAnimation() {
     matrixIntervalId = null;
 }
 
+function clearMatrixAnimation() {
+    matrixContext.clearRect(
+        0,
+        0,
+        matrixCanvas.width,
+        matrixCanvas.height
+    );
+}
+
+function updateMatrixMotionPreference(event) {
+    if (event.matches) {
+        stopMatrixAnimation();
+        clearMatrixAnimation();
+        return;
+    }
+
+    startMatrixAnimation();
+}
+
+addReducedMotionListener(updateMatrixMotionPreference);
+
 document.addEventListener("visibilitychange", () => {
     if (isTabActive()) {
         startMatrixAnimation();
