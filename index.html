@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="DARIO.exe is the personal developer portfolio of Dario Hasler, showcasing projects in web development, industrial automation and cybersecurity."
->
+<meta name="description" content="DARIO.exe is the personal developer portfolio of Dario Hasler, showcasing projects in web development, industrial automation and cybersecurity.">
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="DARIO.exe | Developer Portfolio by Dario Hasler">
@@ -46,35 +45,34 @@
 
 <link rel="canonical" href="https://dario-exe.ch/">
 
-<link rel="stylesheet" href="css/global.css?v=1.2.0">
-<link rel="stylesheet" href="css/animations.css?v=1.2.0">2
-<link rel="stylesheet" href="css/nav-bar.css?v=1.2.0">
-<link rel="stylesheet" href="css/hero-section.css?v=1.2.0">
-<link rel="stylesheet" href="css/about-me.css?v=1.2.0">
-<link rel="stylesheet" href="css/skills.css?v=1.2.0">
+<link rel="stylesheet" href="css/global.css?v=1.2.1">
+<link rel="stylesheet" href="css/animations.css?v=1.2.1">
+<link rel="stylesheet" href="css/nav-bar.css?v=1.2.1">
+<link rel="stylesheet" href="css/hero-section.css?v=1.2.1">
+<link rel="stylesheet" href="css/about-me.css?v=1.2.1">
+<link rel="stylesheet" href="css/skills.css?v=1.2.1">
 <link rel="stylesheet" href="css/project-cards.css?v=1.2.1">
-<link rel="stylesheet" href="css/contact-terminal.css?v=1.2.0">
-<link rel="stylesheet" href="css/return-button.css?v=1.2.0">
-<link rel="icon" href="./favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="css/contact-terminal.css?v=1.2.1">
+<link rel="stylesheet" href="css/return-button.css?v=1.2.1">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 
-<script src="js/global.js?v=1.2.0" defer></script>
-<script src="js/gsap-animations.js?v=1.2.0" defer></script>
-<script src="js/loader.js?v=1.2.0" defer></script>
-<script src="js/matrix.js?v=1.2.0" defer></script>
-<script src="js/navigation.js?v=1.2.0" defer></script>
-<script src="js/particles.js?v=1.2.0" defer></script>
-<script src="js/progress-bar.js?v=1.2.0" defer></script>
-<script src="js/return-button.js?v=1.2.0" defer></script>
-<script src="js/scroll-animation.js?v=1.2.0" defer></script>
-<script src="js/spam-protection.js?v=1.2.0" defer></script>
-<script src="js/typing-text.js?v=1.2.0" defer></script>
+<script src="js/global.js?v=1.2.1" defer></script>
+<script src="js/gsap-animations.js?v=1.2.1" defer></script>
+<script src="js/loader.js?v=1.2.1" defer></script>
+<script src="js/matrix.js?v=1.2.1" defer></script>
+<script src="js/navigation.js?v=1.2.1" defer></script>
+<script src="js/particles.js?v=1.2.1" defer></script>
+<script src="js/progress-bar.js?v=1.2.1" defer></script>
+<script src="js/return-button.js?v=1.2.1" defer></script>
+<script src="js/scroll-animation.js?v=1.2.1" defer></script>
+<script src="js/spam-protection.js?v=1.2.1" defer></script>
+<script src="js/typing-text.js?v=1.2.1" defer></script>
 
 </head>
 <body>
-<div class="matrix-bg"></div>
+<div class="matrix-background"></div>
 
 <!--------------------- Loader --------------------->
 
@@ -87,8 +85,8 @@
 <header class="site-header">
     <nav aria-label="Primary navigation">
         <div class="logo">
-            <span id="logo-dot" class="logo-dot"></span>
-            <span class="logo-text">DARIO.exe</span>
+            <span id="logo-status-dot" class="logo-dot"></span>
+            <span>DARIO.exe</span>
         </div>
         <button
             class="menu-toggle"
@@ -123,14 +121,14 @@
         <p class="hero-kicker">&gt; INITIALIZING SYSTEM...</p>
         <h1 class="glitch" data-text="DARIO.exe">DARIO.exe</h1>
         <div class="terminal-intro">
-            <span id="typing-text"></span>
-            <span class="cursor">█</span>
+            <span id="hero-terminal-output"></span>
+            <span class="hero-terminal-cursor">█</span>
         </div>
         <button class="hero-button" onclick="scrollToSection('about')">&gt; ENTER SYSTEM</button>
         <p class="hero-motto">
-            Building systems<span class="green-dot">.</span><br>
-            Breaking limits<span class="green-dot">.</span><br>
-            Learning code<span class="green-dot">.</span>
+            Building systems<span class="accent-punctuation">.</span><br>
+            Breaking limits<span class="accent-punctuation">.</span><br>
+            Learning code<span class="accent-punctuation">.</span>
         </p>
     </div>
     <div class="scroll-hint">
@@ -156,10 +154,10 @@
         decoding="async">
     <div class="status-badge">
         <span class="status-dot"></span>
-        <span class="status-text">Status: Online</span>
+        <span>Status: Online</span>
     </div>
 </div>
-    <div class="about-right fade-right">
+    <div class="about-content reveal-fade-right">
         <h2>Who Am I</h2>
         <br>
 
@@ -187,18 +185,18 @@
         <div class="about-stats">
             <div class="stat-card">
                 <h3>CURRENT PROJECT</h3>
-                <p class="stat-main">DARIO.exe</p>
-                <p class="stat-sub">Building my personal brand.</p>
+                <p class="stat-card-value">DARIO.exe</p>
+                <p class="stat-card-description">Building my personal brand.</p>
             </div>
             <div class="stat-card">
                 <h3>CURRENT FOCUS</h3>
-                <p class="stat-main">Software Engineering</p>
-                <p class="stat-sub">JavaScript • HTML • CSS</p>
+                <p class="stat-card-value">Software Engineering</p>
+                <p class="stat-card-description">JavaScript • HTML • CSS</p>
             </div>
             <div class="stat-card">
                 <h3>STATUS</h3>
-                <p class="stat-main">∞ Learning</p>
-                <p class="stat-sub">One step every day.</p>
+                <p class="stat-card-value">∞ Learning</p>
+                <p class="stat-card-description">One step every day.</p>
             </div>
         </div>
        
@@ -209,7 +207,7 @@
 
 <section id="skills" class="section">
 
-    <div class="section-heading fade-up">
+    <div class="section-heading reveal-fade-up">
         <p class="section-label">SYSTEM ANALYSIS</p>
         <h2>SYSTEM CAPABILITIES</h2>
     </div>
@@ -217,7 +215,7 @@
     <div class="skills-grid">
 
         <!-- HTML & CSS -->
-        <article class="skill-card zoom">
+        <article class="skill-card reveal-zoom">
 
             <div class="skill-card-header">
                 <span class="skill-number">01</span>
@@ -248,7 +246,7 @@
 
         </article>
 
-        <article class="skill-card zoom">
+        <article class="skill-card reveal-zoom">
 
             <div class="skill-card-header">
                 <span class="skill-number">02</span>
@@ -280,7 +278,7 @@
 
         </article>
 
-        <article class="skill-card zoom">
+        <article class="skill-card reveal-zoom">
 
             <div class="skill-card-header">
                 <span class="skill-number">03</span>
@@ -312,7 +310,7 @@
 
         </article>
 
-        <article class="skill-card zoom">
+        <article class="skill-card reveal-zoom">
 
             <div class="skill-card-header">
                 <span class="skill-number">04</span>
@@ -344,7 +342,7 @@
 
         </article>
 
-        <article class="skill-card zoom">
+        <article class="skill-card reveal-zoom">
 
             <div class="skill-card-header">
                 <span class="skill-number">05</span>
@@ -376,7 +374,7 @@
 
         </article>
 
-        <article class="skill-card zoom">
+        <article class="skill-card reveal-zoom">
 
             <div class="skill-card-header">
                 <span class="skill-number">06</span>
@@ -442,21 +440,21 @@
             <li class="project-tech-tag">EmailJS</li>
         </ul>
         <div class="project-info">
-            <div class="info-box">
-                <span class="info-title">CURRENT VERSION</span>
-                <span class="info-value">v1.2</span>
+            <div>
+                <span class="project-info-label">CURRENT VERSION</span>
+                <span class="project-info-value">v1.2.1</span>
             </div>
-            <div class="info-box">
-                <span class="info-title">STATUS</span><span class="info-value">Building...</span>
+            <div>
+                <span class="project-info-label">STATUS</span><span class="project-info-value">Building...</span>
             </div>
         </div>
             <a
                 href="https://github.com/MidnightHawkEye"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="github-btn">
+                class="github-button">
                <span>VIEW SOURCE</span>
-               <span class="arrow">→</span>
+               <span class="github-button-arrow">→</span>
             </a>
     </div>
     <div class="project-terminal">
@@ -467,23 +465,27 @@
 <!--------------------- Contact --------------------->
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script>emailjs.init("D5nlmTR93lnLoD6jw");</script>
+<script>
+    if (typeof emailjs !== "undefined") {
+        emailjs.init("D5nlmTR93lnLoD6jw");
+    }
+</script>
 <section id="contact" class="section contact-section">
-    <div class="section-heading fade-up">
+    <div class="section-heading reveal-fade-up">
         <p class="section-label">SECURE CONNECTION</p>
         <h2>COMMUNICATION TERMINAL</h2>
     </div>
-    <div class="terminal-status blur">
-        <div class="terminal-status-left">
+    <div class="reveal-blur">
+        <div>
             <span class="status-dot"></span>
             <span>ONLINE</span>
         </div>
-        <div class="terminal-status-right">
+        <div>
             Ready to establish connection...
         </div>
         <br>
     </div>
-    <form id="contact-form" class="contact-form blur">
+    <form id="contact-form" class="contact-form reveal-blur">
         <!-- Honeypot vs Bots -->
         <div class="honeypot" aria-hidden="true">
             <label for="website">Leave this field empty</label>
@@ -533,7 +535,7 @@
     <br>
     <div
         id="form-status"
-        class="terminal-footer blur"
+        class="reveal-blur"
         role="status"
         aria-live="polite"
         aria-atomic="true"
@@ -544,29 +546,23 @@
 
 <!--------------------- Return Button --------------------->
 
-<button id="return-button" onclick="returnToSystem()">
+<button id="return-to-top-button" onclick="runReturnToSystemSequence()">
     ⏏
     <span>RETURN TO SYSTEM</span>
 </button>
-<div id="system-message">
-        <span id="system-text"></span>
-        <span class="terminal-cursor">█</span>
+<div id="return-status-message">
+        <span id="return-status-text"></span>
+        <span class="return-status-cursor">█</span>
 </div>
 
-<canvas id="matrix"></canvas>
-<canvas id="particles"></canvas>
+<canvas id="matrix-canvas"></canvas>
+<canvas id="particle-canvas"></canvas>
 
 <footer class="site-footer">
-    <p class="footer-copyright"> &copy; 2026 Dario Hasler.All rights reserved.</p>
+    <p>&copy; 2026 Dario Hasler. All rights reserved.</p>
     <p class="footer-links"><a href="./privacy.html">Privacy Policy</a></p>
-    <p class="footer-version">DARIO.exe v1.2</p>
+    <p class="footer-version">DARIO.exe v1.2.1</p>
 </footer>
-
-<!--Copyright © 2026 Dario Hasler. All rights reserved.
-
-This source code is publicly available for viewing and educational
-reference only. Copying, modification, redistribution, publication,
-or commercial use is not permitted without prior written permission.-->
 
 </body>
 </html>

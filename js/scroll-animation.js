@@ -2,7 +2,7 @@
 
 const animatedElements =
 document.querySelectorAll(
-".fade-up,.fade-right,.zoom,.blur"
+".reveal-fade-up,.reveal-fade-right,.reveal-zoom,.reveal-blur"
 );
 
 const observer = new IntersectionObserver((entries) => {

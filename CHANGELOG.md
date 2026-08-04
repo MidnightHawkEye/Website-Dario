@@ -4,7 +4,37 @@ All notable changes to DARIO.exe are documented in this file.
 
 ---
 
-## [1.2.0] - In Development
+## [Unreleased]
+
+### Fixed
+
+- Restored the custom styling of the 404 page
+- Removed invalid and empty favicon references
+- Removed unintended text rendered above the main page
+- Added guarded fallbacks when GSAP or EmailJS is unavailable
+- Added Matrix canvas resizing for viewport changes
+- Aligned programmatic scrolling with reduced-motion preferences
+
+### Changed
+
+- Removed a duplicate URL hash-change handler
+- Removed unused CSS variables and HTML class hooks
+- Synchronized version labels and cache-busting parameters
+- Corrected outdated comments and JavaScript constant names
+- Standardized JavaScript variables and functions to lowerCamelCase
+- Renamed internal classes and IDs for clearer component ownership
+
+---
+
+## [1.2.1] - 2026-08-01
+
+### Changed
+
+- UI fixes and optimizations
+
+---
+
+## [1.2.0] - 2026-07-31
 
 ### Added
 

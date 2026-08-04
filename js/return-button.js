@@ -1,51 +1,58 @@
-const ReturnButtonThresholdPx = 500;
-const DefaultTypingSpeedMs = 40;
-const SystemReadyDelayMs = 300;
-const SystemMassageDurationMs = 1200;
-const TopPositionTolerancePx = 5;
-const ScrollCheckIntervalMs = 30;
-const ReturnButtonCooldownMs = 1000;
+const returnButtonThresholdPx = 500;
+const defaultTypingSpeedMs = 40;
+const systemReadyDelayMs = 300;
+const systemMessageDurationMs = 1200;
+const topPositionTolerancePx = 5;
+const scrollCheckIntervalMs = 30;
+const returnButtonCooldownMs = 1000;
 
-const returnButton = document.getElementById("return-button");
-const systemMessage = document.getElementById("system-message");
-const systemText = document.getElementById("system-text");
+const returnToTopButtonElement = document.getElementById(
+    "return-to-top-button"
+);
+const returnStatusMessageElement = document.getElementById(
+    "return-status-message"
+);
+const returnStatusTextElement = document.getElementById(
+    "return-status-text"
+);
 
 let isReturnToSystemRunning = false;
 
 
 /*==================================================
-            BUTTON EIN- UND AUSBLENDEN
+            SHOW AND HIDE BUTTON
 ==================================================*/
 
 window.addEventListener("scroll", () => {
 
-    if (window.scrollY > ReturnButtonThresholdPx) {
-        returnButton.classList.add("show");
+    if (window.scrollY > returnButtonThresholdPx) {
+        returnToTopButtonElement.classList.add("show");
     } else {
-        returnButton.classList.remove("show");
+        returnToTopButtonElement.classList.remove("show");
     }
 
 });
 
 
 /*==================================================
-                TEXT SCHREIBEN
+                TYPE TEXT
 ==================================================*/
 
-function typeMessage(message, speed = DefaultTypingSpeedMs) {
+function typeSystemMessage(message, speed = defaultTypingSpeedMs) {
 
     return new Promise((resolve) => {
 
-        systemText.textContent = "";
-        let i = 0;
+        returnStatusTextElement.textContent = "";
+        let characterIndex = 0;
 
-        const typing = setInterval(() => {
+        const typingIntervalId = setInterval(() => {
 
-            systemText.textContent += message.charAt(i);
-            i++;
+            returnStatusTextElement.textContent +=
+                message.charAt(characterIndex);
+            characterIndex++;
 
-            if (i >= message.length) {
-                clearInterval(typing);
+            if (characterIndex >= message.length) {
+                clearInterval(typingIntervalId);
                 resolve();
             }
 
@@ -60,9 +67,9 @@ function typeMessage(message, speed = DefaultTypingSpeedMs) {
               RETURN TO SYSTEM
 ==================================================*/
 
-async function returnToSystem() {
+async function runReturnToSystemSequence() {
 
-    // Verhindert, dass die Funktion mehrfach gleichzeitig startet
+    // Prevent the function from running multiple times simultaneously
     if (isReturnToSystemRunning) {
         return;
     }
@@ -71,29 +78,29 @@ async function returnToSystem() {
 
     try {
 
-        systemMessage.classList.add("show");
+        returnStatusMessageElement.classList.add("show");
 
-        await typeMessage("> Returning to system...");
+        await typeSystemMessage("> Returning to system...");
 
         window.scrollTo({
             top: 0,
-            behavior: "smooth"
+            behavior: getScrollBehavior()
         });
 
-        await waitForTop();
-        await sleep(SystemReadyDelayMs);
+        await waitForPageTop();
+        await delay(systemReadyDelayMs);
 
-        await typeMessage("> System ready.");
-        await sleep(SystemMassageDurationMs);
+        await typeSystemMessage("> System ready.");
+        await delay(systemMessageDurationMs);
 
-        systemMessage.classList.remove("show");
+        returnStatusMessageElement.classList.remove("show");
 
-        // Nach dem vollständigen Ablauf noch 5 Sekunden warten
-        await sleep(ReturnButtonCooldownMs);
+        // Brief cooldown after the complete sequence
+        await delay(returnButtonCooldownMs);
 
     } finally {
 
-        systemMessage.classList.remove("show");
+        returnStatusMessageElement.classList.remove("show");
         isReturnToSystemRunning = false;
 
     }
@@ -102,21 +109,21 @@ async function returnToSystem() {
 
 
 /*==================================================
-            AUF SEITENANFANG WARTEN
+            WAIT UNTIL PAGE TOP
 ==================================================*/
 
-function waitForTop() {
+function waitForPageTop() {
 
     return new Promise((resolve) => {
 
-        const check = setInterval(() => {
+        const topCheckIntervalId = setInterval(() => {
 
-            if (window.scrollY <= TopPositionTolerancePx) {
-                clearInterval(check);
+            if (window.scrollY <= topPositionTolerancePx) {
+                clearInterval(topCheckIntervalId);
                 resolve();
             }
 
-        }, ScrollCheckIntervalMs);
+        }, scrollCheckIntervalMs);
 
     });
 
@@ -127,7 +134,7 @@ function waitForTop() {
                     DELAY
 ==================================================*/
 
-function sleep(ms) {
+function delay(ms) {
 
     return new Promise((resolve) => {
         setTimeout(resolve, ms);

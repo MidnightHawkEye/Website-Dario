@@ -1,34 +1,34 @@
 /*--------------------- EmailJS ---------------------*/
 
-const contactForm = document.getElementById("contact-form");
-const terminalFooter = document.querySelector(".terminal-footer");
+const contactFormElement = document.getElementById("contact-form");
+const formStatusElement = document.getElementById("form-status");
 
-const SubmitCooldownMs = 30_000;
-const FormResetDelayMs = 3_000;
+const submitCooldownMs = 30_000;
+const formResetDelayMs = 3_000;
 
 let lastSubmit = 0;
 
 
 /*--------------------- Status Message ---------------------*/
 
-function showFormStatus(message) {
-    if (!terminalFooter) {
+function setFormStatus(message) {
+    if (!formStatusElement) {
         return;
     }
 
-    terminalFooter.textContent = message;
+    formStatusElement.textContent = message;
 }
 
 
 /*--------------------- Contact Form ---------------------*/
 
-if (contactForm) {
-    contactForm.addEventListener("submit", async function (event) {
+if (contactFormElement) {
+    contactFormElement.addEventListener("submit", async function (event) {
         event.preventDefault();
 
         const honeypot = document.getElementById("website");
         const submitButton =
-            contactForm.querySelector(".contact-button");
+            contactFormElement.querySelector(".contact-button");
 
         /*--------------------- Honeypot Check ---------------------*/
 
@@ -40,7 +40,7 @@ if (contactForm) {
         /*--------------------- Offline Check ---------------------*/
 
         if (!navigator.onLine) {
-            showFormStatus(
+            setFormStatus(
                 "> Network offline. Check your internet connection and try again."
             );
 
@@ -52,11 +52,25 @@ if (contactForm) {
 
         const now = Date.now();
 
-        if (now - lastSubmit < SubmitCooldownMs) {
+        if (now - lastSubmit < submitCooldownMs) {
             alert(
                 "Please wait 30 seconds before sending another message."
             );
 
+            return;
+        }
+
+        /*--------------------- EmailJS Availability ---------------------*/
+
+        if (
+            typeof emailjs === "undefined" ||
+            typeof emailjs.sendForm !== "function"
+        ) {
+            setFormStatus(
+                "> Transmission service unavailable. Please try again later."
+            );
+
+            submitButton.textContent = "> RETRY TRANSMISSION";
             return;
         }
 
@@ -65,19 +79,19 @@ if (contactForm) {
         submitButton.disabled = true;
         submitButton.textContent = "> TRANSMITTING...";
 
-        showFormStatus("> Encrypting message...");
+        setFormStatus("> Encrypting message...");
 
         try {
             await emailjs.sendForm(
                 "service_rqtw9ef",
                 "template_8nufkke",
-                contactForm
+                contactFormElement
             );
 
             lastSubmit = Date.now();
 
-            if (terminalFooter) {
-                terminalFooter.innerHTML =
+            if (formStatusElement) {
+                formStatusElement.innerHTML =
                     "&gt; Transmission successful.<br>" +
                     "Connection established.";
             }
@@ -85,17 +99,17 @@ if (contactForm) {
             submitButton.textContent =
                 "> TRANSMISSION COMPLETE";
 
-            contactForm.reset();
+            contactFormElement.reset();
 
             setTimeout(() => {
                 submitButton.disabled = false;
                 submitButton.textContent =
                     "> INITIALIZE TRANSMISSION";
 
-                showFormStatus(
+                setFormStatus(
                     "> Awaiting secure connection..."
                 );
-            }, FormResetDelayMs);
+            }, formResetDelayMs);
 
         } catch (error) {
             console.error("EmailJS error:", error);
@@ -104,7 +118,7 @@ if (contactForm) {
                 ? "> Transmission failed. Please try again later."
                 : "> Network connection lost. Check your internet connection.";
 
-            showFormStatus(errorMessage);
+            setFormStatus(errorMessage);
 
             submitButton.disabled = false;
             submitButton.textContent =
@@ -117,13 +131,13 @@ if (contactForm) {
 /*--------------------- Network Status ---------------------*/
 
 window.addEventListener("offline", () => {
-    showFormStatus(
+    setFormStatus(
         "> Network connection lost. Transmission unavailable."
     );
 });
 
 window.addEventListener("online", () => {
-    showFormStatus(
+    setFormStatus(
         "> Connection restored. Ready for secure transmission."
     );
 });

@@ -1,9 +1,9 @@
-const progressBar =
+const progressBarElement =
 document.getElementById("progress-bar");
 
 
 function updateProgressBar() {
-    if (!progressBar) {
+    if (!progressBarElement) {
         return;
     }
 
@@ -28,7 +28,7 @@ function updateProgressBar() {
         )
     );
 
-    progressBar.style.width = `${progress}%`;
+    progressBarElement.style.width = `${progress}%`;
 }
 
 

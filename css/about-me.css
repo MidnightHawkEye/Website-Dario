@@ -107,7 +107,7 @@
 
 /*--------------------- Stat Cards ---------------------*/
 
-.stat-main{
+.stat-card-value{
     margin-top:18px;
     font-size:1.35rem;
     font-weight:700;
@@ -115,7 +115,7 @@
     letter-spacing:1px;
 }
 
-.stat-sub{
+.stat-card-description{
     margin-top:16px;
     color: var(--color-text-muted);
     font-size:.95rem;
@@ -167,7 +167,7 @@
         margin: 0 auto;
     }
 
-    .about-right {
+    .about-content {
         width: 100%;
         min-width: 0;
     }

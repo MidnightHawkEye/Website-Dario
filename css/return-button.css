@@ -1,7 +1,7 @@
 /*==================================================
                 RETURN BUTTON
 ==================================================*/
-#return-button{
+#return-to-top-button{
     position:fixed;
     right:30px;
     bottom:30px;
@@ -24,13 +24,13 @@
     z-index:9999;
 }
 
-#return-button.show{
+#return-to-top-button.show{
     opacity:1;
     transform:translateY(0);
     pointer-events:auto;
 }
 
-#return-button:hover{
+#return-to-top-button:hover{
     box-shadow:
         0 0 12px var(--color-accent),
         0 0 24px rgba(var(--color-accent-rgb),.6);
@@ -40,7 +40,7 @@
 
 /*--------------------- Terminal Message ---------------------*/
 
-#system-message{
+#return-status-message{
 
     position:fixed;
     right:30px;
@@ -61,12 +61,12 @@
     z-index:99999;
 }
 
-#system-message.show{
+#return-status-message.show{
     opacity:1;
     transform:translateY(0);
 }
 
-.terminal-cursor{
+.return-status-cursor{
     animation:blinkCursor .8s infinite;
 }
 
@@ -85,7 +85,7 @@
 
 @media (max-width: 900px) {
 
-    #return-button {
+    #return-to-top-button {
         display: none !important;
     }
 }

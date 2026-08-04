@@ -13,23 +13,6 @@
     --color-text-muted: #9b9b9b;
     --color-text-dark: #666666;
 
-    /*==================================================
-                        SHADOWS
-    ==================================================*/
-
-    --shadow-glow-soft:
-        0 0 12px rgba(var(--color-accent-rgb), 0.2);
-
-    --shadow-glow-medium:
-        0 0 15px rgba(var(--color-accent-rgb), 0.3),
-        0 0 35px rgba(var(--color-accent-rgb), 0.15);
-
-    --shadow-glow-strong:
-        0 0 10px var(--color-accent),
-        0 0 20px rgba(var(--color-accent-rgb), 0.75);
-
-    --shadow-dark-side:
-        -15px 0 40px rgba(0, 0, 0, 0.55);
 }
 
 /*==================================================
@@ -82,7 +65,7 @@ form {
     gap:20px;
 }
 
-#matrix {
+#matrix-canvas {
     position: fixed;
     top: 0;
     left: 0;
@@ -93,7 +76,7 @@ form {
     z-index: -2;
 }
 
-.matrix-bg {
+.matrix-background {
     position:fixed;
     width:100%;
     height:100%;
@@ -132,7 +115,7 @@ form {
     text-align: center;
 }
 
-#particles{
+#particle-canvas{
     position:fixed;
     inset:0;
     width:100%;
@@ -143,7 +126,7 @@ form {
 
 /*--------------------- Typing text ---------------------*/
 
-.cursor{
+.hero-terminal-cursor{
     animation:blink .8s infinite;
 }
 

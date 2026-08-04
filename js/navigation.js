@@ -6,14 +6,14 @@ const mobileBreakpointPx = 900;
 
 
 window.addEventListener("scroll",()=>{
-    let current="";
+    let activeSectionId="";
 
     sections.forEach(section=>{
 
         const sectionTop = section.offsetTop - sectionActivationOffsetPx;
 
             if(window.scrollY >= sectionTop){
-                current = section.getAttribute("id");
+                activeSectionId = section.getAttribute("id");
             }
     });
 
@@ -21,17 +21,18 @@ window.addEventListener("scroll",()=>{
 
         link.classList.remove("active");
 
-            if(link.getAttribute("href")==="#" + current){
+            if(link.getAttribute("href")==="#" + activeSectionId){
                 link.classList.add("active");
             }
     });
 
-    const logoDot = document.getElementById("logo-dot");
+    const logoStatusDotElement =
+        document.getElementById("logo-status-dot");
 
-        if(current === "hero"){
-            logoDot.classList.add("active");
+        if(activeSectionId === "hero"){
+            logoStatusDotElement.classList.add("active");
         }else{
-            logoDot.classList.remove("active");
+            logoStatusDotElement.classList.remove("active");
         }
 });
 
@@ -43,44 +44,59 @@ window.dispatchEvent(new Event("scroll"));
                     MOBILE MENU
 ==================================================*/
 
-const menuToggle = document.querySelector(".menu-toggle");
-const navMenu = document.querySelector(".nav-menu");
-const menuOverlay = document.querySelector(".mobile-menu-overlay");
+const menuToggleButton = document.querySelector(".menu-toggle");
+const navigationMenu = document.querySelector(".nav-menu");
+const navigationOverlayElement =
+    document.querySelector(".mobile-menu-overlay");
 
 window.addEventListener("orientationchange", closeMobileMenu);
 
 function openMobileMenu() {
-        if (!navMenu || !menuToggle || !menuOverlay) {
+        if (
+            !navigationMenu ||
+            !menuToggleButton ||
+            !navigationOverlayElement
+        ) {
             return;
         }
 
-    navMenu.classList.add("open");
-    menuOverlay.classList.add("show");
+    navigationMenu.classList.add("open");
+    navigationOverlayElement.classList.add("show");
     document.body.classList.add("menu-open");
 
-    menuToggle.setAttribute("aria-expanded", "true");
-    menuToggle.setAttribute("aria-label", "Close navigation menu");
+    menuToggleButton.setAttribute("aria-expanded", "true");
+    menuToggleButton.setAttribute(
+        "aria-label",
+        "Close navigation menu"
+    );
 }
 
 
 function closeMobileMenu() {
-        if (!navMenu || !menuToggle || !menuOverlay) {
+        if (
+            !navigationMenu ||
+            !menuToggleButton ||
+            !navigationOverlayElement
+        ) {
             return;
         }
 
-    navMenu.classList.remove("open");
-    menuOverlay.classList.remove("show");
+    navigationMenu.classList.remove("open");
+    navigationOverlayElement.classList.remove("show");
     document.body.classList.remove("menu-open");
 
-    menuToggle.setAttribute("aria-expanded", "false");
-    menuToggle.setAttribute("aria-label", "Open navigation menu");
+    menuToggleButton.setAttribute("aria-expanded", "false");
+    menuToggleButton.setAttribute(
+        "aria-label",
+        "Open navigation menu"
+    );
 }
 
 
-        if (menuToggle) {
-        menuToggle.addEventListener("click", () => {
+        if (menuToggleButton) {
+        menuToggleButton.addEventListener("click", () => {
 
-            if (navMenu.classList.contains("open")) {
+            if (navigationMenu.classList.contains("open")) {
                 closeMobileMenu();
             } else {
                 openMobileMenu();
@@ -88,8 +104,11 @@ function closeMobileMenu() {
         });
         }
 
-        if (menuOverlay) {
-            menuOverlay.addEventListener("click", closeMobileMenu);
+        if (navigationOverlayElement) {
+            navigationOverlayElement.addEventListener(
+                "click",
+                closeMobileMenu
+            );
         }
 
 
@@ -99,11 +118,12 @@ function closeMobileMenu() {
 
 
     document.addEventListener("keydown", event => {
-    const isMenuOpen = navMenu?.classList.contains("open");
+    const isMenuOpen =
+        navigationMenu?.classList.contains("open");
 
     if (event.key === "Escape" && isMenuOpen) {
         closeMobileMenu();
-        menuToggle.focus();
+        menuToggleButton.focus();
     }
 });
 
@@ -129,17 +149,3 @@ function resetNavigationState() {
 
 window.addEventListener("load", resetNavigationState);
 window.addEventListener("pageshow", resetNavigationState);
-
-/*==================================================
-        URL-ANKER NACH NAVIGATION ENTFERNEN
-==================================================*/
-
-window.addEventListener("hashchange", () => {
-
-    history.replaceState(
-        null,
-        "",
-        window.location.pathname + window.location.search
-    );
-
-});

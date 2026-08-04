@@ -33,21 +33,21 @@ The website includes animated sections, interactive navigation, project cards, s
 - Privacy Policy page
 - Version number and copyright information in the footer
 
-## Known Issues
+## Browser Compatibility
 
-- **Opera Mobile:** Pull-to-refresh may interfere with the page's scrolling behaviour.
-- **Microsoft Edge Mobile:** Pull-to-refresh may restore the last viewed section instead of returning to the top of the page.
+The navigation includes explicit scroll-restoration and URL-anchor handling
+for refresh and pull-to-refresh behaviour on mobile browsers.
 
 ## Project Structure
 
 ```text
 Website-Dario/
 ├── index.html          # Main portfolio page
+├── 404.html            # Custom error page
 ├── privacy.html        # Privacy Policy
 ├── css/                # Stylesheets for layout and components
 ├── js/                 # JavaScript animations and interactions
 ├── assets/             # Images and website screenshots
-├── favicon.ico         # Browser tab icon
 ├── CNAME               # Custom domain configuration
 ├── CHANGELOG.md        # Version history
 ├── LICENSE.md          # Copyright and usage terms

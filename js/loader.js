@@ -3,24 +3,24 @@
                     LOADER
 ==================================================*/
 
-const loader = document.getElementById("loader");
-const LoaderRemovalDelay_MS = 700;  // CSS fade-out: 600 ms + 100 ms buffer
-const LoaderFallbackTimeoutMS = 3000;
+const loaderElement = document.getElementById("loader");
+const loaderRemovalDelayMs = 700;  // CSS fade-out: 600 ms + 100 ms buffer
+const loaderFallbackTimeoutMs = 3000;
 
 
 function hideLoader() {
-    if (!loader) {
+    if (!loaderElement) {
         return;
     }
 
-    loader.classList.add("loader-hidden");
-    loader.setAttribute("aria-hidden", "true");
+    loaderElement.classList.add("loader-hidden");
+    loaderElement.setAttribute("aria-hidden", "true");
 
     window.setTimeout(() => {
-        loader.style.display = "none";
-    }, LoaderRemovalDelay_MS);
+        loaderElement.style.display = "none";
+    }, loaderRemovalDelayMs);
 }
 
 window.addEventListener("load", hideLoader);
 window.addEventListener("pageshow", hideLoader);
-window.setTimeout(hideLoader, LoaderFallbackTimeoutMS);
+window.setTimeout(hideLoader, loaderFallbackTimeoutMs);

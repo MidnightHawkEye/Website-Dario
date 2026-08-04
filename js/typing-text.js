@@ -1,9 +1,11 @@
-const terminal = document.getElementById("typing-text");
-const CharacterDelayMs = 35;
-const LineDelayMs = 350;
-const MotteRevealDelayMs = 250;
+const heroTerminalOutputElement = document.getElementById(
+    "hero-terminal-output"
+);
+const characterDelayMs = 35;
+const lineDelayMs = 350;
+const mottoRevealDelayMs = 250;
 
-const lines = [
+const terminalLines = [
     "> booting DARIO.exe...",
     "> loading modules...",
     "> initializing AI systems...",
@@ -16,49 +18,55 @@ const lines = [
 ];
 
 
-let line = 0;
-let character = 0;
+let currentLineIndex = 0;
+let currentCharacterIndex = 0;
 
-function typeLine() {
-        if (!terminal) {
+function typeNextHeroCharacter() {
+        if (!heroTerminalOutputElement) {
             return;
         }
 
-        if (line >= lines.length) {
+        if (currentLineIndex >= terminalLines.length) {
             finishHeroSequence();
             return;
         }
 
-    const currentLine = lines[line];
+    const currentLine = terminalLines[currentLineIndex];
 
-        if (character < currentLine.length) {
-            terminal.append(currentLine.charAt(character));
-            character++;
-            setTimeout(typeLine, CharacterDelayMs);
+        if (currentCharacterIndex < currentLine.length) {
+            heroTerminalOutputElement.append(
+                currentLine.charAt(currentCharacterIndex)
+            );
+            currentCharacterIndex++;
+            setTimeout(typeNextHeroCharacter, characterDelayMs);
             return;
         }
 
-    terminal.appendChild(document.createElement("br"));
+    heroTerminalOutputElement.appendChild(
+        document.createElement("br")
+    );
 
-    line++;
-    character = 0;
+    currentLineIndex++;
+    currentCharacterIndex = 0;
 
-    setTimeout(typeLine, LineDelayMs);
+    setTimeout(typeNextHeroCharacter, lineDelayMs);
 }
 
 function finishHeroSequence() {
-    const button = document.querySelector(".hero-button");
-    const motto = document.querySelector(".hero-motto");
+    const heroButtonElement =
+        document.querySelector(".hero-button");
+    const heroMottoElement =
+        document.querySelector(".hero-motto");
 
-        if (button) {
-            button.classList.add("show");
+        if (heroButtonElement) {
+            heroButtonElement.classList.add("show");
         }
 
     setTimeout(() => {
-        if (motto) {
-            motto.classList.add("show");
+        if (heroMottoElement) {
+            heroMottoElement.classList.add("show");
         }
-    }, MotteRevealDelayMs);
+    }, mottoRevealDelayMs);
 }
 
-typeLine();
+typeNextHeroCharacter();

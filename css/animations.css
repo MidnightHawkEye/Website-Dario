@@ -1,7 +1,7 @@
 /*==================================================
                 SCROLL ANIMATIONS
 ==================================================*/
-.fade-up{
+.reveal-fade-up{
     opacity:0;
     transform:translateY(80px);
     transition:
@@ -9,12 +9,12 @@
         transform .9s ease;
 }
 
-.fade-up.show{
+.reveal-fade-up.show{
     opacity:1;
     transform:translateY(0);
 }
 
-.fade-right{
+.reveal-fade-right{
     opacity:0;
     transform:translateX(80px);
     transition:
@@ -22,12 +22,12 @@
         transform .9s ease;
 }
 
-.fade-right.show{
+.reveal-fade-right.show{
     opacity:1;
     transform:translateX(0);
 }
 
-.zoom{
+.reveal-zoom{
     opacity:0;
     transform:scale(.85);
     transition:
@@ -35,12 +35,12 @@
         transform .8s ease;
 }
 
-.zoom.show{
+.reveal-zoom.show{
     opacity:1;
     transform:scale(1);
 }
 
-.blur{
+.reveal-blur{
     opacity:0;
     filter:blur(12px);
     transition:
@@ -48,7 +48,7 @@
         filter .9s ease;
 }
 
-.blur.show{
+.reveal-blur.show{
     opacity:1;
     filter:blur(0);
 }

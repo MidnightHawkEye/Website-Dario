@@ -1,38 +1,58 @@
-const matrixCanvas = document.getElementById("matrix");
-const matrixCtx = matrixCanvas.getContext("2d");
-
-
-matrixCanvas.width = window.innerWidth;
-matrixCanvas.height = window.innerHeight;
-
-
+const matrixCanvas = document.getElementById("matrix-canvas");
+const matrixContext = matrixCanvas.getContext("2d");
 const letters = "01アイウエオカキクケコサシスセソABCDEFGHIJKLMNOPQRSTUVWXYZ";
-const MatrixFontSizePx = 16;
-const MatrixResetThreshold = 0.975;
-const MatrixIntervalMs = 45;
-const columns = matrixCanvas.width / MatrixFontSizePx;
+const matrixFontSizePx = 16;
+const matrixResetThreshold = 0.975;
+const matrixIntervalMs = 45;
 const drops = [];
 
 const accentColor = getComputedStyle(
     document.documentElement
 ).getPropertyValue("--color-accent").trim();
 
-for (let i = 0; i < columns; i++) {
-    drops[i] = 1;
+function resizeMatrixCanvas() {
+    matrixCanvas.width = window.innerWidth;
+    matrixCanvas.height = window.innerHeight;
+
+    const columnCount = Math.ceil(
+        matrixCanvas.width / matrixFontSizePx
+    );
+
+    if (drops.length > columnCount) {
+        drops.length = columnCount;
+    }
+
+    while (drops.length < columnCount) {
+        drops.push(1);
+    }
 }
+
+resizeMatrixCanvas();
 
 function drawMatrix() {
 
-    matrixCtx.fillStyle = "rgba(0,0,0,0.08)";
-    matrixCtx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
-    matrixCtx.fillStyle = accentColor;
-    matrixCtx.font = MatrixFontSizePx + "px monospace";
+    matrixContext.fillStyle = "rgba(0,0,0,0.08)";
+    matrixContext.fillRect(
+        0,
+        0,
+        matrixCanvas.width,
+        matrixCanvas.height
+    );
+    matrixContext.fillStyle = accentColor;
+    matrixContext.font = matrixFontSizePx + "px monospace";
 
     for (let i = 0; i < drops.length; i++) {
         const text = letters[Math.floor(Math.random() * letters.length)];
-        matrixCtx.fillText(text, i * MatrixFontSizePx, drops[i] * MatrixFontSizePx);
+        matrixContext.fillText(
+            text,
+            i * matrixFontSizePx,
+            drops[i] * matrixFontSizePx
+        );
 
-            if (drops[i] * MatrixFontSizePx > matrixCanvas.height && Math.random() > MatrixResetThreshold) {
+            if (
+                drops[i] * matrixFontSizePx > matrixCanvas.height &&
+                Math.random() > matrixResetThreshold
+            ) {
                 drops[i] = 0;
             }
             
@@ -53,7 +73,7 @@ function startMatrixAnimation() {
 
     matrixIntervalId = setInterval(
         drawMatrix,
-        MatrixIntervalMs
+        matrixIntervalMs
     );
 }
 
@@ -72,6 +92,19 @@ document.addEventListener("visibilitychange", () => {
     } else {
         stopMatrixAnimation();
     }
+});
+
+let matrixResizeFrameId = null;
+
+window.addEventListener("resize", () => {
+    if (matrixResizeFrameId !== null) {
+        return;
+    }
+
+    matrixResizeFrameId = requestAnimationFrame(() => {
+        resizeMatrixCanvas();
+        matrixResizeFrameId = null;
+    });
 });
 
 startMatrixAnimation();

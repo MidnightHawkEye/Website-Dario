@@ -11,7 +11,7 @@ const mouseRepelDistancePx = 150;
 const connectionDistancePx = 120;
 const connectionFadeDistancePx = 140;
 
-function getParticleCount() {
+function getTargetParticleCount() {
     if (mobileParticleQuery.matches) {
         return Math.floor(
             desktopParticleCount / mobileParticleDivider
@@ -23,20 +23,20 @@ function getParticleCount() {
 
 /*--------------------- Mouse Movement ---------------------*/
 
-const mouse = {
+const pointerPosition = {
     x: window.innerWidth / 2,
     y: window.innerHeight / 2
 };
 
-window.addEventListener("mousemove", (e) => {
-    mouse.x = e.clientX;
-    mouse.y = e.clientY;
+window.addEventListener("mousemove", (event) => {
+    pointerPosition.x = event.clientX;
+    pointerPosition.y = event.clientY;
 });
 
 /*--------------------- Particle ---------------------*/
 
-const particleCanvas = document.getElementById("particles");
-const particleCtx = particleCanvas.getContext("2d");
+const particleCanvas = document.getElementById("particle-canvas");
+const particleContext = particleCanvas.getContext("2d");
 
 particleCanvas.width = window.innerWidth;
 particleCanvas.height = window.innerHeight;
@@ -102,7 +102,7 @@ class Particle{
         }
 
 
-    const gradient = particleCtx.createRadialGradient(
+    const gradient = particleContext.createRadialGradient(
         this.x,
         this.y,
         0,
@@ -113,10 +113,10 @@ class Particle{
 
     gradient.addColorStop(0, `rgba(120,255,180,${this.opacity})`);
     gradient.addColorStop(1, "rgba(0,255,136,0)");
-    particleCtx.beginPath();
-    particleCtx.fillStyle = gradient;
+    particleContext.beginPath();
+    particleContext.fillStyle = gradient;
 
-    particleCtx.arc(
+    particleContext.arc(
         this.x,
         this.y,
         glowRadius,
@@ -124,7 +124,7 @@ class Particle{
         Math.PI * 2
         );
 
-    particleCtx.fill();
+    particleContext.fill();
     }
 
     /*--------------------- Particle Movement ---------------------*/
@@ -149,8 +149,8 @@ class Particle{
             this.x = 0;
         }
 
-    const dx = mouse.x - this.x;
-    const dy = mouse.y - this.y;
+    const dx = pointerPosition.x - this.x;
+    const dy = pointerPosition.y - this.y;
 
     const distance = Math.sqrt(dx * dx + dy * dy);
 
@@ -167,7 +167,7 @@ class Particle{
 const particles = [];
 
 function adjustParticleCount() {
-    const targetParticleCount = getParticleCount();
+    const targetParticleCount = getTargetParticleCount();
 
     while (particles.length > targetParticleCount) {
         particles.pop();
@@ -183,8 +183,8 @@ adjustParticleCount();
 
 let particleAnimationFrameId = null;
 
-function animate() {
-    particleCtx.clearRect(
+function animateParticles() {
+    particleContext.clearRect(
         0,
         0,
         particleCanvas.width,
@@ -198,7 +198,7 @@ function animate() {
     connectParticles();
 
     particleAnimationFrameId =
-        requestAnimationFrame(animate);
+        requestAnimationFrame(animateParticles);
 }
 
 function startParticleAnimation() {
@@ -211,7 +211,7 @@ function startParticleAnimation() {
     }
 
     particleAnimationFrameId =
-        requestAnimationFrame(animate);
+        requestAnimationFrame(animateParticles);
 }
 
 function stopParticleAnimation() {
@@ -253,23 +253,23 @@ function connectParticles() {
 
                     const alpha = (1 - distance / connectionFadeDistancePx) * 0.35;
 
-                    particleCtx.beginPath();
+                    particleContext.beginPath();
 
-                    particleCtx.moveTo(
+                    particleContext.moveTo(
                         particles[a].x,
                         particles[a].y
                     );
 
-                    particleCtx.lineTo(
+                    particleContext.lineTo(
                         particles[b].x,
                         particles[b].y
                     );
 
-                    particleCtx.strokeStyle = `rgba(0,255,136,${alpha})`;
+                    particleContext.strokeStyle = `rgba(0,255,136,${alpha})`;
 
-                    particleCtx.lineWidth = 0.8;
+                    particleContext.lineWidth = 0.8;
 
-                    particleCtx.stroke();
+                    particleContext.stroke();
             }
         }
     }
@@ -285,7 +285,7 @@ window.addEventListener("resize", () => {
     const newWidth = window.innerWidth;
     const newHeight = window.innerHeight;
 
-    // Vorhandene Partikel proportional auf die neue Fläche verteilen
+    // Distribute existing particles proportionally across the new area
     particles.forEach((particle) => {
 
         if (oldWidth > 0) {
@@ -300,19 +300,19 @@ window.addEventListener("resize", () => {
 
     });
 
-    // Canvas an die neue Fenstergröße anpassen
+    // Resize the canvas to the new viewport size
     particleCanvas.width = newWidth;
     particleCanvas.height = newHeight;
 
-    // Mausposition innerhalb des neuen Fensters halten
-    mouse.x = Math.max(
+    // Keep the mouse position within the new viewport
+    pointerPosition.x = Math.max(
         0,
-        Math.min(mouse.x, newWidth)
+        Math.min(pointerPosition.x, newWidth)
     );
 
-    mouse.y = Math.max(
+    pointerPosition.y = Math.max(
         0,
-        Math.min(mouse.y, newHeight)
+        Math.min(pointerPosition.y, newHeight)
     );
 
     adjustParticleCount();

@@ -142,7 +142,7 @@
     transform: translateY(0);
 }
 
-.green-dot {
+.accent-punctuation {
     color: var(--color-accent);
 }
 

@@ -4,7 +4,7 @@ if ("scrollRestoration" in history) {
 
 
 /*==================================================
-        URL-ANKER NACH NAVIGATION ENTFERNEN
+        REMOVE URL ANCHOR AFTER NAVIGATION
 ==================================================*/
 
 window.addEventListener("hashchange", () => {
