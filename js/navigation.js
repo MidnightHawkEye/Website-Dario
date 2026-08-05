@@ -49,6 +49,18 @@ const navigationMenu = document.querySelector(".nav-menu");
 const navigationOverlayElement =
     document.querySelector(".mobile-menu-overlay");
 
+function updateMobileMenuLabel() {
+    if (!menuToggleButton) {
+        return;
+    }
+
+    const isMenuOpen = navigationMenu?.classList.contains("open");
+    menuToggleButton.setAttribute(
+        "aria-label",
+        translate(isMenuOpen ? "nav.close" : "nav.open")
+    );
+}
+
 window.addEventListener("orientationchange", closeMobileMenu);
 
 function openMobileMenu() {
@@ -65,10 +77,7 @@ function openMobileMenu() {
     document.body.classList.add("menu-open");
 
     menuToggleButton.setAttribute("aria-expanded", "true");
-    menuToggleButton.setAttribute(
-        "aria-label",
-        "Close navigation menu"
-    );
+    updateMobileMenuLabel();
 }
 
 
@@ -86,10 +95,7 @@ function closeMobileMenu() {
     document.body.classList.remove("menu-open");
 
     menuToggleButton.setAttribute("aria-expanded", "false");
-    menuToggleButton.setAttribute(
-        "aria-label",
-        "Open navigation menu"
-    );
+    updateMobileMenuLabel();
 }
 
 
@@ -149,3 +155,4 @@ function resetNavigationState() {
 
 window.addEventListener("load", resetNavigationState);
 window.addEventListener("pageshow", resetNavigationState);
+document.addEventListener("languagechange", updateMobileMenuLabel);

@@ -7,7 +7,7 @@
         content="width=device-width, initial-scale=1.0"
     >
     <meta name="robots" content="noindex">
-    <title>404 | DARIO.exe</title>
+    <title data-i18n="error404.title">404 | DARIO.exe</title>
 
     <link
         rel="icon"
@@ -35,34 +35,38 @@
 
     <link rel="stylesheet" href="/css/global.css?v=1.2.1">
     <link rel="stylesheet" href="/css/css404.css?v=1.2.1">
+    <script src="/js/i18n.js?v=1.2.4" defer></script>
 </head>
 
 <body class="error-page">
     <main class="error-terminal">
-        <p class="error-status">SYSTEM ERROR</p>
+        <p class="error-status" data-i18n="error404.systemError">SYSTEM ERROR</p>
         <h1 class="error-code">404</h1>
-        <p class="error-title">PAGE_NOT_FOUND</p>
-        <p class="error-message">
+        <p class="error-title" data-i18n="error404.pageNotFound">PAGE_NOT_FOUND</p>
+        <p class="error-message" data-i18n="error404.message">
             The requested resource could not be located.
             The system path may be invalid or no longer available.
         </p>
-        <div class="error-details" aria-label="Error details">
+        <div
+            class="error-details"
+            aria-label="Error details"
+            data-i18n-aria-label="error404.detailsAria">
             <p>
-                <span>ERROR_CODE:</span>
+                <span data-i18n="error404.errorCode">ERROR_CODE:</span>
                 404
             </p>
 
             <p>
-                <span>STATUS:</span>
-                RESOURCE_NOT_FOUND
+                <span data-i18n="error404.status">STATUS:</span>
+                <span data-i18n="error404.resourceNotFound">RESOURCE_NOT_FOUND</span>
             </p>
 
             <p>
-                <span>ACTION:</span>
-                RETURN_TO_SYSTEM
+                <span data-i18n="error404.action">ACTION:</span>
+                <span data-i18n="error404.returnValue">RETURN_TO_SYSTEM</span>
             </p>
         </div>
-        <a class="error-button" href="/">
+        <a class="error-button" href="/" data-i18n="error404.returnButton">
             &gt; RETURN TO SYSTEM
         </a>
     </main>

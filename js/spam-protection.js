@@ -2,21 +2,35 @@
 
 const contactFormElement = document.getElementById("contact-form");
 const formStatusElement = document.getElementById("form-status");
+const contactSubmitButtonElement =
+    contactFormElement?.querySelector(".contact-button");
 
 const submitCooldownMs = 30_000;
 const formResetDelayMs = 3_000;
 
 let lastSubmit = 0;
+let currentFormStatusKey = "contact.awaiting";
+let currentSubmitButtonKey = "contact.submit";
 
 
 /*--------------------- Status Message ---------------------*/
 
-function setFormStatus(message) {
+function setFormStatus(messageKey) {
+    currentFormStatusKey = messageKey;
+
     if (!formStatusElement) {
         return;
     }
 
-    formStatusElement.textContent = message;
+    formStatusElement.textContent = translate(messageKey);
+}
+
+function setSubmitButtonText(messageKey) {
+    currentSubmitButtonKey = messageKey;
+
+    if (contactSubmitButtonElement) {
+        contactSubmitButtonElement.textContent = translate(messageKey);
+    }
 }
 
 
@@ -27,24 +41,20 @@ if (contactFormElement) {
         event.preventDefault();
 
         const honeypot = document.getElementById("website");
-        const submitButton =
-            contactFormElement.querySelector(".contact-button");
+        const submitButton = contactSubmitButtonElement;
 
         /*--------------------- Honeypot Check ---------------------*/
 
         if (honeypot && honeypot.value.trim() !== "") {
-            alert("Unauthorized system interaction detected.");
+            alert(translate("contact.unauthorized"));
             return;
         }
 
         /*--------------------- Offline Check ---------------------*/
 
         if (!navigator.onLine) {
-            setFormStatus(
-                "> Network offline. Check your internet connection and try again."
-            );
-
-            submitButton.textContent = "> RETRY TRANSMISSION";
+            setFormStatus("contact.offline");
+            setSubmitButtonText("contact.retry");
             return;
         }
 
@@ -53,9 +63,7 @@ if (contactFormElement) {
         const now = Date.now();
 
         if (now - lastSubmit < submitCooldownMs) {
-            alert(
-                "Please wait 30 seconds before sending another message."
-            );
+            alert(translate("contact.cooldown"));
 
             return;
         }
@@ -66,20 +74,16 @@ if (contactFormElement) {
             typeof emailjs === "undefined" ||
             typeof emailjs.sendForm !== "function"
         ) {
-            setFormStatus(
-                "> Transmission service unavailable. Please try again later."
-            );
-
-            submitButton.textContent = "> RETRY TRANSMISSION";
+            setFormStatus("contact.unavailable");
+            setSubmitButtonText("contact.retry");
             return;
         }
 
         /*--------------------- Transmission Start ---------------------*/
 
         submitButton.disabled = true;
-        submitButton.textContent = "> TRANSMITTING...";
-
-        setFormStatus("> Encrypting message...");
+        setSubmitButtonText("contact.transmitting");
+        setFormStatus("contact.encrypting");
 
         try {
             await emailjs.sendForm(
@@ -90,39 +94,28 @@ if (contactFormElement) {
 
             lastSubmit = Date.now();
 
-            if (formStatusElement) {
-                formStatusElement.innerHTML =
-                    "&gt; Transmission successful.<br>" +
-                    "Connection established.";
-            }
-
-            submitButton.textContent =
-                "> TRANSMISSION COMPLETE";
+            setFormStatus("contact.success");
+            setSubmitButtonText("contact.complete");
 
             contactFormElement.reset();
 
             setTimeout(() => {
                 submitButton.disabled = false;
-                submitButton.textContent =
-                    "> INITIALIZE TRANSMISSION";
-
-                setFormStatus(
-                    "> Awaiting secure connection..."
-                );
+                setSubmitButtonText("contact.submit");
+                setFormStatus("contact.awaiting");
             }, formResetDelayMs);
 
         } catch (error) {
             console.error("EmailJS error:", error);
 
-            const errorMessage = navigator.onLine
-                ? "> Transmission failed. Please try again later."
-                : "> Network connection lost. Check your internet connection.";
+            const errorMessageKey = navigator.onLine
+                ? "contact.failed"
+                : "contact.connectionLost";
 
-            setFormStatus(errorMessage);
+            setFormStatus(errorMessageKey);
 
             submitButton.disabled = false;
-            submitButton.textContent =
-                "> RETRY TRANSMISSION";
+            setSubmitButtonText("contact.retry");
         }
     });
 }
@@ -131,13 +124,14 @@ if (contactFormElement) {
 /*--------------------- Network Status ---------------------*/
 
 window.addEventListener("offline", () => {
-    setFormStatus(
-        "> Network connection lost. Transmission unavailable."
-    );
+    setFormStatus("contact.offlineStatus");
 });
 
 window.addEventListener("online", () => {
-    setFormStatus(
-        "> Connection restored. Ready for secure transmission."
-    );
+    setFormStatus("contact.restored");
+});
+
+document.addEventListener("languagechange", () => {
+    setFormStatus(currentFormStatusKey);
+    setSubmitButtonText(currentSubmitButtonKey);
 });

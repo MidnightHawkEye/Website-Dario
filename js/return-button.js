@@ -92,7 +92,7 @@ async function runReturnToSystemSequence() {
 
         returnStatusMessageElement.classList.add("show");
 
-        await typeSystemMessage("> Returning to system...");
+        await typeSystemMessage(translate("return.returning"));
 
         window.scrollTo({
             top: 0,
@@ -102,7 +102,7 @@ async function runReturnToSystemSequence() {
         await waitForPageTop();
         await delay(systemReadyDelayMs);
 
-        await typeSystemMessage("> System ready.");
+        await typeSystemMessage(translate("return.ready"));
         await delay(systemMessageDurationMs);
 
         returnStatusMessageElement.classList.remove("show");

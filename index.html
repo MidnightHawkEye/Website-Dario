@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="DARIO.exe is the personal developer portfolio of Dario Hasler, showcasing projects in web development, industrial automation and cybersecurity.">
+<meta name="description" content="DARIO.exe is the personal developer portfolio of Dario Hasler, showcasing projects in web development, industrial automation and cybersecurity." data-i18n-content="meta.description">
 <!-- Open Graph -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="DARIO.exe | Developer Portfolio by Dario Hasler">
-<meta property="og:description" content="DARIO.exe is the personal developer portfolio of Dario Hasler, showcasing projects in web development, industrial automation and cybersecurity.">
+<meta property="og:title" content="DARIO.exe | Developer Portfolio by Dario Hasler" data-i18n-content="meta.title">
+<meta property="og:description" content="DARIO.exe is the personal developer portfolio of Dario Hasler, showcasing projects in web development, industrial automation and cybersecurity." data-i18n-content="meta.description">
 <meta property="og:url" content="https://dario-exe.ch/">
 <meta property="og:site_name" content="DARIO.exe">
 <meta property="og:locale" content="en_US">
@@ -15,9 +15,9 @@
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1731">
 <meta property="og:image:height" content="909">
-<meta property="og:image:alt" content="Preview of the DARIO.exe developer portfolio">
+<meta property="og:image:alt" content="Preview of the DARIO.exe developer portfolio" data-i18n-content="meta.imageAlt">
 
-<title>DARIO.exe | Developer Portfolio by Dario Hasler</title>
+<title data-i18n="meta.title">DARIO.exe | Developer Portfolio by Dario Hasler</title>
 
 <script>
     document.documentElement.classList.add("js-motion");
@@ -49,27 +49,28 @@
 
 <link rel="canonical" href="https://dario-exe.ch/">
 
-<link rel="stylesheet" href="css/global.css?v=1.2.1">
-<link rel="stylesheet" href="css/animations.css?v=1.2.1">
-<link rel="stylesheet" href="css/nav-bar.css?v=1.2.1">
-<link rel="stylesheet" href="css/hero-section.css?v=1.2.1">
-<link rel="stylesheet" href="css/about-me.css?v=1.2.1">
-<link rel="stylesheet" href="css/skills.css?v=1.2.1">
-<link rel="stylesheet" href="css/project-cards.css?v=1.2.1">
-<link rel="stylesheet" href="css/contact-terminal.css?v=1.2.1">
-<link rel="stylesheet" href="css/return-button.css?v=1.2.1">
+<link rel="stylesheet" href="css/global.css?v=1.2.2">
+<link rel="stylesheet" href="css/animations.css?v=1.2.2">
+<link rel="stylesheet" href="css/nav-bar.css?v=1.2.3">
+<link rel="stylesheet" href="css/hero-section.css?v=1.2.2">
+<link rel="stylesheet" href="css/about-me.css?v=1.2.2">
+<link rel="stylesheet" href="css/skills.css?v=1.2.2">
+<link rel="stylesheet" href="css/project-cards.css?v=1.2.2">
+<link rel="stylesheet" href="css/contact-terminal.css?v=1.2.2">
+<link rel="stylesheet" href="css/return-button.css?v=1.2.2">
 
-<script src="js/global.js?v=1.2.1" defer></script>
-<script src="js/motion-animations.js?v=1.2.1" defer></script>
-<script src="js/loader.js?v=1.2.1" defer></script>
-<script src="js/matrix.js?v=1.2.1" defer></script>
-<script src="js/navigation.js?v=1.2.1" defer></script>
-<script src="js/particles.js?v=1.2.1" defer></script>
-<script src="js/progress-bar.js?v=1.2.1" defer></script>
-<script src="js/return-button.js?v=1.2.1" defer></script>
-<script src="js/scroll-animation.js?v=1.2.1" defer></script>
-<script src="js/spam-protection.js?v=1.2.1" defer></script>
-<script src="js/typing-text.js?v=1.2.1" defer></script>
+<script src="js/global.js?v=1.2.2" defer></script>
+<script src="js/i18n.js?v=1.2.4" defer></script>
+<script src="js/motion-animations.js?v=1.2.2" defer></script>
+<script src="js/loader.js?v=1.2.2" defer></script>
+<script src="js/matrix.js?v=1.2.2" defer></script>
+<script src="js/navigation.js?v=1.2.2" defer></script>
+<script src="js/particles.js?v=1.2.2" defer></script>
+<script src="js/progress-bar.js?v=1.2.2" defer></script>
+<script src="js/return-button.js?v=1.2.2" defer></script>
+<script src="js/scroll-animation.js?v=1.2.2" defer></script>
+<script src="js/spam-protection.js?v=1.2.2" defer></script>
+<script src="js/typing-text.js?v=1.2.2" defer></script>
 
 </head>
 <body>
@@ -78,21 +79,44 @@
 <!--------------------- Loader --------------------->
 
 <div id="loader">
-        <p class="loader-title">INITIALIZING DARIO.exe</p>
+        <p class="loader-title" data-i18n="loader.initializing">INITIALIZING DARIO.exe</p>
 </div>
 
 <!--------------------- Nav Bar --------------------->
 
 <header class="site-header">
-    <nav aria-label="Primary navigation">
+    <nav aria-label="Primary navigation" data-i18n-aria-label="nav.primary">
         <div class="logo">
             <span id="logo-status-dot" class="logo-dot"></span>
             <span>DARIO.exe</span>
+        </div>
+        <div
+            class="language-switcher"
+            role="group"
+            aria-label="Language selection"
+            data-i18n-aria-label="language.selector">
+            <button
+                class="language-option"
+                type="button"
+                data-language="de"
+                lang="de"
+                aria-label="Switch to German"
+                data-i18n-aria-label="language.switchToGerman"
+                aria-pressed="false">DE</button>
+            <button
+                class="language-option is-active"
+                type="button"
+                data-language="en"
+                lang="en"
+                aria-label="Switch to English"
+                data-i18n-aria-label="language.switchToEnglish"
+                aria-pressed="true">EN</button>
         </div>
         <button
             class="menu-toggle"
             type="button"
             aria-label="Open navigation menu"
+            data-i18n-aria-label="nav.open"
             aria-expanded="false"
             aria-controls="nav-menu">
             <span></span>
@@ -101,13 +125,13 @@
         </button>
         <div class="mobile-menu-overlay"></div>
         <ul id="nav-menu" class="nav-menu">
-            <li><a href="#about">About</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#about" data-i18n="nav.about">About</a></li>
+            <li><a href="#skills" data-i18n="nav.skills">Skills</a></li>
+            <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
+            <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
             <li class="mobile-menu-status">
                 <span class="mobile-status-dot"></span>
-                SYSTEM ONLINE
+                <span data-i18n="nav.systemOnline">SYSTEM ONLINE</span>
             </li>
         </ul>
     </nav>
@@ -119,25 +143,25 @@
 <section id="hero" class="hero">
     <div class="hero-overlay"></div>
     <div class="hero-content">
-        <p class="hero-kicker">&gt; INITIALIZING SYSTEM...</p>
+        <p class="hero-kicker" data-i18n="hero.kicker">&gt; INITIALIZING SYSTEM...</p>
         <h1 class="glitch" data-text="DARIO.exe">DARIO.exe</h1>
         <div class="terminal-intro">
             <span id="hero-terminal-output"></span>
             <span class="hero-terminal-cursor">█</span>
         </div>
-        <button class="hero-button" onclick="scrollToSection('about')">&gt; ENTER SYSTEM</button>
+        <button class="hero-button" onclick="scrollToSection('about')" data-i18n="hero.enter">&gt; ENTER SYSTEM</button>
         <p class="hero-motto">
-            Building systems<span class="accent-punctuation">.</span><br>
-            Breaking limits<span class="accent-punctuation">.</span><br>
-            Learning code<span class="accent-punctuation">.</span>
+            <span data-i18n="hero.mottoBuilding">Building systems</span><span class="accent-punctuation">.</span><br>
+            <span data-i18n="hero.mottoBreaking">Breaking limits</span><span class="accent-punctuation">.</span><br>
+            <span data-i18n="hero.mottoLearning">Learning code</span><span class="accent-punctuation">.</span>
         </p>
     </div>
     <div class="scroll-hint">
         <div class="hero-system-status">
             <span class="hero-status-dot"></span>
-            <span class="hero-status-text">SYSTEM ONLINE</span>
+            <span class="hero-status-text" data-i18n="hero.systemOnline">SYSTEM ONLINE</span>
         </div>
-        <span>SCROLL TO CONTINUE</span>
+        <span data-i18n="hero.scroll">SCROLL TO CONTINUE</span>
         <span class="scroll-arrow">↓</span>
     </div>
 </section>
@@ -149,55 +173,56 @@
     <img
         src="assets/images/Dario-profile.webp"
         alt="Portrait of Dario Hasler"
+        data-i18n-alt="about.imageAlt"
         width="866"
         height="1085"
         loading="lazy"
         decoding="async">
     <div class="status-badge">
         <span class="status-dot"></span>
-        <span>Status: Online</span>
+        <span data-i18n="about.status">Status: Online</span>
     </div>
 </div>
     <div class="about-content reveal-fade-right">
-        <h2>Who Am I</h2>
+        <h2 data-i18n="about.heading">Who Am I</h2>
         <br>
 
     <p>
-        Industrial Automation Specialist
+        <span data-i18n="about.introRole">Industrial Automation Specialist</span>
         <br>
-        building control systems in real-world environments.
+        <span data-i18n="about.introWork">building control systems in real-world environments.</span>
     </p>
         <br>
     <p>
-        Currently transitioning into
+        <span data-i18n="about.transitioning">Currently transitioning into</span>
         <br>
-        Software Engineering, 
+        <span data-i18n="about.software">Software Engineering,</span>
         <br>
-        Cybersecurity
+        <span data-i18n="about.cybersecurity">Cybersecurity</span>
         <br>
-        and building my own digital products.
+        <span data-i18n="about.products">and building my own digital products.</span>
     </p>
         <br>
     <p>
-        Every line of code
+        <span data-i18n="about.code">Every line of code</span>
         <br>
-        is another step toward freedom.
+        <span data-i18n="about.freedom">is another step toward freedom.</span>
     </p>
         <div class="about-stats">
             <div class="stat-card">
-                <h3>CURRENT PROJECT</h3>
+                <h3 data-i18n="about.currentProject">CURRENT PROJECT</h3>
                 <p class="stat-card-value">DARIO.exe</p>
-                <p class="stat-card-description">Building my personal brand.</p>
+                <p class="stat-card-description" data-i18n="about.brand">Building my personal brand.</p>
             </div>
             <div class="stat-card">
-                <h3>CURRENT FOCUS</h3>
+                <h3 data-i18n="about.currentFocus">CURRENT FOCUS</h3>
                 <p class="stat-card-value">Software Engineering</p>
                 <p class="stat-card-description">JavaScript • HTML • CSS</p>
             </div>
             <div class="stat-card">
-                <h3>STATUS</h3>
-                <p class="stat-card-value">∞ Learning</p>
-                <p class="stat-card-description">One step every day.</p>
+                <h3 data-i18n="about.statusLabel">STATUS</h3>
+                <p class="stat-card-value" data-i18n="about.learning">∞ Learning</p>
+                <p class="stat-card-description" data-i18n="about.daily">One step every day.</p>
             </div>
         </div>
        
@@ -209,8 +234,8 @@
 <section id="skills" class="section">
 
     <div class="section-heading reveal-fade-up">
-        <p class="section-label">SYSTEM ANALYSIS</p>
-        <h2>SYSTEM CAPABILITIES</h2>
+        <p class="section-label" data-i18n="skills.label">SYSTEM ANALYSIS</p>
+        <h2 data-i18n="skills.heading">SYSTEM CAPABILITIES</h2>
     </div>
 
     <div class="skills-grid">
@@ -221,18 +246,18 @@
             <div class="skill-card-header">
                 <span class="skill-number">01</span>
                 <div class="skill-status">
-                    <span class="skill-status-dot"></span>ONLINE
+                    <span class="skill-status-dot"></span><span data-i18n="skills.online">ONLINE</span>
                 </div>
             </div>
 
             <h3>HTML & CSS</h3>
-            <p class="skill-description">
+            <p class="skill-description" data-i18n="skills.htmlDescription">
                 Creating clean, responsive and accessible web interfaces
                 with semantic HTML and modern CSS.</p>
 
             <div class="skill-divider"></div>
             <div class="skill-data">
-                <span>PROFICIENCY</span>
+                <span data-i18n="skills.proficiency">PROFICIENCY</span>
                 <strong>60%</strong>
             </div>
 
@@ -241,8 +266,8 @@
             </div>
 
             <div class="skill-focus">
-                <span>CURRENT FOCUS</span>
-                <p>Layouts, structure and visual consistency</p>
+                <span data-i18n="skills.focus">CURRENT FOCUS</span>
+                <p data-i18n="skills.htmlFocus">Layouts, structure and visual consistency</p>
             </div>
 
         </article>
@@ -252,19 +277,19 @@
             <div class="skill-card-header">
                 <span class="skill-number">02</span>
                 <div class="skill-status">
-                    <span class="skill-status-dot"></span>LEARNING
+                    <span class="skill-status-dot"></span><span data-i18n="skills.learning">LEARNING</span>
                 </div>
             </div>
 
             <h3>JavaScript</h3>
-            <p class="skill-description">
+            <p class="skill-description" data-i18n="skills.jsDescription">
                 Developing interactive experiences, dynamic functionality
                 and browser-based systems.
             </p>
 
             <div class="skill-divider"></div>
             <div class="skill-data">
-                <span>PROFICIENCY</span>
+                <span data-i18n="skills.proficiency">PROFICIENCY</span>
                 <strong>35%</strong>
             </div>
 
@@ -273,8 +298,8 @@
             </div>
 
             <div class="skill-focus">
-                <span>CURRENT FOCUS</span>
-                <p>DOM manipulation, functions and application logic</p>
+                <span data-i18n="skills.focus">CURRENT FOCUS</span>
+                <p data-i18n="skills.jsFocus">DOM manipulation, functions and application logic</p>
             </div>
 
         </article>
@@ -284,19 +309,19 @@
             <div class="skill-card-header">
                 <span class="skill-number">03</span>
                 <div class="skill-status">
-                    <span class="skill-status-dot"></span>ACTIVE
+                    <span class="skill-status-dot"></span><span data-i18n="skills.active">ACTIVE</span>
                 </div>
             </div>
 
-            <h3>Responsive Web Design</h3>
-            <p class="skill-description">
+            <h3 data-i18n="skills.responsiveTitle">Responsive Web Design</h3>
+            <p class="skill-description" data-i18n="skills.responsiveDescription">
                 Optimizing layouts and interfaces for desktop,
                 tablet and mobile devices.
             </p>
 
             <div class="skill-divider"></div>
             <div class="skill-data">
-                <span>PROFICIENCY</span>
+                <span data-i18n="skills.proficiency">PROFICIENCY</span>
                 <strong>45%</strong>
             </div>
 
@@ -305,8 +330,8 @@
             </div>
 
             <div class="skill-focus">
-                <span>CURRENT FOCUS</span>
-                <p>Flexible grids, media queries and mobile navigation</p>
+                <span data-i18n="skills.focus">CURRENT FOCUS</span>
+                <p data-i18n="skills.responsiveFocus">Flexible grids, media queries and mobile navigation</p>
             </div>
 
         </article>
@@ -316,19 +341,19 @@
             <div class="skill-card-header">
                 <span class="skill-number">04</span>
                 <div class="skill-status">
-                    <span class="skill-status-dot"></span>ACTIVE
+                    <span class="skill-status-dot"></span><span data-i18n="skills.active">ACTIVE</span>
                 </div>
             </div>
 
             <h3>UI / UX Design</h3>
-            <p class="skill-description">
+            <p class="skill-description" data-i18n="skills.uxDescription">
                 Designing intuitive interfaces with clear structure,
                 consistency and a user-focused mindset.
             </p>
 
             <div class="skill-divider"></div>
             <div class="skill-data">
-                <span>PROFICIENCY</span>
+                <span data-i18n="skills.proficiency">PROFICIENCY</span>
                 <strong>45%</strong>
             </div>
 
@@ -337,8 +362,8 @@
             </div>
 
             <div class="skill-focus">
-                <span>CURRENT FOCUS</span>
-                <p>Visual hierarchy, navigation and user feedback</p>
+                <span data-i18n="skills.focus">CURRENT FOCUS</span>
+                <p data-i18n="skills.uxFocus">Visual hierarchy, navigation and user feedback</p>
             </div>
 
         </article>
@@ -348,19 +373,19 @@
             <div class="skill-card-header">
                 <span class="skill-number">05</span>
                 <div class="skill-status">
-                    <span class="skill-status-dot"></span>ACTIVE
+                    <span class="skill-status-dot"></span><span data-i18n="skills.active">ACTIVE</span>
                 </div>
             </div>
 
-            <h3>UI Animations</h3>
-            <p class="skill-description">
+            <h3 data-i18n="skills.animationsTitle">UI Animations</h3>
+            <p class="skill-description" data-i18n="skills.animationsDescription">
                 Creating smooth motion, transitions and meaningful
                 visual feedback for interactive elements.
             </p>
 
             <div class="skill-divider"></div>
             <div class="skill-data">
-                <span>PROFICIENCY</span>
+                <span data-i18n="skills.proficiency">PROFICIENCY</span>
                 <strong>50%</strong>
             </div>
 
@@ -369,8 +394,8 @@
             </div>
 
             <div class="skill-focus">
-                <span>CURRENT FOCUS</span>
-                <p>Canvas effects, scroll reveals and micro-interactions</p>
+                <span data-i18n="skills.focus">CURRENT FOCUS</span>
+                <p data-i18n="skills.animationsFocus">Canvas effects, scroll reveals and micro-interactions</p>
             </div>
 
         </article>
@@ -380,19 +405,19 @@
             <div class="skill-card-header">
                 <span class="skill-number">06</span>
                 <div class="skill-status">
-                    <span class="skill-status-dot"></span>EVOLVING
+                    <span class="skill-status-dot"></span><span data-i18n="skills.evolving">EVOLVING</span>
                 </div>
             </div>
 
-            <h3>Problem Solving</h3>
-            <p class="skill-description">
+            <h3 data-i18n="skills.problemSolvingTitle">Problem Solving</h3>
+            <p class="skill-description" data-i18n="skills.problemDescription">
                 Breaking complex problems into understandable steps
                 and developing practical solutions.
             </p>
 
             <div class="skill-divider"></div>
             <div class="skill-data">
-                <span>PROFICIENCY</span>
+                <span data-i18n="skills.proficiency">PROFICIENCY</span>
                 <strong>55%</strong>
             </div>
 
@@ -401,8 +426,8 @@
             </div>
 
             <div class="skill-focus">
-                <span>CURRENT FOCUS</span>
-                <p>Debugging, code structure and independent thinking</p>
+                <span data-i18n="skills.focus">CURRENT FOCUS</span>
+                <p data-i18n="skills.problemFocus">Debugging, code structure and independent thinking</p>
             </div>
 
         </article>
@@ -414,25 +439,24 @@
 <!--------------------- Projects --------------------->
 
 <section id="projects" class="section">
-    <h2>Projects</h2>
+    <h2 data-i18n="projects.heading">Projects</h2>
     <br>
     <div class="project-card">
         <div class="project-header">
             <h3>DARIO.exe</h3>
-            <span class="project-status"><span class="status-dot"></span>ACTIVE DEVELOPMENT</span>
+            <span class="project-status"><span class="status-dot"></span><span data-i18n="projects.active">ACTIVE DEVELOPMENT</span></span>
         </div>
         
         <p class="project-description">
-            A modern developer portfolio built with HTML, CSS and JavaScript.
+            <span data-i18n="projects.descriptionOne">A modern developer portfolio built with HTML, CSS and JavaScript.</span>
             <br>
             <br>
-            Designed as an interactive experience inspired by terminals,
-            <br>
-            cybersecurity and clean UI design.
+            <span data-i18n="projects.descriptionTwo">Designed as an interactive experience inspired by terminals, cybersecurity and clean UI design.</span>
         </p>
         <ul
             class="project-tech-list"
             aria-label="Technologies used"
+            data-i18n-aria-label="projects.technologies"
             >
             <li class="project-tech-tag">HTML</li>
             <li class="project-tech-tag">CSS</li>
@@ -442,11 +466,11 @@
         </ul>
         <div class="project-info">
             <div>
-                <span class="project-info-label">CURRENT VERSION</span>
+                <span class="project-info-label" data-i18n="projects.currentVersion">CURRENT VERSION</span>
                 <span class="project-info-value">v1.2.1</span>
             </div>
             <div>
-                <span class="project-info-label">STATUS</span><span class="project-info-value">Building...</span>
+                <span class="project-info-label" data-i18n="projects.status">STATUS</span><span class="project-info-value" data-i18n="projects.building">Building...</span>
             </div>
         </div>
             <a
@@ -454,11 +478,11 @@
                 target="_blank"
                 rel="noopener noreferrer"
                 class="github-button">
-               <span>VIEW SOURCE</span>
+               <span data-i18n="projects.viewSource">VIEW SOURCE</span>
                <span class="github-button-arrow">→</span>
             </a>
     </div>
-    <div class="project-terminal">
+    <div class="project-terminal" data-i18n="projects.mission">
         > Current mission: Building DARIO.exe
     </div>
 </section>
@@ -473,23 +497,23 @@
 </script>
 <section id="contact" class="section contact-section">
     <div class="section-heading reveal-fade-up">
-        <p class="section-label">SECURE CONNECTION</p>
-        <h2>COMMUNICATION TERMINAL</h2>
+        <p class="section-label" data-i18n="contact.label">SECURE CONNECTION</p>
+        <h2 data-i18n="contact.heading">COMMUNICATION TERMINAL</h2>
     </div>
     <div class="reveal-blur">
         <div>
             <span class="status-dot"></span>
-            <span>ONLINE</span>
+            <span data-i18n="contact.online">ONLINE</span>
         </div>
         <div>
-            Ready to establish connection...
+            <span data-i18n="contact.ready">Ready to establish connection...</span>
         </div>
         <br>
     </div>
     <form id="contact-form" class="contact-form reveal-blur">
         <!-- Honeypot vs Bots -->
         <div class="honeypot" aria-hidden="true">
-            <label for="website">Leave this field empty</label>
+            <label for="website" data-i18n="contact.honeypot">Leave this field empty</label>
             <input
                 type="text"
                 name="website"
@@ -499,37 +523,40 @@
     >
         </div>
         <div class="form-group">
-            <label for="contact-name">IDENTIFICATION</label>
+            <label for="contact-name" data-i18n="contact.identification">IDENTIFICATION</label>
             <input
                 type="text"
                 id="contact-name"
                 name="name"
                 placeholder="> Enter your name"
+                data-i18n-placeholder="contact.namePlaceholder"
                 autocomplete="name"
                 required
             >
         </div>
         <div class="form-group">
-            <label for="contact-email">EMAIL ADDRESS</label>
+            <label for="contact-email" data-i18n="contact.email">EMAIL ADDRESS</label>
             <input
                 type="email"
                 id="contact-email"
                 name="email"
                 placeholder="> Enter your email"
+                data-i18n-placeholder="contact.emailPlaceholder"
                 autocomplete="email"
                 required
             >
         </div>
         <div class="form-group">
-            <label for="contact-message">MESSAGE</label>
+            <label for="contact-message" data-i18n="contact.message">MESSAGE</label>
             <textarea
                 id="contact-message"
                 name="message"
                 placeholder="> Enter your message"
+                data-i18n-placeholder="contact.messagePlaceholder"
                 required
             ></textarea>
         </div>
-        <button type="submit" class="contact-button">
+        <button type="submit" class="contact-button" data-i18n="contact.submit">
             &gt; INITIALIZE TRANSMISSION
         </button>
     </form>
@@ -537,6 +564,7 @@
     <div
         id="form-status"
         class="reveal-blur"
+        data-i18n="contact.awaiting"
         role="status"
         aria-live="polite"
         aria-atomic="true"
@@ -549,7 +577,7 @@
 
 <button id="return-to-top-button" onclick="runReturnToSystemSequence()">
     ⏏
-    <span>RETURN TO SYSTEM</span>
+    <span data-i18n="return.button">RETURN TO SYSTEM</span>
 </button>
 <div id="return-status-message">
         <span id="return-status-text"></span>
@@ -560,8 +588,8 @@
 <canvas id="particle-canvas"></canvas>
 
 <footer class="site-footer">
-    <p>&copy; 2026 Dario Hasler. All rights reserved.</p>
-    <p class="footer-links"><a href="./privacy.html">Privacy Policy</a></p>
+    <p data-i18n="footer.rights">&copy; 2026 Dario Hasler. All rights reserved.</p>
+    <p class="footer-links"><a href="./privacy.html" data-i18n="footer.privacy">Privacy Policy</a></p>
     <p class="footer-version">DARIO.exe v1.2.1</p>
 </footer>
 

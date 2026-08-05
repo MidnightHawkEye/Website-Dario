@@ -93,6 +93,10 @@
     border-color: var(--color-accent);
 }
 
+#form-status {
+    white-space: pre-line;
+}
+
 .honeypot {
     position: absolute !important;
     left: -9999px !important;

@@ -5,17 +5,21 @@ const characterDelayMs = 35;
 const lineDelayMs = 350;
 const mottoRevealDelayMs = 250;
 
-const terminalLines = [
-    "> booting DARIO.exe...",
-    "> loading modules...",
-    "> initializing AI systems...",
-    "> connecting network...",
-    "> verifying identity...",
-    "",
-    "ACCESS GRANTED",
-    "",
-    "Welcome, USER."
-];
+function getHeroTerminalLines() {
+    return [
+        translate("terminal.booting"),
+        translate("terminal.loading"),
+        translate("terminal.ai"),
+        translate("terminal.network"),
+        translate("terminal.identity"),
+        "",
+        translate("terminal.granted"),
+        "",
+        translate("terminal.welcome")
+    ];
+}
+
+let terminalLines = getHeroTerminalLines();
 
 
 let currentLineIndex = 0;
@@ -112,6 +116,11 @@ addReducedMotionListener((event) => {
     if (event.matches) {
         completeHeroSequenceImmediately();
     }
+});
+
+document.addEventListener("languagechange", () => {
+    terminalLines = getHeroTerminalLines();
+    completeHeroSequenceImmediately();
 });
 
 if (prefersReducedMotion()) {
