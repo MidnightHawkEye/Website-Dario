@@ -65,7 +65,7 @@ nav a.active::before{
     align-items: center;
     flex-shrink: 0;
     gap: 3px;
-    margin-left: auto;
+    margin-left: 0;
     margin-right: 28px;
     padding: 3px;
     border: 1px solid rgba(var(--color-accent-rgb), 0.28);
@@ -107,6 +107,56 @@ nav a.active::before{
     box-shadow:
         0 0 8px rgba(var(--color-accent-rgb), 0.24),
         inset 0 0 8px rgba(var(--color-accent-rgb), 0.05);
+}
+
+/*--------------------- Devlog Desktop CTA ---------------------*/
+
+.devlog-nav-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    gap: 8px;
+    min-width: 96px;
+    height: 37px;
+    margin-left: auto;
+    margin-right: 18px;
+    padding: 0 15px;
+    border: 1px solid rgba(var(--color-accent-rgb), 0.3);
+    border-radius: 9px;
+    background: rgba(var(--color-accent-rgb), 0.035);
+    color: var(--color-accent);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition:
+        border-color 0.25s ease,
+        background 0.25s ease,
+        box-shadow 0.25s ease,
+        transform 0.25s ease;
+}
+
+.devlog-nav-cta > span[aria-hidden="true"] {
+    opacity: 0.65;
+}
+
+.devlog-nav-cta.active::before {
+    content: none;
+}
+
+.devlog-nav-cta:hover,
+.devlog-nav-cta.active {
+    border-color: rgba(var(--color-accent-rgb), 0.68);
+    background: rgba(var(--color-accent-rgb), 0.11);
+    box-shadow:
+        0 0 12px rgba(var(--color-accent-rgb), 0.22),
+        inset 0 0 10px rgba(var(--color-accent-rgb), 0.04);
+}
+
+.devlog-mobile-item {
+    display: none;
 }
 
 @media (min-width: 901px) {
@@ -175,6 +225,15 @@ nav a.active::before{
     .language-switcher {
         margin-left: auto;
         margin-right: 10px;
+    }
+
+    .devlog-nav-cta {
+        display: none;
+    }
+
+    .devlog-mobile-item {
+        display: block;
+        margin-top: clamp(48px, 9vh, 84px);
     }
 
     .language-option {
@@ -300,6 +359,36 @@ nav a.active::before{
             0 0 10px rgba(var(--color-accent-rgb), 0.8);
     }
 
+    .nav-menu .devlog-mobile-item a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 9px;
+        padding: 14px 12px;
+        border: 1px solid rgba(var(--color-accent-rgb), 0.38);
+        border-radius: 8px;
+        background: rgba(var(--color-accent-rgb), 0.045);
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+    }
+
+    .nav-menu .devlog-mobile-item a::before {
+        content: ">";
+        opacity: 0.65;
+    }
+
+    .nav-menu .devlog-mobile-item a:hover,
+    .nav-menu .devlog-mobile-item a.active {
+        padding-left: 12px;
+        border-color: rgba(var(--color-accent-rgb), 0.75);
+        background: rgba(var(--color-accent-rgb), 0.12);
+        box-shadow:
+            0 0 14px rgba(var(--color-accent-rgb), 0.2),
+            inset 0 0 12px rgba(var(--color-accent-rgb), 0.04);
+    }
+
     .mobile-menu-status {
         display: flex;
         align-items: center;
@@ -365,6 +454,10 @@ nav a.active::before{
 
     .nav-menu a {
         padding: 10px 12px;
+    }
+
+    .devlog-mobile-item {
+        margin-top: 18px;
     }
 
     .mobile-menu-status {

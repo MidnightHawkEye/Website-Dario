@@ -19,6 +19,11 @@ window.addEventListener("scroll",()=>{
 
     navLinks.forEach(link=>{
 
+        if (link.getAttribute("aria-current") === "page") {
+            link.classList.add("active");
+            return;
+        }
+
         link.classList.remove("active");
 
             if(link.getAttribute("href")==="#" + activeSectionId){

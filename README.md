@@ -31,6 +31,7 @@ The website includes animated sections, interactive navigation, project cards, s
 - Particle background effects
 - Custom loader animation
 - Privacy Policy page
+- Bilingual DEVLOG with milestone-based version history
 - Version number and copyright information in the footer
 
 ## Browser Compatibility
@@ -43,6 +44,7 @@ for refresh and pull-to-refresh behaviour on mobile browsers.
 ```text
 Website-Dario/
 ├── index.html          # Main portfolio page
+├── devlog.html         # Project milestones and version history
 ├── 404.html            # Custom error page
 ├── privacy.html        # Privacy Policy
 ├── css/                # Stylesheets for layout and components
@@ -53,6 +55,13 @@ Website-Dario/
 ├── LICENSE.md          # Copyright and usage terms
 └── README.md           # Project documentation
 ```
+
+## Maintaining the DEVLOG
+
+New milestone entries are added to `devlog.html`. A commented HTML
+template for version 1.3 and later entries is included directly below
+the current timeline. Matching German and English text keys are stored
+centrally in `js/i18n.js`.
 
 
 

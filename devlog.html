@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="description"
+        content="A retrospective development log of DARIO.exe from the first commit through version 1.2.1, based on the documented project history."
+        data-i18n-content="devlog.metaDescription">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="DEVLOG | DARIO.exe" data-i18n-content="devlog.title">
+    <meta
+        property="og:description"
+        content="A retrospective development log of DARIO.exe from the first commit through version 1.2.1, based on the documented project history."
+        data-i18n-content="devlog.metaDescription">
+    <meta property="og:url" content="https://dario-exe.ch/devlog.html">
+    <meta property="og:site_name" content="DARIO.exe">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="de_CH">
+    <meta property="og:image" content="https://dario-exe.ch/assets/images/dario-exe-social-preview.PNG">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1731">
+    <meta property="og:image:height" content="909">
+    <meta
+        property="og:image:alt"
+        content="Preview of the DARIO.exe developer portfolio"
+        data-i18n-content="meta.imageAlt">
+
+    <title data-i18n="devlog.title">DEVLOG | DARIO.exe</title>
+
+    <link rel="icon" href="/assets/favicon/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="/assets/favicon/site.webmanifest">
+
+    <meta name="theme-color" content="#000000">
+    <link rel="canonical" href="https://dario-exe.ch/devlog.html">
+
+    <link rel="stylesheet" href="css/global.css?v=1.2.1">
+    <link rel="stylesheet" href="css/nav-bar.css?v=1.2.7">
+    <link rel="stylesheet" href="css/devlog.css?v=1.2.6">
+
+    <script src="js/global.js?v=1.2.2" defer></script>
+    <script src="js/i18n.js?v=1.2.6" defer></script>
+    <script src="js/navigation.js?v=1.2.5" defer></script>
+    <script src="js/progress-bar.js?v=1.2.2" defer></script>
+</head>
+
+<body class="devlog-body">
+    <header class="site-header">
+        <nav aria-label="Primary navigation" data-i18n-aria-label="nav.primary">
+            <div class="logo">
+                <span id="logo-status-dot" class="logo-dot"></span>
+                <span>DARIO.exe</span>
+            </div>
+
+            <a
+                class="devlog-nav-cta active"
+                href="./devlog.html"
+                aria-current="page">
+                <span aria-hidden="true">&gt;</span>
+                <span data-i18n="nav.devlog">Devlog</span>
+            </a>
+
+            <div
+                class="language-switcher"
+                role="group"
+                aria-label="Language selection"
+                data-i18n-aria-label="language.selector">
+                <button
+                    class="language-option"
+                    type="button"
+                    data-language="de"
+                    lang="de"
+                    aria-label="Switch to German"
+                    data-i18n-aria-label="language.switchToGerman"
+                    aria-pressed="false">DE</button>
+                <button
+                    class="language-option is-active"
+                    type="button"
+                    data-language="en"
+                    lang="en"
+                    aria-label="Switch to English"
+                    data-i18n-aria-label="language.switchToEnglish"
+                    aria-pressed="true">EN</button>
+            </div>
+
+            <button
+                class="menu-toggle"
+                type="button"
+                aria-label="Open navigation menu"
+                data-i18n-aria-label="nav.open"
+                aria-expanded="false"
+                aria-controls="nav-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <div class="mobile-menu-overlay"></div>
+
+            <ul id="nav-menu" class="nav-menu">
+                <li><a href="./index.html#about" data-i18n="nav.about">About</a></li>
+                <li><a href="./index.html#skills" data-i18n="nav.skills">Skills</a></li>
+                <li><a href="./index.html#projects" data-i18n="nav.projects">Projects</a></li>
+                <li><a href="./index.html#contact" data-i18n="nav.contact">Contact</a></li>
+                <li class="devlog-mobile-item">
+                    <a
+                        href="./devlog.html"
+                        class="active"
+                        aria-current="page"
+                        data-i18n="nav.devlog">Devlog</a>
+                </li>
+                <li class="mobile-menu-status">
+                    <span class="mobile-status-dot"></span>
+                    <span data-i18n="nav.systemOnline">SYSTEM ONLINE</span>
+                </li>
+            </ul>
+        </nav>
+        <div id="progress-bar"></div>
+    </header>
+
+    <main class="devlog-page">
+        <section class="devlog-hero" aria-labelledby="devlog-title">
+            <p class="devlog-kicker" data-i18n="devlog.kicker">&gt; VERSION HISTORY</p>
+            <h1 id="devlog-title" data-i18n="devlog.heading">DEVLOG</h1>
+            <p class="devlog-intro" data-i18n="devlog.intro">
+                From the first commit through v1.2.1: the documented milestones, challenges and lessons behind DARIO.exe.
+            </p>
+            <p class="devlog-source-note" data-i18n="devlog.sourceNote">
+                Sources: README, CHANGELOG and documented Git milestones.
+            </p>
+
+            <div
+                class="devlog-summary"
+                aria-label="Devlog summary"
+                data-i18n-aria-label="devlog.summaryAria">
+                <div class="devlog-summary-card">
+                    <span data-i18n="devlog.statusLabel">LOG STATUS</span>
+                    <strong class="devlog-online-value">
+                        <span class="status-dot"></span>
+                        <span data-i18n="devlog.status">ACTIVE</span>
+                    </strong>
+                </div>
+                <div class="devlog-summary-card">
+                    <span data-i18n="devlog.versionLabel">CURRENT VERSION</span>
+                    <strong>v1.2.1</strong>
+                </div>
+                <div class="devlog-summary-card">
+                    <span data-i18n="devlog.entriesLabel">ENTRIES</span>
+                    <strong data-i18n="devlog.entryCount">05</strong>
+                </div>
+            </div>
+        </section>
+
+        <section class="devlog-timeline-section" aria-labelledby="timeline-title">
+            <p id="timeline-title" class="devlog-section-label" data-i18n="devlog.timelineLabel">
+                CHRONOLOGICAL RECORD
+            </p>
+
+            <div class="devlog-timeline">
+                <article class="devlog-entry" id="lessons-through-1-2">
+                    <div class="devlog-entry-rail" aria-hidden="true">
+                        <span class="devlog-marker"></span>
+                        <span class="devlog-entry-number">005</span>
+                    </div>
+                    <div class="devlog-entry-card">
+                        <header class="devlog-entry-header">
+                            <time datetime="2026-08-01" data-i18n="devlog.entry5.date">Through August 1, 2026</time>
+                            <span class="devlog-tag" data-i18n="devlog.entry5.version">THROUGH v1.2.1</span>
+                        </header>
+                        <h2 data-i18n="devlog.entry5.title">What I learned through version 1.2</h2>
+                        <p class="devlog-entry-summary" data-i18n="devlog.entry5.summary">
+                            The documented history shows the progression from a visual learning project to a responsive, documented and more maintainable portfolio.
+                        </p>
+                        <div class="devlog-detail-grid">
+                            <section class="devlog-detail devlog-detail-wide">
+                                <h3 data-i18n="devlog.progressLabel">DOCUMENTED PROGRESS</h3>
+                                <ul class="devlog-change-list">
+                                    <li data-i18n="devlog.entry5.change1">Built a complete static project with HTML, CSS and JavaScript.</li>
+                                    <li data-i18n="devlog.entry5.change2">Expanded the first release into a responsive desktop, tablet and mobile experience.</li>
+                                    <li data-i18n="devlog.entry5.change3">Improved structure, documentation and consistency instead of focusing only on visuals.</li>
+                                </ul>
+                            </section>
+                            <section class="devlog-detail">
+                                <h3 data-i18n="devlog.challengeLabel">CHALLENGE</h3>
+                                <p data-i18n="devlog.entry5.challenge">As the feature set grew, design consistency, browser behavior and code readability had to be handled together.</p>
+                            </section>
+                            <section class="devlog-detail">
+                                <h3 data-i18n="devlog.solutionLabel">SOLUTION</h3>
+                                <p data-i18n="devlog.entry5.solution">Versioned releases, focused mobile follow-up commits and later refactoring turned the work into smaller, traceable improvements.</p>
+                            </section>
+                            <section class="devlog-detail">
+                                <h3 data-i18n="devlog.learningLabel">LEARNING</h3>
+                                <p data-i18n="devlog.entry5.learning">I learned to treat design, interaction, responsive behavior, code structure and documentation as parts of one system.</p>
+                            </section>
+                            <section class="devlog-detail">
+                                <h3 data-i18n="devlog.outlookLabel">OUTLOOK</h3>
+                                <p data-i18n="devlog.entry5.outlook">Starting with version 1.3, new entries will use the prepared template and record meaningful milestones rather than every small change.</p>
+                            </section>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="devlog-entry" id="version-1-2">
+                    <div class="devlog-entry-rail" aria-hidden="true">
+                        <span class="devlog-marker"></span>
+                        <span class="devlog-entry-number">004</span>
+                    </div>
+                    <div class="devlog-entry-card">
+                        <header class="devlog-entry-header">
+                            <time datetime="2026-07-31" data-i18n="devlog.entry4.date">July 31 – August 1, 2026</time>
+                            <span class="devlog-tag">v1.2.0–v1.2.1</span>
+                        </header>
+                        <h2 data-i18n="devlog.entry4.title">Quality, performance and optimization</h2>
+                        <p class="devlog-entry-summary" data-i18n="devlog.entry4.summary">
+                            Version 1.2 improved documentation and maintainability; version 1.2.1 followed with UI fixes and optimizations.
+                        </p>
+                        <div class="devlog-detail-grid">
+                            <section class="devlog-detail devlog-detail-wide">
+                                <h3 data-i18n="devlog.changesLabel">KEY CHANGES</h3>
+                                <ul class="devlog-change-list">
+                                    <li data-i18n="devlog.entry4.change1">Added the Privacy Policy, copyright and version information, screenshots and expanded project documentation.</li>
+                                    <li data-i18n="devlog.entry4.change2">Replaced repeated JavaScript values and direct colors with descriptive constants and CSS variables.</li>
+                                    <li data-i18n="devlog.entry4.change3">Improved code structure, fixed the hidden privacy return link and checked the browser console.</li>
+                                    <li data-i18n="devlog.entry4.change4">Released v1.2.1 with UI fixes and optimizations.</li>
+                                </ul>
+                            </section>
+                            <section class="devlog-detail">
+                                <h3 data-i18n="devlog.challengeLabel">CHALLENGE</h3>
+                                <p data-i18n="devlog.entry4.challenge">Repeated values, direct colors and growing documentation reduced clarity. Mobile pull-to-refresh behavior was also documented as a browser-specific issue.</p>
+                            </section>
+                            <section class="devlog-detail">
+                                <h3 data-i18n="devlog.solutionLabel">SOLUTION</h3>
+                                <p data-i18n="devlog.entry4.solution">Central variables, descriptive constants, clearer documentation, targeted fixes and console checks made the project easier to maintain.</p>
+                            </section>
+                            <section class="devlog-detail">
+                                <h3 data-i18n="devlog.learningLabel">LEARNING</h3>
+                                <p data-i18n="devlog.entry4.learning">I learned that quality also means maintainability, documentation, privacy, cross-browser behavior and consistent version information.</p>
+                            </section>
+                            <section class="devlog-detail">
+                                <h3 data-i18n="devlog.outlookLabel">OUTLOOK</h3>
+                                <p data-i18n="devlog.entry4.outlook">The CHANGELOG records additional cleanup, fallbacks and motion-related work as Unreleased; it does not assign that work a release version or date yet.</p>
+                            </section>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="devlog-entry" id="version-1-1">
+                    <div class="devlog-entry-rail" aria-hidden="true">
+                        <span class="devlog-marker"></span>
+                        <span class="devlog-entry-number">003</span>
+                    </div>
+                    <div class="devlog-entry-card">
+                        <header class="devlog-entry-header">
+                            <time datetime="2026-07-22" data-i18n="devlog.entry3.date">July 22, 2026</time>
+                            <span class="devlog-tag">v1.1.0</span>
+                        </header>
+                        <h2 data-i18n="devlog.entry3.title">First improvements for mobile</h2>
+                        <p class="devlog-entry-summary" data-i18n="devlog.entry3.summary">
+                            Version 1.1 made DARIO.exe responsive for mobile phones and tablets.
+                        </p>
+                        <div class="devlog-detail-grid">
+                            <section class="devlog-detail devlog-detail-wide">
+                                <h3 data-i18n="devlog.changesLabel">KEY CHANGES</h3>
+                                <ul class="devlog-change-list">
+                                    <li data-i18n="devlog.entry3.change1">Added responsive layouts for mobile and tablet devices.</li>
+                                    <li data-i18n="devlog.entry3.change2">Added a dedicated mobile navigation menu.</li>
+                                    <li data-i18n="devlog.entry3.change3">Adapted spacing, element sizes, sections, project cards and the contact area for smaller screens.</li>
+                                </ul>
+                            </section>
+                            <section class="devlog-detail">
+                                <h3 data-i18n="devlog.challengeLabel">CHALLENGE</h3>
+                                <p data-i18n="devlog.entry3.challenge">Desktop navigation, sections, project cards and the contact area also had to remain usable on smaller screens.</p>
+                            </section>
+                            <section class="devlog-detail">
+                                <h3 data-i18n="devlog.solutionLabel">SOLUTION</h3>
+                                <p data-i18n="devlog.entry3.solution">Responsive breakpoints, a mobile menu and component-specific spacing and size adjustments were added.</p>
+                            </section>
+                            <section class="devlog-detail">
+                                <h3 data-i18n="devlog.learningLabel">LEARNING</h3>
+                                <p data-i18n="devlog.entry3.learning">I learned that responsive design is not one global scale change; every component needs its own layout and interaction check.</p>
+                            </section>
+                            <section class="devlog-detail">
+                                <h3 data-i18n="devlog.outlookLabel">OUTLOOK</h3>
+                                <p data-i18n="devlog.entry3.outlook">Several smaller mobile adjustments followed on July 23 before work moved toward version 1.2.</p>
+                            </section>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="devlog-entry" id="version-1-0">
+                    <div class="devlog-entry-rail" aria-hidden="true">
+                        <span class="devlog-marker"></span>
+                        <span class="devlog-entry-number">002</span>
+                    </div>
+                    <div class="devlog-entry-card">
+                        <header class="devlog-entry-header">
+                            <time datetime="2026-07-18" data-i18n="devlog.entry2.date">July 18, 2026</time>
+                            <span class="devlog-tag">v1.0.0</span>
+                        </header>
+                        <h2 data-i18n="devlog.entry2.title">The first release</h2>
+                        <p class="devlog-entry-summary" data-i18n="devlog.entry2.summary">
+                            Version 1.0 established the complete core experience of DARIO.exe.
+                        </p>
+                        <div class="devlog-detail-grid">
+                            <section class="devlog-detail devlog-detail-wide">
+                                <h3 data-i18n="devlog.changesLabel">KEY CHANGES</h3>
+                                <ul class="devlog-change-list">
+                                    <li data-i18n="devlog.entry2.change1">Added the hero typing animation, sticky navigation, active section highlighting, smooth scrolling and scroll progress.</li>
+                                    <li data-i18n="devlog.entry2.change2">Added the About, Skills, Projects and EmailJS contact sections with spam protection.</li>
+                                    <li data-i18n="devlog.entry2.change3">Added Matrix and particle backgrounds, the loader and the return-to-system button.</li>
+                                </ul>
+                            </section>
+                            <section class="devlog-detail">
+                                <h3 data-i18n="devlog.challengeLabel">CHALLENGE</h3>
+                                <p data-i18n="devlog.entry2.challenge">The release combined navigation, forms, canvas effects and several animated interface states in one static portfolio.</p>
+                            </section>
+                            <section class="devlog-detail">
+                                <h3 data-i18n="devlog.solutionLabel">SOLUTION</h3>
+                                <p data-i18n="devlog.entry2.solution">The experience was organized into focused page sections and separate CSS and JavaScript components.</p>
+                            </section>
+                            <section class="devlog-detail">
+                                <h3 data-i18n="devlog.learningLabel">LEARNING</h3>
+                                <p data-i18n="devlog.entry2.learning">HTML, CSS and JavaScript were enough to build an interactive, recognizable portfolio without adding a framework.</p>
+                            </section>
+                            <section class="devlog-detail">
+                                <h3 data-i18n="devlog.outlookLabel">OUTLOOK</h3>
+                                <p data-i18n="devlog.entry2.outlook">The next documented release focused on making the complete experience responsive.</p>
+                            </section>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="devlog-entry" id="project-start">
+                    <div class="devlog-entry-rail" aria-hidden="true">
+                        <span class="devlog-marker"></span>
+                        <span class="devlog-entry-number">001</span>
+                    </div>
+                    <div class="devlog-entry-card">
+                        <header class="devlog-entry-header">
+                            <time datetime="2026-07-02" data-i18n="devlog.entry1.date">July 2, 2026</time>
+                            <span class="devlog-tag" data-i18n="devlog.entry1.version">PROJECT START</span>
+                        </header>
+                        <h2 data-i18n="devlog.entry1.title">The origin of DARIO.exe</h2>
+                        <p class="devlog-entry-summary" data-i18n="devlog.entry1.summary">
+                            DARIO.exe began as a personal developer portfolio and practical learning project: one place for my background, projects and growing developer identity.
+                        </p>
+                        <div class="devlog-detail-grid">
+                            <section class="devlog-detail devlog-detail-wide">
+                                <h3 data-i18n="devlog.changesLabel">KEY CHANGES</h3>
+                                <ul class="devlog-change-list">
+                                    <li data-i18n="devlog.entry1.change1">Created the first static website foundation with HTML, CSS and JavaScript.</li>
+                                    <li data-i18n="devlog.entry1.change2">Defined the cyberpunk, terminal and Matrix-inspired visual direction.</li>
+                                    <li data-i18n="devlog.entry1.change3">Made the portfolio a place to document progress and present projects.</li>
+                                </ul>
+                            </section>
+                            <section class="devlog-detail">
+                                <h3 data-i18n="devlog.challengeLabel">CHALLENGE</h3>
+                                <p data-i18n="devlog.entry1.challenge">I wanted one interface to connect my industrial automation background with my path into software development and cybersecurity.</p>
+                            </section>
+                            <section class="devlog-detail">
+                                <h3 data-i18n="devlog.solutionLabel">SOLUTION</h3>
+                                <p data-i18n="devlog.entry1.solution">I chose a system-inspired static portfolio that could grow section by section without a framework or build process.</p>
+                            </section>
+                            <section class="devlog-detail">
+                                <h3 data-i18n="devlog.learningLabel">LEARNING</h3>
+                                <p data-i18n="devlog.entry1.learning">The project gave me a concrete way to strengthen my frontend skills instead of learning only through isolated exercises.</p>
+                            </section>
+                            <section class="devlog-detail">
+                                <h3 data-i18n="devlog.outlookLabel">OUTLOOK</h3>
+                                <p data-i18n="devlog.entry1.outlook">The next documented milestone was the first complete release: version 1.0.</p>
+                            </section>
+                        </div>
+                    </div>
+                </article>
+
+                <!--
+                    FUTURE DEVLOG ENTRY TEMPLATE — VERSION 1.3+
+
+                    1. Copy this complete <article> block into .devlog-timeline.
+                    2. Give the entry a unique id and increment the three-digit number.
+                    3. Replace "entryX" with the next translation namespace in BOTH
+                       language objects inside js/i18n.js.
+                    4. Only publish dates, versions and changes that are documented in
+                       the project, CHANGELOG or Git history.
+
+                    <article class="devlog-entry" id="version-X-X">
+                        <div class="devlog-entry-rail" aria-hidden="true">
+                            <span class="devlog-marker"></span>
+                            <span class="devlog-entry-number">006</span>
+                        </div>
+                        <div class="devlog-entry-card">
+                            <header class="devlog-entry-header">
+                                <time datetime="YYYY-MM-DD" data-i18n="devlog.entryX.date">DATE</time>
+                                <span class="devlog-tag">vX.X.X</span>
+                            </header>
+                            <h2 data-i18n="devlog.entryX.title">TITLE</h2>
+                            <p class="devlog-entry-summary" data-i18n="devlog.entryX.summary">SHORT DESCRIPTION</p>
+                            <div class="devlog-detail-grid">
+                                <section class="devlog-detail devlog-detail-wide">
+                                    <h3 data-i18n="devlog.changesLabel">KEY CHANGES</h3>
+                                    <ul class="devlog-change-list">
+                                        <li data-i18n="devlog.entryX.change1">CHANGE</li>
+                                    </ul>
+                                </section>
+                                <section class="devlog-detail">
+                                    <h3 data-i18n="devlog.challengeLabel">CHALLENGE</h3>
+                                    <p data-i18n="devlog.entryX.challenge">CHALLENGE</p>
+                                </section>
+                                <section class="devlog-detail">
+                                    <h3 data-i18n="devlog.solutionLabel">SOLUTION</h3>
+                                    <p data-i18n="devlog.entryX.solution">SOLUTION</p>
+                                </section>
+                                <section class="devlog-detail">
+                                    <h3 data-i18n="devlog.learningLabel">LEARNING</h3>
+                                    <p data-i18n="devlog.entryX.learning">LEARNING</p>
+                                </section>
+                                <section class="devlog-detail">
+                                    <h3 data-i18n="devlog.outlookLabel">OUTLOOK</h3>
+                                    <p data-i18n="devlog.entryX.outlook">OUTLOOK</p>
+                                </section>
+                            </div>
+                        </div>
+                    </article>
+                -->
+            </div>
+        </section>
+
+        <section class="devlog-next" aria-labelledby="next-mission-title">
+            <p id="next-mission-title" data-i18n="devlog.nextLabel">NEXT MISSION</p>
+            <strong data-i18n="devlog.next">
+                Use the prepared entry template for version 1.3 and every meaningful release after it.
+            </strong>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p data-i18n="footer.rights">&copy; 2026 Dario Hasler. All rights reserved.</p>
+        <p class="footer-links">
+            <a href="./index.html">DARIO.exe</a>
+            <span aria-hidden="true"> • </span>
+            <a href="./privacy.html" data-i18n="footer.privacy">Privacy Policy</a>
+        </p>
+        <p class="footer-version">DARIO.exe v1.2.1</p>
+    </footer>
+</body>
+</html>
