@@ -125,6 +125,7 @@ const i18nMessages = Object.freeze({
         "error404.resourceNotFound": "RESOURCE_NOT_FOUND",
         "error404.action": "ACTION:",
         "error404.returnValue": "RETURN_TO_SYSTEM",
+        "error404.returnHref": "/",
         "error404.returnButton": "> RETURN TO SYSTEM",
         "privacy.metaDescription": "Privacy Policy for DARIO.exe, including information about website hosting, the contact form, EmailJS and data processing.",
         "privacy.title": "Privacy Policy | DARIO.exe",
@@ -392,6 +393,7 @@ const i18nMessages = Object.freeze({
         "error404.resourceNotFound": "RESSOURCE_NICHT_GEFUNDEN",
         "error404.action": "AKTION:",
         "error404.returnValue": "ZURÜCK_ZUM_SYSTEM",
+        "error404.returnHref": "/de/",
         "error404.returnButton": "> ZURÜCK ZUM SYSTEM",
         "privacy.metaDescription": "Datenschutzerklärung für DARIO.exe mit Informationen zu Website-Hosting, Kontaktformular, EmailJS und Datenbearbeitung.",
         "privacy.title": "Datenschutzerklärung | DARIO.exe",
@@ -593,6 +595,7 @@ function applyTranslations() {
         ["data-i18n-placeholder", "placeholder"],
         ["data-i18n-aria-label", "aria-label"],
         ["data-i18n-alt", "alt"],
+        ["data-i18n-href", "href"],
         ["data-i18n-content", "content"]
     ];
 

@@ -39,6 +39,30 @@ The website includes animated sections, interactive navigation, project cards, s
 The navigation includes explicit scroll-restoration and URL-anchor handling
 for refresh and pull-to-refresh behaviour on mobile browsers.
 
+### Opera Mobile retest — August 7, 2026
+
+The published website was retested with the locally installed Opera 133 engine,
+Lighthouse mobile emulation at 390 × 844 pixels and an additional interactive
+mobile check in portrait and landscape orientation.
+
+The following checks passed:
+
+- No horizontal overflow in portrait or landscape orientation
+- Mobile navigation opens, closes and releases the page scroll lock correctly
+- Navigation links close the menu and scroll to the requested section
+- A normal page reload returns the website to the top
+- German remains selected after a reload
+- No browser console errors or warnings
+
+Opera for Android owns the native pull-to-refresh gesture. That browser UI
+behaviour cannot be reproduced completely by desktop engine emulation. The
+previously documented issue is therefore classified as **unverified**, not as
+a confirmed current website defect: pulling down to refresh at the top of the
+page may interfere with the current scroll position. No physical Android test
+device is currently available. Testing on an iPhone does not verify this
+Opera-for-Android-specific browser behaviour. The check can be repeated later
+if access to an Android device becomes available.
+
 ## Project Structure
 
 ```text
@@ -52,9 +76,16 @@ Website-Dario/
 ├── assets/             # Images and website screenshots
 ├── CNAME               # Custom domain configuration
 ├── CHANGELOG.md        # Version history
+├── LIGHTHOUSE.md       # Lighthouse results and report index
 ├── LICENSE.md          # Copyright and usage terms
 └── README.md           # Project documentation
 ```
+
+## Quality Reports
+
+The current Desktop and Mobile scores, historical animation comparison
+and links to all original Lighthouse reports are documented in
+[LIGHTHOUSE.md](LIGHTHOUSE.md).
 
 ## Maintaining the DEVLOG
 

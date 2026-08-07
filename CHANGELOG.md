@@ -24,6 +24,16 @@ All notable changes to DARIO.exe are documented in this file.
 - Standardized JavaScript variables and functions to lowerCamelCase
 - Renamed internal classes and IDs for clearer component ownership
 
+### Tested
+
+- Retested the live website with the locally installed Opera 133 engine and a mobile 390 × 844 pixel profile
+- Verified portrait and landscape layouts, mobile navigation, section links, normal reload behaviour and German language persistence
+- Confirmed that the Opera-engine Lighthouse run completes without browser errors or warnings
+
+### Known Issues
+
+- Opera for Android: Native pull-to-refresh remains unverified because no physical Android test device is currently available; it was previously reported to interfere with the page's scroll position
+
 ---
 
 ## [1.2.1] - 2026-08-01
