@@ -563,6 +563,12 @@ function saveLanguage(language) {
 }
 
 function getInitialLanguage() {
+    const pageLanguage = document.documentElement.dataset.pageLanguage;
+
+    if (supportedLanguages.includes(pageLanguage)) {
+        return pageLanguage;
+    }
+
     const savedLanguage = getSavedLanguage();
 
     if (supportedLanguages.includes(savedLanguage)) {
@@ -621,10 +627,23 @@ function applyTranslations() {
 }
 
 function updateLanguageControls() {
-    document.querySelectorAll("[data-language]").forEach((button) => {
-        const isActive = button.dataset.language === currentLanguage;
-        button.classList.toggle("is-active", isActive);
-        button.setAttribute("aria-pressed", String(isActive));
+    document.querySelectorAll("[data-language]").forEach((control) => {
+        const isActive = control.dataset.language === currentLanguage;
+        control.classList.toggle("is-active", isActive);
+
+        if (control.matches("a[href]")) {
+            control.removeAttribute("aria-pressed");
+
+            if (isActive) {
+                control.setAttribute("aria-current", "page");
+            } else {
+                control.removeAttribute("aria-current");
+            }
+
+            return;
+        }
+
+        control.setAttribute("aria-pressed", String(isActive));
     });
 }
 
@@ -634,7 +653,9 @@ function setLanguage(language, { persist = true } = {}) {
         : "en";
 
     currentLanguage = nextLanguage;
-    document.documentElement.lang = nextLanguage;
+    document.documentElement.lang = nextLanguage === "de"
+        ? "de-CH"
+        : "en";
 
     if (persist) {
         saveLanguage(nextLanguage);
@@ -654,9 +675,14 @@ function getCurrentLanguage() {
     return currentLanguage;
 }
 
-document.querySelectorAll("[data-language]").forEach((button) => {
-    button.addEventListener("click", () => {
-        setLanguage(button.dataset.language);
+document.querySelectorAll("[data-language]").forEach((control) => {
+    control.addEventListener("click", () => {
+        if (control.matches("a[href]")) {
+            saveLanguage(control.dataset.language);
+            return;
+        }
+
+        setLanguage(control.dataset.language);
     });
 });
 

@@ -1,7 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    <url><loc>https://dario-exe.ch/</loc></url>
-    <url><loc>https://dario-exe.ch/devlog.html</loc></url>
-    <url><loc>https://dario-exe.ch/privacy.html</loc></url>
+<urlset
+    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    <url>
+        <loc>https://dario-exe.ch/</loc>
+        <xhtml:link rel="alternate" hreflang="en" href="https://dario-exe.ch/" />
+        <xhtml:link rel="alternate" hreflang="de-CH" href="https://dario-exe.ch/de/" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://dario-exe.ch/" />
+    </url>
+    <url>
+        <loc>https://dario-exe.ch/de/</loc>
+        <xhtml:link rel="alternate" hreflang="en" href="https://dario-exe.ch/" />
+        <xhtml:link rel="alternate" hreflang="de-CH" href="https://dario-exe.ch/de/" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://dario-exe.ch/" />
+    </url>
+    <url>
+        <loc>https://dario-exe.ch/devlog.html</loc>
+        <xhtml:link rel="alternate" hreflang="en" href="https://dario-exe.ch/devlog.html" />
+        <xhtml:link rel="alternate" hreflang="de-CH" href="https://dario-exe.ch/de/devlog.html" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://dario-exe.ch/devlog.html" />
+    </url>
+    <url>
+        <loc>https://dario-exe.ch/de/devlog.html</loc>
+        <xhtml:link rel="alternate" hreflang="en" href="https://dario-exe.ch/devlog.html" />
+        <xhtml:link rel="alternate" hreflang="de-CH" href="https://dario-exe.ch/de/devlog.html" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://dario-exe.ch/devlog.html" />
+    </url>
+    <url>
+        <loc>https://dario-exe.ch/privacy.html</loc>
+        <xhtml:link rel="alternate" hreflang="en" href="https://dario-exe.ch/privacy.html" />
+        <xhtml:link rel="alternate" hreflang="de-CH" href="https://dario-exe.ch/de/privacy.html" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://dario-exe.ch/privacy.html" />
+    </url>
+    <url>
+        <loc>https://dario-exe.ch/de/privacy.html</loc>
+        <xhtml:link rel="alternate" hreflang="en" href="https://dario-exe.ch/privacy.html" />
+        <xhtml:link rel="alternate" hreflang="de-CH" href="https://dario-exe.ch/de/privacy.html" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://dario-exe.ch/privacy.html" />
+    </url>
 </urlset>
