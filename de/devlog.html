@@ -6,14 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta
         name="description"
-        content="Ein rückblickender Entwicklungsbericht zu DARIO.exe vom ersten Commit bis Version 1.2.1, basierend auf der dokumentierten Projektgeschichte."
+        content="Ein rückblickender Entwicklungsbericht zu DARIO.exe vom ersten Commit bis Version 1.3, basierend auf der dokumentierten Projektgeschichte."
         data-i18n-content="devlog.metaDescription">
 
     <meta property="og:type" content="website">
     <meta property="og:title" content="DEVLOG | DARIO.exe" data-i18n-content="devlog.title">
     <meta
         property="og:description"
-        content="Ein rückblickender Entwicklungsbericht zu DARIO.exe vom ersten Commit bis Version 1.2.1, basierend auf der dokumentierten Projektgeschichte."
+        content="Ein rückblickender Entwicklungsbericht zu DARIO.exe vom ersten Commit bis Version 1.3, basierend auf der dokumentierten Projektgeschichte."
         data-i18n-content="devlog.metaDescription">
     <meta property="og:url" content="https://dario-exe.ch/de/devlog.html">
     <meta property="og:site_name" content="DARIO.exe">
@@ -134,7 +134,7 @@
         <section class="devlog-hero" aria-labelledby="devlog-title">
             <p class="devlog-kicker" data-i18n="devlog.kicker">&gt; VERSIONSGESCHICHTE</p>
             <h1 id="devlog-title" data-i18n="devlog.heading">DEVLOG</h1>
-            <p class="devlog-intro" data-i18n="devlog.intro">Vom ersten Commit bis v1.2.1: die dokumentierten Meilensteine, Herausforderungen und Learnings hinter DARIO.exe.</p>
+            <p class="devlog-intro" data-i18n="devlog.intro">Vom ersten Commit bis v1.3: die dokumentierten Meilensteine, Herausforderungen und Learnings hinter DARIO.exe.</p>
             <p class="devlog-source-note" data-i18n="devlog.sourceNote">Quellen: README, CHANGELOG und dokumentierte Git-Meilensteine.</p>
 
             <div
@@ -154,20 +154,62 @@
                 </div>
                 <div class="devlog-summary-card">
                     <span data-i18n="devlog.entriesLabel">EINTRÄGE</span>
-                    <strong data-i18n="devlog.entryCount">05</strong>
+                    <strong data-i18n="devlog.entryCount">06</strong>
                 </div>
             </div>
         </section>
 
         <section class="devlog-next" aria-labelledby="next-mission-title">
             <h2 id="next-mission-title" data-i18n="devlog.nextLabel">NÄCHSTE MISSION</h2>
-            <strong data-i18n="devlog.next">Die vorbereitete Eintragsvorlage für Version 1.3 und jeden wichtigen Release danach verwenden.</strong>
+            <strong data-i18n="devlog.next">Die Aufgaben- und Funktionsliste für Version 1.4 erstellen und strukturieren.</strong>
         </section>
 
         <section class="devlog-timeline-section" aria-labelledby="timeline-title">
             <h2 id="timeline-title" class="devlog-section-label" data-i18n="devlog.timelineLabel">CHRONOLOGISCHES PROTOKOLL</h2>
 
             <div class="devlog-timeline">
+                <article class="devlog-entry" id="version-1-3">
+                    <div class="devlog-entry-rail" aria-hidden="true">
+                        <span class="devlog-marker"></span>
+                        <span class="devlog-entry-number">006</span>
+                    </div>
+                    <div class="devlog-entry-card">
+                        <header class="devlog-entry-header">
+                            <time datetime="2026-08-08" data-i18n="devlog.entry6.date">8. August 2026</time>
+                            <span class="devlog-tag">v1.3.0</span>
+                        </header>
+                        <h3 data-i18n="devlog.entry6.title">Ein zweisprachiges und unabhängiges System</h3>
+                        <p class="devlog-entry-summary" data-i18n="devlog.entry6.summary">Version 1.3 machte DARIO.exe zweisprachig, ersetzte externe Animationsabhängigkeiten durch native Browsertechnologien und stärkte Barrierefreiheit, SEO, Dokumentation und Tests.</p>
+                        <div class="devlog-detail-grid">
+                            <section class="devlog-detail devlog-detail-wide">
+                                <h4 data-i18n="devlog.changesLabel">WICHTIGSTE ÄNDERUNGEN</h4>
+                                <ul class="devlog-change-list">
+                                    <li data-i18n="devlog.entry6.change1">Englische und deutsche Seitenstrukturen mit zentralen Übersetzungen, Sprachspeicherung, Fallback-Verhalten und lokalisierten Metadaten ergänzt.</li>
+                                    <li data-i18n="devlog.entry6.change2">Einen zweisprachigen DEVLOG mit den neuesten Meilensteinen zuerst und einer wiederverwendbaren Vorlage ergänzt.</li>
+                                    <li data-i18n="devlog.entry6.change3">GSAP und ScrollTrigger durch natives CSS, JavaScript und IntersectionObserver ersetzt und dabei reduzierte Bewegung sowie inaktive Browser-Tabs berücksichtigt.</li>
+                                    <li data-i18n="devlog.entry6.change4">Navigation, barrierefreie Beschriftungen, SEO-Dateien und Dokumentation verbessert sowie perfekte Lighthouse-Kategoriewerte auf Desktop und Mobile dokumentiert.</li>
+                                </ul>
+                            </section>
+                            <section class="devlog-detail">
+                                <h4 data-i18n="devlog.challengeLabel">HERAUSFORDERUNG</h4>
+                                <p data-i18n="devlog.entry6.challenge">Die Mehrsprachigkeit und die Umstellung der Animationen mussten das bestehende Design und alle Funktionen bewahren, während sichtbare Texte, Metadaten, Links, Formularmeldungen und barrierefreie Beschriftungen konsistent blieben.</p>
+                            </section>
+                            <section class="devlog-detail">
+                                <h4 data-i18n="devlog.solutionLabel">LÖSUNG</h4>
+                                <p data-i18n="devlog.entry6.solution">Zentrale Übersetzungsobjekte, generierte deutsche Seiten, native Animationskomponenten und gezielte Prüfungen von Navigation, Formularen, Layouts, Bewegung, Fallback-Verhalten und Browser-Konsole hielten den Release wartbar.</p>
+                            </section>
+                            <section class="devlog-detail">
+                                <h4 data-i18n="devlog.learningLabel">LEARNING</h4>
+                                <p data-i18n="devlog.entry6.learning">Ich lernte, dass mehrsprachige und barrierefreie Entwicklung weit über sichtbare Texte hinausgeht und dass native Browser-APIs eine grosse Animationsabhängigkeit ersetzen können, ohne das bestehende Erlebnis aufzugeben.</p>
+                            </section>
+                            <section class="devlog-detail">
+                                <h4 data-i18n="devlog.outlookLabel">AUSBLICK</h4>
+                                <p data-i18n="devlog.entry6.outlook">Nach dem Deployment prüfe ich Version 1.3 auf Desktop und iPhone und dokumentiere danach den nächsten wichtigen Release mit der vorbereiteten Vorlage.</p>
+                            </section>
+                        </div>
+                    </div>
+                </article>
+
                 <article class="devlog-entry" id="lessons-through-1-2">
                     <div class="devlog-entry-rail" aria-hidden="true">
                         <span class="devlog-marker"></span>
@@ -375,7 +417,7 @@
                 </article>
 
                 <!--
-                    FUTURE DEVLOG ENTRY TEMPLATE — VERSION 1.3+
+                    FUTURE DEVLOG ENTRY TEMPLATE — VERSION 1.4+
 
                     1. Copy this complete <article> block into .devlog-timeline.
                     2. Give the entry a unique id and increment the three-digit number.
@@ -387,7 +429,7 @@
                     <article class="devlog-entry" id="version-X-X">
                         <div class="devlog-entry-rail" aria-hidden="true">
                             <span class="devlog-marker"></span>
-                            <span class="devlog-entry-number">006</span>
+                            <span class="devlog-entry-number">007</span>
                         </div>
                         <div class="devlog-entry-card">
                             <header class="devlog-entry-header">

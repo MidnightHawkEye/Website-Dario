@@ -16,6 +16,7 @@ All notable changes to DARIO.exe are documented in this file.
 - Added centralized translations for visible content, metadata, form messages, ARIA labels, alternative text and language-dependent links
 - Added English as the fallback language for unsupported languages and missing translation keys
 - Added a bilingual DEVLOG with milestone entries, newest-first ordering and a reusable template for future releases
+- Added the version 1.3 milestone entry to the bilingual DEVLOG
 - Added localized canonical, `hreflang` and sitemap references for the English and German pages
 - Added Lighthouse documentation with Desktop, Mobile and animation-migration reports
 - Added an Opera Mobile compatibility report with a deferred Android test procedure
