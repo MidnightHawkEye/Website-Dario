@@ -10,6 +10,7 @@ const i18nMessages = Object.freeze({
         "language.switchToGerman": "Switch to German",
         "language.switchToEnglish": "Switch to English",
         "nav.primary": "Primary navigation",
+        "nav.home": "Go to the DARIO.exe hero section",
         "nav.open": "Open navigation menu",
         "nav.close": "Close navigation menu",
         "nav.about": "About",
@@ -278,6 +279,7 @@ const i18nMessages = Object.freeze({
         "language.switchToGerman": "Auf Deutsch wechseln",
         "language.switchToEnglish": "Auf Englisch wechseln",
         "nav.primary": "Hauptnavigation",
+        "nav.home": "Zur Hero-Section von DARIO.exe",
         "nav.open": "Navigationsmenü öffnen",
         "nav.close": "Navigationsmenü schließen",
         "nav.about": "Über mich",
@@ -672,10 +674,6 @@ function setLanguage(language, { persist = true } = {}) {
             language: nextLanguage
         }
     }));
-}
-
-function getCurrentLanguage() {
-    return currentLanguage;
 }
 
 document.querySelectorAll("[data-language]").forEach((control) => {

@@ -31,8 +31,64 @@ The website includes animated sections, interactive navigation, project cards, s
 - Particle background effects
 - Custom loader animation
 - Privacy Policy page
+- English and German pages with a persistent language selector
 - Bilingual DEVLOG with milestone-based version history
+- Native animation system with reduced-motion support
 - Version number and copyright information in the footer
+
+## Multilingual Support
+
+DARIO.exe supports English and German without an additional framework.
+English pages are located at the website root, while matching German pages
+are stored in the `de/` directory. Both versions use the same centralized
+translation data from `js/i18n.js`.
+
+The language system includes:
+
+- a keyboard-accessible English/German selector
+- persistence of the selected language in `localStorage`
+- language-specific URLs that preserve the selected version on reload
+- English as the reliable fallback for unsupported languages or missing keys
+- translated navigation, forms, validation messages, metadata and DEVLOG text
+- translated ARIA labels, alternative text and other non-visible attributes
+- automatic updates to the document `lang` attribute, page title,
+  meta description and Open Graph text
+
+### Translation structure
+
+All translations are stored in `js/i18n.js` inside the `i18nMessages.en`
+and `i18nMessages.de` objects. Both language objects use the same descriptive
+keys, for example `nav.contact` or `devlog.title`. The `translate()` helper
+first reads the active language, then falls back to English and finally to the
+key itself if no translation exists.
+
+HTML connects content to these keys with `data-i18n`. Attribute translations
+use the matching variants `data-i18n-placeholder`, `data-i18n-aria-label`,
+`data-i18n-alt`, `data-i18n-href` and `data-i18n-content`.
+
+To add a new translated text:
+
+1. Add the same key to the English and German objects in `js/i18n.js`.
+2. Connect the HTML element to that key with the appropriate `data-i18n*`
+   attribute.
+3. Check the result on both the English page and its matching page in `de/`.
+
+## Animation System
+
+The earlier GSAP and ScrollTrigger implementation was replaced with native
+CSS and JavaScript. CSS keyframes and transitions provide interface feedback,
+while `IntersectionObserver` activates section reveals and skill bars only
+when they enter the viewport. The Matrix and particle backgrounds use the
+Canvas API with their own lightweight animation loops.
+
+The animation system also respects performance and accessibility settings:
+
+- `prefers-reduced-motion` disables decorative CSS movement and canvas effects
+- typing, loader and reveal sequences complete immediately in reduced mode
+- smooth programmatic scrolling switches to immediate scrolling when requested
+- CSS animations pause while the browser tab is inactive
+- Matrix and particle loops stop in inactive tabs and resume when appropriate
+- no external animation framework or animation CDN is required
 
 ## Browser Compatibility
 
@@ -73,6 +129,7 @@ Website-Dario/
 ├── privacy.html        # Privacy Policy
 ├── css/                # Stylesheets for layout and components
 ├── js/                 # JavaScript animations and interactions
+├── de/                 # German versions of public pages
 ├── assets/             # Images and website screenshots
 ├── CNAME               # Custom domain configuration
 ├── CHANGELOG.md        # Version history
@@ -87,7 +144,19 @@ The current Desktop and Mobile scores, historical animation comparison
 and links to all original Lighthouse reports are documented in
 [LIGHTHOUSE.md](LIGHTHOUSE.md).
 
-## Maintaining the DEVLOG
+## DEVLOG
+
+The milestone-based DEVLOG documents how DARIO.exe developed from the project
+start through the currently documented releases. Entries are displayed with
+the newest milestone first and are available in both languages:
+
+- [English DEVLOG](devlog.html)
+- [German DEVLOG](de/devlog.html)
+
+The DEVLOG focuses on meaningful releases, challenges, solutions and lessons
+instead of recording every small daily change.
+
+### Adding future entries
 
 New milestone entries are added to `devlog.html`. A commented HTML
 template for version 1.3 and later entries is included directly below
@@ -140,10 +209,12 @@ service ID and template ID are required for message delivery.
 
 ### Libraries and Services
 
-- **CSS animations and transitions** – Interface motion and visual feedback
+- **CSS animations and transitions** – Native interface motion and visual feedback
 - **Intersection Observer API** – Scroll-based animation triggers
 - **Canvas API** – Matrix and particle effects
 - **EmailJS** – Contact form message delivery
+
+No external animation library is required.
 
 ### Development and Deployment
 
