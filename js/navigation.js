@@ -1,6 +1,9 @@
 
 const sections = document.querySelectorAll("section");
 const navLinks = document.querySelectorAll(".nav-menu a");
+const logoStatusDotElement =
+    document.getElementById("logo-status-dot");
+const navigationLogoElement = logoStatusDotElement?.closest(".logo");
 const sectionActivationOffsetPx = 150;
 const mobileBreakpointPx = 900;
 
@@ -31,14 +34,13 @@ window.addEventListener("scroll",()=>{
             }
     });
 
-    const logoStatusDotElement =
-        document.getElementById("logo-status-dot");
+    const isHeroActive = activeSectionId === "hero";
 
-        if(activeSectionId === "hero"){
-            logoStatusDotElement.classList.add("active");
-        }else{
-            logoStatusDotElement.classList.remove("active");
-        }
+    logoStatusDotElement?.classList.toggle("active", isHeroActive);
+    navigationLogoElement?.classList.toggle(
+        "signal-idle",
+        !isHeroActive
+    );
 });
 
 window.dispatchEvent(new Event("scroll"));

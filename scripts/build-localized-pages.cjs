@@ -90,6 +90,7 @@ function translateAttributes(html, translations) {
     const attributeBindings = {
         "data-i18n-placeholder": "placeholder",
         "data-i18n-aria-label": "aria-label",
+        "data-i18n-aria-valuetext": "aria-valuetext",
         "data-i18n-alt": "alt",
         "data-i18n-content": "content"
     };

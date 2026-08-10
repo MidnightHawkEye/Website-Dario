@@ -2,6 +2,7 @@
 
 const desktopParticleCount = 60;
 const mobileParticleDivider = 3;
+const particleDisabledEra = "1998";
 
 const mobileParticleQuery = window.matchMedia(
     `(max-width: ${mobileBreakpointPx}px)`
@@ -19,6 +20,10 @@ function getTargetParticleCount() {
     }
 
     return desktopParticleCount;
+}
+
+function particlesEnabledForCurrentEra() {
+    return document.documentElement.dataset.era !== particleDisabledEra;
 }
 
 /*--------------------- Mouse Movement ---------------------*/
@@ -205,7 +210,8 @@ function startParticleAnimation() {
     if (
         particleAnimationFrameId !== null ||
         !isTabActive() ||
-        prefersReducedMotion()
+        prefersReducedMotion() ||
+        !particlesEnabledForCurrentEra()
     ) {
         return;
     }
@@ -246,6 +252,16 @@ function updateParticleMotionPreference(event) {
 }
 
 addReducedMotionListener(updateParticleMotionPreference);
+
+window.addEventListener("dario:era-change", (event) => {
+    if (event.detail?.era === particleDisabledEra) {
+        stopParticleAnimation();
+        clearParticleAnimation();
+        return;
+    }
+
+    startParticleAnimation();
+});
 
 document.addEventListener("visibilitychange", () => {
     if (isTabActive()) {

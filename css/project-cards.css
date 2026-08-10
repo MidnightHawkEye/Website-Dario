@@ -4,7 +4,7 @@
 .project-card {
     padding: 25px;
     border: 1px solid var(--color-accent);
-    background: rgba(0, 255, 100, 0.03);
+    background: rgba(var(--color-accent-rgb), 0.03);
     transition: all 0.35s ease;
     position: relative;
     overflow: hidden;
@@ -20,7 +20,7 @@
     height: 250%;
     background: radial-gradient(
         circle,
-        rgba(0, 255, 100, 0.15),
+        rgba(var(--color-accent-rgb), 0.15),
         transparent 70%
     );
     transition: all 0.5s ease;
@@ -71,7 +71,7 @@
 
 .project-description{
     margin:25px 0;
-    color:#b8b8b8;
+    color:var(--color-text-light);
     line-height:1.8;
 }
 
@@ -90,7 +90,7 @@
 .project-info-label{
     display:block;
     font-size:.75rem;
-    color:#888;
+    color:var(--color-text-muted);
     letter-spacing:1px;
     margin-bottom:10px;
 }
@@ -104,16 +104,24 @@
     font-family:monospace;
 }
 
-/*--------------------- Github Button ---------------------*/
+/*--------------------- Project Actions ---------------------*/
 
-.github-button {
+.project-actions {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 30px;
+}
+
+.project-action-button {
     display: flex;
     cursor: pointer;
     justify-content: center;
     align-items: center;
     gap: 12px;
     width: 100%;
-    margin-top: 30px;
     padding: 16px;
     border: 1px solid rgba(var(--color-accent-rgb),.35);
     border-radius: 10px;
@@ -122,8 +130,6 @@
     text-decoration: none;
     font-family: monospace;
     font-weight: 300;
-    position: relative;
-    z-index: 2;
     transition:
         transform .35s ease,
         border-color .35s ease,
@@ -131,7 +137,7 @@
         background .35s ease;
 }
 
-.github-button-arrow{
+.project-action-arrow{
     transition:transform .35s ease;
 }
 
@@ -145,7 +151,7 @@
         transform: translateY(-6px);
         border-color: var(--color-accent);
         box-shadow:
-            0 0 25px rgba(0, 255, 100, 0.45);
+            0 0 25px rgba(var(--color-accent-rgb), 0.45);
     }
 
     .project-card:hover::before {
@@ -153,7 +159,7 @@
         left: -50%;
     }
 
-    .github-button:hover {
+    .project-action-button:hover {
         transform: translateY(-4px);
         border-color: var(--color-accent);
         background: rgba(var(--color-accent-rgb), 0.10);
@@ -162,7 +168,7 @@
             0 0 35px rgba(var(--color-accent-rgb), 0.15);
     }
 
-    .github-button:hover .github-button-arrow {
+    .project-action-button:hover .project-action-arrow {
         transform: translateX(6px);
     }
 
@@ -205,4 +211,10 @@
         background-color 0.25s ease,
         box-shadow 0.25s ease,
         transform 0.25s ease;
+}
+
+@media (max-width: 600px) {
+    .project-actions {
+        grid-template-columns: 1fr;
+    }
 }

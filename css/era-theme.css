@@ -1,0 +1,425 @@
+:root {
+    --era-retro-window: #c0c0c0;
+    --era-retro-window-light: #ffffff;
+    --era-retro-window-mid: #808080;
+    --era-retro-window-dark: #404040;
+    --era-retro-title: #000080;
+    --era-retro-ink: #000000;
+    --era-retro-desktop: #008080;
+    --era-retro-screen: #000020;
+    --era-retro-matrix: #000080;
+    --era-retro-accent: #ffffff;
+    --era-retro-accent-rgb: 255, 255, 255;
+    --era-transition-dark: rgba(0, 0, 0, 0.94);
+    --era-transition-signal: rgba(0, 255, 136, 0.24);
+}
+
+/*==================================================
+                TIME TRAVEL TRANSITION
+==================================================*/
+
+html.era-transition::before,
+html.era-transition::after {
+    position: fixed;
+    inset: 0;
+    z-index: 30000;
+    pointer-events: none;
+}
+
+html.era-transition::before {
+    content: "";
+    background:
+        repeating-linear-gradient(
+            0deg,
+            transparent 0 3px,
+            var(--era-transition-signal) 3px 5px
+        ),
+        var(--era-transition-dark);
+    animation: eraSignalShift 0.72s steps(6, end) both;
+}
+
+html.era-transition::after {
+    content: "TEMPORAL SIGNAL // " attr(data-era-target);
+    display: grid;
+    place-items: center;
+    color: var(--color-accent);
+    font-family: monospace;
+    font-size: clamp(1rem, 3vw, 1.8rem);
+    font-weight: 700;
+    letter-spacing: clamp(2px, 0.8vw, 7px);
+    text-shadow:
+        -3px 0 rgba(var(--color-accent-rgb), 0.75),
+        3px 0 rgba(var(--color-accent-rgb), 0.45),
+        0 0 18px var(--color-accent);
+    animation: eraSignalText 0.72s steps(4, end) both;
+}
+
+html.era-transition[data-era-target="1998"] {
+    --era-transition-signal: rgba(0, 0, 128, 0.34);
+}
+
+html.era-transition[data-era-target="1998"]::after {
+    color: var(--era-retro-window-light);
+    text-shadow:
+        -3px 0 var(--era-retro-title),
+        3px 0 var(--era-retro-window-light),
+        0 0 18px var(--era-retro-title);
+}
+
+@keyframes eraSignalShift {
+    0% {
+        opacity: 0;
+        transform: scaleY(0.03);
+    }
+
+    18% {
+        opacity: 1;
+        transform: scaleY(1);
+    }
+
+    42% {
+        transform: translateX(-2%) skewX(-2deg);
+    }
+
+    64% {
+        transform: translateX(2%) skewX(2deg);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scaleY(0.02);
+    }
+}
+
+@keyframes eraSignalText {
+    0%, 15%, 100% {
+        opacity: 0;
+        transform: translateX(0);
+    }
+
+    25%, 72% {
+        opacity: 1;
+    }
+
+    40% {
+        transform: translateX(-8px);
+    }
+
+    58% {
+        transform: translateX(8px);
+    }
+}
+
+/*==================================================
+                    1998 ERA
+==================================================*/
+
+html[data-era="1998"] {
+    --color-background: var(--era-retro-desktop);
+    --color-accent: var(--era-retro-accent);
+    --color-accent-rgb: var(--era-retro-accent-rgb);
+    --color-white: #ffffff;
+    --color-text-light: #e7e7e7;
+    --color-text-muted: #b8b8b8;
+    --color-text-dark: #686868;
+}
+
+html[data-era="1998"] * {
+    font-family: "Courier New", monospace;
+}
+
+html[data-era="1998"] body {
+    background: var(--era-retro-desktop);
+}
+
+html[data-era="1998"] body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent 0 3px,
+        rgba(0, 0, 0, 0.09) 3px 4px
+    );
+    opacity: 0.22;
+}
+
+html[data-era="1998"] #matrix-canvas {
+    opacity: 0.42;
+    filter: none;
+    mix-blend-mode: multiply;
+}
+
+html[data-era="1998"] .matrix-background {
+    background: radial-gradient(
+        circle at center,
+        rgba(255, 255, 255, 0.04),
+        transparent 68%
+    );
+}
+
+html[data-era="1998"] #particle-canvas {
+    display: none;
+}
+
+html[data-era="1998"] .glitch::before {
+    text-shadow: -2px 0 var(--era-retro-title);
+}
+
+html[data-era="1998"] .glitch::after {
+    text-shadow: 2px 0 var(--era-retro-window-light);
+}
+
+html[data-era="1998"] .site-header {
+    background: var(--era-retro-window);
+    border-top: 2px solid var(--era-retro-window-light);
+    border-bottom: 2px solid var(--era-retro-window-dark);
+    box-shadow:
+        inset 0 -1px var(--era-retro-window-mid),
+        0 4px 0 rgba(0, 0, 0, 0.45);
+    backdrop-filter: none;
+}
+
+html[data-era="1998"] .logo {
+    padding: 7px 9px;
+    border-top: 2px solid var(--era-retro-window-dark);
+    border-left: 2px solid var(--era-retro-window-dark);
+    border-right: 2px solid var(--era-retro-window-light);
+    border-bottom: 2px solid var(--era-retro-window-light);
+    background: var(--era-retro-screen);
+    color: var(--color-accent);
+}
+
+html[data-era="1998"] nav a {
+    color: var(--era-retro-ink);
+    font-weight: 700;
+    text-shadow: none;
+}
+
+html[data-era="1998"] .logo,
+html[data-era="1998"] .logo:hover {
+    color: var(--color-accent);
+    text-shadow: 0 0 5px rgba(var(--color-accent-rgb), 0.7);
+}
+
+html[data-era="1998"] .nav-menu a:hover,
+html[data-era="1998"] .nav-menu a.active {
+    color: var(--era-retro-title);
+    text-shadow:
+        -1px 0 rgba(var(--color-accent-rgb), 0.7),
+        1px 0 var(--era-retro-window-light);
+}
+
+html[data-era="1998"] #progress-bar {
+    height: 3px;
+    background: var(--era-retro-title);
+    box-shadow: none;
+}
+
+html[data-era="1998"] .language-switcher,
+html[data-era="1998"] .era-switcher,
+html[data-era="1998"] .menu-toggle {
+    border-top: 2px solid var(--era-retro-window-light);
+    border-left: 2px solid var(--era-retro-window-light);
+    border-right: 2px solid var(--era-retro-window-dark);
+    border-bottom: 2px solid var(--era-retro-window-dark);
+    border-radius: 0;
+    background: var(--era-retro-window);
+    box-shadow: none;
+}
+
+html[data-era="1998"] .language-option,
+html[data-era="1998"] .era-year {
+    color: var(--era-retro-ink);
+    text-shadow: none;
+}
+
+html[data-era="1998"] .language-option.is-active {
+    border-radius: 0;
+    background: var(--era-retro-title);
+    color: var(--era-retro-window-light);
+    box-shadow: none;
+}
+
+html[data-era="1998"] .era-slider::-webkit-slider-runnable-track {
+    height: 6px;
+    border: 2px inset var(--era-retro-window);
+    border-radius: 0;
+    background: var(--era-retro-screen);
+}
+
+html[data-era="1998"] .era-slider::-webkit-slider-thumb {
+    width: 13px;
+    height: 18px;
+    margin-top: -8px;
+    border: 2px outset var(--era-retro-window);
+    border-radius: 0;
+    background: var(--era-retro-window);
+    box-shadow: none;
+}
+
+html[data-era="1998"] .era-slider::-moz-range-track {
+    height: 6px;
+    border: 2px inset var(--era-retro-window);
+    border-radius: 0;
+    background: var(--era-retro-screen);
+}
+
+html[data-era="1998"] .era-slider::-moz-range-thumb {
+    width: 13px;
+    height: 18px;
+    border: 2px outset var(--era-retro-window);
+    border-radius: 0;
+    background: var(--era-retro-window);
+    box-shadow: none;
+}
+
+html[data-era="1998"] .menu-toggle span {
+    border-radius: 0;
+    background: var(--era-retro-ink);
+}
+
+html[data-era="1998"] :where(
+    .stat-card,
+    .skill-card,
+    .project-card,
+    .contact-form,
+    .devlog-summary-card,
+    .devlog-entry-card,
+    .devlog-next,
+    .privacy-card,
+    .error-terminal
+) {
+    border-top: 2px solid var(--era-retro-window-light);
+    border-left: 2px solid var(--era-retro-window-light);
+    border-right: 2px solid var(--era-retro-window-dark);
+    border-bottom: 2px solid var(--era-retro-window-dark);
+    border-radius: 0;
+    background: rgba(0, 0, 32, 0.94);
+    box-shadow:
+        3px 3px 0 rgba(0, 0, 0, 0.65),
+        inset 0 0 0 1px var(--era-retro-window-mid);
+}
+
+html[data-era="1998"] :where(
+    .project-status,
+    .project-tech-tag,
+    .status-badge,
+    .skill-status,
+    .devlog-tag
+) {
+    border-radius: 0;
+}
+
+html[data-era="1998"] :where(
+    .section > h2,
+    .section-heading h2,
+    .devlog-section-label,
+    .privacy-label,
+    .error-status
+) {
+    display: inline-block;
+    padding: 5px 9px;
+    border: 1px solid var(--era-retro-window-light);
+    background: var(--era-retro-title);
+    color: var(--era-retro-window-light);
+    text-shadow: 1px 1px var(--era-retro-ink);
+}
+
+html[data-era="1998"] :where(
+    .hero-button,
+    .project-action-button,
+    .contact-button,
+    .return-button,
+    .privacy-back-link,
+    .error-button
+) {
+    border-top: 2px solid var(--era-retro-window-light);
+    border-left: 2px solid var(--era-retro-window-light);
+    border-right: 2px solid var(--era-retro-window-dark);
+    border-bottom: 2px solid var(--era-retro-window-dark);
+    border-radius: 0;
+    background: var(--era-retro-window);
+    color: var(--era-retro-ink);
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.55);
+    text-shadow: none;
+}
+
+html[data-era="1998"] :where(
+    .hero-button,
+    .project-action-button,
+    .contact-button,
+    .return-button,
+    .privacy-back-link,
+    .error-button
+):active {
+    border-top-color: var(--era-retro-window-dark);
+    border-left-color: var(--era-retro-window-dark);
+    border-right-color: var(--era-retro-window-light);
+    border-bottom-color: var(--era-retro-window-light);
+    box-shadow: none;
+    transform: translate(1px, 1px);
+}
+
+html[data-era="1998"] .contact-form :where(input, textarea) {
+    border-top: 2px solid var(--era-retro-window-dark);
+    border-left: 2px solid var(--era-retro-window-dark);
+    border-right: 2px solid var(--era-retro-window-light);
+    border-bottom: 2px solid var(--era-retro-window-light);
+    border-radius: 0;
+    background: var(--era-retro-screen);
+    color: var(--color-accent);
+    box-shadow: inset 2px 2px 0 rgba(0, 0, 0, 0.65);
+}
+
+html[data-era="1998"] .project-terminal,
+html[data-era="1998"] .terminal-intro,
+html[data-era="1998"] .error-details {
+    border-radius: 0;
+    background: rgba(0, 0, 0, 0.72);
+}
+
+html[data-era="1998"] .site-footer {
+    border-top: 2px solid var(--era-retro-window-light);
+    background: var(--era-retro-window);
+    color: var(--era-retro-ink);
+}
+
+html[data-era="1998"] .site-footer a,
+html[data-era="1998"] .footer-version {
+    color: var(--era-retro-title);
+}
+
+@media (max-width: 900px) {
+    html[data-era="1998"] .nav-menu {
+        border-left: 2px solid var(--era-retro-window-light);
+        background: var(--era-retro-window);
+        box-shadow: -4px 0 0 var(--era-retro-window-dark);
+    }
+
+    html[data-era="1998"] .nav-menu a {
+        border-bottom-color: var(--era-retro-window-mid);
+        color: var(--era-retro-ink);
+    }
+
+    html[data-era="1998"] .nav-menu a:hover,
+    html[data-era="1998"] .nav-menu a.active {
+        background: var(--era-retro-title);
+        color: var(--era-retro-window-light);
+    }
+
+    html[data-era="1998"] .era-mobile-label,
+    html[data-era="1998"] .mobile-menu-status {
+        color: var(--era-retro-ink);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html.era-transition::before,
+    html.era-transition::after {
+        display: none !important;
+        animation: none !important;
+    }
+}

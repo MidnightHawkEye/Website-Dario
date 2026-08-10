@@ -5,10 +5,22 @@ const matrixFontSizePx = 16;
 const matrixResetThreshold = 0.975;
 const matrixIntervalMs = 45;
 const drops = [];
+let matrixCharacterColor = "#00ff88";
+let matrixTrailColor = "rgba(0,0,0,0.08)";
 
-const accentColor = getComputedStyle(
-    document.documentElement
-).getPropertyValue("--color-accent").trim();
+function updateMatrixPalette() {
+    const htmlElement = document.documentElement;
+    const styles = getComputedStyle(htmlElement);
+    const isRetroEra = htmlElement.dataset.era === "1998";
+
+    matrixCharacterColor = isRetroEra
+        ? styles.getPropertyValue("--era-retro-matrix").trim() || "#000080"
+        : styles.getPropertyValue("--color-accent").trim() || "#00ff88";
+
+    matrixTrailColor = isRetroEra
+        ? "rgba(0,128,128,0.14)"
+        : "rgba(0,0,0,0.08)";
+}
 
 function resizeMatrixCanvas() {
     matrixCanvas.width = window.innerWidth;
@@ -31,14 +43,14 @@ resizeMatrixCanvas();
 
 function drawMatrix() {
 
-    matrixContext.fillStyle = "rgba(0,0,0,0.08)";
+    matrixContext.fillStyle = matrixTrailColor;
     matrixContext.fillRect(
         0,
         0,
         matrixCanvas.width,
         matrixCanvas.height
     );
-    matrixContext.fillStyle = accentColor;
+    matrixContext.fillStyle = matrixCharacterColor;
     matrixContext.font = matrixFontSizePx + "px monospace";
 
     for (let i = 0; i < drops.length; i++) {
@@ -107,6 +119,11 @@ function updateMatrixMotionPreference(event) {
 
 addReducedMotionListener(updateMatrixMotionPreference);
 
+window.addEventListener("dario:era-change", () => {
+    updateMatrixPalette();
+    clearMatrixAnimation();
+});
+
 document.addEventListener("visibilitychange", () => {
     if (isTabActive()) {
         startMatrixAnimation();
@@ -128,4 +145,5 @@ window.addEventListener("resize", () => {
     });
 });
 
+updateMatrixPalette();
 startMatrixAnimation();

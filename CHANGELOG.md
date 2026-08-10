@@ -6,6 +6,28 @@ All notable changes to DARIO.exe are documented in this file.
 
 ## [Unreleased]
 
+### Added
+
+- Added an accessible 1998/2026 time-machine slider in the former desktop DEVLOG position and inside the mobile menu
+- Added a persistent 1998 retro theme combining Windows 98 interface details with the existing Matrix-inspired DARIO.exe design
+- Added a short signal/glitch transition between eras with an immediate reduced-motion alternative
+- Added a one-shot glitch response to the About, Skills, Projects and Contact links while preserving their existing hover glow
+- Added a restrained signal-ripple click response to primary 2026 action buttons, with reduced-motion and 1998-theme safeguards
+
+### Changed
+
+- Started active development of version 1.4 while keeping v1.3 identified as the latest released version
+- Moved DEVLOG access from the desktop navigation and mobile menu into the DARIO.exe project card
+- Added a CSS-only glitch effect to the DARIO.exe navigation logo
+- Continued the dark DARIO.exe design and reused the existing CSS color variables for the updated project controls
+- Extended the centralized color system with reusable variables for the 1998 interface palette
+- Changed the 1998 desktop background to the classic Windows 98 teal color
+- Adapted the Matrix canvas to a quieter dark-blue palette in the 1998 interface
+- Disabled and paused the particle canvas while the 1998 interface is active
+- Replaced the remaining neon-green retro accents with teal, navy, grey, black and white
+- Prevented longer German desktop navigation labels from wrapping onto two lines
+- Limited the subtle navigation-logo signal glitch to times when the Hero section is inactive and the status dot is grey
+
 ---
 
 ## [1.3.0] - 2026-08-08
