@@ -64,6 +64,7 @@
 <link rel="stylesheet" href="css/contact-terminal.css?v=1.2.2">
 <link rel="stylesheet" href="css/return-button.css?v=1.2.2">
 <link rel="stylesheet" href="css/era-theme.css?v=1.4.3">
+<link rel="stylesheet" href="css/system-decryption.css?v=1.4.2">
 
 <script src="js/global.js?v=1.2.2" defer></script>
 <script src="js/interaction-effects.js?v=1.4.0" defer></script>
@@ -71,7 +72,8 @@
 <script src="js/era-switcher.js?v=1.4.2" defer></script>
 <script src="js/motion-animations.js?v=1.2.2" defer></script>
 <script src="js/loader.js?v=1.2.2" defer></script>
-<script src="js/matrix.js?v=1.4.1" defer></script>
+<script src="js/matrix.js?v=1.4.4" defer></script>
+<script src="js/system-decryption.js?v=1.4.2" defer></script>
 <script src="js/navigation.js?v=1.2.6" defer></script>
 <script src="js/particles.js?v=1.4.0" defer></script>
 <script src="js/progress-bar.js?v=1.2.2" defer></script>
@@ -526,7 +528,13 @@
         <div class="project-info">
             <div>
                 <span class="project-info-label" data-i18n="projects.currentVersion">LATEST RELEASE</span>
-                <span class="project-info-value">v1.3</span>
+                <button
+                    type="button"
+                    class="project-info-value project-version-trigger system-decryption-trigger"
+                    aria-label="DARIO.exe version information"
+                    data-i18n-aria-label="decryption.triggerLabel">
+                    v1.3
+                </button>
             </div>
             <div>
                 <span class="project-info-label" data-i18n="projects.status">STATUS</span><span class="project-info-value" data-i18n="projects.building">Building...</span>
@@ -659,8 +667,144 @@
         <span aria-hidden="true"> • </span>
         <a href="./privacy.html" data-i18n="footer.privacy">Privacy Policy</a>
     </p>
-    <p class="footer-version">DARIO.exe v1.3</p>
+    <button
+        type="button"
+        class="footer-version system-decryption-trigger"
+        aria-label="DARIO.exe version information"
+        data-i18n-aria-label="decryption.triggerLabel">
+        DARIO.exe v1.3
+    </button>
 </footer>
+
+<div
+    id="system-decryption-signal"
+    class="system-decryption-signal"
+    role="status"
+    aria-live="polite"
+    hidden>
+    <span data-i18n="decryption.detected">SIGNAL DETECTED...</span>
+</div>
+
+<div
+    id="system-decryption-signal-layer"
+    class="system-decryption-signal-layer"
+    aria-hidden="true">
+</div>
+
+<div
+    id="system-decryption-overlay"
+    class="system-decryption-overlay"
+    aria-hidden="true"
+    hidden>
+    <section
+        id="system-decryption-terminal"
+        class="system-decryption-terminal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="system-decryption-title"
+        aria-describedby="system-decryption-instructions"
+        tabindex="-1">
+        <header class="system-decryption-header">
+            <div>
+                <p class="system-decryption-channel" data-i18n="decryption.channel">
+                    SECURE CHANNEL // UNKNOWN ORIGIN
+                </p>
+                <h2 id="system-decryption-title" data-i18n="decryption.title">
+                    SYSTEM DECRYPTION
+                </h2>
+            </div>
+            <button
+                id="system-decryption-close"
+                class="system-decryption-close"
+                type="button"
+                aria-label="Abort system decryption"
+                data-i18n-aria-label="decryption.abortAria">
+                <span aria-hidden="true">×</span>
+                <span data-i18n="decryption.abort">ABORT</span>
+            </button>
+        </header>
+
+        <ol
+            class="system-decryption-rounds"
+            aria-label="Decryption rounds"
+            data-i18n-aria-label="decryption.roundsLabel">
+            <li data-decryption-round="0">
+                <span aria-hidden="true">01</span>
+                <span data-i18n="decryption.roundOne">ROUND 1</span>
+            </li>
+            <li data-decryption-round="1">
+                <span aria-hidden="true">02</span>
+                <span data-i18n="decryption.roundTwo">ROUND 2</span>
+            </li>
+            <li data-decryption-round="2">
+                <span aria-hidden="true">03</span>
+                <span data-i18n="decryption.roundThree">ROUND 3</span>
+            </li>
+        </ol>
+
+        <div class="system-decryption-game">
+            <p
+                id="system-decryption-status"
+                class="system-decryption-status"
+                role="status"
+                aria-live="polite"
+                aria-atomic="true">
+                AUTHENTICATION REQUIRED
+            </p>
+
+            <div
+                id="system-decryption-sequence"
+                class="system-decryption-sequence"
+                role="img"
+                aria-live="assertive"
+                aria-label="Symbol sequence"
+                data-i18n-aria-label="decryption.sequenceLabel">
+            </div>
+
+            <p
+                id="system-decryption-input"
+                class="system-decryption-input"
+                aria-live="polite">
+            </p>
+
+            <div
+                class="system-decryption-symbols"
+                role="group"
+                aria-label="Decryption symbols"
+                data-i18n-aria-label="decryption.symbolsLabel">
+                <button type="button" data-decryption-symbol="●" data-symbol-name="circle" aria-label="Circle" data-i18n-aria-label="decryption.symbolCircle">●</button>
+                <button type="button" data-decryption-symbol="▲" data-symbol-name="triangle" aria-label="Triangle" data-i18n-aria-label="decryption.symbolTriangle">▲</button>
+                <button type="button" data-decryption-symbol="■" data-symbol-name="square" aria-label="Square" data-i18n-aria-label="decryption.symbolSquare">■</button>
+                <button type="button" data-decryption-symbol="◆" data-symbol-name="diamond" aria-label="Diamond" data-i18n-aria-label="decryption.symbolDiamond">◆</button>
+                <button type="button" data-decryption-symbol="+" data-symbol-name="plus" aria-label="Plus" data-i18n-aria-label="decryption.symbolPlus">+</button>
+                <button type="button" data-decryption-symbol="×" data-symbol-name="multiply" aria-label="Multiply" data-i18n-aria-label="decryption.symbolMultiply">×</button>
+            </div>
+
+            <p
+                id="system-decryption-instructions"
+                class="system-decryption-instructions"
+                data-i18n="decryption.instructions">
+                Memorize the symbols, then repeat the sequence.
+            </p>
+        </div>
+
+        <div class="system-decryption-final" hidden>
+            <p data-i18n="decryption.accessGranted">ACCESS GRANTED</p>
+            <strong data-i18n="decryption.activeTitle">
+                DARIO.exe // SYSTEM ACTIVE
+            </strong>
+        </div>
+
+        <div class="system-decryption-crash" role="alert" hidden>
+            <p data-i18n="decryption.crash">SYSTEM INSTABILITY DETECTED</p>
+            <strong id="system-decryption-countdown"></strong>
+        </div>
+
+        <p class="system-decryption-abort-hint" data-i18n="decryption.abortHint">
+            ESC // ABORT
+        </p>
+    </section>
+</div>
 
 </body>
 </html>

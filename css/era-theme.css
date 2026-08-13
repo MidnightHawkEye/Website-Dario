@@ -160,6 +160,16 @@ html[data-era="1998"] .matrix-background {
     );
 }
 
+html[data-era="1998"] .hero-overlay {
+    background: transparent;
+}
+
+html[data-era="1998"] .hero-motto,
+html[data-era="1998"] .scroll-hint {
+    color: var(--era-retro-window-light);
+    text-shadow: 1px 1px 0 var(--era-retro-title);
+}
+
 html[data-era="1998"] #particle-canvas {
     display: none;
 }
@@ -375,10 +385,13 @@ html[data-era="1998"] .contact-form :where(input, textarea) {
 }
 
 html[data-era="1998"] .project-terminal,
-html[data-era="1998"] .terminal-intro,
 html[data-era="1998"] .error-details {
     border-radius: 0;
     background: rgba(0, 0, 0, 0.72);
+}
+
+html[data-era="1998"] .terminal-intro {
+    background: transparent;
 }
 
 html[data-era="1998"] .site-footer {

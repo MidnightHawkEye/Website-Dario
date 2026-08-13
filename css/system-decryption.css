@@ -1,0 +1,713 @@
+/*==================================================
+            SYSTEM DECRYPTION EASTER EGG
+==================================================*/
+
+.system-decryption-trigger {
+    display: inline-block;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: default;
+}
+
+.system-decryption-trigger.is-detected {
+    animation: glitchTop 0.42s steps(3, end) both;
+}
+
+.project-version-trigger {
+    cursor: pointer;
+}
+
+.project-version-trigger:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
+}
+
+#matrix-canvas {
+    transition:
+        opacity 0.35s ease,
+        filter 0.35s ease;
+}
+
+.system-decryption-signal[hidden],
+.system-decryption-overlay[hidden],
+.system-decryption-close[hidden],
+.system-decryption-game[hidden],
+.system-decryption-final[hidden],
+.system-decryption-crash[hidden] {
+    display: none;
+}
+
+.system-decryption-signal {
+    position: fixed;
+    left: 50%;
+    bottom: 28px;
+    z-index: 21000;
+    width: min(90vw, 420px);
+    padding: 14px 18px;
+    border: 1px solid var(--color-accent);
+    background: rgba(0, 0, 0, 0.94);
+    color: var(--color-accent);
+    box-shadow: 0 0 22px rgba(var(--color-accent-rgb), 0.3);
+    font-size: 0.82rem;
+    letter-spacing: 0.16em;
+    text-align: center;
+    transform: translateX(-50%);
+    animation: decryptionSignalDetected 0.68s steps(3, end) both;
+}
+
+.system-decryption-signal-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 15000;
+    background:
+        repeating-linear-gradient(
+            0deg,
+            transparent 0 4px,
+            rgba(var(--color-accent-rgb), 0.16) 4px 5px
+        ),
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(var(--color-accent-rgb), 0.05),
+            transparent
+        );
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+}
+
+.system-decryption-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 20000;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    overflow-y: auto;
+    background: rgba(0, 0, 0, 0.82);
+    backdrop-filter: blur(7px);
+    animation: decryptionOverlayIn 0.34s ease both;
+}
+
+.system-decryption-terminal {
+    position: relative;
+    width: min(860px, 100%);
+    max-height: calc(100vh - 48px);
+    padding: clamp(22px, 4vw, 38px);
+    overflow-y: auto;
+    border: 1px solid rgba(var(--color-accent-rgb), 0.7);
+    border-radius: 12px;
+    outline: none;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(var(--color-accent-rgb), 0.055),
+            transparent 42%
+        ),
+        rgba(0, 8, 5, 0.97);
+    box-shadow:
+        0 0 28px rgba(var(--color-accent-rgb), 0.24),
+        inset 0 0 34px rgba(var(--color-accent-rgb), 0.04);
+    color: var(--color-text-light);
+    animation: decryptionTerminalIn 0.38s ease both;
+}
+
+.system-decryption-terminal::before {
+    content: "";
+    position: absolute;
+    inset: 7px;
+    border: 1px solid rgba(var(--color-accent-rgb), 0.13);
+    border-radius: 8px;
+    pointer-events: none;
+}
+
+.system-decryption-header {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid rgba(var(--color-accent-rgb), 0.24);
+}
+
+.system-decryption-channel {
+    margin: 0 0 8px;
+    color: var(--color-text-muted);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+}
+
+.system-decryption-header h2 {
+    margin: 0;
+    color: var(--color-accent);
+    font-size: clamp(1.5rem, 4vw, 2.6rem);
+    letter-spacing: 0.08em;
+    text-shadow: 0 0 16px rgba(var(--color-accent-rgb), 0.32);
+}
+
+.system-decryption-close {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 10px 13px;
+    border: 1px solid rgba(var(--color-accent-rgb), 0.45);
+    border-radius: 7px;
+    background: rgba(var(--color-accent-rgb), 0.05);
+    color: var(--color-accent);
+    font-size: 0.76rem;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition:
+        background 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.system-decryption-rounds {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 24px 0;
+    padding: 0;
+    list-style: none;
+}
+
+.system-decryption-rounds li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+    padding: 11px 12px;
+    border: 1px solid rgba(var(--color-accent-rgb), 0.16);
+    color: var(--color-text-dark);
+    font-size: 0.73rem;
+    letter-spacing: 0.08em;
+}
+
+.system-decryption-rounds li span:first-child {
+    color: var(--color-text-muted);
+}
+
+.system-decryption-rounds li[data-state="current"] {
+    border-color: rgba(var(--color-accent-rgb), 0.6);
+    background: rgba(var(--color-accent-rgb), 0.07);
+    color: var(--color-accent);
+}
+
+.system-decryption-rounds li[data-state="complete"] {
+    border-color: rgba(var(--color-accent-rgb), 0.32);
+    color: var(--color-accent);
+}
+
+.system-decryption-rounds li[data-state="complete"]::after {
+    content: "✓";
+    margin-left: auto;
+}
+
+.system-decryption-game {
+    position: relative;
+    z-index: 1;
+}
+
+.system-decryption-status,
+.system-decryption-input {
+    min-height: 1.5em;
+    color: var(--color-accent);
+    font-size: 0.82rem;
+    letter-spacing: 0.13em;
+    text-align: center;
+}
+
+.system-decryption-status[data-state="error"] {
+    color: #ff5c72;
+}
+
+.system-decryption-sequence {
+    display: grid;
+    place-items: center;
+    min-height: 150px;
+    margin: 18px 0 10px;
+    padding: 18px;
+    border: 1px solid rgba(var(--color-accent-rgb), 0.16);
+    background: rgba(0, 0, 0, 0.46);
+    color: var(--color-accent);
+    font-size: clamp(2.7rem, 8vw, 5.4rem);
+    line-height: 1;
+    overflow-wrap: anywhere;
+    word-spacing: clamp(0.25rem, 1.5vw, 1rem);
+    text-shadow: 0 0 24px rgba(var(--color-accent-rgb), 0.45);
+}
+
+.system-decryption-sequence.is-visible {
+    animation: decryptionSymbolPulse 0.34s ease both;
+}
+
+.system-decryption-input {
+    margin-bottom: 15px;
+    color: var(--color-text-muted);
+}
+
+.system-decryption-symbols {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(64px, 1fr));
+    gap: 10px;
+}
+
+.system-decryption-symbols button {
+    display: grid;
+    place-items: center;
+    min-width: 64px;
+    min-height: 70px;
+    border: 1px solid rgba(var(--color-accent-rgb), 0.42);
+    border-radius: 8px;
+    background: rgba(var(--color-accent-rgb), 0.045);
+    color: var(--color-accent);
+    font-size: 2rem;
+    cursor: pointer;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    transition:
+        transform 0.18s ease,
+        background 0.18s ease,
+        border-color 0.18s ease,
+        box-shadow 0.18s ease;
+}
+
+.system-decryption-symbols button:disabled {
+    opacity: 0.36;
+    cursor: wait;
+}
+
+.system-decryption-symbols button.is-selected {
+    border-color: var(--color-accent);
+    background: rgba(var(--color-accent-rgb), 0.2);
+    box-shadow: 0 0 18px rgba(var(--color-accent-rgb), 0.3);
+    transform: scale(0.96);
+}
+
+.system-decryption-instructions,
+.system-decryption-abort-hint {
+    margin: 18px 0 0;
+    color: var(--color-text-muted);
+    font-size: 0.74rem;
+    line-height: 1.6;
+    letter-spacing: 0.08em;
+    text-align: center;
+}
+
+.system-decryption-abort-hint {
+    margin-top: 22px;
+    opacity: 0.65;
+}
+
+.system-decryption-final,
+.system-decryption-crash {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    min-height: 360px;
+    padding: 30px 10px;
+    text-align: center;
+}
+
+.system-decryption-final p,
+.system-decryption-crash p {
+    color: var(--color-accent);
+    font-size: 0.9rem;
+    letter-spacing: 0.28em;
+}
+
+.system-decryption-final strong {
+    display: block;
+    margin-top: 26px;
+    color: var(--color-white);
+    font-size: clamp(2.4rem, 8vw, 6.4rem);
+    line-height: 0.95;
+    letter-spacing: -0.055em;
+    text-shadow:
+        -2px 0 rgba(var(--color-accent-rgb), 0.8),
+        2px 0 rgba(var(--color-accent-rgb), 0.45),
+        0 0 28px rgba(var(--color-accent-rgb), 0.38);
+    animation: decryptionSystemActive 1.8s steps(3, end) infinite;
+}
+
+.system-decryption-final strong:empty {
+    min-height: 1em;
+}
+
+.system-decryption-final strong.is-unlocked {
+    animation: decryptionUnlockedGlow 3s ease-in-out infinite;
+}
+
+.system-decryption-crash strong {
+    margin-top: 24px;
+    color: #ff5c72;
+    font-size: clamp(1.4rem, 6vw, 3rem);
+    letter-spacing: 0.12em;
+}
+
+.system-decryption-terminal.is-failed {
+    animation: glitchBottom 0.34s steps(3, end) both;
+}
+
+html.system-decryption-open,
+html.system-decryption-open body {
+    overflow: hidden;
+}
+
+html.system-decryption-level-1 #matrix-canvas {
+    opacity: 0.22;
+    filter: blur(1px);
+}
+
+html.system-decryption-level-1 .system-decryption-signal-layer {
+    opacity: 0.045;
+}
+
+html.system-decryption-level-2 #matrix-canvas {
+    opacity: 0.32;
+    filter: none;
+}
+
+html.system-decryption-level-2 .system-decryption-signal-layer {
+    opacity: 0.085;
+    animation: glitchTop 3.4s steps(2, end) infinite;
+}
+
+html.system-decryption-level-3 #matrix-canvas,
+html.system-decryption-active #matrix-canvas {
+    opacity: 0.43;
+    filter: none;
+}
+
+html.system-decryption-level-3 .system-decryption-signal-layer,
+html.system-decryption-active .system-decryption-signal-layer {
+    opacity: 0.13;
+    animation: glitchBottom 2.6s steps(3, end) infinite;
+}
+
+html.system-decryption-active .system-decryption-terminal {
+    border-color: var(--color-accent);
+    box-shadow:
+        0 0 42px rgba(var(--color-accent-rgb), 0.4),
+        inset 0 0 42px rgba(var(--color-accent-rgb), 0.08);
+}
+
+html.system-decryption-finalizing #matrix-canvas,
+html.system-decryption-decrypting #matrix-canvas {
+    opacity: 0.78;
+    filter:
+        brightness(1.7)
+        contrast(1.15)
+        drop-shadow(0 0 12px rgba(var(--color-accent-rgb), 0.7));
+}
+
+html.system-decryption-finalizing .system-decryption-signal-layer,
+html.system-decryption-decrypting .system-decryption-signal-layer {
+    opacity: 0.22;
+    animation: glitchTop 0.9s steps(3, end) infinite;
+}
+
+html.system-decryption-finalizing .system-decryption-overlay,
+html.system-decryption-decrypting .system-decryption-overlay {
+    background: rgba(0, 0, 0, 0.56);
+    backdrop-filter: blur(2px);
+}
+
+html.system-decryption-finalizing .system-decryption-terminal,
+html.system-decryption-decrypting .system-decryption-terminal {
+    border-color: var(--color-accent);
+    box-shadow:
+        0 0 56px rgba(var(--color-accent-rgb), 0.52),
+        inset 0 0 52px rgba(var(--color-accent-rgb), 0.1);
+}
+
+html.system-decryption-decrypted #matrix-canvas {
+    opacity: 0.72;
+    filter: brightness(1.08) contrast(1.05);
+}
+
+html.system-decryption-decrypted .system-decryption-signal-layer {
+    opacity: 0.1;
+    animation: none;
+}
+
+html.system-decryption-decrypted .system-decryption-overlay {
+    background: rgba(0, 0, 0, 0.67);
+    backdrop-filter: blur(3px);
+}
+
+html.system-decryption-crashing .system-decryption-terminal {
+    animation: decryptionCrash 0.72s steps(4, end) infinite;
+}
+
+html.system-decryption-repairing .system-decryption-terminal {
+    animation: decryptionRepair 0.8s ease both;
+}
+
+html[data-era="1998"].system-decryption-open .system-decryption-overlay {
+    background: rgba(0, 0, 32, 0.88);
+    backdrop-filter: none;
+}
+
+html[data-era="1998"] .system-decryption-terminal {
+    border-radius: 0;
+    background: rgba(0, 0, 32, 0.97);
+    box-shadow:
+        3px 3px 0 rgba(0, 0, 0, 0.7),
+        inset 0 0 0 1px var(--era-retro-window-mid);
+}
+
+html[data-era="1998"] :where(
+    .system-decryption-close,
+    .system-decryption-symbols button
+) {
+    border-top: 2px solid var(--era-retro-window-light);
+    border-left: 2px solid var(--era-retro-window-light);
+    border-right: 2px solid var(--era-retro-window-dark);
+    border-bottom: 2px solid var(--era-retro-window-dark);
+    border-radius: 0;
+    background: var(--era-retro-window);
+    color: var(--era-retro-ink);
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.55);
+}
+
+html[data-era="1998"].system-decryption-level-1 #matrix-canvas {
+    opacity: 0.48;
+}
+
+html[data-era="1998"].system-decryption-level-2 #matrix-canvas {
+    opacity: 0.55;
+}
+
+html[data-era="1998"].system-decryption-level-3 #matrix-canvas,
+html[data-era="1998"].system-decryption-active #matrix-canvas {
+    opacity: 0.62;
+}
+
+html[data-era="1998"].system-decryption-finalizing .system-decryption-overlay,
+html[data-era="1998"].system-decryption-decrypting .system-decryption-overlay {
+    background: rgba(0, 0, 32, 0.62);
+}
+
+html[data-era="1998"].system-decryption-decrypted .system-decryption-overlay {
+    background: rgba(0, 0, 32, 0.7);
+}
+
+html[data-era="1998"].system-decryption-finalizing #matrix-canvas,
+html[data-era="1998"].system-decryption-decrypting #matrix-canvas {
+    opacity: 0.75;
+    filter:
+        brightness(1.55)
+        contrast(1.12)
+        drop-shadow(0 0 12px rgba(255, 255, 255, 0.48));
+}
+
+html[data-era="1998"].system-decryption-decrypted #matrix-canvas {
+    opacity: 0.74;
+    filter: brightness(1.02) contrast(1.12);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .system-decryption-close:hover,
+    .system-decryption-symbols button:not(:disabled):hover {
+        border-color: var(--color-accent);
+        background: rgba(var(--color-accent-rgb), 0.12);
+        box-shadow: 0 0 16px rgba(var(--color-accent-rgb), 0.24);
+    }
+}
+
+@media (max-width: 700px) {
+    .system-decryption-overlay {
+        place-items: start center;
+        padding: 12px;
+    }
+
+    .system-decryption-terminal {
+        max-height: calc(100dvh - 24px);
+        padding: 20px 15px;
+        border-radius: 8px;
+    }
+
+    .system-decryption-header {
+        align-items: center;
+        gap: 12px;
+    }
+
+    .system-decryption-close span:last-child {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        clip-path: inset(50%);
+        white-space: nowrap;
+    }
+
+    .system-decryption-rounds {
+        gap: 6px;
+    }
+
+    .system-decryption-rounds li {
+        justify-content: center;
+        padding: 10px 6px;
+        font-size: 0.65rem;
+    }
+
+    .system-decryption-rounds li span:first-child {
+        display: none;
+    }
+
+    .system-decryption-sequence {
+        min-height: 124px;
+    }
+
+    .system-decryption-symbols {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .system-decryption-symbols button {
+        min-width: 0;
+        min-height: 64px;
+    }
+
+    .system-decryption-final,
+    .system-decryption-crash {
+        min-height: 330px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .system-decryption-trigger.is-detected,
+    .system-decryption-signal,
+    .system-decryption-overlay,
+    .system-decryption-terminal,
+    .system-decryption-sequence.is-visible,
+    .system-decryption-final strong,
+    html.system-decryption-crashing .system-decryption-terminal,
+    html.system-decryption-repairing .system-decryption-terminal,
+    html.system-decryption-level-2 .system-decryption-signal-layer,
+    html.system-decryption-level-3 .system-decryption-signal-layer,
+    html.system-decryption-finalizing .system-decryption-signal-layer,
+    html.system-decryption-decrypting .system-decryption-signal-layer,
+    html.system-decryption-active .system-decryption-signal-layer {
+        animation: none !important;
+        transition: none !important;
+    }
+
+    html.system-decryption-level-1 .system-decryption-signal-layer {
+        opacity: 0.02;
+    }
+
+    html.system-decryption-level-2 .system-decryption-signal-layer {
+        opacity: 0.03;
+    }
+
+    html.system-decryption-level-3 .system-decryption-signal-layer,
+    html.system-decryption-finalizing .system-decryption-signal-layer,
+    html.system-decryption-decrypting .system-decryption-signal-layer,
+    html.system-decryption-active .system-decryption-signal-layer {
+        opacity: 0.04;
+    }
+
+    html.system-decryption-finalizing #matrix-canvas,
+    html.system-decryption-decrypting #matrix-canvas,
+    html.system-decryption-decrypted #matrix-canvas {
+        opacity: 0.72;
+        filter: brightness(1.08) contrast(1.05);
+    }
+}
+
+@keyframes decryptionSignalDetected {
+    0%, 100% {
+        opacity: 0;
+        transform: translateX(-50%) scaleX(0.2);
+    }
+
+    18%, 78% {
+        opacity: 1;
+        transform: translateX(-50%) scaleX(1);
+    }
+
+    38% {
+        transform: translateX(calc(-50% - 3px));
+    }
+
+    55% {
+        transform: translateX(calc(-50% + 3px));
+    }
+}
+
+@keyframes decryptionOverlayIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes decryptionTerminalIn {
+    from {
+        opacity: 0;
+        transform: translateY(18px) scale(0.985);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes decryptionSymbolPulse {
+    0% {
+        opacity: 0;
+        transform: scale(0.82);
+    }
+
+    35% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes decryptionSystemActive {
+    0%, 92%, 100% { transform: translateX(0); }
+    94% { transform: translateX(-2px); }
+    96% { transform: translateX(2px); }
+}
+
+@keyframes decryptionUnlockedGlow {
+    0%, 100% {
+        filter: brightness(1);
+    }
+
+    50% {
+        filter: brightness(1.16);
+    }
+}
+
+@keyframes decryptionCrash {
+    0%, 100% { transform: translate(0); }
+    25% { transform: translate(-3px, 1px); }
+    50% { transform: translate(2px, -1px); }
+    75% { transform: translate(1px, 2px); }
+}
+
+@keyframes decryptionRepair {
+    from {
+        opacity: 0.62;
+        filter: contrast(1.5);
+    }
+
+    to {
+        opacity: 1;
+        filter: none;
+    }
+}

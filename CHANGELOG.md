@@ -13,6 +13,7 @@ All notable changes to DARIO.exe are documented in this file.
 - Added a short signal/glitch transition between eras with an immediate reduced-motion alternative
 - Added a one-shot glitch response to the About, Skills, Projects and Contact links while preserving their existing hover glow
 - Added a restrained signal-ripple click response to primary 2026 action buttons, with reduced-motion and 1998-theme safeguards
+- Added a hidden, bilingual SYSTEM DECRYPTION memory game with three rounds, keyboard and touch controls, controlled Matrix escalation, a clean abort flow and an inactivity self-repair sequence
 
 ### Changed
 
@@ -27,6 +28,9 @@ All notable changes to DARIO.exe are documented in this file.
 - Replaced the remaining neon-green retro accents with teal, navy, grey, black and white
 - Prevented longer German desktop navigation labels from wrapping onto two lines
 - Limited the subtle navigation-logo signal glitch to times when the Hero section is inactive and the status dot is grey
+- Slowed the SYSTEM DECRYPTION symbol sequence for easier memorization
+- Extended the hidden SYSTEM DECRYPTION trigger to the visible release number in the project card
+- Simplified SYSTEM DECRYPTION by keeping complete symbol sequences visible, enabling input immediately and adding a persistent Matrix-based decrypted finale
 
 ---
 
