@@ -222,11 +222,7 @@ function drawMatrix() {
         ? Math.max(0.42, 1 - matrixDecryptionState.progress * 0.55)
         : 1;
     matrixContext.shadowColor = matrixCharacterColor;
-    matrixContext.shadowBlur = isEscalating
-        ? 12
-        : matrixDecryptionState.phase === "unlocked"
-            ? 6
-            : 0;
+    matrixContext.shadowBlur = isEscalating ? 12 : 0;
 
     for (let i = 0; i < drops.length; i++) {
         const text = letters[Math.floor(Math.random() * letters.length)];

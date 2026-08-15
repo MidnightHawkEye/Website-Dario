@@ -3,11 +3,13 @@ const systemDecryptionConfig = Object.freeze({
     triggerWindowMs: 3000,
     triggerRevealDelayMs: 680,
     roundLengths: Object.freeze([3, 4, 5]),
-    sequenceLeadInMs: 1520,
-    symbolStepMs: 2400,
+    failureDurationsMs: Object.freeze([10000, 15000, 20000]),
+    sequenceLeadInMs: 507,
+    symbolStepMs: 800,
     roundFeedbackMs: 1050,
     finalAccessGrantedMs: 900,
     finalDecodeStepMs: 700,
+    finalAutoCloseMs: 2000,
     inactivityTimeoutMs: 45000,
     crashCountdownSeconds: 3,
     repairDurationMs: 900
@@ -87,6 +89,23 @@ const systemDecryptionSymbolButtons = Array.from(
 const systemDecryptionRoundIndicators = Array.from(
     document.querySelectorAll("[data-decryption-round]")
 );
+const systemDecryptionAbortHint = document.querySelector(
+    ".system-decryption-abort-hint"
+);
+const systemDecryptionTextExclusionSelector = [
+    "#system-decryption-overlay",
+    "#system-decryption-signal",
+    "#system-decryption-signal-layer",
+    "script",
+    "style",
+    "noscript",
+    "template",
+    "textarea",
+    "option",
+    "[hidden]",
+    '[aria-hidden="true"]'
+].join(",");
+const systemDecryptionCorruptedTextContainers = new Set();
 
 const systemDecryptionState = {
     activeTrigger: null,
@@ -99,6 +118,7 @@ const systemDecryptionState = {
     statusKey: "decryption.ready",
     isTriggering: false,
     isOpen: false,
+    isCompletionLocked: false,
     scheduledTimeouts: new Set(),
     inactivityTimeoutId: null,
     previousFocus: null,
@@ -292,11 +312,93 @@ function playSystemDecryptionSequence() {
     );
 }
 
+function restoreSystemDecryptionPageText() {
+    systemDecryptionCorruptedTextContainers.forEach((container) => {
+        if (!container.isConnected) {
+            return;
+        }
+
+        container.replaceWith(
+            document.createTextNode(container.textContent || "")
+        );
+    });
+
+    systemDecryptionCorruptedTextContainers.clear();
+    document.body.normalize();
+}
+
+function corruptSystemDecryptionPageText() {
+    restoreSystemDecryptionPageText();
+
+    const textNodes = [];
+    const walker = document.createTreeWalker(
+        document.body,
+        NodeFilter.SHOW_TEXT,
+        {
+            acceptNode(node) {
+                const parent = node.parentElement;
+
+                if (
+                    !parent ||
+                    !node.nodeValue?.trim() ||
+                    parent.closest(systemDecryptionTextExclusionSelector)
+                ) {
+                    return NodeFilter.FILTER_REJECT;
+                }
+
+                return NodeFilter.FILTER_ACCEPT;
+            }
+        }
+    );
+
+    while (walker.nextNode()) {
+        textNodes.push(walker.currentNode);
+    }
+
+    let characterIndex = 0;
+
+    textNodes.forEach((textNode) => {
+        const textContainer = document.createElement("span");
+        textContainer.className = "decryption-corrupt-text";
+
+        textNode.nodeValue.split(/(\s+)/u).forEach((segment) => {
+            if (!segment || /\s/u.test(segment)) {
+                textContainer.append(document.createTextNode(segment));
+                return;
+            }
+
+            const word = document.createElement("span");
+            word.className = "decryption-corrupt-word";
+
+            Array.from(segment).forEach((character) => {
+                const span = document.createElement("span");
+                span.className = [
+                    "decryption-corrupt-character",
+                    `decryption-corrupt-character--${characterIndex % 4}`
+                ].join(" ");
+                span.style.setProperty(
+                    "--corruption-index",
+                    String(characterIndex % 41)
+                );
+                span.textContent = character;
+                word.append(span);
+                characterIndex += 1;
+            });
+
+            textContainer.append(word);
+        });
+
+        systemDecryptionCorruptedTextContainers.add(textContainer);
+        textNode.replaceWith(textContainer);
+    });
+}
+
 function startSystemDecryptionRound() {
     const sequenceLength = systemDecryptionConfig.roundLengths[
         systemDecryptionState.currentRound
     ];
 
+    restoreSystemDecryptionPageText();
     systemDecryptionState.phase = "showing";
     systemDecryptionState.currentSequence =
         getRandomSystemDecryptionSequence(sequenceLength);
@@ -308,6 +410,9 @@ function startSystemDecryptionRound() {
         getSystemDecryptionText("decryption.sequenceLabel")
     );
     systemDecryptionSequenceDisplay.classList.remove("is-visible");
+    systemDecryptionHtmlElement.classList.remove(
+        "system-decryption-failed"
+    );
     systemDecryptionTerminal.classList.remove("is-failed");
     setSystemDecryptionStatus("decryption.memorize");
     setSystemDecryptionControlsEnabled(false);
@@ -317,17 +422,36 @@ function startSystemDecryptionRound() {
 }
 
 function failSystemDecryptionRound() {
-    systemDecryptionState.phase = "feedback";
+    const failureDuration = systemDecryptionConfig.failureDurationsMs[
+        systemDecryptionState.currentRound
+    ];
+
+    systemDecryptionState.phase = "failed";
     systemDecryptionState.inputSequence = [];
     systemDecryptionInputDisplay.textContent = "";
+    cancelSystemDecryptionTask(
+        systemDecryptionState.inactivityTimeoutId
+    );
+    systemDecryptionState.inactivityTimeoutId = null;
     setSystemDecryptionControlsEnabled(false);
     setSystemDecryptionStatus("decryption.failed", "error");
+    systemDecryptionHtmlElement.classList.add(
+        "system-decryption-failed"
+    );
     systemDecryptionTerminal.classList.add("is-failed");
+    setSystemDecryptionBackgroundInert(false);
+    corruptSystemDecryptionPageText();
 
     scheduleSystemDecryptionTask(() => {
+        systemDecryptionHtmlElement.classList.remove(
+            "system-decryption-failed"
+        );
         systemDecryptionTerminal.classList.remove("is-failed");
+        restoreSystemDecryptionPageText();
+        setSystemDecryptionBackgroundInert(true);
+        systemDecryptionTerminal.focus({ preventScroll: true });
         startSystemDecryptionRound();
-    }, systemDecryptionConfig.roundFeedbackMs);
+    }, failureDuration);
 }
 
 function completeSystemDecryptionFinal() {
@@ -345,7 +469,11 @@ function completeSystemDecryptionFinal() {
         "system-decryption-decrypted"
     );
     updateSystemDecryptionMatrix("unlocked", 1);
-    systemDecryptionCloseButton.focus({ preventScroll: true });
+
+    scheduleSystemDecryptionTask(
+        closeCompletedSystemDecryption,
+        systemDecryptionConfig.finalAutoCloseMs
+    );
 }
 
 function beginSystemDecryptionDecode() {
@@ -373,6 +501,7 @@ function beginSystemDecryptionDecode() {
 
 function activateSystemDecryptionFinal() {
     systemDecryptionState.phase = "finalizing";
+    systemDecryptionState.isCompletionLocked = true;
     systemDecryptionState.completedRounds = 3;
     cancelSystemDecryptionTask(
         systemDecryptionState.inactivityTimeoutId
@@ -390,7 +519,8 @@ function activateSystemDecryptionFinal() {
     systemDecryptionFinal.setAttribute("aria-live", "polite");
     systemDecryptionFinalTitle.textContent = "";
     systemDecryptionFinalTitle.classList.remove("is-unlocked");
-    systemDecryptionCloseButton.hidden = false;
+    systemDecryptionCloseButton.hidden = true;
+    systemDecryptionAbortHint.hidden = true;
     systemDecryptionTerminal.focus({ preventScroll: true });
     updateSystemDecryptionMatrix("escalate", 0);
 
@@ -491,6 +621,7 @@ function openSystemDecryption() {
     if (systemDecryptionState.phase === "complete") {
         systemDecryptionState.isTriggering = false;
         systemDecryptionState.isOpen = true;
+        systemDecryptionState.isCompletionLocked = false;
         systemDecryptionState.previousFocus = document.activeElement;
 
         systemDecryptionSignal.hidden = true;
@@ -498,6 +629,7 @@ function openSystemDecryption() {
         systemDecryptionOverlay.hidden = false;
         systemDecryptionOverlay.setAttribute("aria-hidden", "false");
         systemDecryptionCloseButton.hidden = false;
+        systemDecryptionAbortHint.hidden = false;
         systemDecryptionGame.hidden = true;
         systemDecryptionFinal.hidden = false;
         systemDecryptionFinalTitle.textContent = getSystemDecryptionText(
@@ -518,6 +650,7 @@ function openSystemDecryption() {
     updateSystemDecryptionMatrix("reset", 0);
     systemDecryptionState.isTriggering = false;
     systemDecryptionState.isOpen = true;
+    systemDecryptionState.isCompletionLocked = false;
     systemDecryptionState.phase = "opening";
     systemDecryptionState.currentRound = 0;
     systemDecryptionState.completedRounds = 0;
@@ -530,6 +663,7 @@ function openSystemDecryption() {
     systemDecryptionOverlay.hidden = false;
     systemDecryptionOverlay.setAttribute("aria-hidden", "false");
     systemDecryptionCloseButton.hidden = false;
+    systemDecryptionAbortHint.hidden = false;
     systemDecryptionGame.hidden = false;
     systemDecryptionFinal.hidden = true;
     systemDecryptionFinalTitle.textContent = getSystemDecryptionText(
@@ -558,6 +692,7 @@ function resetSystemDecryption() {
     const focusTarget = systemDecryptionState.previousFocus;
 
     clearSystemDecryptionTasks();
+    restoreSystemDecryptionPageText();
     systemDecryptionState.clickTimes = [];
     systemDecryptionState.completedRounds = 0;
     systemDecryptionState.currentRound = 0;
@@ -567,6 +702,7 @@ function resetSystemDecryption() {
     systemDecryptionState.statusKey = "decryption.ready";
     systemDecryptionState.isTriggering = false;
     systemDecryptionState.isOpen = false;
+    systemDecryptionState.isCompletionLocked = false;
     systemDecryptionState.previousFocus = null;
 
     systemDecryptionState.activeTrigger?.classList.remove("is-detected");
@@ -575,6 +711,7 @@ function resetSystemDecryption() {
     systemDecryptionOverlay.hidden = true;
     systemDecryptionOverlay.setAttribute("aria-hidden", "true");
     systemDecryptionCloseButton.hidden = false;
+    systemDecryptionAbortHint.hidden = false;
     systemDecryptionGame.hidden = false;
     systemDecryptionFinal.hidden = true;
     systemDecryptionCrash.hidden = true;
@@ -601,6 +738,7 @@ function resetSystemDecryption() {
         "system-decryption-finalizing",
         "system-decryption-decrypting",
         "system-decryption-decrypted",
+        "system-decryption-failed",
         "system-decryption-crashing",
         "system-decryption-repairing",
         "system-decryption-level-1",
@@ -708,43 +846,44 @@ function handleSystemDecryptionTrigger(trigger) {
     }
 }
 
-function handleSystemDecryptionTriggerKeydown(event, trigger) {
-    if (!isSystemDecryptionActivationKey(event)) {
-        return;
+function closeCompletedSystemDecryption() {
+    const focusTarget = systemDecryptionState.previousFocus;
+
+    clearSystemDecryptionTasks();
+    systemDecryptionState.clickTimes = [];
+    systemDecryptionState.isTriggering = false;
+    systemDecryptionState.isOpen = false;
+    systemDecryptionState.isCompletionLocked = false;
+    systemDecryptionState.previousFocus = null;
+    systemDecryptionState.activeTrigger?.classList.remove(
+        "is-detected"
+    );
+    systemDecryptionState.activeTrigger = null;
+    systemDecryptionSignal.hidden = true;
+    systemDecryptionOverlay.hidden = true;
+    systemDecryptionOverlay.setAttribute("aria-hidden", "true");
+    setSystemDecryptionBackgroundInert(false);
+    systemDecryptionHtmlElement.classList.remove(
+        "system-decryption-open"
+    );
+
+    if (focusTarget instanceof HTMLElement) {
+        focusTarget.focus({ preventScroll: true });
     }
-
-    event.preventDefault();
-    handleSystemDecryptionTrigger(trigger);
-}
-
-function isSystemDecryptionActivationKey(event) {
-    return ["Enter", " ", "Spacebar"].includes(event.key);
 }
 
 function abortSystemDecryption() {
+    if (
+        systemDecryptionState.isCompletionLocked ||
+        ["finalizing", "decrypting"].includes(
+            systemDecryptionState.phase
+        )
+    ) {
+        return;
+    }
+
     if (systemDecryptionState.phase === "complete") {
-        const focusTarget = systemDecryptionState.previousFocus;
-
-        clearSystemDecryptionTasks();
-        systemDecryptionState.clickTimes = [];
-        systemDecryptionState.isTriggering = false;
-        systemDecryptionState.isOpen = false;
-        systemDecryptionState.previousFocus = null;
-        systemDecryptionState.activeTrigger?.classList.remove(
-            "is-detected"
-        );
-        systemDecryptionState.activeTrigger = null;
-        systemDecryptionSignal.hidden = true;
-        systemDecryptionOverlay.hidden = true;
-        systemDecryptionOverlay.setAttribute("aria-hidden", "true");
-        setSystemDecryptionBackgroundInert(false);
-        systemDecryptionHtmlElement.classList.remove(
-            "system-decryption-open"
-        );
-
-        if (focusTarget instanceof HTMLElement) {
-            focusTarget.focus({ preventScroll: true });
-        }
+        closeCompletedSystemDecryption();
         return;
     }
 
@@ -784,10 +923,6 @@ systemDecryptionTriggers.forEach((trigger) => {
     trigger.addEventListener("click", () => {
         handleSystemDecryptionTrigger(trigger);
     });
-
-    trigger.addEventListener("keydown", (event) => {
-        handleSystemDecryptionTriggerKeydown(event, trigger);
-    });
 });
 
 systemDecryptionCloseButton.addEventListener(
@@ -795,26 +930,8 @@ systemDecryptionCloseButton.addEventListener(
     abortSystemDecryption
 );
 
-systemDecryptionCloseButton.addEventListener("keydown", (event) => {
-    if (!isSystemDecryptionActivationKey(event)) {
-        return;
-    }
-
-    event.preventDefault();
-    abortSystemDecryption();
-});
-
 systemDecryptionSymbolButtons.forEach((button) => {
     button.addEventListener("click", () => {
-        handleSystemDecryptionSymbol(button);
-    });
-
-    button.addEventListener("keydown", (event) => {
-        if (!isSystemDecryptionActivationKey(event)) {
-            return;
-        }
-
-        event.preventDefault();
         handleSystemDecryptionSymbol(button);
     });
 });
@@ -855,6 +972,10 @@ document.addEventListener("languagechange", () => {
         systemDecryptionFinalTitle.textContent = getSystemDecryptionText(
             "decryption.activeTitle"
         );
+    }
+
+    if (systemDecryptionState.phase === "failed") {
+        corruptSystemDecryptionPageText();
     }
 });
 
