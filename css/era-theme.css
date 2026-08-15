@@ -10,103 +10,551 @@
     --era-retro-matrix: #000080;
     --era-retro-accent: #ffffff;
     --era-retro-accent-rgb: 255, 255, 255;
-    --era-transition-dark: rgba(0, 0, 0, 0.94);
-    --era-transition-signal: rgba(0, 255, 136, 0.24);
+    --era-transition-signal: 0, 255, 136;
+    --era-transition-panel: rgba(0, 12, 8, 0.76);
+    --era-transition-duration: 1.85s;
+    --era-transition-scanline-duration: 1.25s;
+    --era-transition-scanline-delay: 0.2s;
+    --era-transition-glitch-offset: 2px;
 }
 
 /*==================================================
                 TIME TRAVEL TRANSITION
 ==================================================*/
 
+html.era-transition,
+html.era-transition body {
+    overflow-x: clip;
+}
+
 html.era-transition::before,
 html.era-transition::after {
     position: fixed;
-    inset: 0;
-    z-index: 30000;
     pointer-events: none;
 }
 
 html.era-transition::before {
     content: "";
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 30001;
+    height: clamp(3px, 0.45vw, 6px);
     background:
-        repeating-linear-gradient(
-            0deg,
-            transparent 0 3px,
-            var(--era-transition-signal) 3px 5px
-        ),
-        var(--era-transition-dark);
-    animation: eraSignalShift 0.72s steps(6, end) both;
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(var(--era-transition-signal), 0.72) 12%,
+            rgba(255, 255, 255, 0.96) 50%,
+            rgba(var(--era-transition-signal), 0.72) 88%,
+            transparent
+        );
+    box-shadow:
+        0 -55vh 0 55vh rgba(var(--era-transition-signal), 0.035),
+        0 0 10px rgba(var(--era-transition-signal), 0.9),
+        0 0 24px rgba(var(--era-transition-signal), 0.42);
+    transform: translateY(-10vh);
+    animation-duration: var(--era-transition-scanline-duration);
+    animation-delay: var(--era-transition-scanline-delay);
+    animation-timing-function: cubic-bezier(0.36, 0, 0.22, 1);
+    animation-fill-mode: both;
 }
 
 html.era-transition::after {
-    content: "TEMPORAL SIGNAL // " attr(data-era-target);
+    content: "";
+    inset: 0;
+    z-index: 29999;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent 0 4px,
+        rgba(var(--era-transition-signal), 0.055) 4px 5px
+    );
+    opacity: 0.38;
+    animation: eraTravelTexture var(--era-transition-duration)
+        steps(2, end) both;
+}
+
+html.era-transition-to-modern::before {
+    animation-name: eraMigrationScanline;
+}
+
+html.era-transition-to-retro {
+    --era-transition-signal: 0, 0, 128;
+    --era-transition-panel: rgba(192, 192, 192, 0.9);
+}
+
+html.era-transition-to-retro::before {
+    background: repeating-linear-gradient(
+        90deg,
+        var(--era-retro-window-light) 0 12px,
+        var(--era-retro-title) 12px 18px,
+        var(--era-retro-window-mid) 18px 28px
+    );
+    box-shadow:
+        0 -55vh 0 55vh rgba(0, 0, 128, 0.035),
+        0 0 8px rgba(255, 255, 255, 0.72),
+        0 0 18px rgba(0, 0, 128, 0.5);
+    animation-name: eraRollbackScanline;
+}
+
+html.era-transition-to-retro::after {
+    background: repeating-linear-gradient(
+        0deg,
+        transparent 0 3px,
+        rgba(0, 0, 128, 0.11) 3px 4px
+    );
+    opacity: 0.5;
+}
+
+.era-time-counter {
+    position: fixed;
+    inset: 0;
+    z-index: 30002;
     display: grid;
-    place-items: center;
+    place-content: center;
+    justify-items: center;
+    gap: clamp(10px, 2vh, 22px);
+    padding: 24px;
     color: var(--color-accent);
     font-family: monospace;
-    font-size: clamp(1rem, 3vw, 1.8rem);
-    font-weight: 700;
-    letter-spacing: clamp(2px, 0.8vw, 7px);
+    text-align: center;
+    pointer-events: none;
+    animation: eraCounterFrame var(--era-transition-duration)
+        steps(1, end) both;
+}
+
+.era-time-counter__year {
+    font-size: clamp(4rem, 16vw, 10rem);
+    font-weight: 800;
+    line-height: 0.86;
+    letter-spacing: clamp(4px, 1.2vw, 18px);
     text-shadow:
-        -3px 0 rgba(var(--color-accent-rgb), 0.75),
-        3px 0 rgba(var(--color-accent-rgb), 0.45),
-        0 0 18px var(--color-accent);
-    animation: eraSignalText 0.72s steps(4, end) both;
+        calc(var(--era-transition-glitch-offset) * -1) 0
+            rgba(var(--color-accent-rgb), 0.62),
+        var(--era-transition-glitch-offset) 0 rgba(255, 255, 255, 0.44),
+        0 0 28px rgba(var(--era-transition-signal), 0.68);
+    animation: eraCounterGlitch 145ms steps(2, end) infinite;
 }
 
-html.era-transition[data-era-target="1998"] {
-    --era-transition-signal: rgba(0, 0, 128, 0.34);
+.era-time-counter__status {
+    max-width: min(88vw, 760px);
+    padding: 10px 16px;
+    border: 1px solid rgba(var(--era-transition-signal), 0.62);
+    background: var(--era-transition-panel);
+    font-size: clamp(0.78rem, 2.2vw, 1.2rem);
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: clamp(1px, 0.45vw, 5px);
+    text-shadow: 0 0 12px currentColor;
 }
 
-html.era-transition[data-era-target="1998"]::after {
+.era-time-counter.is-target .era-time-counter__year {
+    transform: scale(1.08);
+    text-shadow:
+        -2px 0 rgba(var(--color-accent-rgb), 0.75),
+        2px 0 rgba(255, 255, 255, 0.68),
+        0 0 42px rgba(var(--era-transition-signal), 0.92);
+    animation: eraCounterTargetLock 350ms ease-out both;
+}
+
+html.era-transition-to-retro .era-time-counter {
     color: var(--era-retro-window-light);
+}
+
+html.era-transition-to-retro .era-time-counter__year {
     text-shadow:
         -3px 0 var(--era-retro-title),
-        3px 0 var(--era-retro-window-light),
-        0 0 18px var(--era-retro-title);
+        3px 0 var(--era-retro-window-dark),
+        0 0 18px rgba(0, 0, 128, 0.55);
 }
 
-@keyframes eraSignalShift {
+html.era-transition-to-retro .era-time-counter__status {
+    border: 2px solid;
+    border-color:
+        var(--era-retro-window-light)
+        var(--era-retro-window-dark)
+        var(--era-retro-window-dark)
+        var(--era-retro-window-light);
+    background: var(--era-retro-window);
+    color: var(--era-retro-ink);
+    text-shadow: none;
+    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.38);
+}
+
+html.era-transition .era-switcher {
+    position: relative;
+    isolation: isolate;
+}
+
+html.era-transition .era-switcher[data-era-travel-year]::after {
+    content: attr(data-era-travel-year);
+    position: absolute;
+    inset: -1px;
+    z-index: 4;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(var(--era-transition-signal), 0.62);
+    border-radius: inherit;
+    background: var(--era-transition-panel);
+    color: var(--color-accent);
+    font-family: monospace;
+    font-size: clamp(0.55rem, 0.8vw, 0.68rem);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+    text-shadow: 0 0 8px currentColor;
+    animation: eraSliderSignal 145ms steps(2, end) infinite;
+}
+
+html.era-transition-to-retro
+    .era-switcher[data-era-travel-year]::after {
+    border-radius: 0;
+    border-color:
+        var(--era-retro-window-light)
+        var(--era-retro-window-dark)
+        var(--era-retro-window-dark)
+        var(--era-retro-window-light);
+    background: var(--era-retro-window);
+    color: var(--era-retro-ink);
+    text-shadow: none;
+}
+
+html.era-transition .era-switcher.is-era-target::after {
+    animation: none;
+    filter: brightness(1.18);
+}
+
+html.era-transition :where(
+    body,
+    .site-header,
+    .logo,
+    .language-switcher,
+    .era-switcher,
+    .menu-toggle,
+    .stat-card,
+    .skill-card,
+    .project-card,
+    .project-terminal,
+    .contact-form,
+    .contact-form input,
+    .contact-form textarea,
+    .hero-button,
+    .project-action-button,
+    .contact-button,
+    .return-button,
+    .site-footer
+) {
+    transition:
+        color 0.82s ease,
+        background-color 0.82s ease,
+        border-color 0.82s ease,
+        border-radius 0.82s ease,
+        box-shadow 0.82s ease,
+        text-shadow 0.82s ease,
+        filter 0.82s ease,
+        opacity 0.82s ease;
+}
+
+html.era-transition:not(.era-transition-reduced) :where(
+    .site-header,
+    .logo,
+    .language-switcher,
+    .era-switcher,
+    .menu-toggle,
+    .stat-card,
+    .skill-card,
+    .project-card,
+    .project-terminal,
+    .contact-form,
+    .hero-button,
+    .project-action-button,
+    .contact-button,
+    .return-button,
+    .site-footer
+) {
+    will-change: transform, opacity, filter;
+    animation-duration: 1.32s;
+    animation-timing-function: steps(1, end);
+    animation-fill-mode: both;
+}
+
+html.era-transition-to-modern:not(.era-transition-reduced) :where(
+    .site-header,
+    .logo,
+    .language-switcher,
+    .era-switcher,
+    .menu-toggle,
+    .stat-card,
+    .skill-card,
+    .project-card,
+    .project-terminal,
+    .contact-form,
+    .hero-button,
+    .project-action-button,
+    .contact-button,
+    .return-button,
+    .site-footer
+) {
+    animation-name: eraMigrateInterface;
+}
+
+html.era-transition-to-retro:not(.era-transition-reduced) :where(
+    .site-header,
+    .logo,
+    .language-switcher,
+    .era-switcher,
+    .menu-toggle,
+    .stat-card,
+    .skill-card,
+    .project-card,
+    .project-terminal,
+    .contact-form,
+    .hero-button,
+    .project-action-button,
+    .contact-button,
+    .return-button,
+    .site-footer
+) {
+    animation-name: eraRollbackInterface;
+}
+
+html.era-transition:not(.era-transition-reduced) :where(
+    .stat-card:nth-child(even),
+    .skill-card:nth-child(even),
+    .project-terminal,
+    .contact-form,
+    .site-footer
+) {
+    animation-delay: 70ms;
+}
+
+html.era-transition-to-modern:not(.era-transition-reduced) #matrix-canvas {
+    opacity: 0.14;
+    filter: blur(2px);
+    transform: scale(1);
+    animation: none;
+}
+
+html.era-transition-to-retro:not(.era-transition-reduced) #matrix-canvas {
+    animation: eraMatrixRollback var(--era-transition-duration)
+        steps(1, end) both;
+}
+
+@keyframes eraMigrationScanline {
     0% {
         opacity: 0;
-        transform: scaleY(0.03);
+        transform: translateY(-10vh);
     }
 
-    18% {
-        opacity: 1;
-        transform: scaleY(1);
+    7% {
+        opacity: 0.92;
     }
 
-    42% {
-        transform: translateX(-2%) skewX(-2deg);
-    }
-
-    64% {
-        transform: translateX(2%) skewX(2deg);
+    94% {
+        opacity: 0.86;
     }
 
     100% {
         opacity: 0;
-        transform: scaleY(0.02);
+        transform: translateY(110vh);
     }
 }
 
-@keyframes eraSignalText {
-    0%, 15%, 100% {
+@keyframes eraRollbackScanline {
+    0% {
         opacity: 0;
-        transform: translateX(0);
+        transform: translateY(-10vh) scaleY(1.4);
     }
 
-    25%, 72% {
+    9%, 13%, 38%, 42%, 72%, 76% {
+        opacity: 0.94;
+    }
+
+    11%, 40%, 74% {
+        opacity: 0.56;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(110vh) scaleY(1.4);
+    }
+}
+
+@keyframes eraTravelTexture {
+    0%, 100% {
+        opacity: 0;
+        background-position: 0 0;
+    }
+
+    7%, 92% {
+        opacity: 0.42;
+    }
+
+    32% {
+        background-position: 0 2px;
+    }
+
+    68% {
+        background-position: 0 4px;
+    }
+}
+
+@keyframes eraCounterFrame {
+    0%, 100% {
+        opacity: 0;
+    }
+
+    4%, 96% {
+        opacity: 1;
+    }
+}
+
+@keyframes eraCounterGlitch {
+    0%, 100% {
+        transform: translateX(0) skewX(0);
         opacity: 1;
     }
 
-    40% {
-        transform: translateX(-8px);
+    36% {
+        transform: translateX(calc(var(--era-transition-glitch-offset) * -1))
+            skewX(-0.5deg);
+        opacity: 0.92;
     }
 
-    58% {
-        transform: translateX(8px);
+    64% {
+        transform: translateX(var(--era-transition-glitch-offset))
+            skewX(0.5deg);
+        opacity: 1;
+    }
+}
+
+@keyframes eraCounterTargetLock {
+    0% {
+        transform: scale(0.96);
+        filter: brightness(1.8);
+    }
+
+    55% {
+        transform: scale(1.12);
+    }
+
+    100% {
+        transform: scale(1.08);
+        filter: none;
+    }
+}
+
+@keyframes eraSliderSignal {
+    0%, 100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    50% {
+        opacity: 0.82;
+        transform: translateX(var(--era-transition-glitch-offset));
+    }
+}
+
+@keyframes eraMigrateInterface {
+    0%, 100% {
+        transform: translateX(0) skewX(0);
+        opacity: 1;
+        filter: none;
+    }
+
+    18% {
+        transform: translateX(-2px) skewX(-0.4deg);
+        opacity: 0.96;
+        filter: contrast(1.08);
+    }
+
+    23% {
+        transform: translateX(3px) skewX(0.6deg);
+        opacity: 0.9;
+        filter: contrast(1.18);
+    }
+
+    28%, 54% {
+        transform: translateX(0) skewX(0);
+        opacity: 1;
+        filter: none;
+    }
+
+    59% {
+        transform: translateX(-3px) skewX(-0.5deg);
+        opacity: 0.92;
+        filter: brightness(1.12);
+    }
+
+    64% {
+        transform: translateX(2px) skewX(0.35deg);
+        opacity: 0.97;
+        filter: contrast(1.12);
+    }
+}
+
+@keyframes eraRollbackInterface {
+    0%, 100% {
+        transform: translateX(0) skewX(0);
+        opacity: 1;
+        filter: none;
+    }
+
+    16% {
+        transform: translateX(2px) skewX(0.45deg);
+        opacity: 0.94;
+        filter: brightness(1.12);
+    }
+
+    21% {
+        transform: translateX(-3px) skewX(-0.7deg);
+        opacity: 0.88;
+        filter: contrast(1.2);
+    }
+
+    27%, 50% {
+        transform: translateX(0) skewX(0);
+        opacity: 1;
+        filter: none;
+    }
+
+    55% {
+        transform: translateX(3px) skewX(0.55deg);
+        opacity: 0.91;
+        filter: contrast(1.16);
+    }
+
+    61% {
+        transform: translateX(-2px) skewX(-0.4deg);
+        opacity: 0.96;
+        filter: brightness(0.9);
+    }
+}
+
+@keyframes eraMatrixRollback {
+    0% {
+        opacity: 0.15;
+        filter: blur(2px);
+        transform: scale(1);
+    }
+
+    30% {
+        opacity: 0.34;
+        filter: blur(1px) contrast(1.18);
+        transform: scaleX(1.006);
+    }
+
+    64% {
+        opacity: 0.5;
+        filter: contrast(1.22);
+        transform: scaleX(1.01);
+    }
+
+    100% {
+        opacity: 0.42;
+        filter: none;
+        transform: scale(1);
     }
 }
 
@@ -434,5 +882,42 @@ html[data-era="1998"] .footer-version {
     html.era-transition::after {
         display: none !important;
         animation: none !important;
+    }
+
+    .era-time-counter,
+    .era-time-counter__year,
+    .era-time-counter__status,
+    html.era-transition .era-switcher[data-era-travel-year]::after {
+        animation: none !important;
+        opacity: 1;
+        transform: none;
+    }
+
+    .era-time-counter__year,
+    .era-time-counter__status {
+        transition: opacity 0.18s ease;
+    }
+
+    html.era-transition :where(
+        .site-header,
+        .logo,
+        .language-switcher,
+        .era-switcher,
+        .menu-toggle,
+        .stat-card,
+        .skill-card,
+        .project-card,
+        .project-terminal,
+        .contact-form,
+        .hero-button,
+        .project-action-button,
+        .contact-button,
+        .return-button,
+        .site-footer,
+        #matrix-canvas
+    ) {
+        animation: none !important;
+        transition-duration: 0.35s !important;
+        will-change: auto;
     }
 }

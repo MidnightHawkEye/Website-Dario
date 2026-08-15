@@ -558,6 +558,11 @@ html.system-decryption-failed .system-decryption-signal-layer {
     animation: none;
 }
 
+html.system-decryption-failed #matrix-canvas {
+    transform-origin: center;
+    animation: decryptionMatrixCorrupt 3.2s steps(1, end) infinite;
+}
+
 html.system-decryption-failed .decryption-corrupt-word {
     display: inline-block;
     white-space: nowrap;
@@ -721,6 +726,7 @@ html.system-decryption-failed .about-image-wrapper .status-badge {
     .system-decryption-sequence.is-visible,
     .system-decryption-final strong,
     .decryption-corrupt-character,
+    html.system-decryption-failed #matrix-canvas,
     html.system-decryption-failed .about-image-wrapper img,
     html.system-decryption-failed .about-image-wrapper::after,
     html.system-decryption-failed .era-switcher,
@@ -775,6 +781,13 @@ html.system-decryption-failed .about-image-wrapper .status-badge {
 
     html.system-decryption-failed .system-decryption-signal-layer {
         opacity: 0.04;
+    }
+
+    html.system-decryption-failed #matrix-canvas {
+        transform: scale(1.01) skewX(-0.3deg);
+        clip-path: inset(0 0 2% 0);
+        opacity: 0.42;
+        filter: contrast(1.2) brightness(0.82);
     }
 
     html.system-decryption-failed
@@ -967,6 +980,78 @@ html.system-decryption-failed .about-image-wrapper .status-badge {
     100% {
         opacity: 0;
         transform: translateY(115vh) rotate(7deg);
+    }
+}
+
+@keyframes decryptionMatrixCorrupt {
+    0%, 100% {
+        transform: translate(0) skewX(0) scale(1.02);
+        clip-path: inset(0);
+        opacity: 0.5;
+        filter: blur(2px) brightness(0.9) contrast(1.2);
+    }
+
+    8% {
+        transform: translateX(-1.2%) skewX(-0.7deg) scale(1.025);
+        clip-path: inset(0 0 62% 0);
+        opacity: 0.3;
+        filter: blur(0.8px) brightness(0.58) contrast(1.65);
+    }
+
+    11% {
+        transform: translateX(0.8%) skewX(0.45deg) scale(1.025);
+        clip-path: inset(38% 0 0 0);
+        opacity: 0.72;
+        filter: blur(1px) brightness(1.18) contrast(1.42);
+    }
+
+    14% {
+        transform: translate(0) skewX(0) scale(1.02);
+        clip-path: inset(0);
+        opacity: 0.46;
+        filter: blur(2px) brightness(0.86) contrast(1.28);
+    }
+
+    31% {
+        transform: translateX(1.1%) skewY(0.35deg) scale(1.025);
+        clip-path: inset(22% 0 35% 0);
+        opacity: 0.2;
+        filter: blur(0.5px) brightness(0.52) contrast(1.72);
+    }
+
+    35% {
+        transform: translateX(-0.5%) skewX(-0.3deg) scale(1.02);
+        clip-path: inset(0);
+        opacity: 0.64;
+        filter: blur(1.4px) brightness(1.08) contrast(1.38);
+    }
+
+    54% {
+        transform: translateY(0.9%) skewX(0.55deg) scaleX(1.03) scaleY(0.97);
+        clip-path: inset(8% 0 12% 0);
+        opacity: 0.34;
+        filter: blur(0.7px) brightness(0.68) contrast(1.58);
+    }
+
+    58% {
+        transform: translate(0) skewX(0) scale(1.02);
+        clip-path: inset(0);
+        opacity: 0.52;
+        filter: blur(2px) brightness(0.92) contrast(1.24);
+    }
+
+    77% {
+        transform: translateX(-0.9%) skewX(-0.5deg) scale(1.025);
+        clip-path: inset(48% 0 18% 0);
+        opacity: 0.26;
+        filter: blur(0.6px) brightness(0.6) contrast(1.7);
+    }
+
+    81% {
+        transform: translateX(0.4%) skewX(0.25deg) scale(1.02);
+        clip-path: inset(0);
+        opacity: 0.68;
+        filter: blur(1px) brightness(1.14) contrast(1.4);
     }
 }
 

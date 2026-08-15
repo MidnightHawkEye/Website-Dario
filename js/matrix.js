@@ -6,6 +6,7 @@ const matrixResetThreshold = 0.975;
 const matrixIntervalMs = 45;
 const matrixDecryptionIntervalMs = 18;
 const matrixUnlockedIntervalMs = matrixDecryptionIntervalMs;
+const matrixRollbackIntervalMs = 68;
 const matrixDecryptionPhrases = Object.freeze([
     "SYSTEM ONLINE",
     "DECRYPTION COMPLETE",
@@ -18,6 +19,7 @@ const drops = [];
 let matrixCharacterColor = "#00ff88";
 let matrixTrailColor = "rgba(0,0,0,0.08)";
 let matrixActiveIntervalMs = matrixIntervalMs;
+let matrixEraTransitionMode = "idle";
 const matrixDecryptionState = {
     phase: "normal",
     progress: 0,
@@ -58,6 +60,16 @@ function resizeMatrixCanvas() {
 resizeMatrixCanvas();
 
 function getMatrixTrailColor() {
+    if (matrixEraTransitionMode === "to-modern") {
+        return "rgba(0,0,0,0.08)";
+    }
+
+    if (matrixEraTransitionMode === "to-retro") {
+        return document.documentElement.dataset.era === "1998"
+            ? "rgba(0,128,128,0.18)"
+            : "rgba(0,0,0,0.12)";
+    }
+
     if (!["escalate", "decrypt", "unlocked"].includes(
         matrixDecryptionState.phase
     )) {
@@ -206,6 +218,7 @@ function drawMatrix() {
     const isEscalating = ["escalate", "decrypt", "unlocked"].includes(
         matrixDecryptionState.phase
     );
+    const isRollingBack = matrixEraTransitionMode === "to-retro";
 
     matrixDecryptionState.frame += 1;
     matrixContext.save();
@@ -217,12 +230,14 @@ function drawMatrix() {
         matrixCanvas.height
     );
     matrixContext.fillStyle = matrixCharacterColor;
-    matrixContext.font = matrixFontSizePx + "px monospace";
+    matrixContext.font = `${isRollingBack ? 18 : matrixFontSizePx}px monospace`;
     matrixContext.globalAlpha = matrixDecryptionState.phase === "decrypt"
         ? Math.max(0.42, 1 - matrixDecryptionState.progress * 0.55)
-        : 1;
+        : isRollingBack ? 0.76 : 1;
     matrixContext.shadowColor = matrixCharacterColor;
-    matrixContext.shadowBlur = isEscalating ? 12 : 0;
+    matrixContext.shadowBlur = isEscalating
+        ? 12
+        : 0;
 
     for (let i = 0; i < drops.length; i++) {
         const text = letters[Math.floor(Math.random() * letters.length)];
@@ -307,6 +322,24 @@ function restartMatrixAnimation() {
     startMatrixAnimation();
 }
 
+function getMatrixActiveInterval() {
+    if (matrixEraTransitionMode === "to-modern") {
+        return matrixIntervalMs;
+    }
+
+    if (matrixEraTransitionMode === "to-retro") {
+        return matrixRollbackIntervalMs;
+    }
+
+    if (matrixDecryptionState.phase === "normal") {
+        return matrixIntervalMs;
+    }
+
+    return matrixDecryptionState.phase === "unlocked"
+        ? matrixUnlockedIntervalMs
+        : matrixDecryptionIntervalMs;
+}
+
 function updateMatrixMotionPreference(event) {
     if (event.matches) {
         stopMatrixAnimation();
@@ -335,6 +368,32 @@ window.addEventListener("dario:era-change", () => {
     }
 });
 
+window.addEventListener("dario:era-transition", (event) => {
+    const isActive = event.detail?.active === true;
+    const direction = event.detail?.direction;
+
+    matrixEraTransitionMode = isActive && [
+        "to-modern",
+        "to-retro"
+    ].includes(direction)
+        ? direction
+        : "idle";
+
+    if (matrixEraTransitionMode === "to-modern") {
+        const styles = getComputedStyle(document.documentElement);
+
+        matrixCharacterColor = styles
+            .getPropertyValue("--color-accent")
+            .trim() || "#00ff88";
+        matrixTrailColor = "rgba(0,0,0,0.08)";
+    } else {
+        updateMatrixPalette();
+    }
+
+    matrixActiveIntervalMs = getMatrixActiveInterval();
+    restartMatrixAnimation();
+});
+
 window.addEventListener("dario:matrix-decryption", (event) => {
     const phase = event.detail?.phase;
     const progress = Number(event.detail?.progress) || 0;
@@ -343,7 +402,7 @@ window.addEventListener("dario:matrix-decryption", (event) => {
         matrixDecryptionState.phase = "normal";
         matrixDecryptionState.progress = 0;
         matrixDecryptionState.frame = 0;
-        matrixActiveIntervalMs = matrixIntervalMs;
+        matrixActiveIntervalMs = getMatrixActiveInterval();
         restartMatrixAnimation();
         return;
     }
@@ -354,9 +413,7 @@ window.addEventListener("dario:matrix-decryption", (event) => {
 
     matrixDecryptionState.phase = phase;
     matrixDecryptionState.progress = Math.max(0, Math.min(1, progress));
-    matrixActiveIntervalMs = phase === "unlocked"
-        ? matrixUnlockedIntervalMs
-        : matrixDecryptionIntervalMs;
+    matrixActiveIntervalMs = getMatrixActiveInterval();
     restartMatrixAnimation();
 });
 
