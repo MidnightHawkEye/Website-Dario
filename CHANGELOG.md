@@ -6,18 +6,24 @@ All notable changes to DARIO.exe are documented in this file.
 
 ## [Unreleased]
 
+No unreleased changes are currently documented.
+
+---
+
+## [1.4.0] - 2026-08-16
+
 ### Added
 
 - Added an accessible 1998/2026 time-machine slider in the former desktop DEVLOG position and inside the mobile menu
 - Added a persistent 1998 retro theme combining Windows 98 interface details with the existing Matrix-inspired DARIO.exe design
-- Added a short signal/glitch transition between eras with an immediate reduced-motion alternative
+- Added a synchronized year counter, horizontal transformation scanline and responsive slider feedback to the transition between eras
 - Added a one-shot glitch response to the About, Skills, Projects and Contact links while preserving their existing hover glow
 - Added a restrained signal-ripple click response to primary 2026 action buttons, with reduced-motion and 1998-theme safeguards
 - Added a hidden, bilingual SYSTEM DECRYPTION memory game with three rounds, keyboard and touch controls, controlled Matrix escalation, a clean abort flow and an inactivity self-repair sequence
+- Added progressive temporary system-instability effects for incorrect SYSTEM DECRYPTION sequences
 
 ### Changed
 
-- Started active development of version 1.4 while keeping v1.3 identified as the latest released version
 - Moved DEVLOG access from the desktop navigation and mobile menu into the DARIO.exe project card
 - Added a CSS-only glitch effect to the DARIO.exe navigation logo
 - Continued the dark DARIO.exe design and reused the existing CSS color variables for the updated project controls
@@ -31,6 +37,20 @@ All notable changes to DARIO.exe are documented in this file.
 - Slowed the SYSTEM DECRYPTION symbol sequence for easier memorization
 - Extended the hidden SYSTEM DECRYPTION trigger to the visible release number in the project card
 - Simplified SYSTEM DECRYPTION by keeping complete symbol sequences visible, enabling input immediately and adding a persistent Matrix-based decrypted finale
+- Kept the Matrix at normal 2026 background intensity during the 1998-to-2026 transition
+- Updated README, CHANGELOG, DEVLOG and visible website version labels for the v1.4 release
+
+### Fixed
+
+- Improved text contrast and removed unwanted dark panels from the 1998 Hero section
+- Ensured time-machine controls, temporary overlays, classes and timers are restored after every transition
+
+### Tested
+
+- Verified the 1998-to-2026 migration and 2026-to-1998 rollback, including year counters, scanlines and slider locking
+- Verified the time-machine interface at a 390-pixel mobile viewport without horizontal overflow
+- Verified the English and German transition labels and final state cleanup
+- Checked JavaScript syntax and the browser console after the final transition adjustments
 
 ---
 

@@ -110,6 +110,7 @@ const systemDecryptionCorruptedTextContainers = new Set();
 const systemDecryptionState = {
     activeTrigger: null,
     clickTimes: [],
+    triggerResetTimeoutId: null,
     completedRounds: 0,
     currentRound: 0,
     currentSequence: [],
@@ -124,6 +125,56 @@ const systemDecryptionState = {
     previousFocus: null,
     inertElements: []
 };
+
+function clearSystemDecryptionTriggerResetTimer() {
+    if (systemDecryptionState.triggerResetTimeoutId === null) {
+        return;
+    }
+
+    window.clearTimeout(systemDecryptionState.triggerResetTimeoutId);
+    systemDecryptionState.triggerResetTimeoutId = null;
+}
+
+function clearSystemDecryptionTriggerFeedback() {
+    systemDecryptionTriggers.forEach((trigger) => {
+        trigger.classList.remove(
+            "is-signal-weak",
+            "is-signal-strong"
+        );
+    });
+}
+
+function resetSystemDecryptionTriggerProgress() {
+    clearSystemDecryptionTriggerResetTimer();
+    clearSystemDecryptionTriggerFeedback();
+    systemDecryptionState.clickTimes = [];
+}
+
+function startSystemDecryptionTriggerResetTimer() {
+    if (systemDecryptionState.triggerResetTimeoutId !== null) {
+        return;
+    }
+
+    systemDecryptionState.triggerResetTimeoutId = window.setTimeout(() => {
+        systemDecryptionState.triggerResetTimeoutId = null;
+        systemDecryptionState.clickTimes = [];
+        clearSystemDecryptionTriggerFeedback();
+    }, systemDecryptionConfig.triggerWindowMs);
+}
+
+function showSystemDecryptionTriggerFeedback(trigger, clickCount) {
+    clearSystemDecryptionTriggerFeedback();
+
+    if (clickCount < 3 || clickCount > 4) {
+        return;
+    }
+
+    // Restart the short signal animation for the next discovery step.
+    void trigger.offsetWidth;
+    trigger.classList.add(
+        clickCount === 3 ? "is-signal-weak" : "is-signal-strong"
+    );
+}
 
 function scheduleSystemDecryptionTask(callback, delay) {
     const timeoutId = window.setTimeout(() => {
@@ -693,7 +744,7 @@ function resetSystemDecryption() {
 
     clearSystemDecryptionTasks();
     restoreSystemDecryptionPageText();
-    systemDecryptionState.clickTimes = [];
+    resetSystemDecryptionTriggerProgress();
     systemDecryptionState.completedRounds = 0;
     systemDecryptionState.currentRound = 0;
     systemDecryptionState.currentSequence = [];
@@ -805,8 +856,8 @@ function beginSystemDecryptionCrash() {
 }
 
 function detectSystemDecryptionSignal(trigger) {
+    resetSystemDecryptionTriggerProgress();
     systemDecryptionState.isTriggering = true;
-    systemDecryptionState.clickTimes = [];
     systemDecryptionState.activeTrigger = trigger;
     trigger.classList.add("is-detected");
     systemDecryptionSignal.hidden = false;
@@ -831,12 +882,29 @@ function handleSystemDecryptionTrigger(trigger) {
     }
 
     const currentTime = Date.now();
+    const recentClickTimes = systemDecryptionState.clickTimes.filter(
+        (clickTime) => (
+            currentTime - clickTime <= systemDecryptionConfig.triggerWindowMs
+        )
+    );
+
+    if (recentClickTimes.length === 0) {
+        clearSystemDecryptionTriggerResetTimer();
+    }
+
     systemDecryptionState.clickTimes = [
-        ...systemDecryptionState.clickTimes,
+        ...recentClickTimes,
         currentTime
-    ].filter((clickTime) => (
-        currentTime - clickTime <= systemDecryptionConfig.triggerWindowMs
-    ));
+    ];
+
+    if (systemDecryptionState.clickTimes.length === 1) {
+        startSystemDecryptionTriggerResetTimer();
+    }
+
+    showSystemDecryptionTriggerFeedback(
+        trigger,
+        systemDecryptionState.clickTimes.length
+    );
 
     if (
         systemDecryptionState.clickTimes.length >=
@@ -850,7 +918,7 @@ function closeCompletedSystemDecryption() {
     const focusTarget = systemDecryptionState.previousFocus;
 
     clearSystemDecryptionTasks();
-    systemDecryptionState.clickTimes = [];
+    resetSystemDecryptionTriggerProgress();
     systemDecryptionState.isTriggering = false;
     systemDecryptionState.isOpen = false;
     systemDecryptionState.isCompletionLocked = false;

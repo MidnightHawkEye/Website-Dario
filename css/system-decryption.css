@@ -9,8 +9,21 @@
     border: 0;
     background: transparent;
     cursor: pointer;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
     transform-origin: center;
     animation: decryptionTriggerHint 7.2s steps(1, end) infinite;
+}
+
+.footer-version.system-decryption-trigger {
+    display: inline-flex;
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    margin: -7px auto -15px;
 }
 
 html[data-era="1998"] .system-decryption-trigger {
@@ -25,11 +38,19 @@ html.system-decryption-open .system-decryption-trigger {
     animation: glitchTop 0.42s steps(3, end) both;
 }
 
+.system-decryption-trigger.is-signal-weak {
+    animation: decryptionTriggerSignalWeak 0.2s steps(2, end) 1;
+}
+
+.system-decryption-trigger.is-signal-strong {
+    animation: decryptionTriggerSignalStrong 0.3s steps(3, end) 1;
+}
+
 .project-version-trigger {
     cursor: pointer;
 }
 
-.project-version-trigger:focus-visible {
+.system-decryption-trigger:focus-visible {
     outline: 2px solid var(--color-accent);
     outline-offset: 4px;
 }
@@ -719,6 +740,14 @@ html.system-decryption-failed .about-image-wrapper .status-badge {
 }
 
 @media (prefers-reduced-motion: reduce) {
+    .system-decryption-trigger.is-signal-weak {
+        animation: decryptionTriggerSignalCalmWeak 0.18s ease 1 !important;
+    }
+
+    .system-decryption-trigger.is-signal-strong {
+        animation: decryptionTriggerSignalCalmStrong 0.22s ease 1 !important;
+    }
+
     .system-decryption-trigger.is-detected,
     .system-decryption-signal,
     .system-decryption-overlay,
@@ -907,6 +936,62 @@ html.system-decryption-failed .about-image-wrapper .status-badge {
     67% {
         transform: translateX(1px) skewX(3deg);
         text-shadow: 1px 0 var(--decryption-trigger-signal);
+    }
+}
+
+@keyframes decryptionTriggerSignalWeak {
+    0%, 100% {
+        transform: translateX(0) skewX(0);
+        text-shadow: none;
+    }
+
+    50% {
+        transform: translateX(-1px) skewX(-2deg);
+        text-shadow: -1px 0 var(--decryption-trigger-signal);
+    }
+}
+
+@keyframes decryptionTriggerSignalStrong {
+    0%, 100% {
+        filter: brightness(1);
+        transform: translateX(0) skewX(0);
+        text-shadow: none;
+    }
+
+    34% {
+        filter: brightness(1.18);
+        transform: translateX(-1px) skewX(-4deg);
+        text-shadow: -1px 0 var(--decryption-trigger-signal);
+    }
+
+    67% {
+        filter: brightness(1.1);
+        transform: translateX(1px) skewX(3deg);
+        text-shadow: 0 0 6px var(--decryption-trigger-signal);
+    }
+}
+
+@keyframes decryptionTriggerSignalCalmWeak {
+    0%, 100% {
+        filter: brightness(1);
+        text-shadow: none;
+    }
+
+    50% {
+        filter: brightness(1.08);
+        text-shadow: 0 0 2px var(--decryption-trigger-signal);
+    }
+}
+
+@keyframes decryptionTriggerSignalCalmStrong {
+    0%, 100% {
+        filter: brightness(1);
+        text-shadow: none;
+    }
+
+    50% {
+        filter: brightness(1.14);
+        text-shadow: 0 0 4px var(--decryption-trigger-signal);
     }
 }
 

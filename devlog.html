@@ -1,18 +1,18 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" data-page-language="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta
         name="description"
-        content="A retrospective development log of DARIO.exe from the first commit through version 1.3, based on the documented project history."
+        content="A retrospective development log of DARIO.exe from the first commit through version 1.4, based on the documented project history."
         data-i18n-content="devlog.metaDescription">
 
     <meta property="og:type" content="website">
     <meta property="og:title" content="DEVLOG | DARIO.exe" data-i18n-content="devlog.title">
     <meta
         property="og:description"
-        content="A retrospective development log of DARIO.exe from the first commit through version 1.3, based on the documented project history."
+        content="A retrospective development log of DARIO.exe from the first commit through version 1.4, based on the documented project history."
         data-i18n-content="devlog.metaDescription">
     <meta property="og:url" content="https://dario-exe.ch/devlog.html">
     <meta property="og:site_name" content="DARIO.exe">
@@ -48,7 +48,7 @@
 <link rel="stylesheet" href="css/era-theme.css?v=1.4.6">
 
     <script src="js/global.js?v=1.2.2" defer></script>
-<script src="js/i18n.js?v=1.4.3" defer></script>
+<script src="js/i18n.js?v=1.4.4" defer></script>
 <script src="js/era-switcher.js?v=1.4.4" defer></script>
     <script src="js/navigation.js?v=1.2.6" defer></script>
     <script src="js/progress-bar.js?v=1.2.2" defer></script>
@@ -170,7 +170,7 @@
             <p class="devlog-kicker" data-i18n="devlog.kicker">&gt; VERSION HISTORY</p>
             <h1 id="devlog-title" data-i18n="devlog.heading">DEVLOG</h1>
             <p class="devlog-intro" data-i18n="devlog.intro">
-                From the first commit through v1.3: the documented milestones, challenges and lessons behind DARIO.exe.
+                From the first commit through v1.4: the documented milestones, challenges and lessons behind DARIO.exe.
             </p>
             <p class="devlog-source-note" data-i18n="devlog.sourceNote">
                 Sources: README, CHANGELOG and documented Git milestones.
@@ -189,11 +189,11 @@
                 </div>
                 <div class="devlog-summary-card">
                     <span data-i18n="devlog.versionLabel">LATEST RELEASE</span>
-                    <strong>v1.3</strong>
+                    <strong>v1.4</strong>
                 </div>
                 <div class="devlog-summary-card">
                     <span data-i18n="devlog.entriesLabel">ENTRIES</span>
-                    <strong data-i18n="devlog.entryCount">06</strong>
+                    <strong data-i18n="devlog.entryCount">07</strong>
                 </div>
             </div>
         </section>
@@ -201,7 +201,7 @@
         <section class="devlog-next" aria-labelledby="next-mission-title">
             <h2 id="next-mission-title" data-i18n="devlog.nextLabel">NEXT MISSION</h2>
             <strong data-i18n="devlog.next">
-                Create and structure the task and feature checklist for version 1.4.
+                Deploy version 1.4 and verify the live website on Desktop and iPhone.
             </strong>
         </section>
 
@@ -211,6 +211,50 @@
             </h2>
 
             <div class="devlog-timeline">
+                <article class="devlog-entry" id="version-1-4">
+                    <div class="devlog-entry-rail" aria-hidden="true">
+                        <span class="devlog-marker"></span>
+                        <span class="devlog-entry-number">007</span>
+                    </div>
+                    <div class="devlog-entry-card">
+                        <header class="devlog-entry-header">
+                            <time datetime="2026-08-16" data-i18n="devlog.entry7.date">August 16, 2026</time>
+                            <span class="devlog-tag">v1.4.0</span>
+                        </header>
+                        <h3 data-i18n="devlog.entry7.title">A time machine inside DARIO.exe</h3>
+                        <p class="devlog-entry-summary" data-i18n="devlog.entry7.summary">
+                            Version 1.4 added a persistent journey between the modern 2026 interface and a Windows 98-inspired 1998 system, together with a hidden SYSTEM DECRYPTION experience.
+                        </p>
+                        <div class="devlog-detail-grid">
+                            <section class="devlog-detail devlog-detail-wide">
+                                <h4 data-i18n="devlog.changesLabel">KEY CHANGES</h4>
+                                <ul class="devlog-change-list">
+                                    <li data-i18n="devlog.entry7.change1">Added an accessible 1998/2026 time-machine slider on Desktop and Mobile with persistent era selection.</li>
+                                    <li data-i18n="devlog.entry7.change2">Built a synchronized year counter, transformation scanline and two direction-specific transitions while preserving reduced-motion support.</li>
+                                    <li data-i18n="devlog.entry7.change3">Created a complete 1998 interface with teal, navy, grey, black and white Windows 98 styling while reusing the same page structure.</li>
+                                    <li data-i18n="devlog.entry7.change4">Added the bilingual three-round SYSTEM DECRYPTION game with keyboard and touch controls, progressive failure effects and a persistent Matrix finale.</li>
+                                </ul>
+                            </section>
+                            <section class="devlog-detail">
+                                <h4 data-i18n="devlog.challengeLabel">CHALLENGE</h4>
+                                <p data-i18n="devlog.entry7.challenge">Two distinct eras and a hidden interactive game had to feel integrated without duplicating the website, adding libraries or weakening accessibility and performance.</p>
+                            </section>
+                            <section class="devlog-detail">
+                                <h4 data-i18n="devlog.solutionLabel">SOLUTION</h4>
+                                <p data-i18n="devlog.entry7.solution">A shared data-era state, centralized CSS variables, carefully cleaned transition timers and the existing Matrix canvas made both interfaces and the Easter Egg part of one native system.</p>
+                            </section>
+                            <section class="devlog-detail">
+                                <h4 data-i18n="devlog.learningLabel">LEARNING</h4>
+                                <p data-i18n="devlog.entry7.learning">I learned how one DOM structure can support two very different visual eras, and how small state-driven effects become easier to maintain when timing, cleanup and accessibility are designed together.</p>
+                            </section>
+                            <section class="devlog-detail">
+                                <h4 data-i18n="devlog.outlookLabel">OUTLOOK</h4>
+                                <p data-i18n="devlog.entry7.outlook">I will deploy version 1.4 and verify the live website on Desktop and iPhone before planning the next milestone.</p>
+                            </section>
+                        </div>
+                    </div>
+                </article>
+
                 <article class="devlog-entry" id="version-1-3">
                     <div class="devlog-entry-rail" aria-hidden="true">
                         <span class="devlog-marker"></span>
@@ -472,7 +516,7 @@
                 </article>
 
                 <!--
-                    FUTURE DEVLOG ENTRY TEMPLATE — VERSION 1.4+
+                    FUTURE DEVLOG ENTRY TEMPLATE — VERSION 1.5+
 
                     1. Copy this complete <article> block into .devlog-timeline.
                     2. Give the entry a unique id and increment the three-digit number.
@@ -484,7 +528,7 @@
                     <article class="devlog-entry" id="version-X-X">
                         <div class="devlog-entry-rail" aria-hidden="true">
                             <span class="devlog-marker"></span>
-                            <span class="devlog-entry-number">007</span>
+                            <span class="devlog-entry-number">008</span>
                         </div>
                         <div class="devlog-entry-card">
                             <header class="devlog-entry-header">
@@ -532,7 +576,7 @@
             <span aria-hidden="true"> • </span>
             <a href="./privacy.html" data-i18n="footer.privacy">Privacy Policy</a>
         </p>
-        <p class="footer-version">DARIO.exe v1.3</p>
+        <p class="footer-version">DARIO.exe v1.4</p>
     </footer>
 </body>
 </html>
