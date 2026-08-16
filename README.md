@@ -42,8 +42,8 @@ native visual system and introduces the hidden SYSTEM DECRYPTION experience.
 - Native animation system with reduced-motion support
 - Persistent 1998/2026 time-machine theme with keyboard-accessible controls,
   a synchronized year counter and a scanline transition
-- Hidden bilingual SYSTEM DECRYPTION memory game with three rounds and a
-  Matrix-based finale
+- Hidden bilingual SYSTEM DECRYPTION memory game with three rounds, a reliable
+  five-input Desktop/Mobile trigger and a Matrix-based finale
 - Version number and copyright information in the footer
 
 ## Multilingual Support
@@ -132,6 +132,13 @@ uses the existing Matrix canvas for its final decrypted state. Incorrect
 sequences trigger progressive temporary system-instability effects, while a
 successful decryption leaves the Matrix in its unlocked state until the page
 is reloaded.
+
+The release-number trigger uses the same `click` event for mouse, keyboard and
+touch input. Five inputs must arrive inside one three-second window. The footer
+keeps its small visual version label while providing a minimum 44 × 44 pixel
+touch target. The third and fourth inputs give only restrained signal feedback;
+with `prefers-reduced-motion`, that feedback becomes a calm brightness change.
+A single reset timer clears incomplete attempts and prevents duplicate starts.
 
 The game reuses the existing translation, motion-preference and canvas
 systems. It does not add a framework or a second Matrix implementation.

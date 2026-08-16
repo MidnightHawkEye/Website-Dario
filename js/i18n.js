@@ -98,7 +98,7 @@ const i18nMessages = Object.freeze({
         "projects.building": "Building...",
         "projects.viewSource": "VIEW SOURCE",
         "projects.viewDevlog": "OPEN DEVLOG",
-        "projects.mission": "> Current mission: Deploying and verifying version 1.4",
+        "projects.mission": "> Current mission: Collecting ideas for version 1.5",
         "contact.label": "SECURE CONNECTION",
         "contact.heading": "COMMUNICATION TERMINAL",
         "contact.online": "ONLINE",
@@ -333,12 +333,13 @@ const i18nMessages = Object.freeze({
         "devlog.entry7.change2": "Built a synchronized year counter, transformation scanline and two direction-specific transitions while preserving reduced-motion support.",
         "devlog.entry7.change3": "Created a complete 1998 interface with teal, navy, grey, black and white Windows 98 styling while reusing the same page structure.",
         "devlog.entry7.change4": "Added the bilingual three-round SYSTEM DECRYPTION game with keyboard and touch controls, progressive failure effects and a persistent Matrix finale.",
+        "devlog.entry7.change5": "Improved discovery on Desktop and Mobile with a shared five-input trigger, a 44-pixel footer touch target and subtle third/fourth-input signal feedback.",
         "devlog.entry7.challenge": "Two distinct eras and a hidden interactive game had to feel integrated without duplicating the website, adding libraries or weakening accessibility and performance.",
         "devlog.entry7.solution": "A shared data-era state, centralized CSS variables, carefully cleaned transition timers and the existing Matrix canvas made both interfaces and the Easter Egg part of one native system.",
         "devlog.entry7.learning": "I learned how one DOM structure can support two very different visual eras, and how small state-driven effects become easier to maintain when timing, cleanup and accessibility are designed together.",
         "devlog.entry7.outlook": "I will deploy version 1.4 and verify the live website on Desktop and iPhone before planning the next milestone.",
         "devlog.nextLabel": "NEXT MISSION",
-        "devlog.next": "Deploy version 1.4 and verify the live website on Desktop and iPhone."
+        "devlog.next": "Collect ideas for version 1.5."
     },
     de: {
         "meta.description": "DARIO.exe ist das persönliche Entwickler-Portfolio von Dario Hasler mit Projekten aus Webentwicklung, Industrieautomation und Cybersecurity.",
@@ -436,7 +437,7 @@ const i18nMessages = Object.freeze({
         "projects.building": "Im Aufbau...",
         "projects.viewSource": "QUELLCODE ANSEHEN",
         "projects.viewDevlog": "DEVLOG ÖFFNEN",
-        "projects.mission": "> Aktuelle Mission: Version 1.4 veröffentlichen und prüfen",
+        "projects.mission": "> Aktuelle Mission: Ideensammlung für Version 1.5",
         "contact.label": "SICHERE VERBINDUNG",
         "contact.heading": "KOMMUNIKATIONSTERMINAL",
         "contact.online": "ONLINE",
@@ -671,12 +672,13 @@ const i18nMessages = Object.freeze({
         "devlog.entry7.change2": "Einen synchronisierten Jahreszähler, eine Transformations-Scanline und zwei richtungsspezifische Übergänge mit weiterhin unterstützter reduzierter Bewegung umgesetzt.",
         "devlog.entry7.change3": "Eine vollständige 1998-Oberfläche mit türkisen, dunkelblauen, grauen, schwarzen und weissen Windows-98-Stilen auf derselben Seitenstruktur aufgebaut.",
         "devlog.entry7.change4": "Das zweisprachige SYSTEM-DECRYPTION-Spiel mit drei Runden, Tastatur- und Touch-Steuerung, gestaffelten Fehlereffekten und dauerhaftem Matrix-Finale ergänzt.",
+        "devlog.entry7.change5": "Die Entdeckung auf Desktop und Mobilgeräten mit einem gemeinsamen Fünf-Eingaben-Trigger, einem 44-Pixel-Touchziel im Footer und dezenten Signalhinweisen bei der dritten und vierten Eingabe verbessert.",
         "devlog.entry7.challenge": "Zwei klar unterschiedliche Epochen und ein verstecktes interaktives Spiel mussten integriert wirken, ohne die Website zu duplizieren, Bibliotheken hinzuzufügen oder Barrierefreiheit und Performance zu schwächen.",
         "devlog.entry7.solution": "Ein gemeinsamer data-era-Zustand, zentrale CSS-Variablen, zuverlässig bereinigte Übergangs-Timer und die vorhandene Matrix-Canvas machten beide Oberflächen und das Easter Egg zu Teilen desselben nativen Systems.",
         "devlog.entry7.learning": "Ich lernte, wie eine DOM-Struktur zwei sehr unterschiedliche visuelle Epochen tragen kann und wie zustandsbasierte Effekte wartbarer werden, wenn Timing, Bereinigung und Barrierefreiheit gemeinsam geplant sind.",
         "devlog.entry7.outlook": "Ich veröffentliche Version 1.4 und prüfe die Live-Website auf Desktop und iPhone, bevor ich den nächsten Meilenstein plane.",
         "devlog.nextLabel": "NÄCHSTE MISSION",
-        "devlog.next": "Version 1.4 veröffentlichen und die Live-Website auf Desktop und iPhone prüfen."
+        "devlog.next": "Ideen für Version 1.5 sammeln."
     }
 });
 

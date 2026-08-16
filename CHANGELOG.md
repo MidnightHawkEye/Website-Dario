@@ -36,6 +36,7 @@ No unreleased changes are currently documented.
 - Limited the subtle navigation-logo signal glitch to times when the Hero section is inactive and the status dot is grey
 - Slowed the SYSTEM DECRYPTION symbol sequence for easier memorization
 - Extended the hidden SYSTEM DECRYPTION trigger to the visible release number in the project card
+- Improved the shared release-number trigger with one three-second five-input window, a minimum 44 × 44 pixel footer touch target and restrained third/fourth-input feedback for mouse, keyboard and touch users
 - Simplified SYSTEM DECRYPTION by keeping complete symbol sequences visible, enabling input immediately and adding a persistent Matrix-based decrypted finale
 - Kept the Matrix at normal 2026 background intensity during the 1998-to-2026 transition
 - Updated README, CHANGELOG, DEVLOG and visible website version labels for the v1.4 release
@@ -49,6 +50,8 @@ No unreleased changes are currently documented.
 
 - Verified the 1998-to-2026 migration and 2026-to-1998 rollback, including year counters, scanlines and slider locking
 - Verified the time-machine interface at a 390-pixel mobile viewport without horizontal overflow
+- Verified rapid five-click/five-tap activation, slow-input reset, single overlay activation and reuse after a complete Easter Egg reset
+- Verified the 44 × 44 pixel Mobile touch target, reduced-motion fallback and absence of horizontal overflow
 - Verified the English and German transition labels and final state cleanup
 - Checked JavaScript syntax and the browser console after the final transition adjustments
 
