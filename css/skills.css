@@ -192,10 +192,8 @@
     width: var(--skill-level);
 }
 
-@media (prefers-reduced-motion: reduce) {
-    .js-motion .skill-fill {
-        width: var(--skill-level);
-    }
+html.motion-reduced.js-motion .skill-fill {
+    width: var(--skill-level);
 }
 
 .skill-focus {

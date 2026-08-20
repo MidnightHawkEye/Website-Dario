@@ -1,0 +1,977 @@
+html.snow-mode #particle-canvas {
+    display: block;
+}
+
+html[data-era="1998"].snow-mode #particle-canvas {
+    display: block;
+    opacity: 0.78;
+    filter: none;
+    mix-blend-mode: normal;
+}
+
+html.motion-reduced.snow-mode #particle-canvas,
+html.motion-reduced[data-era="1998"].snow-mode #particle-canvas {
+    display: block;
+    opacity: 0.62;
+}
+
+/*==================================================
+                COMPLETE WINTER THEME
+==================================================*/
+
+html.winter-mode {
+    --winter-ice-white: rgba(236, 249, 255, 0.94);
+    --winter-ice-soft: rgba(191, 232, 246, 0.78);
+    --winter-ice-edge: rgba(133, 229, 239, 0.72);
+    --winter-frost-panel: rgba(4, 17, 26, 0.78);
+    --winter-frost-border: rgba(151, 231, 240, 0.48);
+    --winter-frost-glow: rgba(92, 218, 231, 0.2);
+    --winter-snow-cap-height: 22px;
+    --winter-snow-cap-offset: -15px;
+    --winter-snow-side-offset: 0px;
+    --christmas-gold: #e7bd67;
+    --christmas-gold-rgb: 231, 189, 103;
+    --christmas-red: #8e2938;
+    --christmas-red-rgb: 142, 41, 56;
+    --christmas-green: #174f3d;
+    --christmas-green-rgb: 23, 79, 61;
+    --christmas-ice-blue: #91dff2;
+    --christmas-ice-blue-rgb: 145, 223, 242;
+    --winter-snow-mask: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201000%2032'%20preserveAspectRatio='none'%3E%3Cpath%20fill='%23000'%20d='M0%2027%20C18%2026%2035%2023%2056%2019%20C86%2017%20111%2018%20142%2014%20C168%2011%20177%205%20213%2010%20C253%2017%20286%2023%20328%2015%20C360%208%20392%207%20429%2016%20C462%2024%20502%2021%20539%2017%20C577%2013%20601%203%20646%207%20C691%2011%20713%2024%20757%2021%20C801%2018%20828%206%20872%2010%20C914%2014%20944%2018%20966%2022%20C982%2024%20992%2026%201000%2027%20C982%2028%20964%2030%20936%2031%20L64%2031%20C36%2030%2018%2028%200%2027%20Z'/%3E%3C/svg%3E");
+}
+
+/* Modern DARIO.exe keeps its dark terminal identity, but cools down. */
+html.winter-mode:not([data-era="1998"]) {
+    --color-background: #02080f;
+    --color-accent: #78f4e0;
+    --color-accent-rgb: 120, 244, 224;
+    --color-white: #f3fbff;
+    --color-text-light: #d6e8ee;
+    --color-text-muted: #9db6c0;
+    --color-text-dark: #66818c;
+}
+
+html.winter-mode:not([data-era="1998"]) body {
+    background-color: var(--color-background);
+    background-image:
+        radial-gradient(
+            ellipse at 16% 20%,
+            rgba(91, 199, 220, 0.1),
+            transparent 38%
+        ),
+        radial-gradient(
+            ellipse at 82% 58%,
+            rgba(152, 232, 244, 0.07),
+            transparent 42%
+        ),
+        linear-gradient(
+            145deg,
+            #01050a 0%,
+            #05131d 48%,
+            #02080f 100%
+        );
+}
+
+html.winter-mode:not([data-era="1998"]) .matrix-background {
+    background:
+        radial-gradient(
+            circle at 50% 38%,
+            rgba(98, 225, 235, 0.11),
+            transparent 54%
+        ),
+        radial-gradient(
+            ellipse at 18% 72%,
+            rgba(202, 243, 255, 0.045),
+            transparent 38%
+        );
+}
+
+html.winter-mode:not([data-era="1998"]) #matrix-canvas {
+    opacity: 0.19;
+    filter: blur(1.5px) saturate(0.84) brightness(1.12);
+}
+
+html.winter-mode:not([data-era="1998"]) .hero-overlay {
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(var(--color-accent-rgb), 0.11),
+            transparent 48%
+        ),
+        linear-gradient(
+            to bottom,
+            rgba(6, 23, 34, 0.08),
+            rgba(1, 7, 13, 0.58)
+        );
+}
+
+html.winter-mode:not([data-era="1998"]) .site-header {
+    border-bottom-color: var(--winter-frost-border);
+    background:
+        linear-gradient(
+            180deg,
+            rgba(14, 35, 46, 0.91),
+            rgba(2, 10, 16, 0.88)
+        );
+    box-shadow:
+        inset 0 1px 0 rgba(235, 250, 255, 0.32),
+        0 5px 22px rgba(70, 201, 219, 0.12);
+    backdrop-filter: blur(11px) saturate(1.08);
+}
+
+html.winter-mode:not([data-era="1998"]) :where(
+    .stat-card,
+    .skill-card,
+    .project-card,
+    .contact-form,
+    .devlog-summary-card,
+    .devlog-entry-card,
+    .devlog-next,
+    .privacy-card,
+    .error-terminal
+) {
+    border-color: var(--winter-frost-border);
+    background-color: var(--winter-frost-panel);
+    background-image:
+        linear-gradient(
+            135deg,
+            rgba(237, 250, 255, 0.065),
+            transparent 24%
+        ),
+        radial-gradient(
+            circle at 88% 12%,
+            rgba(var(--color-accent-rgb), 0.065),
+            transparent 34%
+        );
+    box-shadow:
+        inset 0 1px 0 rgba(238, 251, 255, 0.22),
+        inset 0 0 24px rgba(123, 218, 234, 0.035),
+        0 0 24px var(--winter-frost-glow);
+    backdrop-filter: blur(7px) saturate(1.03);
+}
+
+html.winter-mode:not([data-era="1998"]) :where(
+    .project-terminal,
+    .status-badge,
+    .skill-status,
+    .project-status,
+    .project-action-button,
+    .hero-button,
+    .contact-button,
+    .language-switcher,
+    .era-switcher
+) {
+    border-color: rgba(156, 233, 241, 0.5);
+    background-color: rgba(8, 25, 35, 0.7);
+    box-shadow:
+        inset 0 1px 0 rgba(238, 251, 255, 0.12),
+        0 0 14px rgba(82, 211, 226, 0.09);
+}
+
+html.winter-mode:not([data-era="1998"]) .contact-form :where(
+    input,
+    textarea
+) {
+    border-color: rgba(150, 226, 237, 0.38);
+    background: rgba(2, 11, 18, 0.82);
+    color: var(--color-white);
+    box-shadow: inset 0 1px 12px rgba(174, 231, 242, 0.04);
+}
+
+html.winter-mode:not([data-era="1998"]) .nav-menu {
+    background:
+        linear-gradient(
+            180deg,
+            rgba(10, 29, 39, 0.98),
+            rgba(2, 9, 15, 0.99)
+        );
+}
+
+/*==================================================
+              CYBER CHRISTMAS DETAILS
+==================================================*/
+
+.holiday-lights,
+.holiday-system-init {
+    display: none;
+}
+
+html.winter-mode .holiday-lights {
+    position: absolute;
+    right: 11%;
+    bottom: -30px;
+    left: 11%;
+    z-index: 6;
+    display: block;
+    height: 37px;
+    pointer-events: none;
+}
+
+html.winter-mode .holiday-light-cable {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 20px;
+    overflow: visible;
+}
+
+html.winter-mode :where(
+    .holiday-cable-shadow,
+    .holiday-cable-line,
+    .holiday-cable-pixel
+) {
+    fill: none;
+    vector-effect: non-scaling-stroke;
+}
+
+html.winter-mode .holiday-cable-shadow {
+    stroke: rgba(0, 0, 0, 0.92);
+    stroke-width: 3.4;
+}
+
+html.winter-mode .holiday-cable-line {
+    stroke: rgba(75, 93, 92, 0.96);
+    stroke-width: 1.35;
+    filter: drop-shadow(
+        0 1px 1px rgba(var(--christmas-gold-rgb), 0.09)
+    );
+}
+
+html.winter-mode .holiday-cable-pixel {
+    display: none;
+}
+
+html.winter-mode .holiday-light {
+    position: absolute;
+    top: calc(var(--holiday-cable-y) + 8px);
+    left: var(--holiday-led-x);
+    z-index: 2;
+    display: block;
+    width: 8px;
+    height: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 44% 44% 68% 68% / 34% 34% 76% 76%;
+    background:
+        radial-gradient(
+            circle at 50% 24%,
+            rgba(255, 255, 255, 0.96) 0 9%,
+            rgba(255, 255, 255, 0.3) 18%,
+            transparent 39%
+        ),
+        currentColor;
+    opacity: 0.12;
+    transform: translateX(-50%) scale(0.62);
+    transform-origin: center top;
+}
+
+html.winter-mode .holiday-light::before {
+    content: "";
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    width: 1px;
+    height: 6px;
+    background: rgba(52, 67, 67, 0.98);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.24);
+    transform: translateX(-50%);
+}
+
+html.winter-mode .holiday-light::after {
+    content: "";
+    position: absolute;
+    top: -3px;
+    left: 50%;
+    width: 6px;
+    height: 4px;
+    border-radius: 1px 1px 0 0;
+    background: linear-gradient(
+        to right,
+        #11191a,
+        #485554 48%,
+        #11191a
+    );
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.7);
+    transform: translateX(-50%);
+}
+
+html.winter-mode .holiday-light--gold {
+    color: var(--christmas-gold);
+    box-shadow:
+        0 0 4px currentColor,
+        0 0 12px rgba(var(--christmas-gold-rgb), 0.58);
+}
+
+html.winter-mode .holiday-light--red {
+    color: var(--christmas-red);
+    box-shadow:
+        0 0 4px currentColor,
+        0 0 11px rgba(var(--christmas-red-rgb), 0.48);
+}
+
+html.winter-mode .holiday-light--green {
+    color: var(--christmas-green);
+    box-shadow:
+        0 0 4px currentColor,
+        0 0 10px rgba(var(--christmas-green-rgb), 0.45);
+}
+
+html.winter-mode .holiday-light--ice {
+    color: var(--christmas-ice-blue);
+    box-shadow:
+        0 0 4px currentColor,
+        0 0 11px rgba(var(--christmas-ice-blue-rgb), 0.48);
+}
+
+html.winter-mode .holiday-lights.is-sequencing .holiday-light {
+    animation: holidayLedStart 0.26s ease-out
+        var(--holiday-led-delay) forwards;
+}
+
+html.winter-mode .holiday-lights.is-online .holiday-light {
+    opacity: var(--holiday-led-opacity, 0.9);
+    transform: translateX(-50%) scale(1);
+    animation: holidayLedBreathe 5.2s ease-in-out
+        var(--holiday-led-breathe-delay) infinite;
+}
+
+html.winter-mode .holiday-sprig {
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    display: block;
+    width: 43px;
+    height: 13px;
+    background:
+        repeating-linear-gradient(
+            67deg,
+            transparent 0 4px,
+            rgba(var(--christmas-green-rgb), 0.96) 4px 6px,
+            transparent 6px 9px
+        ),
+        linear-gradient(
+            7deg,
+            transparent 43%,
+            rgba(var(--christmas-green-rgb), 0.88) 44% 58%,
+            transparent 59%
+        );
+    clip-path: polygon(0 48%, 100% 0, 82% 48%, 100% 100%);
+    opacity: 0.88;
+    pointer-events: none;
+}
+
+html.winter-mode .holiday-sprig::after {
+    content: "";
+    position: absolute;
+    top: 1px;
+    left: 8px;
+    width: 25px;
+    height: 3px;
+    border-radius: 50%;
+    background: rgba(238, 250, 255, 0.82);
+    box-shadow: 8px 2px 0 rgba(210, 239, 246, 0.52);
+}
+
+html.winter-mode .holiday-sprig--start {
+    left: -33px;
+}
+
+html.winter-mode .holiday-sprig--end {
+    right: -33px;
+    transform: scaleX(-1);
+}
+
+html.winter-mode .holiday-system-init {
+    position: fixed;
+    top: 88px;
+    left: 50%;
+    z-index: 1100;
+    display: block;
+    width: min(420px, calc(100vw - 32px));
+    padding: 11px 14px;
+    border: 1px solid rgba(var(--christmas-gold-rgb), 0.46);
+    border-left: 3px solid var(--christmas-gold);
+    border-radius: 3px;
+    background: rgba(2, 12, 18, 0.94);
+    box-shadow:
+        0 0 20px rgba(var(--christmas-gold-rgb), 0.09),
+        inset 0 1px 0 rgba(var(--christmas-ice-blue-rgb), 0.13);
+    color: var(--winter-ice-soft);
+    font: 700 0.66rem/1.55 monospace;
+    letter-spacing: 0.055em;
+    opacity: 0;
+    transform: translate(-50%, -6px);
+    transition:
+        opacity 0.18s ease,
+        transform 0.18s ease;
+    pointer-events: none;
+}
+
+html.winter-mode .holiday-system-init.is-visible {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+
+html.winter-mode .holiday-system-init p {
+    margin: 0;
+    opacity: 0;
+}
+
+html.winter-mode .holiday-system-init.is-visible p {
+    animation: holidaySystemLine 1.25s ease-out forwards;
+}
+
+html.winter-mode .holiday-system-init.is-visible p:nth-child(2) {
+    animation-delay: 0.14s;
+}
+
+html.winter-mode .holiday-system-init.is-visible p:nth-child(3) {
+    animation-delay: 0.28s;
+}
+
+html.winter-mode .holiday-system-init.is-visible p:nth-child(4) {
+    animation-delay: 0.42s;
+}
+
+html.winter-mode .holiday-system-init.is-visible p:nth-child(5) {
+    color: var(--christmas-gold);
+    animation-delay: 0.56s;
+}
+
+html.winter-mode:not([data-era="1998"]) .project-card {
+    border-top-color: rgba(var(--christmas-gold-rgb), 0.62);
+    box-shadow:
+        inset 0 1px 0 rgba(var(--christmas-gold-rgb), 0.16),
+        0 -2px 13px rgba(var(--christmas-gold-rgb), 0.045),
+        0 0 24px var(--winter-frost-glow);
+}
+
+html.winter-mode:not([data-era="1998"])
+    .project-card .project-status {
+    border-color: rgba(var(--christmas-gold-rgb), 0.43);
+    box-shadow: 0 0 10px rgba(var(--christmas-gold-rgb), 0.08);
+}
+
+html.winter-mode:not([data-era="1998"])
+    .project-card .project-tech-tag:first-child {
+    border-color: rgba(var(--christmas-gold-rgb), 0.58);
+    color: var(--christmas-gold);
+}
+
+html.winter-mode:not([data-era="1998"]) .project-terminal {
+    border-left-color: var(--christmas-red);
+    box-shadow: inset 3px 0 0 rgba(var(--christmas-gold-rgb), 0.1);
+}
+
+@keyframes holidayLedStart {
+    0% {
+        opacity: 0.1;
+        transform: translateX(-50%) scale(0.62);
+        filter: brightness(0.62);
+    }
+
+    68% {
+        opacity: 1;
+        transform: translateX(-50%) scale(1.1);
+        filter: brightness(1.18);
+    }
+
+    100% {
+        opacity: var(--holiday-led-opacity, 0.9);
+        transform: translateX(-50%) scale(1);
+        filter: brightness(1);
+    }
+}
+
+@keyframes holidayLedBreathe {
+    0%,
+    100% {
+        filter: brightness(0.86);
+    }
+
+    50% {
+        filter: brightness(1.16);
+    }
+}
+
+@keyframes holidaySystemLine {
+    0% {
+        opacity: 0;
+        transform: translateX(-5px);
+    }
+
+    24%,
+    82% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    100% {
+        opacity: 0.72;
+        transform: translateX(0);
+    }
+}
+
+/* Simulated accumulation: one lightweight CSS layer per major surface. */
+html.winter-mode :where(
+    .about-image-wrapper,
+    .stat-card,
+    .skill-card,
+    .project-card,
+    .contact-form,
+    .devlog-summary-card,
+    .devlog-entry-card,
+    .devlog-next,
+    .privacy-card,
+    .error-terminal
+) {
+    position: relative;
+    isolation: isolate;
+    overflow: visible;
+    --winter-local-snow-height: var(--winter-snow-cap-height);
+    --winter-snow-flip: 1;
+}
+
+/* Keep the existing card highlights contained after opening the snow edge. */
+html.winter-mode .skill-card::before,
+html.winter-mode .project-card::before {
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    opacity: 0;
+    transform: none;
+    transition: opacity 0.5s ease;
+}
+
+html.winter-mode .skill-card:hover::before,
+html.winter-mode .project-card:hover::before {
+    top: 0;
+    left: 0;
+    opacity: 1;
+    transform: none;
+}
+
+html.winter-mode .about-image-wrapper > img {
+    border-radius: inherit;
+}
+
+/* Mirrored and differently sized variants keep neighbouring cards distinct. */
+html.winter-mode :where(
+    .stat-card:nth-child(even),
+    .skill-card:nth-child(even),
+    .devlog-summary-card:nth-child(even),
+    .devlog-entry:nth-child(even) .devlog-entry-card
+) {
+    --winter-snow-flip: -1;
+}
+
+html.winter-mode :where(
+    .stat-card:nth-child(2),
+    .skill-card:nth-child(3n + 2),
+    .devlog-summary-card:nth-child(3n + 2),
+    .devlog-entry:nth-child(3n + 2) .devlog-entry-card
+) {
+    --winter-local-snow-height: calc(
+        var(--winter-snow-cap-height) - 3px
+    );
+}
+
+html.winter-mode :where(
+    .stat-card:nth-child(3),
+    .skill-card:nth-child(3n),
+    .devlog-summary-card:nth-child(3n),
+    .devlog-entry:nth-child(3n) .devlog-entry-card
+) {
+    --winter-local-snow-height: calc(
+        var(--winter-snow-cap-height) + 2px
+    );
+}
+
+html.winter-mode :where(
+    .about-image-wrapper,
+    .stat-card,
+    .skill-card,
+    .project-card,
+    .contact-form,
+    .devlog-summary-card,
+    .devlog-entry-card,
+    .devlog-next,
+    .privacy-card,
+    .error-terminal
+)::after {
+    content: "";
+    position: absolute;
+    top: var(--winter-snow-cap-offset);
+    left: var(--winter-snow-side-offset);
+    right: var(--winter-snow-side-offset);
+    z-index: 5;
+    width: auto;
+    height: var(--winter-local-snow-height);
+    background:
+        radial-gradient(
+            ellipse at 16% 16%,
+            rgba(255, 255, 255, 0.98) 0 8%,
+            transparent 26%
+        ),
+        radial-gradient(
+            ellipse at 63% 8%,
+            rgba(255, 255, 255, 0.84) 0 7%,
+            transparent 24%
+        ),
+        linear-gradient(
+            to bottom,
+            var(--winter-ice-white) 0 34%,
+            rgba(225, 247, 252, 0.96) 58%,
+            rgba(152, 211, 229, 0.9) 100%
+        );
+    background-repeat: no-repeat;
+    -webkit-mask-image: var(--winter-snow-mask);
+    mask-image: var(--winter-snow-mask);
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    filter:
+        drop-shadow(0 3px 3px rgba(76, 156, 181, 0.34))
+        drop-shadow(0 0 5px rgba(225, 248, 255, 0.2));
+    opacity: 1;
+    transform:
+        scaleX(var(--winter-snow-flip))
+        scaleY(0.18);
+    transform-origin: center top;
+    animation: winterSnowAccumulate 30s ease-out forwards;
+    pointer-events: none;
+}
+
+@keyframes winterSnowAccumulate {
+    0% {
+        opacity: 0.42;
+        transform:
+            scaleX(var(--winter-snow-flip))
+            scaleY(0.18);
+    }
+
+    38% {
+        opacity: 0.78;
+        transform:
+            scaleX(var(--winter-snow-flip))
+            scaleY(0.58);
+    }
+
+    100% {
+        opacity: 1;
+        transform:
+            scaleX(var(--winter-snow-flip))
+            scaleY(1);
+    }
+}
+
+/*==================================================
+                WIN98 WINTER VARIANT
+==================================================*/
+
+html.winter-mode[data-era="1998"] {
+    --era-retro-window: #c7d2d9;
+    --era-retro-window-light: #f7fcff;
+    --era-retro-window-mid: #8498a5;
+    --era-retro-window-dark: #3d5361;
+    --era-retro-title: #174b73;
+    --era-retro-ink: #07131c;
+    --era-retro-desktop: #356f88;
+    --era-retro-screen: #061b2b;
+    --era-retro-matrix: #d8f4ff;
+    --era-retro-accent: #ffffff;
+    --era-retro-accent-rgb: 255, 255, 255;
+    --christmas-gold: #a97718;
+    --christmas-gold-rgb: 169, 119, 24;
+    --christmas-red: #821d2d;
+    --christmas-red-rgb: 130, 29, 45;
+    --christmas-green: #174b73;
+    --christmas-green-rgb: 23, 75, 115;
+    --christmas-ice-blue: #b8e6f2;
+    --christmas-ice-blue-rgb: 184, 230, 242;
+    --winter-snow-cap-height: 15px;
+    --winter-snow-cap-offset: -10px;
+}
+
+html.winter-mode[data-era="1998"] body {
+    background-color: var(--era-retro-desktop);
+    background-image:
+        linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.025) 50%,
+            transparent 50%
+        ),
+        linear-gradient(
+            rgba(255, 255, 255, 0.025) 50%,
+            transparent 50%
+        );
+    background-size: 8px 8px;
+}
+
+html.winter-mode[data-era="1998"] .matrix-background {
+    background: radial-gradient(
+        circle at center,
+        rgba(220, 247, 255, 0.08),
+        transparent 68%
+    );
+}
+
+html.winter-mode[data-era="1998"] #matrix-canvas {
+    opacity: 0.32;
+    filter: none;
+    mix-blend-mode: multiply;
+}
+
+html.winter-mode[data-era="1998"] :where(
+    .stat-card,
+    .skill-card,
+    .project-card,
+    .contact-form,
+    .devlog-summary-card,
+    .devlog-entry-card,
+    .devlog-next,
+    .privacy-card,
+    .error-terminal
+) {
+    border-top-color: var(--era-retro-window-light);
+    border-left-color: var(--era-retro-window-light);
+    border-right-color: var(--era-retro-window-dark);
+    border-bottom-color: var(--era-retro-window-dark);
+    background: rgba(6, 27, 43, 0.95);
+    box-shadow:
+        3px 3px 0 rgba(3, 15, 24, 0.72),
+        inset 0 0 0 1px var(--era-retro-window-mid);
+    backdrop-filter: none;
+}
+
+html.winter-mode[data-era="1998"] :where(
+    .holiday-cable-shadow,
+    .holiday-cable-line
+) {
+    display: none;
+}
+
+html.winter-mode[data-era="1998"] .holiday-cable-pixel {
+    display: block;
+    stroke: var(--era-retro-window-dark);
+    stroke-width: 2;
+    shape-rendering: crispEdges;
+}
+
+html.winter-mode[data-era="1998"] .holiday-light {
+    width: 6px;
+    height: 8px;
+    border: 1px solid var(--era-retro-ink);
+    border-radius: 0;
+    background: currentColor;
+    box-shadow: 1px 1px 0 var(--era-retro-window-dark);
+}
+
+html.winter-mode[data-era="1998"] .holiday-light::before {
+    top: -6px;
+    left: 50%;
+    width: 1px;
+    height: 4px;
+    background: var(--era-retro-window-dark);
+    box-shadow: none;
+    transform: translateX(-50%);
+}
+
+html.winter-mode[data-era="1998"] .holiday-light::after {
+    top: -2px;
+    left: 50%;
+    width: 5px;
+    height: 3px;
+    border-radius: 0;
+    background: var(--era-retro-window-dark);
+    box-shadow: none;
+    transform: translateX(-50%);
+}
+
+html.winter-mode[data-era="1998"] .holiday-sprig {
+    height: 11px;
+    background: var(--christmas-green);
+    clip-path: polygon(
+        0 45%, 14% 45%, 14% 27%, 34% 27%, 34% 9%,
+        57% 9%, 57% 27%, 78% 27%, 78% 45%, 100% 45%,
+        100% 64%, 78% 64%, 78% 82%, 57% 82%, 57% 100%,
+        34% 100%, 34% 82%, 14% 82%, 14% 64%, 0 64%
+    );
+    opacity: 1;
+}
+
+html.winter-mode[data-era="1998"] .holiday-sprig::after {
+    top: 0;
+    left: 13px;
+    width: 14px;
+    height: 2px;
+    border-radius: 0;
+    background: var(--era-retro-window-light);
+    box-shadow: 8px 2px 0 var(--era-retro-window-light);
+}
+
+html.winter-mode[data-era="1998"] .holiday-system-init {
+    border: 2px solid;
+    border-color:
+        var(--era-retro-window-light)
+        var(--era-retro-window-dark)
+        var(--era-retro-window-dark)
+        var(--era-retro-window-light);
+    border-radius: 0;
+    background: var(--era-retro-window);
+    box-shadow: 3px 3px 0 var(--era-retro-window-dark);
+    color: var(--era-retro-ink);
+}
+
+html.winter-mode[data-era="1998"]
+    .holiday-system-init.is-visible p:nth-child(5) {
+    color: var(--era-retro-title);
+}
+
+html.winter-mode[data-era="1998"]
+    .project-card .project-tech-tag:first-child {
+    border-color: var(--christmas-gold);
+    color: var(--christmas-gold);
+}
+
+html.winter-mode[data-era="1998"] .project-terminal {
+    border-left: 4px solid var(--christmas-red);
+}
+
+html.winter-mode[data-era="1998"] :where(
+    .about-image-wrapper,
+    .stat-card,
+    .skill-card,
+    .project-card,
+    .contact-form,
+    .devlog-summary-card,
+    .devlog-entry-card,
+    .devlog-next,
+    .privacy-card,
+    .error-terminal
+)::after {
+    height: var(--winter-local-snow-height);
+    -webkit-mask-image: none;
+    mask-image: none;
+    background: linear-gradient(
+        to bottom,
+        #ffffff 0 34%,
+        var(--era-retro-window-light) 34% 58%,
+        #a9cfdd 58% 100%
+    );
+    clip-path: polygon(
+        0 78%, 2% 78%, 2% 62%, 5% 62%, 5% 44%,
+        10% 44%, 10% 26%, 16% 26%, 16% 38%, 22% 38%,
+        22% 56%, 29% 56%, 29% 20%, 37% 20%, 37% 42%,
+        43% 42%, 43% 32%, 51% 32%, 51% 58%, 58% 58%,
+        58% 16%, 66% 16%, 66% 28%, 73% 28%, 73% 50%,
+        81% 50%, 81% 36%, 87% 36%, 87% 24%, 93% 24%,
+        93% 46%, 96% 46%, 96% 62%, 98% 62%, 98% 78%,
+        100% 78%, 98% 84%, 96% 84%, 96% 92%, 92% 92%,
+        92% 100%, 8% 100%, 8% 92%, 4% 92%, 4% 84%,
+        2% 84%
+    );
+    filter: none;
+    animation: winterSnowAccumulate 30s steps(6, end) forwards;
+}
+
+@media (max-width: 900px) {
+    html.winter-mode .holiday-lights {
+        right: 5%;
+        bottom: -38px;
+        left: 5%;
+        height: 37px;
+    }
+}
+
+@media (max-width: 700px) {
+    html.winter-mode {
+        --winter-snow-cap-height: 17px;
+        --winter-snow-cap-offset: -12px;
+    }
+
+    html.winter-mode[data-era="1998"] {
+        --winter-snow-cap-height: 12px;
+        --winter-snow-cap-offset: -8px;
+    }
+
+    html.winter-mode:not([data-era="1998"]) :where(
+        .stat-card,
+        .skill-card,
+        .project-card,
+        .contact-form,
+        .devlog-summary-card,
+        .devlog-entry-card
+    ) {
+        backdrop-filter: blur(4px);
+    }
+
+    html.winter-mode .holiday-lights {
+        right: 5%;
+        bottom: -34px;
+        left: 5%;
+        height: 34px;
+    }
+
+    html.winter-mode .holiday-light:nth-of-type(4n + 3) {
+        display: none;
+    }
+
+    html.winter-mode .holiday-sprig--end {
+        display: none;
+    }
+
+    html.winter-mode .holiday-sprig--start {
+        left: -13px;
+        transform: scale(0.8);
+        transform-origin: left center;
+    }
+
+    html.winter-mode .holiday-system-init {
+        top: 76px;
+        width: min(350px, calc(100vw - 24px));
+        padding: 9px 11px;
+        font-size: 0.59rem;
+    }
+
+}
+
+html.motion-reduced.winter-mode .holiday-system-init {
+    display: none;
+    transition: none;
+}
+
+html.motion-reduced.winter-mode
+.holiday-lights.is-online .holiday-light,
+html.motion-reduced.winter-mode
+.holiday-lights.is-sequencing .holiday-light {
+    animation: none;
+    opacity: var(--holiday-led-opacity, 0.9);
+    transform: translateX(-50%) scale(1);
+    filter: none;
+}
+
+html.motion-reduced.winter-mode :where(
+    .about-image-wrapper,
+    .stat-card,
+    .skill-card,
+    .project-card,
+    .contact-form,
+    .devlog-summary-card,
+    .devlog-entry-card,
+    .devlog-next,
+    .privacy-card,
+    .error-terminal
+)::after {
+    animation: none;
+    opacity: 0.9;
+    transform:
+        scaleX(var(--winter-snow-flip))
+        scaleY(0.82);
+}

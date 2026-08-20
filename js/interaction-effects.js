@@ -6,10 +6,6 @@ const signalRippleSelector = [
     ".error-button"
 ].join(",");
 
-const signalRippleMotionQuery = window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-);
-
 function removeSignalRipple(ripple) {
     if (ripple.isConnected) {
         ripple.remove();
@@ -18,7 +14,9 @@ function removeSignalRipple(ripple) {
 
 function createSignalRipple(control, event) {
     if (
-        signalRippleMotionQuery.matches ||
+        document.documentElement.classList.contains(
+            "motion-reduced"
+        ) ||
         document.documentElement.dataset.era === "1998" ||
         control.matches(":disabled")
     ) {

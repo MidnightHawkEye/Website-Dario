@@ -877,47 +877,46 @@ html[data-era="1998"] .footer-version {
     }
 }
 
-@media (prefers-reduced-motion: reduce) {
-    html.era-transition::before,
-    html.era-transition::after {
-        display: none !important;
-        animation: none !important;
-    }
+html.motion-reduced.era-transition::before,
+html.motion-reduced.era-transition::after {
+    display: none !important;
+    animation: none !important;
+}
 
-    .era-time-counter,
-    .era-time-counter__year,
-    .era-time-counter__status,
-    html.era-transition .era-switcher[data-era-travel-year]::after {
-        animation: none !important;
-        opacity: 1;
-        transform: none;
-    }
+html.motion-reduced .era-time-counter,
+html.motion-reduced .era-time-counter__year,
+html.motion-reduced .era-time-counter__status,
+html.motion-reduced.era-transition
+.era-switcher[data-era-travel-year]::after {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
+}
 
-    .era-time-counter__year,
-    .era-time-counter__status {
-        transition: opacity 0.18s ease;
-    }
+html.motion-reduced .era-time-counter__year,
+html.motion-reduced .era-time-counter__status {
+    transition: opacity 0.18s ease;
+}
 
-    html.era-transition :where(
-        .site-header,
-        .logo,
-        .language-switcher,
-        .era-switcher,
-        .menu-toggle,
-        .stat-card,
-        .skill-card,
-        .project-card,
-        .project-terminal,
-        .contact-form,
-        .hero-button,
-        .project-action-button,
-        .contact-button,
-        .return-button,
-        .site-footer,
-        #matrix-canvas
-    ) {
-        animation: none !important;
-        transition-duration: 0.35s !important;
-        will-change: auto;
-    }
+html.motion-reduced.era-transition :where(
+    .site-header,
+    .logo,
+    .language-switcher,
+    .era-switcher,
+    .menu-toggle,
+    .stat-card,
+    .skill-card,
+    .project-card,
+    .project-terminal,
+    .contact-form,
+    .hero-button,
+    .project-action-button,
+    .contact-button,
+    .return-button,
+    .site-footer,
+    #matrix-canvas
+) {
+    animation: none !important;
+    transition-duration: 0.35s !important;
+    will-change: auto;
 }

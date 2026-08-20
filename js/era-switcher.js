@@ -31,9 +31,6 @@
         document.querySelectorAll(".era-switcher")
     );
     const eraAnnouncer = document.querySelector("[data-era-announcer]");
-    const reducedMotionMedia = window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-    );
     const transitionTimeouts = new Set();
     let activeDirection = null;
     let isTransitioning = false;
@@ -372,9 +369,10 @@
             return;
         }
 
-        const prefersQuietChange = reducedMotionMedia.matches ||
-            (typeof prefersReducedMotion === "function" &&
-                prefersReducedMotion());
+        const prefersQuietChange =
+            document.documentElement.classList.contains(
+                "motion-reduced"
+            );
 
         activeDirection = nextEra === modernEra
             ? "to-modern"

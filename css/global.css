@@ -246,25 +246,23 @@ html[data-era="1998"] .signal-ripple {
                     prefers-reduced-motion
 ==================================================*/
 
-@media (prefers-reduced-motion: reduce) {
-    html {
-        scroll-behavior: auto;
-    }
+html.motion-reduced {
+    scroll-behavior: auto;
+}
 
-    *,
-    *::before,
-    *::after {
-        animation: none !important;
-        transition: none !important;
-        scroll-behavior: auto !important;
-    }
+html.motion-reduced *,
+html.motion-reduced *::before,
+html.motion-reduced *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+}
 
-    .glitch::before,
-    .glitch::after,
-    #matrix-canvas,
-    #particle-canvas {
-        display: none;
-    }
+html.motion-reduced .glitch::before,
+html.motion-reduced .glitch::after,
+html.motion-reduced #matrix-canvas,
+html.motion-reduced #particle-canvas {
+    display: none;
 }
 
 /*==================================================

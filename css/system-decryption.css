@@ -739,145 +739,152 @@ html.system-decryption-failed .about-image-wrapper .status-badge {
     }
 }
 
-@media (prefers-reduced-motion: reduce) {
-    .system-decryption-trigger.is-signal-weak {
-        animation: decryptionTriggerSignalCalmWeak 0.18s ease 1 !important;
-    }
+html.motion-reduced .system-decryption-trigger.is-signal-weak {
+    animation: decryptionTriggerSignalCalmWeak 0.18s ease 1 !important;
+}
 
-    .system-decryption-trigger.is-signal-strong {
-        animation: decryptionTriggerSignalCalmStrong 0.22s ease 1 !important;
-    }
+html.motion-reduced .system-decryption-trigger.is-signal-strong {
+    animation: decryptionTriggerSignalCalmStrong 0.22s ease 1 !important;
+}
 
-    .system-decryption-trigger.is-detected,
-    .system-decryption-signal,
-    .system-decryption-overlay,
-    .system-decryption-terminal,
-    .system-decryption-sequence.is-visible,
-    .system-decryption-final strong,
-    .decryption-corrupt-character,
-    html.system-decryption-failed #matrix-canvas,
-    html.system-decryption-failed .about-image-wrapper img,
-    html.system-decryption-failed .about-image-wrapper::after,
-    html.system-decryption-failed .era-switcher,
-    html.system-decryption-failed .language-switcher,
-    html.system-decryption-failed .hero-button,
-    html.system-decryption-failed .status-badge,
-    html.system-decryption-failed .stat-card,
-    html.system-decryption-failed .skill-card,
-    html.system-decryption-failed .project-card,
-    html.system-decryption-failed .project-terminal,
-    html.system-decryption-failed .project-action-button,
-    html.system-decryption-failed .contact-form,
-    html.system-decryption-failed .form-group,
-    html.system-decryption-failed .contact-button,
-    html.system-decryption-failed .return-button,
-    html.system-decryption-crashing .system-decryption-terminal,
-    html.system-decryption-repairing .system-decryption-terminal,
-    html.system-decryption-level-2 .system-decryption-signal-layer,
-    html.system-decryption-level-3 .system-decryption-signal-layer,
-    html.system-decryption-finalizing .system-decryption-signal-layer,
-    html.system-decryption-decrypting .system-decryption-signal-layer,
-    html.system-decryption-active .system-decryption-signal-layer {
-        animation: none !important;
-        transition: none !important;
-    }
+html.motion-reduced .system-decryption-trigger.is-detected,
+html.motion-reduced .system-decryption-signal,
+html.motion-reduced .system-decryption-overlay,
+html.motion-reduced .system-decryption-terminal,
+html.motion-reduced .system-decryption-sequence.is-visible,
+html.motion-reduced .system-decryption-final strong,
+html.motion-reduced .decryption-corrupt-character,
+html.motion-reduced.system-decryption-failed #matrix-canvas,
+html.motion-reduced.system-decryption-failed .about-image-wrapper img,
+html.motion-reduced.system-decryption-failed .about-image-wrapper::after,
+html.motion-reduced.system-decryption-failed .era-switcher,
+html.motion-reduced.system-decryption-failed .language-switcher,
+html.motion-reduced.system-decryption-failed .hero-button,
+html.motion-reduced.system-decryption-failed .status-badge,
+html.motion-reduced.system-decryption-failed .stat-card,
+html.motion-reduced.system-decryption-failed .skill-card,
+html.motion-reduced.system-decryption-failed .project-card,
+html.motion-reduced.system-decryption-failed .project-terminal,
+html.motion-reduced.system-decryption-failed .project-action-button,
+html.motion-reduced.system-decryption-failed .contact-form,
+html.motion-reduced.system-decryption-failed .form-group,
+html.motion-reduced.system-decryption-failed .contact-button,
+html.motion-reduced.system-decryption-failed .return-button,
+html.motion-reduced.system-decryption-crashing .system-decryption-terminal,
+html.motion-reduced.system-decryption-repairing .system-decryption-terminal,
+html.motion-reduced.system-decryption-level-2 .system-decryption-signal-layer,
+html.motion-reduced.system-decryption-level-3 .system-decryption-signal-layer,
+html.motion-reduced.system-decryption-finalizing .system-decryption-signal-layer,
+html.motion-reduced.system-decryption-decrypting .system-decryption-signal-layer,
+html.motion-reduced.system-decryption-active .system-decryption-signal-layer {
+    animation: none !important;
+    transition: none !important;
+}
 
-    html.system-decryption-level-1 .system-decryption-signal-layer {
-        opacity: 0.02;
-    }
+html.motion-reduced.system-decryption-level-1
+.system-decryption-signal-layer {
+    opacity: 0.02;
+}
 
-    html.system-decryption-level-2 .system-decryption-signal-layer {
-        opacity: 0.03;
-    }
+html.motion-reduced.system-decryption-level-2
+.system-decryption-signal-layer {
+    opacity: 0.03;
+}
 
-    html.system-decryption-level-3 .system-decryption-signal-layer,
-    html.system-decryption-finalizing .system-decryption-signal-layer,
-    html.system-decryption-decrypting .system-decryption-signal-layer,
-    html.system-decryption-active .system-decryption-signal-layer {
-        opacity: 0.04;
-    }
+html.motion-reduced.system-decryption-level-3
+.system-decryption-signal-layer,
+html.motion-reduced.system-decryption-finalizing
+.system-decryption-signal-layer,
+html.motion-reduced.system-decryption-decrypting
+.system-decryption-signal-layer,
+html.motion-reduced.system-decryption-active
+.system-decryption-signal-layer {
+    opacity: 0.04;
+}
 
-    html.system-decryption-finalizing #matrix-canvas,
-    html.system-decryption-decrypting #matrix-canvas,
-    html.system-decryption-decrypted #matrix-canvas {
-        opacity: 0.72;
-        filter: brightness(1.08) contrast(1.05);
-    }
+html.motion-reduced.system-decryption-finalizing #matrix-canvas,
+html.motion-reduced.system-decryption-decrypting #matrix-canvas,
+html.motion-reduced.system-decryption-decrypted #matrix-canvas {
+    opacity: 0.72;
+    filter: brightness(1.08) contrast(1.05);
+}
 
-    html.system-decryption-failed .system-decryption-terminal.is-failed {
-        visibility: hidden;
-    }
+html.motion-reduced.system-decryption-failed
+.system-decryption-terminal.is-failed {
+    visibility: hidden;
+}
 
-    html.system-decryption-failed .system-decryption-signal-layer {
-        opacity: 0.04;
-    }
+html.motion-reduced.system-decryption-failed
+.system-decryption-signal-layer {
+    opacity: 0.04;
+}
 
-    html.system-decryption-failed #matrix-canvas {
-        transform: scale(1.01) skewX(-0.3deg);
-        clip-path: inset(0 0 2% 0);
-        opacity: 0.42;
-        filter: contrast(1.2) brightness(0.82);
-    }
+html.motion-reduced.system-decryption-failed #matrix-canvas {
+    transform: scale(1.01) skewX(-0.3deg);
+    clip-path: inset(0 0 2% 0);
+    opacity: 0.42;
+    filter: contrast(1.2) brightness(0.82);
+}
 
-    html.system-decryption-failed
-    .decryption-corrupt-character--0,
-    html.system-decryption-failed
-    .decryption-corrupt-character--2 {
-        font-family: "Courier New", monospace;
-        letter-spacing: 0.04em;
-        text-shadow: 1px 0 rgba(var(--color-accent-rgb), 0.45);
-    }
+html.motion-reduced.system-decryption-failed
+.decryption-corrupt-character--0,
+html.motion-reduced.system-decryption-failed
+.decryption-corrupt-character--2 {
+    font-family: "Courier New", monospace;
+    letter-spacing: 0.04em;
+    text-shadow: 1px 0 rgba(var(--color-accent-rgb), 0.45);
+}
 
-    html.system-decryption-failed
-    .decryption-corrupt-character--1 {
-        font-family: Georgia, "Times New Roman", serif;
-        font-style: italic;
-        letter-spacing: 0.03em;
-    }
+html.motion-reduced.system-decryption-failed
+.decryption-corrupt-character--1 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: italic;
+    letter-spacing: 0.03em;
+}
 
-    html.system-decryption-failed
-    .decryption-corrupt-character--3 {
-        font-family: Arial, Helvetica, sans-serif;
-        font-weight: 700;
-    }
+html.motion-reduced.system-decryption-failed
+.decryption-corrupt-character--3 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+}
 
-    html.system-decryption-failed :where(
-        .era-switcher,
-        .language-switcher,
-        .hero-button,
-        .status-badge,
-        .stat-card,
-        .skill-card,
-        .project-card,
-        .project-terminal,
-        .project-action-button,
-        .contact-form,
-        .form-group,
-        .contact-button,
-        .return-button
-    ) {
-        clip-path: polygon(0 0, 98% 1%, 100% 96%, 2% 100%);
-        box-shadow:
-            -2px 0 rgba(var(--color-accent-rgb), 0.3),
-            2px 2px 0 rgba(0, 0, 0, 0.35);
-    }
+html.motion-reduced.system-decryption-failed :where(
+    .era-switcher,
+    .language-switcher,
+    .hero-button,
+    .status-badge,
+    .stat-card,
+    .skill-card,
+    .project-card,
+    .project-terminal,
+    .project-action-button,
+    .contact-form,
+    .form-group,
+    .contact-button,
+    .return-button
+) {
+    clip-path: polygon(0 0, 98% 1%, 100% 96%, 2% 100%);
+    box-shadow:
+        -2px 0 rgba(var(--color-accent-rgb), 0.3),
+        2px 2px 0 rgba(0, 0, 0, 0.35);
+}
 
-    html.system-decryption-failed .about-image-wrapper {
-        transform: rotate(-3.5deg) translate(-4px, 4px);
-    }
+html.motion-reduced.system-decryption-failed .about-image-wrapper {
+    transform: rotate(-3.5deg) translate(-4px, 4px);
+}
 
-    html.system-decryption-failed .about-image-wrapper img {
-        transform: skewX(-1.2deg) scaleX(1.025) scaleY(0.99);
-        filter:
-            contrast(1.1)
-            brightness(0.93)
-            saturate(0.88);
-    }
+html.motion-reduced.system-decryption-failed .about-image-wrapper img {
+    transform: skewX(-1.2deg) scaleX(1.025) scaleY(0.99);
+    filter:
+        contrast(1.1)
+        brightness(0.93)
+        saturate(0.88);
+}
 
-    html.system-decryption-failed .about-image-wrapper::after {
-        background-position: 0 58%, 0 0;
-        opacity: 0.3;
-    }
+html.motion-reduced.system-decryption-failed
+.about-image-wrapper::after {
+    background-position: 0 58%, 0 0;
+    opacity: 0.3;
 }
 
 @keyframes decryptionSignalDetected {

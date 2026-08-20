@@ -24,6 +24,7 @@ window.addEventListener("hashchange", () => {
 const reducedMotionQuery = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
 );
+const reducedMotionListenerMap = new WeakMap();
 
 
 /*==================================================
@@ -35,21 +36,32 @@ function prefersReducedMotion() {
 }
 
 function addReducedMotionListener(listener) {
-    if (typeof reducedMotionQuery.addEventListener === "function") {
-        reducedMotionQuery.addEventListener("change", listener);
-        return;
-    }
+    removeReducedMotionListener(listener);
 
-    reducedMotionQuery.addListener(listener);
+    const motionListener = (event) => {
+        listener({
+            matches: event.detail.matches,
+            media: reducedMotionQuery.media
+        });
+    };
+
+    reducedMotionListenerMap.set(listener, motionListener);
+    window.addEventListener(
+        "dario:motion-preference-change",
+        motionListener
+    );
 }
 
 function removeReducedMotionListener(listener) {
-    if (typeof reducedMotionQuery.removeEventListener === "function") {
-        reducedMotionQuery.removeEventListener("change", listener);
-        return;
-    }
+    const motionListener = reducedMotionListenerMap.get(listener);
 
-    reducedMotionQuery.removeListener(listener);
+    if (motionListener) {
+        window.removeEventListener(
+            "dario:motion-preference-change",
+            motionListener
+        );
+        reducedMotionListenerMap.delete(listener);
+    }
 }
 
 

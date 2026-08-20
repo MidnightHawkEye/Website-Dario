@@ -66,18 +66,18 @@
     filter:blur(0);
 }
 
-@media (prefers-reduced-motion: reduce) {
-    .js-motion .section {
-        opacity: 1;
-        transform: none;
-    }
+html.motion-reduced.js-motion .section {
+    opacity: 1;
+    transform: none;
+}
 
+html.motion-reduced :where(
     .reveal-fade-up,
     .reveal-fade-right,
     .reveal-zoom,
-    .reveal-blur {
-        opacity: 1;
-        transform: none;
-        filter: none;
-    }
+    .reveal-blur
+) {
+    opacity: 1;
+    transform: none;
+    filter: none;
 }

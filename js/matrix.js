@@ -1,6 +1,8 @@
 const matrixCanvas = document.getElementById("matrix-canvas");
 const matrixContext = matrixCanvas.getContext("2d");
 const letters = "01アイウエオカキクケコサシスセソABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const matrixHolidayTokens = Object.freeze(["❄", "*", "25", "XMAS"]);
+const matrixHolidayTokenChance = 0.0025;
 const matrixFontSizePx = 16;
 const matrixResetThreshold = 0.975;
 const matrixIntervalMs = 45;
@@ -25,6 +27,22 @@ const matrixDecryptionState = {
     progress: 0,
     frame: 0
 };
+let matrixHolidayModeEnabled = document.documentElement.classList.contains(
+    "winter-mode"
+);
+
+function getMatrixGlyph() {
+    if (
+        matrixHolidayModeEnabled &&
+        Math.random() < matrixHolidayTokenChance
+    ) {
+        return matrixHolidayTokens[
+            Math.floor(Math.random() * matrixHolidayTokens.length)
+        ];
+    }
+
+    return letters[Math.floor(Math.random() * letters.length)];
+}
 
 function updateMatrixPalette() {
     const htmlElement = document.documentElement;
@@ -240,7 +258,7 @@ function drawMatrix() {
         : 0;
 
     for (let i = 0; i < drops.length; i++) {
-        const text = letters[Math.floor(Math.random() * letters.length)];
+        const text = getMatrixGlyph();
         matrixContext.fillText(
             text,
             i * matrixFontSizePx,
@@ -251,7 +269,7 @@ function drawMatrix() {
             matrixContext.save();
             matrixContext.globalAlpha = 0.62;
             matrixContext.fillText(
-                letters[Math.floor(Math.random() * letters.length)],
+                getMatrixGlyph(),
                 i * matrixFontSizePx,
                 (drops[i] - 1) * matrixFontSizePx
             );
@@ -357,6 +375,19 @@ function updateMatrixMotionPreference(event) {
 addReducedMotionListener(updateMatrixMotionPreference);
 
 window.addEventListener("dario:era-change", () => {
+    updateMatrixPalette();
+    clearMatrixAnimation();
+
+    if (
+        prefersReducedMotion() &&
+        matrixDecryptionState.phase !== "normal"
+    ) {
+        drawMatrix();
+    }
+});
+
+window.addEventListener("dario:winter-mode-change", (event) => {
+    matrixHolidayModeEnabled = event.detail?.enabled === true;
     updateMatrixPalette();
     clearMatrixAnimation();
 
