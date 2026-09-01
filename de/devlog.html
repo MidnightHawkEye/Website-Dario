@@ -6,14 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta
         name="description"
-        content="Ein rückblickender Entwicklungsbericht zu DARIO.exe vom ersten Commit bis Version 1.4, basierend auf der dokumentierten Projektgeschichte."
+        content="Ein rückblickender Entwicklungsbericht zu DARIO.exe vom ersten Commit bis Version 1.5, basierend auf der dokumentierten Projektgeschichte."
         data-i18n-content="devlog.metaDescription">
 
     <meta property="og:type" content="website">
     <meta property="og:title" content="DEVLOG | DARIO.exe" data-i18n-content="devlog.title">
     <meta
         property="og:description"
-        content="Ein rückblickender Entwicklungsbericht zu DARIO.exe vom ersten Commit bis Version 1.4, basierend auf der dokumentierten Projektgeschichte."
+        content="Ein rückblickender Entwicklungsbericht zu DARIO.exe vom ersten Commit bis Version 1.5, basierend auf der dokumentierten Projektgeschichte."
         data-i18n-content="devlog.metaDescription">
     <meta property="og:url" content="https://dario-exe.ch/de/devlog.html">
     <meta property="og:site_name" content="DARIO.exe">
@@ -42,15 +42,15 @@
     <link rel="alternate" hreflang="de-CH" href="https://dario-exe.ch/de/devlog.html">
     <link rel="alternate" hreflang="x-default" href="https://dario-exe.ch/devlog.html">
 
-    <script src="/js/era-init.js?v=1.5.4"></script>
+    <script src="/js/era-init.js?v=1.5.5"></script>
     <link rel="stylesheet" href="/css/global.css?v=1.4.1">
     <link rel="stylesheet" href="/css/nav-bar.css?v=1.4.3">
     <link rel="stylesheet" href="/css/devlog.css?v=1.2.6">
 <link rel="stylesheet" href="/css/era-theme.css?v=1.4.7">
-    <link rel="stylesheet" href="/css/winter-preview.css?v=1.5.13">
+    <link rel="stylesheet" href="/css/winter-preview.css?v=1.5.14">
 
     <script src="/js/global.js?v=1.2.4" defer></script>
-<script src="/js/i18n.js?v=1.4.6" defer></script>
+<script src="/js/i18n.js?v=1.5.0" defer></script>
 <script src="/js/era-switcher.js?v=1.4.6" defer></script>
     <script src="/js/navigation.js?v=1.2.6" defer></script>
     <script src="/js/progress-bar.js?v=1.2.2" defer></script>
@@ -171,7 +171,7 @@
         <section class="devlog-hero" aria-labelledby="devlog-title">
             <p class="devlog-kicker" data-i18n="devlog.kicker">&gt; VERSIONSGESCHICHTE</p>
             <h1 id="devlog-title" data-i18n="devlog.heading">DEVLOG</h1>
-            <p class="devlog-intro" data-i18n="devlog.intro">Vom ersten Commit bis v1.4: die dokumentierten Meilensteine, Herausforderungen und Learnings hinter DARIO.exe.</p>
+            <p class="devlog-intro" data-i18n="devlog.intro">Vom ersten Commit bis v1.5: die dokumentierten Meilensteine, Herausforderungen und Learnings hinter DARIO.exe.</p>
             <p class="devlog-source-note" data-i18n="devlog.sourceNote">Quellen: README, CHANGELOG und dokumentierte Git-Meilensteine.</p>
 
             <div
@@ -187,24 +187,67 @@
                 </div>
                 <div class="devlog-summary-card">
                     <span data-i18n="devlog.versionLabel">LETZTER RELEASE</span>
-                    <strong>v1.4</strong>
+                    <strong>v1.5</strong>
                 </div>
                 <div class="devlog-summary-card">
                     <span data-i18n="devlog.entriesLabel">EINTRÄGE</span>
-                    <strong data-i18n="devlog.entryCount">07</strong>
+                    <strong data-i18n="devlog.entryCount">08</strong>
                 </div>
             </div>
         </section>
 
         <section class="devlog-next" aria-labelledby="next-mission-title">
             <h2 id="next-mission-title" data-i18n="devlog.nextLabel">NÄCHSTE MISSION</h2>
-            <strong data-i18n="devlog.next">Ideen für Version 1.5 sammeln.</strong>
+            <strong data-i18n="devlog.next">Ideen für Version 1.6 sammeln.</strong>
         </section>
 
         <section class="devlog-timeline-section" aria-labelledby="timeline-title">
             <h2 id="timeline-title" class="devlog-section-label" data-i18n="devlog.timelineLabel">CHRONOLOGISCHES PROTOKOLL</h2>
 
             <div class="devlog-timeline">
+                <article class="devlog-entry" id="version-1-5">
+                    <div class="devlog-entry-rail" aria-hidden="true">
+                        <span class="devlog-marker"></span>
+                        <span class="devlog-entry-number">008</span>
+                    </div>
+                    <div class="devlog-entry-card">
+                        <header class="devlog-entry-header">
+                            <time datetime="2026-08-30" data-i18n="devlog.entry8.date">30. August 2026</time>
+                            <span class="devlog-tag">v1.5.0</span>
+                        </header>
+                        <h3 data-i18n="devlog.entry8.title">Ein Wintersystem, das sich selbst aktiviert</h3>
+                        <p class="devlog-entry-summary" data-i18n="devlog.entry8.summary">Version 1.5 ergänzte einen automatischen, ausschließlich im Dezember aktiven Wintermodus mit responsivem Schnee, saisonalen Oberflächendetails und einer eigenen Pixel-Interpretation für die Win98-Epoche.</p>
+                        <div class="devlog-detail-grid">
+                            <section class="devlog-detail devlog-detail-wide">
+                                <h4 data-i18n="devlog.changesLabel">WICHTIGSTE ÄNDERUNGEN</h4>
+                                <ul class="devlog-change-list">
+                                    <li data-i18n="devlog.entry8.change1">Einen zentralen lokalen Kalenderzustand ergänzt, der den Wintermodus nur im Dezember aktiviert und sich nach Mitternacht automatisch neu prüft.</li>
+                                    <li data-i18n="devlog.entry8.change2">Die bestehende Partikel-Canvas für responsiven modernen Schneefall und reduzierten Win98-Pixelschnee mit weniger Elementen auf Mobilgeräten wiederverwendet.</li>
+                                    <li data-i18n="devlog.entry8.change3">Saisonale Farben, Frostflächen, wachsende Schneekappen, dezente Weihnachtsbeleuchtung und eine passende Darstellung für Portfolio, DEVLOG, Datenschutz- und 404-Seite ergänzt.</li>
+                                    <li data-i18n="devlog.entry8.change4">Touch- und Tastaturbedienung geschützt und die kontinuierliche Schneeanimation bei reduzierter Bewegung durch ein sichtbares statisches Bild ersetzt.</li>
+                                    <li data-i18n="devlog.entry8.change5">Einen Performance-Audit mit 24 Durchläufen für beide Epochen, Winter an/aus und Desktop-/Mobile-Emulation abgeschlossen – mit perfekten Werten in allen Kategorien außer Mobile Performance.</li>
+                                </ul>
+                            </section>
+                            <section class="devlog-detail">
+                                <h4 data-i18n="devlog.challengeLabel">HERAUSFORDERUNG</h4>
+                                <p data-i18n="devlog.entry8.challenge">Die saisonale Ebene musste zwei sehr unterschiedliche visuelle Epochen und mehrere Seitentypen unterstützen, ohne die normale Website außerhalb des Dezembers zu verändern oder Animationssysteme zu duplizieren.</p>
+                            </section>
+                            <section class="devlog-detail">
+                                <h4 data-i18n="devlog.solutionLabel">LÖSUNG</h4>
+                                <p data-i18n="devlog.entry8.solution">Zentrale Dokumentklassen und gemeinsame Zustandsereignisse verbinden Kalender, CSS-Variablen, Partikel-Canvas und den vorhandenen Matrix-Hintergrund; responsive Regeln und Reduced Motion halten das Ergebnis kontrolliert.</p>
+                            </section>
+                            <section class="devlog-detail">
+                                <h4 data-i18n="devlog.learningLabel">LEARNING</h4>
+                                <p data-i18n="devlog.entry8.learning">Ich lernte, dass eine saisonale Funktion deutlich wartbarer bleibt, wenn Datumserkennung, visueller Zustand und Barrierefreiheit eine gemeinsame Quelle verwenden.</p>
+                            </section>
+                            <section class="devlog-detail">
+                                <h4 data-i18n="devlog.outlookLabel">AUSBLICK</h4>
+                                <p data-i18n="devlog.entry8.outlook">Als Nächstes prüfe ich den Live-Release von v1.5 in weiteren Browsern und auf einem iPhone und sammle danach Ideen für Version 1.6.</p>
+                            </section>
+                        </div>
+                    </div>
+                </article>
+
                 <article class="devlog-entry" id="version-1-4">
                     <div class="devlog-entry-rail" aria-hidden="true">
                         <span class="devlog-marker"></span>
@@ -497,7 +540,7 @@
                 </article>
 
                 <!--
-                    FUTURE DEVLOG ENTRY TEMPLATE — VERSION 1.5+
+                    FUTURE DEVLOG ENTRY TEMPLATE — VERSION 1.6+
 
                     1. Copy this complete <article> block into .devlog-timeline.
                     2. Give the entry a unique id and increment the three-digit number.
@@ -557,7 +600,7 @@
             <span aria-hidden="true"> • </span>
             <a href="/de/privacy.html" data-i18n="footer.privacy">Datenschutzerklärung</a>
         </p>
-        <p class="footer-version">DARIO.exe v1.4</p>
+        <p class="footer-version">DARIO.exe v1.5</p>
     </footer>
 </body>
 </html>

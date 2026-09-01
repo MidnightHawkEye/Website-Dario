@@ -6,7 +6,43 @@ All notable changes to DARIO.exe are documented in this file.
 
 ## [Unreleased]
 
-No unreleased changes are currently documented.
+No unreleased changes yet.
+
+---
+
+## [1.5.0] - 2026-08-30
+
+### Added
+
+- Added one centralized local-calendar Winter Mode that activates `winter-mode` and `snow-mode` only during December, refreshes its state after midnight and returns to the normal interface on January 1
+- Added responsive canvas snowfall for the modern 2026 interface and lower-density pixel snow for the Win98 interface
+- Added shared seasonal colors, frosted surfaces, gradual snow accumulation, restrained holiday lights and a short seasonal system-status sequence
+- Extended the seasonal presentation to the English and German portfolio, DEVLOG, Privacy Policy and 404 pages through the existing shared page architecture
+
+### Changed
+
+- Reused the existing particle and Matrix systems for winter rendering instead of adding another animation framework or independent background implementation
+- Adapted snow density and decorative details for Mobile and kept all seasonal layers non-interactive so links, forms, touch and keyboard controls remain available
+- Changed Reduced Motion winter snowfall from a continuously scheduled slow canvas loop to a static, visible snow frame
+- Removed obsolete storage cleanup for the retired Winter and Motion preview modes
+- Updated the README and Lighthouse documentation with the current v1.5 performance architecture, measured results and test limitations
+
+### Fixed
+
+- Improved the final holiday system line and footer-version contrast in the Win98 winter theme
+- Expanded the project-card release-number trigger to a 44 × 44 pixel touch target without changing its visible size or surrounding layout
+
+### Tested
+
+- Ran three Lighthouse 13.4.1 measurements for each combination of Desktop/Mobile emulation, DARIO.exe 2026/Win98 and Winter on/off
+- Recorded median scores of 100 on Desktop and 91 on Mobile Performance, with 100 for Accessibility, Best Practices and SEO in all eight states
+- Measured stable Desktop CPU ranges after animation startup and verified repeat era changes, Canvas resize handling, loop counts, resources, short-term memory behaviour and Reduced Motion
+- Verified that the targeted Win98 winter contrast correction reaches 100 Accessibility in three Desktop and three Mobile follow-up runs
+- Verified the December boundaries for November 30, December 1, December 31 and January 1 against the centralized seasonal function
+- Completed the final interactive release pass in Chromium 151 at Desktop and 390 × 844 Mobile sizes, including navigation, language persistence, era switching, form validation, the SYSTEM DECRYPTION dialog and return-to-system controls
+- Rendered the finished release in Microsoft Edge 152 and Firefox 153.0.4, including a dedicated 390 × 844 Firefox responsive check, with no browser-console errors in the interactive test
+- Verified 17 JavaScript files, 177 local asset and page references, seven pages without duplicate IDs, 349 matching translation keys per language and all 17 JavaScript plus 15 CSS source files as actively referenced
+- Documented that physical-device Mobile CPU/FPS measurements were not available instead of estimating values
 
 ---
 

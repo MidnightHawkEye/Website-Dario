@@ -14,9 +14,10 @@ The website includes animated sections, interactive navigation, project cards, s
 
 ## Development Status
 
-The latest released version is **v1.4**, released on August 16, 2026. This
-release adds the persistent 1998/2026 time-machine interface, expands the
-native visual system and introduces the hidden SYSTEM DECRYPTION experience.
+The latest released version is **v1.5**, released on August 30, 2026. This
+Winter Update adds one centralized December mode, responsive snow for both
+visual eras, seasonal interface details and verified reduced-motion and
+performance safeguards.
 
 
 
@@ -44,6 +45,8 @@ native visual system and introduces the hidden SYSTEM DECRYPTION experience.
   a synchronized year counter and a scanline transition
 - Hidden bilingual SYSTEM DECRYPTION memory game with three rounds, a reliable
   five-input Desktop/Mobile trigger and a Matrix-based finale
+- Automatic December-only Winter Mode with modern snowfall, Win98 pixel snow,
+  responsive snow accumulation and restrained holiday interface details
 - Version number and copyright information in the footer
 
 ## Multilingual Support
@@ -93,7 +96,8 @@ Canvas API with their own lightweight animation loops.
 
 The animation system also respects performance and accessibility settings:
 
-- `prefers-reduced-motion` disables decorative CSS movement and canvas effects
+- `prefers-reduced-motion` stops decorative CSS and ongoing canvas movement;
+  winter snow remains visible as a static canvas image
 - typing, loader and reveal sequences complete immediately in reduced mode
 - smooth programmatic scrolling switches to immediate scrolling when requested
 - CSS animations pause while the browser tab is inactive
@@ -114,14 +118,35 @@ year change readable without rapid movement. Both themes reuse the
 centralized CSS color variables and remain available on the English and
 German pages.
 
-The 1998 interface uses the classic Windows 98 teal desktop color. Its
-particle canvas is hidden and paused, while the Matrix canvas switches to a
-quieter dark-blue palette that remains visible without overpowering content.
-Neon-green accents are reserved for the modern 2026 interface; the retro
-interface uses teal, navy, grey, black and white.
+The 1998 interface uses the classic Windows 98 teal desktop color. Outside
+winter, the shared particle canvas renders a small number of low-frequency
+retro data pixels; during winter it renders reduced pixel snow. Mobile uses
+fewer elements than Desktop. The Matrix canvas switches to a quieter dark-blue
+palette that remains visible without overpowering content. Neon-green accents
+are reserved for the modern 2026 interface; the retro interface uses teal,
+navy, grey, black and white.
 
 - Matrix and particle loops stop in inactive tabs and resume when appropriate
 - no external animation framework or animation CDN is required
+
+## Winter Mode
+
+Version 1.5 adds one centralized seasonal state in `js/era-init.js`. The
+website applies `winter-mode` and `snow-mode` to the document only during
+December, checks the local calendar again shortly after midnight and returns
+to the normal interface automatically on January 1. Other components consume
+that shared state instead of performing their own date checks.
+
+The modern 2026 interface uses responsive canvas snow, frosted surfaces,
+gradually appearing snow caps and restrained holiday lights. The 1998
+interface keeps the same seasonal state but renders lower-density pixel snow
+and era-specific winter styling. The shared winter layer also covers the
+DEVLOG, Privacy Policy and 404 page without changing their page structure.
+
+Mobile viewports use fewer snow elements and smaller decorative details.
+Decorative layers do not capture pointer input or create layout width. When
+`prefers-reduced-motion` is active, continuous snow movement is replaced with
+a static visible frame and decorative CSS sequences are reduced or disabled.
 
 ## SYSTEM DECRYPTION Easter Egg
 
@@ -193,9 +218,14 @@ Website-Dario/
 
 ## Quality Reports
 
-The current Desktop and Mobile scores, historical animation comparison
-and links to all original Lighthouse reports are documented in
-[LIGHTHOUSE.md](LIGHTHOUSE.md).
+The current v1.5 development audit, historical measurements, animation
+comparison and report evidence are documented in
+[LIGHTHOUSE.md](LIGHTHOUSE.md). On August 25, 2026, all four Desktop states
+(2026/1998 with winter on/off) scored 100 for Performance, Accessibility,
+Best Practices and SEO. The matching 390 × 844 Lighthouse Mobile emulations
+scored 91 for Performance and 100 in the other categories. Each result is the
+median of three runs; CPU, repeat-switch, resize, loop and reduced-motion
+checks are documented separately instead of being estimated.
 
 ## DEVLOG
 
@@ -212,7 +242,7 @@ instead of recording every small daily change.
 ### Adding future entries
 
 New milestone entries are added to `devlog.html`. A commented HTML
-template for version 1.5 and later entries is included directly below
+template for version 1.6 and later entries is included directly below
 the current timeline. Matching German and English text keys are stored
 centrally in `js/i18n.js`.
 

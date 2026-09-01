@@ -622,6 +622,14 @@ html[data-era="1998"] #particle-canvas {
     display: none;
 }
 
+html[data-era="1998"]:not(.snow-mode):not(.motion-reduced) #particle-canvas {
+    display: block;
+    opacity: 0.52;
+    filter: none;
+    mix-blend-mode: multiply;
+    image-rendering: pixelated;
+}
+
 html[data-era="1998"] .glitch::before {
     text-shadow: -2px 0 var(--era-retro-title);
 }

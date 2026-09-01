@@ -2,11 +2,14 @@
 
 const desktopParticleCount = 60;
 const mobileParticleDivider = 3;
-const particleDisabledEra = "1998";
+const retroEra = "1998";
 const modernSnowflakeCount = 46;
 const retroSnowflakeCount = 34;
 const mobileSnowflakeDivider = 2.4;
 const reducedMotionSnowflakeDivider = 3.5;
+const retroAmbientDesktopPixelCount = 18;
+const retroAmbientMobileDivider = 2.25;
+const retroAmbientFrameIntervalMs = 100;
 
 const mobileParticleQuery = window.matchMedia(
     `(max-width: ${mobileBreakpointPx}px)`
@@ -30,14 +33,22 @@ function snowModeEnabled() {
     return document.documentElement.classList.contains("snow-mode");
 }
 
-function particleEffectsEnabledForCurrentState() {
-    return snowModeEnabled() ||
-        document.documentElement.dataset.era !== particleDisabledEra;
+function retroAmbientModeEnabled() {
+    return !snowModeEnabled() &&
+        document.documentElement.dataset.era === retroEra;
+}
+
+function getTargetRetroAmbientPixelCount() {
+    const targetCount = mobileParticleQuery.matches
+        ? retroAmbientDesktopPixelCount / retroAmbientMobileDivider
+        : retroAmbientDesktopPixelCount;
+
+    return Math.max(6, Math.round(targetCount));
 }
 
 function getTargetSnowflakeCount() {
     const isRetroEra =
-        document.documentElement.dataset.era === particleDisabledEra;
+        document.documentElement.dataset.era === retroEra;
     let targetCount = isRetroEra
         ? retroSnowflakeCount
         : modernSnowflakeCount;
@@ -294,10 +305,82 @@ class Snowflake {
     }
 }
 
+/*--------------------- Win98 Ambient Data Pixels ---------------------*/
+
+class RetroAmbientPixel {
+    constructor() {
+        this.reset(true);
+    }
+
+    reset(initialPosition = false) {
+        this.x = initialPosition
+            ? Math.random() * particleCanvas.width
+            : -8;
+        this.y = Math.random() * particleCanvas.height;
+        const sizeVariation = Math.random();
+        this.size = sizeVariation < 0.7
+            ? 2
+            : sizeVariation < 0.94
+                ? 3
+                : 4;
+        this.opacity = Math.random() * 0.14 + 0.18;
+        this.speedX = Math.random() * 3.5 + 3;
+        this.speedY = (Math.random() - 0.5) * 2.4;
+        this.flickerPhase = Math.random() * Math.PI * 2;
+        this.flickerRate = Math.random() * 0.00028 + 0.00024;
+        this.hasDataTick = Math.random() < 0.32;
+        this.color = Math.random() < 0.18
+            ? "#c0c0c0"
+            : Math.random() < 0.55
+                ? "#000080"
+                : "#003f5c";
+    }
+
+    draw(timestamp) {
+        const flicker = 0.68 +
+            Math.sin(timestamp * this.flickerRate + this.flickerPhase) * 0.32;
+        const x = Math.round(this.x);
+        const y = Math.round(this.y);
+
+        particleContext.globalAlpha = this.opacity * flicker;
+        particleContext.fillStyle = this.color;
+        particleContext.fillRect(x, y, this.size, this.size);
+
+        if (this.hasDataTick && flicker > 0.94) {
+            particleContext.fillRect(
+                x - this.size * 3,
+                y,
+                this.size * 2,
+                1
+            );
+        }
+
+        particleContext.globalAlpha = 1;
+    }
+
+    update(deltaTimeMs, timestamp) {
+        const deltaSeconds = deltaTimeMs / 1000;
+
+        this.x += this.speedX * deltaSeconds;
+        this.y += this.speedY * deltaSeconds;
+
+        if (
+            this.x > particleCanvas.width + 8 ||
+            this.y < -8 ||
+            this.y > particleCanvas.height + 8
+        ) {
+            this.reset(false);
+        }
+
+        this.draw(timestamp);
+    }
+}
+
 /*--------------------- Particle Creating many Particles ---------------------*/
 
 const particles = [];
 const snowflakes = [];
+const retroAmbientPixels = [];
 let snowflakeEra = null;
 
 function adjustParticleCount() {
@@ -321,7 +404,7 @@ function adjustSnowflakeCount() {
     }
 
     const targetSnowflakeCount = getTargetSnowflakeCount();
-    const isRetroEra = currentEra === particleDisabledEra;
+    const isRetroEra = currentEra === retroEra;
 
     while (snowflakes.length > targetSnowflakeCount) {
         snowflakes.pop();
@@ -332,7 +415,18 @@ function adjustSnowflakeCount() {
     }
 }
 
-adjustParticleCount();
+function adjustRetroAmbientPixelCount() {
+    const targetPixelCount = getTargetRetroAmbientPixelCount();
+
+    while (retroAmbientPixels.length > targetPixelCount) {
+        retroAmbientPixels.pop();
+    }
+
+    while (retroAmbientPixels.length < targetPixelCount) {
+        retroAmbientPixels.push(new RetroAmbientPixel());
+    }
+}
+
 /*--------------------- Particle Animates ---------------------*/
 
 let particleAnimationFrameId = null;
@@ -340,20 +434,24 @@ let lastParticleFrameTimestamp = 0;
 
 function animateParticles(timestamp) {
     const snowIsActive = snowModeEnabled();
+    const retroAmbientIsActive = retroAmbientModeEnabled();
     const elapsedSinceLastFrameMs = lastParticleFrameTimestamp === 0
         ? 1000 / 60
         : timestamp - lastParticleFrameTimestamp;
-    const snowFrameIntervalMs = prefersReducedMotion()
-        ? 160
-        : document.documentElement.dataset.era === particleDisabledEra
-            ? 80
+    const targetFrameIntervalMs = snowIsActive
+        ? prefersReducedMotion()
+            ? 160
+            : document.documentElement.dataset.era === retroEra
+                ? 80
+                : 0
+        : retroAmbientIsActive
+            ? retroAmbientFrameIntervalMs
             : 0;
 
     if (
-        snowIsActive &&
-        snowFrameIntervalMs > 0 &&
+        targetFrameIntervalMs > 0 &&
         lastParticleFrameTimestamp !== 0 &&
-        elapsedSinceLastFrameMs < snowFrameIntervalMs
+        elapsedSinceLastFrameMs < targetFrameIntervalMs
     ) {
         particleAnimationFrameId =
             requestAnimationFrame(animateParticles);
@@ -373,6 +471,10 @@ function animateParticles(timestamp) {
         snowflakes.forEach((snowflake) => {
             snowflake.update(elapsedTimeMs);
         });
+    } else if (retroAmbientIsActive) {
+        retroAmbientPixels.forEach((pixel) => {
+            pixel.update(elapsedTimeMs, timestamp);
+        });
     } else {
         particles.forEach((particle) => {
             particle.update();
@@ -385,20 +487,43 @@ function animateParticles(timestamp) {
         requestAnimationFrame(animateParticles);
 }
 
+function drawStaticSnow() {
+    clearParticleAnimation();
+    snowflakes.forEach((snowflake) => {
+        if (snowflake.isRetroEra) {
+            snowflake.drawRetro();
+            return;
+        }
+
+        snowflake.drawModern();
+    });
+}
+
 function startParticleAnimation() {
     const snowIsActive = snowModeEnabled();
 
     if (
         particleAnimationFrameId !== null ||
-        !isTabActive() ||
-        (!snowIsActive && prefersReducedMotion()) ||
-        !particleEffectsEnabledForCurrentState()
+        !isTabActive()
     ) {
+        return;
+    }
+
+    if (prefersReducedMotion()) {
+        if (snowIsActive) {
+            adjustSnowflakeCount();
+            drawStaticSnow();
+        }
+
         return;
     }
 
     if (snowIsActive) {
         adjustSnowflakeCount();
+    } else if (retroAmbientModeEnabled()) {
+        adjustRetroAmbientPixelCount();
+    } else {
+        adjustParticleCount();
     }
 
     lastParticleFrameTimestamp = 0;
@@ -446,11 +571,16 @@ window.addEventListener("dario:era-change", (event) => {
     clearParticleAnimation();
 
     if (snowModeEnabled()) {
+        retroAmbientPixels.length = 0;
         snowflakes.length = 0;
         snowflakeEra = null;
         adjustSnowflakeCount();
-    } else if (event.detail?.era === particleDisabledEra) {
-        return;
+    } else if (event.detail?.era === retroEra) {
+        retroAmbientPixels.length = 0;
+        adjustRetroAmbientPixelCount();
+    } else {
+        retroAmbientPixels.length = 0;
+        adjustParticleCount();
     }
 
     startParticleAnimation();
@@ -461,13 +591,20 @@ window.addEventListener("dario:snow-mode-change", (event) => {
     clearParticleAnimation();
 
     if (event.detail?.enabled) {
+        retroAmbientPixels.length = 0;
         snowflakes.length = 0;
         snowflakeEra = null;
         adjustSnowflakeCount();
     } else {
         snowflakes.length = 0;
         snowflakeEra = null;
-        adjustParticleCount();
+
+        if (retroAmbientModeEnabled()) {
+            retroAmbientPixels.length = 0;
+            adjustRetroAmbientPixelCount();
+        } else {
+            adjustParticleCount();
+        }
     }
 
     startParticleAnimation();
@@ -559,6 +696,16 @@ window.addEventListener("resize", () => {
         }
     });
 
+    retroAmbientPixels.forEach((pixel) => {
+        if (oldWidth > 0) {
+            pixel.x = (pixel.x / oldWidth) * newWidth;
+        }
+
+        if (oldHeight > 0) {
+            pixel.y = (pixel.y / oldHeight) * newHeight;
+        }
+    });
+
     // Resize the canvas to the new viewport size
     particleCanvas.width = newWidth;
     particleCanvas.height = newHeight;
@@ -576,7 +723,13 @@ window.addEventListener("resize", () => {
 
     if (snowModeEnabled()) {
         adjustSnowflakeCount();
+    } else if (retroAmbientModeEnabled()) {
+        adjustRetroAmbientPixelCount();
     } else {
         adjustParticleCount();
+    }
+
+    if (prefersReducedMotion() && snowModeEnabled()) {
+        drawStaticSnow();
     }
 });

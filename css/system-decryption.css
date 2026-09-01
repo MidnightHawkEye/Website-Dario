@@ -47,6 +47,13 @@ html.system-decryption-open .system-decryption-trigger {
 }
 
 .project-version-trigger {
+    display: inline-flex;
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 7px 15px;
+    margin: -14px -7px -15px;
     cursor: pointer;
 }
 

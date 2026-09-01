@@ -167,13 +167,6 @@
         }, Math.max(1000, nextLocalDay.getTime() - referenceDate.getTime()));
     }
 
-    try {
-        localStorage.removeItem("darioWinterPreview");
-        sessionStorage.removeItem("darioMotionPreview");
-    } catch {
-        // Storage cleanup must not block automatic seasonal startup.
-    }
-
     window.darioWinterMode = Object.freeze({
         isActive() {
             return rootElement.classList.contains(winterModeClass);

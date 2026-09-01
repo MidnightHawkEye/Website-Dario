@@ -509,7 +509,7 @@ html.winter-mode:not([data-era="1998"]) .project-terminal {
     }
 
     100% {
-        opacity: 0.72;
+        opacity: 1;
         transform: translateX(0);
     }
 }
@@ -697,6 +697,10 @@ html.winter-mode[data-era="1998"] {
     --christmas-ice-blue-rgb: 184, 230, 242;
     --winter-snow-cap-height: 15px;
     --winter-snow-cap-offset: -10px;
+}
+
+html.winter-mode[data-era="1998"] .footer-version {
+    opacity: 1;
 }
 
 html.winter-mode[data-era="1998"] body {

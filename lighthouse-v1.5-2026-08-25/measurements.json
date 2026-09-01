@@ -1,0 +1,129 @@
+{
+  "audit": "DARIO.exe v1.5 development performance audit",
+  "tested": "2026-08-25",
+  "environment": {
+    "operatingSystem": "Microsoft Windows build 10.0.26200.9278",
+    "browser": "Google Chrome 151.0.7922.174",
+    "lighthouse": "13.4.1",
+    "logicalProcessors": 32,
+    "source": "Local static server at 127.0.0.1"
+  },
+  "methodology": {
+    "lighthouseRunsPerScenario": 3,
+    "reportedLighthouseValue": "Median",
+    "desktopViewport": "1350x940, device scale factor 1",
+    "mobileViewport": "390x844, device scale factor 2.625",
+    "mobileMode": "Lighthouse mobile emulation with simulated throttling",
+    "winterState": "Deterministic December date on a temporary test page",
+    "eraState": "Deterministic 2026 or 1998 state on a temporary test page",
+    "cpu": "Dedicated headless Chrome process tree, background throttling disabled, 6 s stabilization, three 4 s samples; total CPU normalized across 32 logical processors"
+  },
+  "units": {
+    "paintAndThreadMetrics": "milliseconds",
+    "transfer": "KiB",
+    "cpu": "percent of total 32-logical-processor capacity"
+  },
+  "scenarios": [
+    {
+      "id": "desktop-modern-normal",
+      "median": {"performance": 100, "accessibility": 100, "bestPractices": 100, "seo": 100, "fcp": 446, "lcp": 671, "tbt": 0, "cls": 0.003, "speedIndex": 446, "tti": 673, "mainThread": 398, "jsBoot": 36, "transferKiB": 1544.9, "requests": 34, "warnings": 0},
+      "runs": [
+        {"performance": 100, "accessibility": 100, "bestPractices": 100, "seo": 100, "fcp": 446, "lcp": 671, "tbt": 0, "cls": 0.003, "speedIndex": 446, "tti": 673, "mainThread": 398, "jsBoot": 35, "transferKiB": 1544.9, "requests": 34, "warnings": 0},
+        {"performance": 100, "accessibility": 100, "bestPractices": 100, "seo": 100, "fcp": 446, "lcp": 670, "tbt": 0, "cls": 0.003, "speedIndex": 446, "tti": 672, "mainThread": 392, "jsBoot": 36, "transferKiB": 1544.9, "requests": 34, "warnings": 0},
+        {"performance": 100, "accessibility": 100, "bestPractices": 100, "seo": 100, "fcp": 447, "lcp": 671, "tbt": 0, "cls": 0.003, "speedIndex": 447, "tti": 673, "mainThread": 424, "jsBoot": 37, "transferKiB": 1544.9, "requests": 34, "warnings": 0}
+      ]
+    },
+    {
+      "id": "desktop-modern-winter",
+      "median": {"performance": 100, "accessibility": 100, "bestPractices": 100, "seo": 100, "fcp": 447, "lcp": 673, "tbt": 0, "cls": 0.003, "speedIndex": 593, "tti": 675, "mainThread": 537, "jsBoot": 25, "transferKiB": 1544.9, "requests": 35, "warnings": 0},
+      "runs": [
+        {"performance": 100, "accessibility": 100, "bestPractices": 100, "seo": 100, "fcp": 446, "lcp": 670, "tbt": 0, "cls": 0.003, "speedIndex": 623, "tti": 672, "mainThread": 570, "jsBoot": 23, "transferKiB": 1544.9, "requests": 35, "warnings": 0},
+        {"performance": 100, "accessibility": 100, "bestPractices": 100, "seo": 100, "fcp": 447, "lcp": 692, "tbt": 0, "cls": 0.003, "speedIndex": 579, "tti": 692, "mainThread": 487, "jsBoot": 25, "transferKiB": 1544.9, "requests": 35, "warnings": 0},
+        {"performance": 100, "accessibility": 100, "bestPractices": 100, "seo": 100, "fcp": 448, "lcp": 673, "tbt": 0, "cls": 0.003, "speedIndex": 593, "tti": 675, "mainThread": 537, "jsBoot": 26, "transferKiB": 1544.9, "requests": 35, "warnings": 0}
+      ]
+    },
+    {
+      "id": "desktop-retro-normal",
+      "median": {"performance": 100, "accessibility": 100, "bestPractices": 100, "seo": 100, "fcp": 447, "lcp": 671, "tbt": 0, "cls": 0.004, "speedIndex": 640, "tti": 673, "mainThread": 370, "jsBoot": 14, "transferKiB": 1544.9, "requests": 34, "warnings": 0},
+      "runs": [
+        {"performance": 100, "accessibility": 100, "bestPractices": 100, "seo": 100, "fcp": 447, "lcp": 691, "tbt": 0, "cls": 0.004, "speedIndex": 637, "tti": 691, "mainThread": 374, "jsBoot": 15, "transferKiB": 1544.9, "requests": 34, "warnings": 0},
+        {"performance": 100, "accessibility": 100, "bestPractices": 100, "seo": 100, "fcp": 446, "lcp": 671, "tbt": 0, "cls": 0.004, "speedIndex": 640, "tti": 673, "mainThread": 370, "jsBoot": 14, "transferKiB": 1544.9, "requests": 34, "warnings": 0},
+        {"performance": 100, "accessibility": 100, "bestPractices": 100, "seo": 100, "fcp": 447, "lcp": 671, "tbt": 0, "cls": 0.004, "speedIndex": 640, "tti": 673, "mainThread": 368, "jsBoot": 14, "transferKiB": 1544.9, "requests": 34, "warnings": 0}
+      ]
+    },
+    {
+      "id": "desktop-retro-winter",
+      "median": {"performance": 100, "accessibility": 100, "bestPractices": 100, "seo": 100, "fcp": 447, "lcp": 692, "tbt": 0, "cls": 0.004, "speedIndex": 626, "tti": 692, "mainThread": 446, "jsBoot": 17, "transferKiB": 1545.3, "requests": 34, "warnings": 0},
+      "runs": [
+        {"performance": 100, "accessibility": 100, "bestPractices": 100, "seo": 100, "fcp": 449, "lcp": 695, "tbt": 0, "cls": 0.004, "speedIndex": 661, "tti": 695, "mainThread": 478, "jsBoot": 19, "transferKiB": 1545.3, "requests": 34, "warnings": 0},
+        {"performance": 100, "accessibility": 100, "bestPractices": 100, "seo": 100, "fcp": 447, "lcp": 672, "tbt": 0, "cls": 0.004, "speedIndex": 624, "tti": 674, "mainThread": 437, "jsBoot": 17, "transferKiB": 1545.3, "requests": 34, "warnings": 0},
+        {"performance": 100, "accessibility": 100, "bestPractices": 100, "seo": 100, "fcp": 447, "lcp": 692, "tbt": 0, "cls": 0.004, "speedIndex": 626, "tti": 692, "mainThread": 446, "jsBoot": 17, "transferKiB": 1545.4, "requests": 34, "warnings": 0}
+      ]
+    },
+    {
+      "id": "mobile-modern-normal",
+      "median": {"performance": 91, "accessibility": 100, "bestPractices": 100, "seo": 100, "fcp": 1957, "lcp": 3235, "tbt": 0, "cls": 0.018, "speedIndex": 1957, "tti": 3243, "mainThread": 1280, "jsBoot": 185, "transferKiB": 1544.9, "requests": 34, "warnings": 0},
+      "runs": [
+        {"performance": 91, "accessibility": 100, "bestPractices": 100, "seo": 100, "fcp": 1957, "lcp": 3237, "tbt": 0, "cls": 0.018, "speedIndex": 1957, "tti": 3244, "mainThread": 1276, "jsBoot": 186, "transferKiB": 1544.9, "requests": 34, "warnings": 0},
+        {"performance": 91, "accessibility": 100, "bestPractices": 100, "seo": 100, "fcp": 1955, "lcp": 3234, "tbt": 0, "cls": 0.018, "speedIndex": 1955, "tti": 3242, "mainThread": 1393, "jsBoot": 185, "transferKiB": 1544.9, "requests": 34, "warnings": 0},
+        {"performance": 91, "accessibility": 100, "bestPractices": 100, "seo": 100, "fcp": 1958, "lcp": 3235, "tbt": 0, "cls": 0.017, "speedIndex": 1958, "tti": 3243, "mainThread": 1280, "jsBoot": 172, "transferKiB": 1544.9, "requests": 34, "warnings": 0}
+      ]
+    },
+    {
+      "id": "mobile-modern-winter",
+      "median": {"performance": 91, "accessibility": 100, "bestPractices": 100, "seo": 100, "fcp": 1959, "lcp": 3236, "tbt": 0, "cls": 0.018, "speedIndex": 1959, "tti": 3243, "mainThread": 1818, "jsBoot": 187, "transferKiB": 1544.9, "requests": 35, "warnings": 0},
+      "runs": [
+        {"performance": 91, "accessibility": 100, "bestPractices": 100, "seo": 100, "fcp": 1959, "lcp": 3311, "tbt": 0, "cls": 0.018, "speedIndex": 1959, "tti": 3311, "mainThread": 1761, "jsBoot": 178, "transferKiB": 1544.9, "requests": 35, "warnings": 0},
+        {"performance": 91, "accessibility": 100, "bestPractices": 100, "seo": 100, "fcp": 1959, "lcp": 3236, "tbt": 0, "cls": 0.018, "speedIndex": 1959, "tti": 3243, "mainThread": 1818, "jsBoot": 187, "transferKiB": 1544.9, "requests": 35, "warnings": 0},
+        {"performance": 91, "accessibility": 100, "bestPractices": 100, "seo": 100, "fcp": 1958, "lcp": 3235, "tbt": 11, "cls": 0.018, "speedIndex": 1958, "tti": 3242, "mainThread": 1967, "jsBoot": 187, "transferKiB": 1544.9, "requests": 35, "warnings": 0}
+      ]
+    },
+    {
+      "id": "mobile-retro-normal",
+      "median": {"performance": 91, "accessibility": 100, "bestPractices": 100, "seo": 100, "fcp": 1957, "lcp": 3237, "tbt": 0, "cls": 0.020, "speedIndex": 1998, "tti": 3245, "mainThread": 1243, "jsBoot": 131, "transferKiB": 1544.9, "requests": 34, "warnings": 0},
+      "runs": [
+        {"performance": 91, "accessibility": 100, "bestPractices": 100, "seo": 100, "fcp": 1957, "lcp": 3236, "tbt": 0, "cls": 0.020, "speedIndex": 1998, "tti": 3243, "mainThread": 1243, "jsBoot": 131, "transferKiB": 1544.9, "requests": 34, "warnings": 0},
+        {"performance": 91, "accessibility": 100, "bestPractices": 100, "seo": 100, "fcp": 1957, "lcp": 3309, "tbt": 0, "cls": 0.020, "speedIndex": 1964, "tti": 3309, "mainThread": 1205, "jsBoot": 131, "transferKiB": 1544.9, "requests": 34, "warnings": 0},
+        {"performance": 91, "accessibility": 100, "bestPractices": 100, "seo": 100, "fcp": 1960, "lcp": 3237, "tbt": 0, "cls": 0.020, "speedIndex": 2010, "tti": 3245, "mainThread": 1247, "jsBoot": 131, "transferKiB": 1544.9, "requests": 34, "warnings": 0}
+      ]
+    },
+    {
+      "id": "mobile-retro-winter",
+      "median": {"performance": 91, "accessibility": 100, "bestPractices": 100, "seo": 100, "fcp": 1960, "lcp": 3237, "tbt": 0, "cls": 0.020, "speedIndex": 1960, "tti": 3245, "mainThread": 1565, "jsBoot": 160, "transferKiB": 1545.3, "requests": 34, "warnings": 0},
+      "runs": [
+        {"performance": 91, "accessibility": 100, "bestPractices": 100, "seo": 100, "fcp": 1960, "lcp": 3313, "tbt": 0, "cls": 0.020, "speedIndex": 1960, "tti": 3313, "mainThread": 1664, "jsBoot": 160, "transferKiB": 1545.4, "requests": 34, "warnings": 0},
+        {"performance": 91, "accessibility": 100, "bestPractices": 100, "seo": 100, "fcp": 1957, "lcp": 3237, "tbt": 0, "cls": 0.020, "speedIndex": 1957, "tti": 3244, "mainThread": 1554, "jsBoot": 144, "transferKiB": 1545.3, "requests": 34, "warnings": 0},
+        {"performance": 91, "accessibility": 100, "bestPractices": 100, "seo": 100, "fcp": 1960, "lcp": 3237, "tbt": 0, "cls": 0.020, "speedIndex": 1960, "tti": 3245, "mainThread": 1565, "jsBoot": 161, "transferKiB": 1545.3, "requests": 34, "warnings": 0}
+      ]
+    }
+  ],
+  "runtimeChecks": {
+    "desktopCpuSamples": [
+      {"id": "desktop-modern-normal", "cpuPercent": [2.18, 3.87, 1.38], "workingSetMiB": [652.1, 665.8, 619.9]},
+      {"id": "desktop-modern-winter", "cpuPercent": [2.84, 3.55, 2.32], "workingSetMiB": [648.4, 661.5, 615.6]},
+      {"id": "desktop-retro-normal", "cpuPercent": [0.82, 2.39, 1.92], "workingSetMiB": [625.4, 639.7, 596.0]},
+      {"id": "desktop-retro-winter", "cpuPercent": [2.08, 2.75, 1.89], "workingSetMiB": [639.8, 656.1, 612.1]}
+    ],
+    "instrumentedStates": 8,
+    "steadyAnimationLoopsPerState": {"requestAnimationFrame": 1, "interval": 1},
+    "longTasksAcrossInstrumentedStates": 0,
+    "duplicateResourceUrlsAcrossInstrumentedStates": 0,
+    "afterTwelveEraChanges": {"requestAnimationFrame": 1, "interval": 1, "domNodes": 427, "temporaryEraCounters": 0, "usedHeapBytes": 5423138},
+    "beforeEraChanges": {"requestAnimationFrame": 1, "interval": 1, "domNodes": 421, "usedHeapBytes": 7592025},
+    "afterSixResizeChanges": {"requestAnimationFrame": 1, "interval": 1, "domNodes": 427, "longTasks": 0, "usedHeapBytes": 6513118},
+    "reducedMotionWinterAfterOptimization": {"requestAnimationFrame": 0, "interval": 0, "matrix": "hidden", "snow": "static and visible", "longTasks": 0}
+  },
+  "resourceFindings": {
+    "largestTransfer": {"path": "assets/images/Dario-profile.webp", "transferKiB": 1198.0},
+    "lighthouseImageDeliveryEstimatedSavingsKiB": 1177,
+    "lighthouseUnusedCssEstimatedSavingsKiB": 77,
+    "lighthouseUnusedJsEstimatedSavingsKiB": 28,
+    "note": "These are Lighthouse opportunities, not measured regressions. The shared multi-page CSS/JS and portrait asset were not restructured during this targeted audit."
+  },
+  "limitations": [
+    "No physical smartphone was available; Mobile is Lighthouse emulation.",
+    "Real-device mobile CPU and memory were not measured.",
+    "The in-app browser throttled or accelerated requestAnimationFrame when not foregrounded, so no FPS number is reported.",
+    "The short repeat-action memory check found no monotonic growth but is not a full heap-snapshot proof."
+  ]
+}
