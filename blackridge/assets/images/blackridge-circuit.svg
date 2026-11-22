@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="350" viewBox="0 0 560 350" fill="none">
+  <defs>
+    <radialGradient id="board-light" cx=".68" cy=".47" r=".62">
+      <stop stop-color="#21436e" stop-opacity=".42"/>
+      <stop offset="1" stop-color="#132841" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="chip-surface" x1="317" y1="93" x2="434" y2="211" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1d3858"/>
+      <stop offset="1" stop-color="#101d2c"/>
+    </linearGradient>
+    <pattern id="board-grid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M20 0H0v20" stroke="#5279a7" stroke-width=".5"/>
+    </pattern>
+    <pattern id="signal-grid" x="37" y="181" width="19" height="17" patternUnits="userSpaceOnUse">
+      <path d="M19 0H0v17" stroke="#6b98cc" stroke-width=".65"/>
+    </pattern>
+    <circle id="via" r="3" fill="#102137" stroke="#6890c1" stroke-width="1.1"/>
+    <circle id="junction" r="1.7" fill="#75aff7"/>
+  </defs>
+
+  <rect x="2" y="2" width="556" height="346" rx="22" fill="url(#board-light)"/>
+  <rect x="19" y="20" width="522" height="310" rx="10" fill="url(#board-grid)" opacity=".19"/>
+  <g stroke="#74a6df" stroke-opacity=".33">
+    <path d="M19 52V30a10 10 0 0 1 10-10h29m444 0h29a10 10 0 0 1 10 10v22M19 298v22a10 10 0 0 0 10 10h29m444 0h29a10 10 0 0 0 10-10v-22"/>
+    <path d="M239 20h82M239 330h82" stroke-dasharray="1 7" stroke-linecap="round"/>
+    <path d="M32 37h12m-6-6v12m478 270h12m-6-6v12"/>
+  </g>
+
+  <g stroke="#4c76a7" stroke-width="1.15" stroke-linejoin="round" opacity=".83">
+    <path d="M54 60h158l52 52h54M83 75h114l51 51h70M110 90h72l50 50h86M136 105h33l49 49h100"/>
+    <path d="M154 138h31l30 30h103M220 159h36l23 23h39M227 225h47l29-29h15"/>
+    <path d="M338 93V75l-28-28h-37m79 46V69l-20-20m34 44V55m14 38V68l19-19h21m-26 44V76l18-18h53m-57 35V83l13-13h74"/>
+    <path d="M434 112h37l18-18h27m-82 32h47l23-23h21m-91 37h90m-90 14h56l20 20h15m-91-6h40l24 24h28m-92-10h29l26 26h35M434 196h20l27 27h43"/>
+    <path d="M338 211v26l-43 43h-36m93-69v34l-43 43H207l-21 21h-68m248-98v42l-45 45h-59m118-87v42l32 32h53m-71-74v34l30 30h62m-78-64v26l24 24h70"/>
+    <path d="M50 293h102l17-17h78l28-28h33m-267 56h29m434-59h20" stroke-opacity=".5"/>
+  </g>
+
+  <g stroke="#74aaff" stroke-width="1.5" stroke-linejoin="round">
+    <path d="M83 75h114l51 51h70m116 28h56l20 20h15" opacity=".64"/>
+    <path d="M227 225h47l29-29h15m62 15v42l32 32h53" opacity=".87"/>
+  </g>
+
+  <g opacity=".87">
+    <use href="#via" x="54" y="60"/><use href="#via" x="83" y="75"/><use href="#via" x="110" y="90"/><use href="#via" x="136" y="105"/>
+    <use href="#via" x="154" y="138"/><use href="#via" x="220" y="159"/><use href="#via" x="273" y="47"/><use href="#via" x="332" y="49"/>
+    <use href="#via" x="366" y="55"/><use href="#via" x="420" y="49"/><use href="#via" x="465" y="58"/><use href="#via" x="495" y="70"/>
+    <use href="#via" x="516" y="94"/><use href="#via" x="525" y="103"/><use href="#via" x="524" y="140"/><use href="#via" x="525" y="174"/>
+    <use href="#via" x="526" y="192"/><use href="#via" x="524" y="208"/><use href="#via" x="524" y="223"/><use href="#via" x="502" y="261"/>
+    <use href="#via" x="486" y="275"/><use href="#via" x="465" y="285"/><use href="#via" x="262" y="298"/><use href="#via" x="259" y="280"/>
+    <use href="#via" x="118" y="309"/><use href="#via" x="50" y="293"/>
+  </g>
+  <g opacity=".78">
+    <use href="#junction" x="197" y="75"/><use href="#junction" x="248" y="126"/><use href="#junction" x="274" y="225"/>
+    <use href="#junction" x="303" y="196"/><use href="#junction" x="490" y="154"/><use href="#junction" x="510" y="174"/>
+    <use href="#junction" x="380" y="253"/><use href="#junction" x="412" y="285"/>
+  </g>
+
+  <rect x="36" y="180" width="192" height="104" rx="7" fill="#0e1a2a" stroke="#466990"/>
+  <rect x="37" y="181" width="190" height="102" rx="6" fill="url(#signal-grid)" opacity=".31"/>
+  <g stroke="#86b5eb" stroke-opacity=".34" stroke-width=".8">
+    <path d="M46 232h172m-87-42v84" stroke-dasharray="3 4"/>
+    <path d="M56 270v5m38-5v5m38-5v5m38-5v5m38-5v5M42 198h4m-4 17h4m-4 17h4m-4 17h4m-4 17h4"/>
+  </g>
+  <path d="M46 232h22l9-7 9 7h11l11-18 9 18h8l11-29 14 55 11-26h13l8-11 8 11h14l5-5 10-2" stroke="#568fed" stroke-opacity=".16" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M46 232h22l9-7 9 7h11l11-18 9 18h8l11-29 14 55 11-26h13l8-11 8 11h14l5-5 10-2" stroke="#7eb5fe" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"/>
+  <use href="#junction" x="46" y="232"/><use href="#junction" x="220" y="225"/>
+
+  <g stroke="#7aa5d8" stroke-width="2" stroke-linecap="square" opacity=".8">
+    <path d="M304 112h14m-14 14h14m-14 14h14m-14 14h14m-14 14h14m-14 14h14m-14 14h14m116-84h14m-14 14h14m-14 14h14m-14 14h14m-14 14h14m-14 14h14m-14 14h14"/>
+    <path d="M338 81v12m14-12v12m14-12v12m14-12v12m14-12v12m14-12v12m-70 118v12m14-12v12m14-12v12m14-12v12m14-12v12m14-12v12"/>
+  </g>
+  <path d="M329 93h94l11 11v96l-11 11h-94l-11-11v-96z" fill="url(#chip-surface)" stroke="#7bb1f3" stroke-width="1.4"/>
+  <rect x="335" y="110" width="82" height="84" rx="7" fill="#14273e" stroke="#5c85b8" stroke-opacity=".85"/>
+  <path d="M348 125h56v53h-56z" fill="url(#board-grid)" stroke="#78a8ff" stroke-opacity=".34"/>
+  <path d="M348 137v-12h12m32 0h12v12m0 29v12h-12m-32 0h-12v-12" stroke="#8abbfa" stroke-opacity=".82"/>
+  <path d="M357 152h9l7-8 8 14 8-6h6" stroke="#8abbfa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="327" cy="103" r="2" fill="#78a8ff"/>
+</svg>

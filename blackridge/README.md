@@ -21,6 +21,8 @@ python -m http.server 8000 --bind 127.0.0.1
 
 ## Berglandschaft, Logo und Favicon
 
+- `assets/images/kontakt-alpenpanorama.webp` (2172 × 724) und `kontakt-alpenpanorama-960.webp` (960 × 320) enthalten das ausgewählte generierte Talpanorama. Es liegt in voller Breite unter und seitlich hinter dem Kontaktformular. Der Browser wählt die passende WebP-Grösse. Die CSS-Maske blendet die Bildränder in den Seitenhintergrund.
+
 - `assets/images/abschluss-berge-links.webp` (394 × 97) und `abschluss-berge-rechts.webp` (379 × 110) stammen aus den beiden Randbereichen von `Blackridge_Bild1_Berglandschaft.png`. Am oberen Rand des linken Motivs wurde der sichtbare Rest des vorherigen Panels abgeschnitten. Die CSS-Verläufe verbinden die Ausschnitte mit der Mitte und dem Footer. Überschrift, Beschreibung und Anfragebutton sind HTML.
 - `assets/logo/blackridge.png` (107 × 50) übernimmt das Bergsymbol aus `Blackridge_Bild2_Logo.png` mit transparentem Hintergrund. Die schmale weisse Randlinie liegt ausserhalb des Ausschnitts. Die Originalform ist freigestellt und proportional eingebunden. Das vorhandene Rasterbild begrenzt die nutzbare Grösse.
 - `assets/logo/blackridge-favicon.png` (64 × 64) verwendet dasselbe Zeichen auf einer quadratischen transparenten Fläche. Wenn später eine originale SVG-Datei verfügbar wird, lassen sich Logo und Favicon zentral in den Assets und über die Verweise in den drei HTML-Dateien ersetzen.
