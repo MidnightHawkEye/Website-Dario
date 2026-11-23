@@ -8,7 +8,9 @@
   <title>Über Blackridge | Blackridge Technical</title>
   <link rel="icon" href="../assets/logo/blackridge-favicon.png" type="image/png" sizes="64x64">
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/lightbox.css">
   <script src="../js/main.js" defer></script>
+  <script src="../js/lightbox.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Zum Inhalt springen</a>
@@ -118,7 +120,55 @@
         <p>2027 beginne ich meine Weiterbildung zum Techniker HF. Langfristig möchte ich meine Kenntnisse in Cybersecurity vertiefen. Das geplante Dienstleistungsangebot konzentriert sich auf PCs und Hardware.</p>
       </div>
     </section>
+
+    <section class="section photo-section" id="setup-einblicke" aria-labelledby="setup-title">
+      <div class="container photo-container">
+        <header class="section-heading">
+          <h2 class="section-title" id="setup-title">Einblicke in PC-Setups</h2>
+        </header>
+        <div class="photo-gallery setup-gallery" data-lightbox="setup-lightbox">
+          <a class="lightbox-trigger" href="../assets/images/setup-zwei-monitore.webp" data-lightbox-image>
+            <img src="../assets/images/setup-zwei-monitore-vorschau.webp" width="600" height="800" alt="Schreibtisch mit zwei Monitoren und blau beleuchtetem PC" loading="lazy" decoding="async">
+          </a>
+          <a class="lightbox-trigger" href="../assets/images/setup-ultrawide.webp" data-lightbox-image>
+            <img src="../assets/images/setup-ultrawide-vorschau.webp" width="600" height="800" alt="Schreibtisch mit gebogenem Ultrawide-Monitor und violetter Raumbeleuchtung" loading="lazy" decoding="async">
+          </a>
+          <a class="lightbox-trigger" href="../assets/images/setup-drei-monitore.webp" data-lightbox-image>
+            <img src="../assets/images/setup-drei-monitore-vorschau.webp" width="600" height="450" alt="Grün beleuchtetes Setup mit drei Monitoren, zwei PCs und Mikrofon" loading="lazy" decoding="async">
+          </a>
+          <a class="lightbox-trigger" href="../assets/images/setup-raum-pink.webp" data-lightbox-image>
+            <img src="../assets/images/setup-raum-pink-vorschau.webp" width="600" height="800" alt="Schreibtisch mit zwei leuchtenden PCs unter einer pink beleuchteten Wolkendecke" loading="lazy" decoding="async">
+          </a>
+          <a class="lightbox-trigger" href="../assets/images/setup-streaming.webp" data-lightbox-image>
+            <img src="../assets/images/setup-streaming-vorschau.webp" width="600" height="800" alt="Violett beleuchteter Schreibtisch mit drei Monitoren, zwei PCs und Mikrofonarm" loading="lazy" decoding="async">
+          </a>
+          <a class="lightbox-trigger" href="../assets/images/setup-raum-violett.webp" data-lightbox-image>
+            <img src="../assets/images/setup-raum-violett-vorschau.webp" width="600" height="800" alt="Violett beleuchteter PC-Raum mit Wolkendecke und zwei Schreibtischen" loading="lazy" decoding="async">
+          </a>
+        </div>
+      </div>
+    </section>
   </main>
+
+  <dialog class="lightbox" id="setup-lightbox" aria-label="PC-Setup-Galerie" aria-modal="true">
+    <button class="lightbox__control lightbox__close" type="button" aria-label="Galerie schliessen" data-lightbox-close autofocus>
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" aria-hidden="true">
+        <path d="m6 6 12 12M18 6 6 18"></path>
+      </svg>
+    </button>
+    <button class="lightbox__control lightbox__prev" type="button" aria-label="Vorheriges Bild" data-lightbox-prev>
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="m9 6 6 6-6 6"></path>
+      </svg>
+    </button>
+    <button class="lightbox__control lightbox__next" type="button" aria-label="Nächstes Bild" data-lightbox-next>
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="m9 6 6 6-6 6"></path>
+      </svg>
+    </button>
+    <div class="lightbox__stage" data-lightbox-stage></div>
+    <p class="lightbox__count" data-lightbox-count role="status" aria-atomic="true"></p>
+  </dialog>
 
   <footer class="site-footer">
     <div class="closing-cta-art" aria-hidden="true">

@@ -9,6 +9,7 @@
   <link rel="icon" href="assets/logo/blackridge-favicon.png" type="image/png" sizes="64x64">
   <link rel="stylesheet" href="css/style.css">
   <script src="js/main.js" defer></script>
+  <script src="js/hero-flux.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Zum Inhalt springen</a>
@@ -38,7 +39,7 @@
   </header>
 
   <main id="main-content" tabindex="-1">
-    <section class="hero" id="start" aria-labelledby="hero-title" tabindex="-1">
+    <section class="hero" id="start" aria-labelledby="hero-title" tabindex="-1" data-hero-flux>
       <div class="container hero-inner">
         <div class="hero-content">
           <p class="eyebrow">PC-SERVICE · BERATUNG · AUFBAU · WARTUNG</p>
@@ -50,7 +51,7 @@
           </div>
         </div>
         <div class="hero-visual">
-          <img src="assets/images/hro.webp" srcset="assets/images/hero-768.webp 768w, assets/images/hero.webp 1536w" sizes="(max-width: 52rem) 100vw, 70vw" width="1536" height="1024" alt="Schwarzer Desktop-PC mit blau beleuchtetem Innenraum an einem Arbeitsplatz" fetchpriority="high">
+          <img src="assets/images/hero-setup.webp" srcset="assets/images/hero-setup-768.webp 768w, assets/images/hero-setup.webp 1440w" sizes="(max-width: 39rem) 100vw, (max-width: 52rem) 82vw, 76vw" width="1440" height="1080" alt="Schreibtisch mit drei Monitoren, Mikrofon und beleuchtetem PC" fetchpriority="high">
         </div>
         <ul class="hero-benefits" aria-label="Was Sie erwartet">
           <li><svg class="icon" aria-hidden="true"><use href="assets/icons/icons.svg#sliders"></use></svg><span>Individuell &amp; bedarfsgerecht</span></li>
@@ -68,8 +69,8 @@
         </header>
         <div class="services-grid">
           <article class="service-card" data-reveal="left">
-            <div class="service-image">
-              <img src="assets/images/aufbau.webp" width="512" height="512" alt="Mainboard und Komponenten beim Aufbau eines Desktop-PCs" loading="lazy" decoding="async">
+            <div class="service-image service-image--build">
+              <img src="assets/images/pc-aufbau-blau.webp" width="840" height="1120" alt="Blau beleuchtetes PC-Innenleben mit Grafikkarte, Wasserkühlung und Lüftern" loading="lazy" decoding="async">
             </div>
             <div class="service-body">
               <span class="service-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons/icons.svg#monitor"></use></svg></span>
@@ -79,8 +80,8 @@
             </div>
           </article>
           <article class="service-card" data-reveal="up" data-reveal-step="1">
-            <div class="service-image">
-              <img src="assets/images/beratung.webp" width="512" height="512" alt="Computerkomponenten zur Planung einer PC-Konfiguration" loading="lazy" decoding="async">
+            <div class="service-image service-image--test">
+              <img src="assets/images/pc-bios-test.webp" width="1080" height="810" alt="Geöffneter PC auf dem Tisch, daneben ein Monitor mit den BIOS-Einstellungen" loading="lazy" decoding="async">
             </div>
             <div class="service-body">
               <span class="service-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons/icons.svg#layers"></use></svg></span>
@@ -90,8 +91,8 @@
             </div>
           </article>
           <article class="service-card" data-reveal="right" data-reveal-step="2">
-            <div class="service-image">
-              <img src="assets/images/wartung.webp" width="512" height="512" alt="Lüfter und Kühlkomponenten im Inneren eines PCs" loading="lazy" decoding="async">
+            <div class="service-image service-image--cooling">
+              <img src="assets/images/pc-kuehlung.webp" width="705" height="1600" alt="Beleuchtete Lüfter und Wasserkühlung in einem offenen PC-Gehäuse" loading="lazy" decoding="async">
             </div>
             <div class="service-body">
               <span class="service-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons/icons.svg#wrench"></use></svg></span>

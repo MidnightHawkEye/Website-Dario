@@ -1,0 +1,245 @@
+.lightbox-trigger {
+  position: relative;
+  display: block;
+  min-inline-size: 0;
+  overflow: hidden;
+  border-radius: var(--radius);
+  cursor: zoom-in;
+}
+
+.lightbox-trigger::after {
+  position: absolute;
+  inset: 0;
+  border: 1px solid transparent;
+  border-radius: inherit;
+  content: "";
+  pointer-events: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .lightbox-trigger:hover::after {
+    border-color: var(--accent);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .lightbox-trigger img {
+    transition: transform 240ms ease;
+  }
+
+  .lightbox-trigger::after {
+    transition: border-color 240ms ease;
+  }
+
+  .lightbox-trigger:hover img {
+    transform: scale(1.035);
+  }
+}
+
+html.has-lightbox {
+  overflow: hidden;
+  overflow-anchor: none;
+  overscroll-behavior: none;
+}
+
+html.has-lightbox-gutter {
+  scrollbar-gutter: stable;
+}
+
+.lightbox {
+  --lightbox-control: 3rem;
+  --lightbox-gap: clamp(.75rem, 2vw, 1.5rem);
+  --lightbox-top: max(var(--lightbox-gap), env(safe-area-inset-top, 0px));
+  --lightbox-right: max(var(--lightbox-gap), env(safe-area-inset-right, 0px));
+  --lightbox-bottom: max(var(--lightbox-gap), env(safe-area-inset-bottom, 0px));
+  --lightbox-left: max(var(--lightbox-gap), env(safe-area-inset-left, 0px));
+  --lightbox-height-inset: 7.5vh;
+  position: fixed;
+  inset: 0;
+  inline-size: 100vw;
+  block-size: 100%;
+  block-size: 100dvh;
+  max-inline-size: none;
+  max-block-size: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  touch-action: manipulation;
+}
+
+@supports (height: 100dvh) {
+  .lightbox {
+    --lightbox-height-inset: 7.5dvh;
+  }
+}
+
+.lightbox::backdrop {
+  background: rgb(9 11 16 / 92%);
+}
+
+.lightbox__stage {
+  position: absolute;
+  inset: max(var(--lightbox-height-inset), calc(var(--lightbox-top) + var(--lightbox-control) + .5rem))
+    max(5vw, calc(var(--lightbox-right) + var(--lightbox-control) + .5rem))
+    max(var(--lightbox-height-inset), calc(var(--lightbox-bottom) + var(--lightbox-control) + .5rem))
+    max(5vw, calc(var(--lightbox-left) + var(--lightbox-control) + .5rem));
+  display: grid;
+  grid-template: minmax(0, 1fr) / minmax(0, 1fr);
+  place-items: center;
+  pointer-events: none;
+}
+
+.lightbox__image, .lightbox__error {
+  grid-area: 1 / 1;
+}
+
+.lightbox__image {
+  inline-size: auto;
+  block-size: auto;
+  max-inline-size: 100%;
+  max-block-size: 100%;
+  border-radius: .75rem;
+  object-fit: contain;
+  pointer-events: auto;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.lightbox__image--out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.lightbox__error {
+  margin: 1rem;
+  color: var(--muted);
+  text-align: center;
+}
+
+.lightbox__control {
+  position: absolute;
+  display: grid;
+  inline-size: var(--lightbox-control);
+  block-size: var(--lightbox-control);
+  padding: 0;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--surface-raised);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.lightbox__control[hidden] {
+  display: none;
+}
+
+.lightbox__control .icon {
+  pointer-events: none;
+}
+
+.lightbox__control:hover, .lightbox__control:focus-visible {
+  border-color: var(--accent);
+  background: #182840;
+  color: #fff;
+}
+
+.lightbox__prev, .lightbox__next {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.lightbox__prev {
+  left: var(--lightbox-left);
+}
+
+.lightbox__prev .icon {
+  transform: rotate(180deg);
+}
+
+.lightbox__next, .lightbox__close {
+  right: var(--lightbox-right);
+}
+
+.lightbox__close {
+  top: var(--lightbox-top);
+}
+
+.lightbox__count {
+  position: absolute;
+  right: 0;
+  bottom: var(--lightbox-bottom);
+  left: 0;
+  display: grid;
+  block-size: var(--lightbox-control);
+  place-items: center;
+  color: var(--muted);
+  font-size: .875rem;
+  font-variant-numeric: tabular-nums;
+  pointer-events: none;
+}
+
+.lightbox__count:empty {
+  visibility: hidden;
+}
+
+@media (max-width: 42rem), (pointer: coarse) {
+  .lightbox__stage {
+    right: max(5vw, env(safe-area-inset-right, 0px));
+    left: max(5vw, env(safe-area-inset-left, 0px));
+  }
+
+  .lightbox__prev, .lightbox__next {
+    top: auto;
+    bottom: var(--lightbox-bottom);
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .lightbox[open], .lightbox[open]::backdrop {
+    animation: lightbox-in 240ms ease-out both;
+  }
+
+  .lightbox[open].is-closing, .lightbox[open].is-closing::backdrop {
+    animation: lightbox-out 240ms ease-in both;
+  }
+
+  .lightbox__image {
+    animation: lightbox-image-in 240ms ease-out both;
+  }
+
+  .lightbox__image--out {
+    animation: lightbox-out 200ms ease-out both;
+  }
+
+  .lightbox__control {
+    transition: background-color 180ms ease, border-color 180ms ease;
+  }
+}
+
+@keyframes lightbox-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes lightbox-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes lightbox-image-in {
+  from {
+    opacity: 0;
+    transform: scale(.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

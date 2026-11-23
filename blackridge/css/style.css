@@ -328,13 +328,22 @@ button, input, select, textarea {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 70% center;
+  object-position: 80% 48%;
+}
+
+.hero-flux {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  pointer-events: none;
 }
 
 .hero-visual::after {
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, #090b10 0%, #090b10f0 12%, #090b10b8 26%, #090b1038 49%, transparent 71%), linear-gradient(0deg, #090b10e6, transparent 30%);
+  background: linear-gradient(90deg, #090b10, #090b10f5 15%, #090b10d9 39%, #090b1066 58%, transparent 76%), linear-gradient(0deg, #090b10e6, transparent 40%);
   content: "";
 }
 
@@ -482,6 +491,18 @@ button, input, select, textarea {
   height: 100%;
   object-fit: cover;
   transition: transform .45s ease;
+}
+
+.service-image--build img {
+  object-position: center 44%;
+}
+
+.service-image--test img {
+  object-position: center 65%;
+}
+
+.service-image--cooling img {
+  object-position: center 34%;
 }
 
 .service-image::after {
@@ -1033,7 +1054,39 @@ button, input, select, textarea {
 
 .about-section, #ueber-mich {
   border-block: 1px solid #212c40;
-  background: #0e121b;
+  background: var(--surface);
+}
+
+.about-section, .contact-section {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+}
+
+.about-section::before, .about-section::after,
+.contact-section::before, .contact-section::after {
+  position: absolute;
+  content: "";
+  pointer-events: none;
+}
+
+.about-section::before {
+  --about-panorama: url("../assets/images/ueber-blackridge-panorama.webp");
+  z-index: -2;
+  inset-block-start: 55%;
+  inset-inline-start: 50%;
+  inline-size: max(100%, 68rem);
+  aspect-ratio: 3 / 1;
+  background: var(--about-panorama) center / cover no-repeat;
+  filter: blur(2px);
+  mask-image: linear-gradient(transparent, #000 20%, #000 72%, transparent);
+  transform: translate(-50%, -50%);
+}
+
+.about-section::after {
+  z-index: -1;
+  inset: 0;
+  background: linear-gradient(90deg, rgb(7 16 32 / 75%), rgb(7 16 32 / 69%) 54%, rgb(7 16 32 / 64%));
 }
 
 .about-layout {
@@ -1085,6 +1138,40 @@ button, input, select, textarea {
 .about-image img {
   width: 100%;
   height: auto;
+}
+
+.photo-section {
+  padding-top: 0;
+}
+
+.photo-container {
+  max-width: 54rem;
+}
+
+.photo-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(.75rem, 2vw, 1.45rem);
+}
+
+.photo-gallery img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: center 44%;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.setup-gallery {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.setup-gallery img {
+  aspect-ratio: 4 / 3;
+  object-position: center 56%;
 }
 
 #ablauf {
@@ -1166,39 +1253,26 @@ button, input, select, textarea {
 }
 
 .contact-section {
-  position: relative;
-  isolation: isolate;
   padding-block: var(--section-space) clamp(8rem, 14vw, 18rem);
+  background: radial-gradient(ellipse at 50% 70%, #0a1a2c, var(--ink) 78%);
 }
 
-.contact-landscape {
-  position: absolute;
+.contact-section::before {
+  --contact-panorama: url("../assets/images/kontakt-alpenpanorama-nacht.webp");
+  z-index: -2;
+  inset: auto -5% clamp(2rem, 4.5vw, 4.5rem);
+  aspect-ratio: 3 / 1;
+  background: var(--contact-panorama) center / cover no-repeat;
+  filter: blur(1px);
+  mask-image: linear-gradient(transparent, #000 11%, #000 82%, transparent);
+}
+
+.contact-section::after {
   z-index: -1;
   inset: 0;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.contact-landscape img {
-  position: absolute;
-  inset-inline: 0;
-  bottom: 0;
-  width: 100%;
-  height: auto;
-  max-height: 100%;
-  object-fit: cover;
-  object-position: center bottom;
-  opacity: .95;
-  mask-image: linear-gradient(
-    to bottom,
-    transparent,
-    rgb(0 0 0 / 12%) 6%,
-    rgb(0 0 0 / 50%) 12.5%,
-    rgb(0 0 0 / 88%) 19%,
-    #000 25%,
-    #000 91%,
-    transparent
-  );
+  background:
+    radial-gradient(ellipse at 50% 60%, rgb(5 12 23 / 42%) 15%, rgb(5 12 23 / 12%) 72%),
+    linear-gradient(transparent 66%, color-mix(in srgb, var(--ink) 42%, transparent));
 }
 
 .contact-panel {
@@ -1750,7 +1824,7 @@ button, input, select, textarea {
   }
 
   .hero-visual::after {
-    background: linear-gradient(90deg, #090b10, #090b10eb 14%, #090b1085 47%, #090b1020 77%), linear-gradient(0deg, #090b10e6, transparent 35%);
+    background: linear-gradient(90deg, #090b10, #090b10f2 16%, #090b10e0 48%, #090b10d6 60%, #090b1040 82%, #090b101a), linear-gradient(0deg, #090b10e6, transparent 40%);
   }
 
   .services-grid {
@@ -1780,6 +1854,15 @@ button, input, select, textarea {
     gap: 1.7rem;
   }
 
+  .about-section::before {
+    --about-panorama: url("../assets/images/ueber-blackridge-panorama-960.webp");
+  }
+
+  .contact-section::before {
+    --contact-panorama: url("../assets/images/kontakt-alpenpanorama-nacht-960.webp");
+    inset-inline: 0;
+  }
+
   .footer-layout {
     grid-template-columns: minmax(0, 1fr);
   }
@@ -1792,6 +1875,10 @@ button, input, select, textarea {
 @media (max-width: 42rem) {
   .price-grid {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .setup-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .closing-cta-content {
@@ -1822,11 +1909,11 @@ button, input, select, textarea {
   }
 
   .hero-visual img {
-    object-position: 78% 45%;
+    object-position: 76% 52%;
   }
 
   .hero-visual::after {
-    background: linear-gradient(0deg, #090b10 3%, #090b10eb 13%, #090b1055 38%, transparent 68%);
+    background: linear-gradient(0deg, #090b10 3%, #090b10eb 13%, #090b10d0 29%, transparent 67%);
   }
 
   .hero-title {
@@ -1852,6 +1939,12 @@ button, input, select, textarea {
 
   .services-grid, .about-layout, .process-grid {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .about-section::before {
+    inset-block-start: 30%;
+    inset-inline-start: 0;
+    transform: translate(-10%, -50%);
   }
 
   .about-image {
