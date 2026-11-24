@@ -677,6 +677,10 @@ button, input, select, textarea {
   gap: clamp(.85rem, 2vw, 1.45rem);
 }
 
+.price-grid:has(.price-scope[open]) {
+  align-items: start;
+}
+
 .price-card {
   min-width: 0;
   display: flex;
@@ -752,13 +756,133 @@ button, input, select, textarea {
   font-weight: 650;
 }
 
-.price-list-row dd {
+.price-list-value {
   margin: 0;
   color: var(--text);
   font-variant-numeric: tabular-nums;
   font-weight: 750;
   text-align: end;
   white-space: nowrap;
+}
+
+.price-list-scope {
+  grid-column: 1 / -1;
+  min-width: 0;
+  margin: 0;
+}
+
+.price-card .price-scope {
+  width: 100%;
+  margin-top: auto;
+  border-top: 1px solid var(--line);
+}
+
+.price-scope summary {
+  display: flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: .5rem;
+  color: var(--accent);
+  font-size: .925rem;
+  font-weight: 650;
+  list-style: none;
+  cursor: pointer;
+}
+
+.price-scope summary::-webkit-details-marker {
+  display: none;
+}
+
+.price-scope summary:hover {
+  color: var(--text);
+}
+
+.price-scope summary .icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.price-scope[open] summary .icon {
+  transform: rotate(180deg);
+}
+
+.price-scope:not([open]) .price-scope-hide,
+.price-scope[open] .price-scope-show {
+  display: none;
+}
+
+.price-scope-content {
+  display: grid;
+  gap: .65rem;
+  margin: .15rem 0 .3rem;
+  padding: .8rem;
+  border: 1px solid var(--line);
+  border-radius: .65rem;
+  background: var(--ink);
+  font-size: .9rem;
+}
+
+.price-scope-content h3 {
+  font-size: .95rem;
+}
+
+.price-scope-content ul {
+  display: grid;
+  gap: .35rem;
+  margin: 0;
+  padding: 0;
+  color: var(--muted);
+  list-style: none;
+}
+
+.price-scope-content li {
+  position: relative;
+  padding-inline-start: 1rem;
+}
+
+.price-scope-content li::before {
+  position: absolute;
+  inset-block-start: .38rem;
+  inset-inline-start: .12rem;
+  width: .3rem;
+  height: .5rem;
+  transform: rotate(45deg);
+  border: solid var(--accent);
+  border-width: 0 2px 2px 0;
+  content: "";
+}
+
+.price-scope-note {
+  color: var(--muted);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .price-scope summary .icon {
+    transition: transform .24s ease;
+  }
+
+  .price-scope[open] .price-scope-content {
+    animation: price-scope-in .24s ease both;
+  }
+
+  @supports (interpolate-size: allow-keywords) and (transition-behavior: allow-discrete) and selector(details::details-content) {
+    .price-scope::details-content {
+      block-size: 0;
+      overflow: clip;
+      interpolate-size: allow-keywords;
+      transition: block-size .24s ease, content-visibility .24s allow-discrete;
+    }
+
+    .price-scope[open]::details-content {
+      block-size: auto;
+    }
+  }
+}
+
+@keyframes price-scope-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .price-material-note {
@@ -1185,26 +1309,40 @@ button, input, select, textarea {
   gap: clamp(1rem, 3vw, 2.3rem);
 }
 
-.process-grid li {
+.process-grid > li {
+  --process-segment: calc((100% - .75rem) / 3);
+  --process-track: linear-gradient(#40577c, #40577c);
   position: relative;
   display: grid;
   align-content: start;
   gap: .65rem;
   min-width: 0;
   padding: 1.3rem 0 0;
-  border-top: 1px solid #40577c;
+  border-top: 1px solid transparent;
+  background:
+    var(--process-track) left top / var(--process-segment) 1px no-repeat border-box,
+    var(--process-track) center top / var(--process-segment) 1px no-repeat border-box,
+    var(--process-track) right top / var(--process-segment) 1px no-repeat border-box;
 }
 
-.process-grid li::before {
+.process-grid > li::before {
   position: absolute;
-  top: -.125rem;
-  left: 0;
-  width: 1.75rem;
+  inset-block-start: -.125rem;
+  inset-inline-start: var(--process-highlight-start, 0px);
+  inline-size: var(--process-segment);
   height: .2rem;
   border-radius: 2rem;
   background: var(--accent);
   box-shadow: 0 0 .65rem #5b92ff90;
   content: "";
+}
+
+.process-grid > li:nth-child(2) {
+  --process-highlight-start: calc((100% - var(--process-segment)) / 2);
+}
+
+.process-grid > li:nth-child(3) {
+  --process-highlight-start: calc(100% - var(--process-segment));
 }
 
 .process-icon {
@@ -1296,29 +1434,6 @@ button, input, select, textarea {
 
 .contact-copy > p:not(:first-child) {
   margin-top: .85rem;
-}
-
-.contact-note {
-  display: flex;
-  align-items: flex-start;
-  gap: .7rem;
-  margin-top: 1.1rem;
-  padding-top: .9rem;
-  border-top: 1px solid #324563;
-  color: var(--muted);
-  font-size: .875rem;
-}
-
-.contact-note strong {
-  color: var(--text);
-}
-
-.contact-note p {
-  margin-top: .25rem;
-}
-
-.contact-note .icon {
-  color: var(--accent);
 }
 
 .whatsapp-card {

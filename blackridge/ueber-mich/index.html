@@ -9,8 +9,10 @@
   <link rel="icon" href="../assets/logo/blackridge-favicon.png" type="image/png" sizes="64x64">
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/lightbox.css">
+  <link rel="stylesheet" href="../css/circuit-challenge.css">
   <script src="../js/main.js" defer></script>
   <script src="../js/lightbox.js" defer></script>
+  <script src="../js/circuit-challenge.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Zum Inhalt springen</a>
@@ -81,20 +83,23 @@
             </div>
           </div>
 
-          <div class="approach-principles">
+          <div class="approach-principles" data-circuit-sequence>
             <article class="approach-card" data-reveal="left">
+              <button type="button" class="circuit-node" data-circuit-node aria-label="Schaltpunkt Analysieren" hidden></button>
               <span class="approach-card-icon"><svg class="icon" aria-hidden="true"><use href="../assets/icons/icons.svg#search"></use></svg></span>
               <h3>Analysieren</h3>
               <p class="approach-card-lead">Verstehen, bevor man entscheidet.</p>
               <p class="approach-card-description">Anforderungen erkennen, technische Zusammenhänge verstehen und geeignete Lösungen finden.</p>
             </article>
             <article class="approach-card" data-reveal="up" data-reveal-step="1">
+              <button type="button" class="circuit-node" data-circuit-node aria-label="Schaltpunkt Umsetzen" hidden></button>
               <span class="approach-card-icon"><svg class="icon" aria-hidden="true"><use href="../assets/icons/icons.svg#wrench"></use></svg></span>
               <h3>Umsetzen</h3>
               <p class="approach-card-lead">Sorgfältig und strukturiert arbeiten.</p>
               <p class="approach-card-description">Technische Lösungen mit einem klaren Plan und einem hohen Anspruch an sorgfältige Ausführung realisieren.</p>
             </article>
             <article class="approach-card" data-reveal="right" data-reveal-step="2">
+              <button type="button" class="circuit-node" data-circuit-node aria-label="Schaltpunkt Prüfen" hidden></button>
               <span class="approach-card-icon"><svg class="icon" aria-hidden="true"><use href="../assets/icons/icons.svg#waveform"></use></svg></span>
               <h3>Prüfen</h3>
               <p class="approach-card-lead">Funktion kontrollieren und verbessern.</p>
@@ -168,6 +173,40 @@
     </button>
     <div class="lightbox__stage" data-lightbox-stage></div>
     <p class="lightbox__count" data-lightbox-count role="status" aria-atomic="true"></p>
+  </dialog>
+
+  <dialog class="circuit-dialog" id="circuit-challenge" aria-labelledby="circuit-title" aria-modal="true">
+    <button type="button" class="circuit-close" data-circuit-close aria-label="Challenge schliessen">
+      <svg viewBox="0 0 24 24" class="icon" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" aria-hidden="true">
+        <path d="m6 6 12 12M18 6 6 18"></path>
+      </svg>
+    </button>
+    <header class="circuit-header">
+      <p class="circuit-brand" lang="en">BLACKRIDGE TECHNICAL</p>
+      <h2 id="circuit-title" lang="en">CIRCUIT CHALLENGE UNLOCKED</h2>
+    </header>
+    <div data-circuit-intro>
+      <p class="circuit-note" lang="en">Engineering is about making the right connections.</p>
+      <button type="button" class="button button-primary" data-circuit-start>Challenge starten</button>
+    </div>
+    <div data-circuit-game hidden>
+      <p class="circuit-level" data-circuit-level lang="en"></p>
+      <p class="circuit-note" id="circuit-instructions">Drehe die Leiterbahnen um je 90° im Uhrzeigersinn und verbinde die Quelle mit dem Ausgang.<span class="sr-only"> Mit den Pfeiltasten wählst du eine Leiterbahn. Mit Eingabe oder Leertaste drehst du sie.</span></p>
+      <div class="circuit-board" data-circuit-board role="group" aria-label="Schaltungsraster" aria-describedby="circuit-instructions"></div>
+      <p class="circuit-key"><span>Quelle</span><span>Ausgang</span></p>
+      <p class="circuit-status" data-circuit-status role="status" lang="en"></p>
+      <button type="button" class="button button-primary" data-circuit-next hidden>Nächstes Level</button>
+    </div>
+    <div class="circuit-finish" data-circuit-finish hidden>
+      <p class="circuit-on" lang="en">POWER ON</p>
+      <p lang="en">All connections established.</p>
+      <p class="circuit-brand" lang="en">BLACKRIDGE TECHNICAL</p>
+      <p lang="en">Engineered with curiosity.</p>
+      <div class="circuit-actions">
+        <button type="button" class="button button-primary" data-circuit-replay>Erneut spielen</button>
+        <button type="button" class="button button-secondary" data-circuit-close>Schliessen</button>
+      </div>
+    </div>
   </dialog>
 
   <footer class="site-footer">
