@@ -12,7 +12,23 @@
   <link rel="stylesheet" href="../css/circuit-challenge.css">
   <script src="../js/main.js" defer></script>
   <script src="../js/lightbox.js" defer></script>
+  <script src="../js/circuit-puzzles.js" defer></script>
+  <script src="../js/circuit-score.js" defer></script>
   <script src="../js/circuit-challenge.js" defer></script>
+  <!-- language-meta:start -->
+  <link rel="canonical" href="https://dario-exe.ch/blackridge/ueber-mich/">
+  <link rel="alternate" hreflang="de-CH" href="https://dario-exe.ch/blackridge/ueber-mich/">
+  <link rel="alternate" hreflang="en" href="https://dario-exe.ch/blackridge/en/about/">
+  <link rel="alternate" hreflang="x-default" href="https://dario-exe.ch/blackridge/ueber-mich/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Blackridge Technical">
+  <meta property="og:title" content="Über Blackridge | Blackridge Technical">
+  <meta property="og:description" content="Lernen Sie Dario Hasler, seinen technischen Hintergrund und seine Arbeitsweise bei Blackridge Technical kennen.">
+  <meta property="og:url" content="https://dario-exe.ch/blackridge/ueber-mich/">
+  <meta property="og:locale" content="de_CH">
+  <meta property="og:locale:alternate" content="en_GB">
+  <meta property="og:image" content="https://dario-exe.ch/blackridge/assets/images/hero-setup-eisblau.webp">
+  <!-- language-meta:end -->
 </head>
 <body>
   <a class="skip-link" href="#main-content">Zum Inhalt springen</a>
@@ -38,6 +54,13 @@
           <li><a class="button button-primary" href="../kontakt/">Kontakt</a></li>
         </ul>
       </nav>
+      <!-- language-switch:start -->
+      <nav class="language-switch" aria-label="Sprache">
+        <a href="./" lang="de-CH" hreflang="de-CH" aria-label="Deutsch" aria-current="true">DE</a>
+        <span aria-hidden="true">|</span>
+        <a href="../en/about/" lang="en" hreflang="en" aria-label="English">EN</a>
+      </nav>
+      <!-- language-switch:end -->
     </div>
   </header>
 
@@ -192,20 +215,58 @@
     <div data-circuit-game hidden>
       <p class="circuit-level" data-circuit-level lang="en"></p>
       <p class="circuit-note" id="circuit-instructions">Drehe die Leiterbahnen um je 90° im Uhrzeigersinn und verbinde die Quelle mit dem Ausgang.<span class="sr-only"> Mit den Pfeiltasten wählst du eine Leiterbahn. Mit Eingabe oder Leertaste drehst du sie.</span></p>
-      <div class="circuit-board" data-circuit-board role="group" aria-label="Schaltungsraster" aria-describedby="circuit-instructions"></div>
+      <p class="circuit-goal" id="circuit-goal" data-circuit-goal hidden></p>
+      <div class="circuit-board" data-circuit-board role="group" aria-label="Schaltungsraster" aria-describedby="circuit-instructions circuit-goal"></div>
       <p class="circuit-key"><span>Quelle</span><span>Ausgang</span></p>
-      <p class="circuit-status" data-circuit-status role="status" lang="en"></p>
-      <button type="button" class="button button-primary" data-circuit-next hidden>Nächstes Level</button>
-    </div>
-    <div class="circuit-finish" data-circuit-finish hidden>
-      <p class="circuit-on" lang="en">POWER ON</p>
-      <p lang="en">All connections established.</p>
-      <p class="circuit-brand" lang="en">BLACKRIDGE TECHNICAL</p>
-      <p lang="en">Engineered with curiosity.</p>
-      <div class="circuit-actions">
-        <button type="button" class="button button-primary" data-circuit-replay>Erneut spielen</button>
-        <button type="button" class="button button-secondary" data-circuit-close>Schliessen</button>
+      <div class="circuit-tools">
+        <p><span>Drehungen</span> <span data-circuit-rotations></span></p>
+        <p hidden><span>Prüfpunkte</span> <span data-circuit-checkpoints></span></p>
+        <p><span>Hinweise</span> <span data-circuit-hint-count></span></p>
+        <button type="button" class="button button-secondary" data-circuit-hint>Hinweis anzeigen</button>
       </div>
+      <p class="circuit-hint-message" data-circuit-hint-message role="status"></p>
+    </div>
+    <section class="circuit-score circuit-score--final" data-circuit-finish aria-labelledby="circuit-final-title" hidden>
+      <h3 id="circuit-final-title" class="circuit-final-title" tabindex="-1" lang="en">BLACKRIDGE CIRCUIT CHALLENGE</h3>
+      <p class="circuit-score-heading" lang="en">ALL SYSTEMS ONLINE</p>
+      <p class="circuit-score-tally">
+        <span class="circuit-score-label">Gesamtergebnis</span>
+        <strong><span data-circuit-value="points"></span><span class="circuit-score-max"> / <span data-circuit-value="maxPoints"></span></span></strong>
+        <span class="circuit-score-unit">Punkte</span>
+      </p>
+      <div class="circuit-score-rank">
+        <p class="circuit-score-label">Spielrang</p>
+        <p class="circuit-rank-name" data-circuit-rank lang="en"></p>
+        <p class="circuit-rank-note" data-circuit-rank-note></p>
+      </div>
+      <dl class="circuit-score-list circuit-score-levels" data-circuit-level-scores></dl>
+      <dl class="circuit-score-list circuit-score-totals">
+        <div><dt>Drehungen insgesamt</dt><dd data-circuit-value="rotations"></dd></div>
+        <div><dt>Hinweise insgesamt</dt><dd data-circuit-value="hintsUsed"></dd></div>
+      </dl>
+    </section>
+    <section class="circuit-score" data-circuit-result aria-labelledby="circuit-result-title" hidden>
+      <h3 id="circuit-result-title" class="circuit-score-heading" data-circuit-status tabindex="-1" lang="en"></h3>
+      <p class="circuit-result-level" data-circuit-result-level lang="en"></p>
+      <dl class="circuit-score-list">
+        <div><dt>Drehungen</dt><dd data-circuit-value="rotations"></dd></div>
+        <div><dt>Lösungsrichtwert</dt><dd data-circuit-value="parRotations"></dd></div>
+        <div><dt>Zusätzliche Drehungen</dt><dd data-circuit-value="extraRotations"></dd></div>
+        <div><dt>Verwendete Hinweise</dt><dd data-circuit-value="hintsUsed"></dd></div>
+        <div><dt>Abzug durch Drehungen</dt><dd data-circuit-value="rotationDeduction"></dd></div>
+        <div><dt>Abzug durch Hinweise</dt><dd data-circuit-value="hintDeduction"></dd></div>
+      </dl>
+      <p class="circuit-score-tally">
+        <span class="circuit-score-label">Levelpunkte</span>
+        <strong data-circuit-value="points"></strong>
+        <span class="circuit-score-unit">Punkte</span>
+      </p>
+    </section>
+    <div class="circuit-actions" data-circuit-result-actions hidden>
+      <button type="button" class="button button-primary" data-circuit-next>Nächstes Level</button>
+      <button type="button" class="button button-primary" data-circuit-replay hidden>Erneut spielen</button>
+      <button type="button" class="button button-secondary" data-circuit-retry>Erneut versuchen</button>
+      <button type="button" class="button button-secondary" data-circuit-close data-circuit-final-close hidden>Schliessen</button>
     </div>
   </dialog>
 

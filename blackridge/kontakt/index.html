@@ -3,13 +3,27 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Kontaktieren Sie Blackridge Technical per Formular oder WhatsApp für Fragen zum Projekt, zu geplanten PC-Dienstleistungen und für Feedback.">
+  <meta name="description" content="Kontaktieren Sie Blackridge Technical per E-Mail oder WhatsApp für Fragen zum Projekt, zu geplanten PC-Dienstleistungen und für Feedback.">
   <meta name="theme-color" content="#0a0f16">
   <title>Kontakt | Blackridge Technical</title>
   <link rel="icon" href="../assets/logo/blackridge-favicon.png" type="image/png" sizes="64x64">
   <link rel="stylesheet" href="../css/style.css">
   <script src="../js/main.js" defer></script>
   <script type="module" src="../js/contact-form.js"></script>
+  <!-- language-meta:start -->
+  <link rel="canonical" href="https://dario-exe.ch/blackridge/kontakt/">
+  <link rel="alternate" hreflang="de-CH" href="https://dario-exe.ch/blackridge/kontakt/">
+  <link rel="alternate" hreflang="en" href="https://dario-exe.ch/blackridge/en/contact/">
+  <link rel="alternate" hreflang="x-default" href="https://dario-exe.ch/blackridge/kontakt/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Blackridge Technical">
+  <meta property="og:title" content="Kontakt | Blackridge Technical">
+  <meta property="og:description" content="Kontaktieren Sie Blackridge Technical per E-Mail oder WhatsApp für Fragen zum Projekt, zu geplanten PC-Dienstleistungen und für Feedback.">
+  <meta property="og:url" content="https://dario-exe.ch/blackridge/kontakt/">
+  <meta property="og:locale" content="de_CH">
+  <meta property="og:locale:alternate" content="en_GB">
+  <meta property="og:image" content="https://dario-exe.ch/blackridge/assets/images/hero-setup-eisblau.webp">
+  <!-- language-meta:end -->
 </head>
 <body>
   <a class="skip-link" href="#main-content">Zum Inhalt springen</a>
@@ -35,6 +49,13 @@
           <li><a class="button button-primary" href="../kontakt/" aria-current="page">Kontakt</a></li>
         </ul>
       </nav>
+      <!-- language-switch:start -->
+      <nav class="language-switch" aria-label="Sprache">
+        <a href="./" lang="de-CH" hreflang="de-CH" aria-label="Deutsch" aria-current="true">DE</a>
+        <span aria-hidden="true">|</span>
+        <a href="../en/contact/" lang="en" hreflang="en" aria-label="English">EN</a>
+      </nav>
+      <!-- language-switch:end -->
     </div>
   </header>
 
@@ -44,18 +65,15 @@
         <div class="contact-copy" data-reveal="left">
           <h1 class="section-title" id="contact-title">Kontakt aufnehmen</h1>
           <p>Haben Sie eine Frage zu Blackridge Technical oder möchten Sie mehr über das Projekt erfahren?</p>
-          <p>Allgemeine Fragen und Feedback sind per Kontaktformular oder WhatsApp willkommen.</p>
+          <p>Allgemeine Fragen und Feedback sind per E-Mail oder WhatsApp willkommen.</p>
         </div>
         <div class="contact-channel" id="contact-channel" data-reveal="right" data-reveal-step="1">
-          <noscript>
-            <p class="contact-form-status">Zum Absenden des Formulars ist JavaScript erforderlich.</p>
-          </noscript>
-          <form class="contact-form" id="blackridge-contact-form" method="post" aria-labelledby="contact-title">
+          <form class="contact-form" id="blackridge-contact-form" method="post" aria-labelledby="contact-title" hidden>
             <fieldset class="contact-fields" data-contact-fields disabled>
               <legend class="sr-only">Angaben zu Ihrer Nachricht</legend>
               <div class="contact-field">
-                <label for="contact-name">Name</label>
-                <input id="contact-name" name="name" type="text" autocomplete="name" minlength="2" maxlength="120" required>
+                <label for="contact-name">Name (optional)</label>
+                <input id="contact-name" name="name" type="text" autocomplete="name" minlength="2" maxlength="120">
               </div>
               <div class="contact-field">
                 <label for="contact-email">E-Mail-Adresse</label>
@@ -78,7 +96,8 @@
               </div>
               <div class="contact-field">
                 <label for="contact-message">Nachricht</label>
-                <textarea id="contact-message" name="message" rows="5" minlength="10" maxlength="4000" required></textarea>
+                <textarea id="contact-message" name="message" rows="5" minlength="10" maxlength="4000" aria-describedby="contact-message-help" required></textarea>
+                <small id="contact-message-help">Bitte geben Sie nur Informationen an, die wir zur Bearbeitung Ihrer Anfrage benötigen. Senden Sie keine Passwörter, Zugangsdaten oder vertraulichen Angaben über Dritte.</small>
               </div>
               <div class="contact-privacy">
                 <input id="contact-privacy" name="privacy" type="checkbox" value="accepted" required>
@@ -95,8 +114,8 @@
             </fieldset>
           </form>
           <div class="contact-form-status" role="status" aria-atomic="true" data-contact-status data-state="unconfigured">
-            <strong data-contact-status-title>Das Formular ist noch nicht versandbereit.</strong>
-            <p data-contact-status-message>Für Fragen erreichen Sie mich <a href="#kontakt-whatsapp">über WhatsApp</a>.</p>
+            <strong data-contact-status-title>Das Kontaktformular ist derzeit nicht verfügbar.</strong>
+            <p data-contact-status-message>Sie erreichen mich <a href="mailto:dario.werner.hasler@gmail.com">per E-Mail</a> oder <a href="#kontakt-whatsapp">über WhatsApp</a>.</p>
           </div>
         </div>
         <section class="whatsapp-card" id="kontakt-whatsapp" aria-labelledby="whatsapp-title" data-reveal="up" data-reveal-step="2">

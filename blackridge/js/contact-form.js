@@ -1,4 +1,4 @@
-import { formId } from "./contact-form-config.js";
+import { formEnabled, formId } from "./contact-form-config.js";
 
 function setUpContactForm() {
   const form = document.getElementById("blackridge-contact-form");
@@ -11,13 +11,41 @@ function setUpContactForm() {
   const statusTitle = status.querySelector("[data-contact-status-title]");
   const statusMessage = status.querySelector("[data-contact-status-message]");
   const name = form.elements.namedItem("name");
+  const email = form.elements.namedItem("email");
   const subject = form.elements.namedItem("subject");
   const message = form.elements.namedItem("message");
+  const privacy = form.elements.namedItem("privacy");
+  const english = document.documentElement.lang === "en";
+  const copy = english ? {
+    error: "Your message could not be sent.",
+    retry: "Please try again.",
+    name: "Enter a name with at least two characters.",
+    email: "Enter a valid email address.",
+    subject: "Select a subject.",
+    message: "Enter a message with at least ten characters.",
+    privacy: "Confirm that you have read the privacy notice.",
+    sending: "Sending …",
+    pending: "Your message is being sent …",
+    success: "Message sent!",
+    thanks: "Thank you for your message. I’ll get back to you when I can.",
+    send: "Send Message",
+  } : {
+    error: "Nachricht konnte nicht gesendet werden.",
+    retry: "Bitte versuchen Sie es erneut.",
+    name: "Bitte geben Sie einen Namen mit mindestens zwei Zeichen ein.",
+    subject: "Bitte wählen Sie einen Betreff aus.",
+    message: "Bitte schreiben Sie eine Nachricht mit mindestens zehn Zeichen.",
+    sending: "Wird gesendet …",
+    pending: "Ihre Nachricht wird gesendet …",
+    success: "Nachricht erfolgreich gesendet!",
+    thanks: "Vielen Dank für Ihre Nachricht. Ich werde mich bei Gelegenheit bei Ihnen melden.",
+    send: "Nachricht senden",
+  };
   const subjects = new Set(Array.from(subject.options)
     .filter((option) => option.value && !option.disabled)
     .map((option) => option.value));
   const id = typeof formId === "string" ? formId.trim() : "";
-  const endpoint = /^[a-z0-9_-]+$/i.test(id) ? `https://formspree.io/f/${id}` : null;
+  const endpoint = formEnabled && /^[a-z0-9_-]+$/i.test(id) ? `https://formspree.io/f/${id}` : null;
   let submitting = false;
 
   function showStatus(state, title = "", text = "") {
@@ -27,11 +55,20 @@ function setUpContactForm() {
   }
 
   function showError() {
-    showStatus("error", "Nachricht konnte nicht gesendet werden.", "Bitte versuchen Sie es erneut.");
+    showStatus("error", copy.error, copy.retry);
   }
 
-  for (const field of [name, subject, message]) {
+  for (const field of [name, email, subject, message, privacy]) {
     field.addEventListener("input", () => field.setCustomValidity(""));
+  }
+
+  if (english) {
+    form.addEventListener("invalid", (event) => {
+      const field = event.target;
+      if (field.validity.valueMissing || field.validity.typeMismatch || field.validity.tooShort) {
+        field.setCustomValidity(copy[field.name] ?? "");
+      }
+    }, true);
   }
 
   form.addEventListener("submit", async (event) => {
@@ -40,12 +77,12 @@ function setUpContactForm() {
 
     const trimmedName = name.value.trim();
     const trimmedMessage = message.value.trim();
-    name.setCustomValidity(Array.from(trimmedName).length < name.minLength
-      ? "Bitte geben Sie einen Namen mit mindestens zwei Zeichen ein."
+    name.setCustomValidity(trimmedName && Array.from(trimmedName).length < name.minLength
+      ? copy.name
       : "");
-    subject.setCustomValidity(subjects.has(subject.value) ? "" : "Bitte wählen Sie einen Betreff aus.");
+    subject.setCustomValidity(subjects.has(subject.value) ? "" : copy.subject);
     message.setCustomValidity(Array.from(trimmedMessage).length < message.minLength
-      ? "Bitte schreiben Sie eine Nachricht mit mindestens zehn Zeichen."
+      ? copy.message
       : "");
     if (!form.reportValidity()) return;
 
@@ -55,7 +92,8 @@ function setUpContactForm() {
       return;
     }
 
-    data.set("name", trimmedName);
+    if (trimmedName) data.set("name", trimmedName);
+    else data.delete("name");
     data.set("message", trimmedMessage);
     data.delete("privacy");
 
@@ -66,9 +104,9 @@ function setUpContactForm() {
     submitting = true;
     fields.disabled = true;
     submit.disabled = true;
-    submitLabel.textContent = "Wird gesendet …";
+    submitLabel.textContent = copy.sending;
     form.setAttribute("aria-busy", "true");
-    showStatus("pending", "Ihre Nachricht wird gesendet …");
+    showStatus("pending", copy.pending);
 
     try {
       const response = await fetch(endpoint, {
@@ -90,7 +128,7 @@ function setUpContactForm() {
       }
 
       form.reset();
-      showStatus("success", "Nachricht erfolgreich gesendet!", "Vielen Dank für Ihre Nachricht. Ich werde mich bei Gelegenheit bei Ihnen melden.");
+      showStatus("success", copy.success, copy.thanks);
     } catch {
       showError();
     } finally {
@@ -98,13 +136,14 @@ function setUpContactForm() {
       submitting = false;
       fields.disabled = false;
       submit.disabled = false;
-      submitLabel.textContent = "Nachricht senden";
+      submitLabel.textContent = copy.send;
       form.removeAttribute("aria-busy");
       if (restoreFocus && document.activeElement === document.body) submit.focus({ preventScroll: true });
     }
   });
 
   if (endpoint) {
+    form.hidden = false;
     fields.disabled = false;
     submit.disabled = false;
     showStatus("idle");

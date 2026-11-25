@@ -65,7 +65,9 @@ function setUpLightbox(gallery) {
       const error = document.createElement("p");
       error.className = "lightbox__error";
       error.setAttribute("role", "status");
-      error.textContent = "Dieses Bild konnte nicht geladen werden.";
+      error.textContent = document.documentElement.lang === "en"
+        ? "This image could not be loaded."
+        : "Dieses Bild konnte nicht geladen werden.";
       stage.replaceChildren(error);
       count.textContent = position;
       stage.removeAttribute("aria-busy");

@@ -5,7 +5,7 @@ function setUpNavigation() {
 
   if (!menuRoot || !toggle || !menu) return;
 
-  const mobile = window.matchMedia("(max-width: 52rem)");
+  const mobile = window.matchMedia("(max-width: 58rem)");
 
   function setMenu(open) {
     toggle.setAttribute("aria-expanded", String(open));
@@ -62,89 +62,99 @@ function setUpScrollReveal() {
   if (motion.matches || typeof window.IntersectionObserver !== "function") return;
 
   const selector = "[data-reveal]";
+  const targets = Array.from(document.querySelectorAll(selector))
+    .filter(target => !target.closest("dialog, [role='dialog']"));
+  if (!targets.length) return;
+
+  const openDetails = ".faq-item[open], .price-scope[open]";
   const isTopEntry = window.scrollY === 0 && !window.location.hash;
-  const pending = new Set(Array.from(document.querySelectorAll(selector)).filter((target) => {
-    const top = target.getBoundingClientRect().top;
-
-    // Sections moved up on their own pages can already be visible on entry.
-    return top >= window.innerHeight || (isTopEntry && top >= 0);
-  }));
-  if (!pending.size) return;
-
+  const seen = new WeakSet();
+  const armed = new Map();
+  const running = new Set();
   const events = new AbortController();
   const listenerOptions = { signal: events.signal };
-  const inset = 40;
-  const observer = new IntersectionObserver((entries) => {
-    for (const entry of entries) {
-      if (entry.isIntersecting) {
-        show(entry.target, true);
-      } else if (entry.boundingClientRect.bottom <= 0) {
-        show(entry.target, false);
-      }
-    }
-  }, { rootMargin: "0px 0px -" + inset + "px 0px" });
   let lastScrollY = window.scrollY;
-  let jumpFrame;
+  let scrollingDown = false;
 
-  function stopObserving() {
-    observer.disconnect();
-    events.abort();
-    if (jumpFrame !== undefined) window.cancelAnimationFrame(jumpFrame);
+  function protectedContent(target) {
+    return target.matches(":focus-within") || target.closest(openDetails) || target.querySelector(openDetails);
+  }
+
+  function settle(target) {
+    armed.delete(target);
+    running.delete(target);
+    target.classList.remove("reveal-pending", "reveal-visible");
+  }
+
+  function arm(target) {
+    armed.set(target, window.scrollY);
+    target.classList.add("reveal-pending");
   }
 
   function finishAnimation(event) {
-    if (event.target !== event.currentTarget || event.animationName !== "scroll-reveal") return;
-
-    const target = event.currentTarget;
-    target.classList.remove("reveal-visible");
-    target.removeEventListener("animationend", finishAnimation);
-    target.removeEventListener("animationcancel", finishAnimation);
+    const target = event.target;
+    if (event.animationName !== "scroll-reveal" || !running.has(target)) return;
+    settle(target);
+    // The transform can affect intersections mid-animation. Once it is gone,
+    // check the resting position in case the user already scrolled back up.
+    if (target.getBoundingClientRect().top >= window.innerHeight && !protectedContent(target)) arm(target);
   }
 
-  function show(target, animate) {
-    if (!pending.delete(target)) return;
-
-    observer.unobserve(target);
-    target.classList.remove("reveal-pending");
-    if (animate) {
-      target.addEventListener("animationend", finishAnimation);
-      target.addEventListener("animationcancel", finishAnimation);
-      target.classList.add("reveal-visible");
+  const observer = new IntersectionObserver((entries) => {
+    for (const { target, rootBounds, boundingClientRect, intersectionRect, isIntersecting } of entries) {
+      if (!rootBounds || running.has(target)) continue;
+      const firstObservation = !seen.has(target);
+      seen.add(target);
+      if (protectedContent(target)) {
+        settle(target);
+      } else if (!isIntersecting) {
+        if (boundingClientRect.top >= rootBounds.bottom) arm(target);
+        else if (boundingClientRect.bottom <= rootBounds.top) settle(target);
+      } else {
+        const initialEntry = firstObservation && isTopEntry && window.scrollY === 0 && boundingClientRect.top >= 0;
+        const reentry = scrollingDown && window.scrollY > armed.get(target);
+        if (!initialEntry && !reentry) {
+          settle(target);
+          continue;
+        }
+        // Keep a small gap between becoming fully offscreen and starting
+        // again. Short headings need less visible height than large cards.
+        const visibleHeight = Math.min(24, boundingClientRect.height * .25);
+        if (!initialEntry && intersectionRect.height + .5 < visibleHeight) continue;
+        settle(target);
+        running.add(target);
+        target.classList.add("reveal-visible");
+      }
     }
-    if (!pending.size) stopObserving();
-  }
-
-  for (const target of pending) {
-    target.classList.add("reveal-pending");
-    observer.observe(target);
-  }
-
-  document.addEventListener("focusin", (event) => {
-    const target = event.target.closest(selector);
-    if (target) show(target, false);
-  }, listenerOptions);
+  }, { threshold: [0, .025, .05, .1, .25, .5, 1] });
 
   window.addEventListener("scroll", () => {
-    const distance = window.scrollY - lastScrollY;
-    lastScrollY = window.scrollY;
-    if (distance < window.innerHeight - inset || jumpFrame !== undefined) return;
-
-    // Anchor jumps can skip an element without crossing the observer boundary.
-    jumpFrame = window.requestAnimationFrame(() => {
-      jumpFrame = undefined;
-      for (const target of pending) {
-        if (target.getBoundingClientRect().bottom <= 0) show(target, false);
-      }
-    });
+    const position = window.scrollY;
+    if (position === lastScrollY) return;
+    scrollingDown = position > lastScrollY;
+    lastScrollY = position;
   }, { ...listenerOptions, passive: true });
 
-  motion.addEventListener("change", (event) => {
-    if (event.matches) {
-      for (const target of pending) target.classList.remove("reveal-pending");
-      pending.clear();
-      stopObserving();
+  function settleAncestors(element) {
+    for (let target = element.closest(selector); target; target = target.parentElement?.closest(selector)) {
+      settle(target);
     }
+  }
+
+  document.addEventListener("focusin", event => settleAncestors(event.target), listenerOptions);
+  document.addEventListener("toggle", event => {
+    if (event.target.matches(openDetails)) settleAncestors(event.target);
+  }, { ...listenerOptions, capture: true });
+  document.addEventListener("animationend", finishAnimation, listenerOptions);
+  document.addEventListener("animationcancel", finishAnimation, listenerOptions);
+
+  motion.addEventListener("change", (event) => {
+    if (!event.matches) return;
+    observer.disconnect();
+    events.abort();
+    for (const target of targets) settle(target);
   }, listenerOptions);
+  targets.forEach(target => observer.observe(target));
 }
 
 for (const year of document.querySelectorAll("[data-current-year]")) {

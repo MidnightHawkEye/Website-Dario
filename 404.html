@@ -9,6 +9,22 @@
     <meta name="robots" content="noindex">
     <title data-i18n="error404.title">404 | DARIO.exe</title>
 
+    <style>
+        html[data-blackridge-error-pending] body { visibility: hidden; }
+        html[data-blackridge-error-pending] { background: #090b10; }
+    </style>
+    <script>
+        // GitHub Pages serves this file at the URL that returned 404.
+        if (/^\/blackridge(?:\/|$)/.test(location.pathname)) {
+            document.documentElement.dataset.blackridgeErrorPending = "";
+            const loader = document.createElement("script");
+            loader.src = "/blackridge/js/signal-lost.js";
+            loader.dataset.signalRouter = "";
+            loader.onerror = () => delete document.documentElement.dataset.blackridgeErrorPending;
+            document.head.append(loader);
+        }
+    </script>
+
     <link
         rel="icon"
         href="/assets/favicon/favicon.ico"

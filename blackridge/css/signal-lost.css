@@ -1,0 +1,143 @@
+.signal-lost {
+  display: grid;
+  min-height: 100vh;
+  min-height: 100svh;
+  place-items: center;
+  padding: clamp(1rem, 4vw, 3rem);
+  background:
+    radial-gradient(ellipse at 50% 18%, #122444 0%, transparent 60%),
+    var(--ink);
+}
+
+.signal-frame {
+  width: min(100%, 45rem);
+  padding: clamp(1.15rem, 4vw, 2.75rem);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: linear-gradient(165deg, #151e2e, var(--surface) 72%);
+  box-shadow: 0 1.4rem 4.5rem #0007;
+  text-align: center;
+}
+
+.signal-header img {
+  width: 4rem;
+  height: auto;
+  margin-inline: auto;
+}
+
+.signal-header p, .signal-status, .signal-footer {
+  color: var(--subtle);
+  font: 700 .75rem/1.5 var(--font);
+  letter-spacing: .12em;
+}
+
+.signal-header p {
+  margin-top: .55rem;
+}
+
+.signal-code {
+  margin-top: clamp(.65rem, 2.5vw, 1.2rem);
+  color: var(--text);
+  font-size: clamp(5rem, 16vw, 10rem);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  line-height: .95;
+  letter-spacing: -.055em;
+  text-shadow: 0 0 1.8rem #78a8ff29;
+}
+
+.signal-circuit {
+  display: block;
+  width: min(100%, 35rem);
+  height: auto;
+  margin: .5rem auto .25rem;
+}
+
+.signal-trace, .signal-node {
+  stroke: #466186;
+  stroke-width: 2;
+}
+
+.signal-node {
+  fill: var(--surface);
+}
+
+.signal-gap {
+  stroke: var(--accent);
+}
+
+.signal-pulse {
+  opacity: 0;
+  stroke: #9bd4ff;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 8 92;
+  filter: drop-shadow(0 0 4px #78a8ff);
+}
+
+.signal-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .45rem;
+  color: var(--accent);
+}
+
+.signal-status span {
+  width: .45rem;
+  height: .45rem;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 .7rem #78a8ff75;
+}
+
+.signal-copy {
+  margin-top: .95rem;
+}
+
+.signal-copy h1 {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  letter-spacing: -.035em;
+  text-wrap: balance;
+}
+
+.signal-copy > p {
+  max-width: 34rem;
+  margin: .55rem auto 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.signal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .6rem;
+  margin-top: 1.1rem;
+}
+
+.signal-footer {
+  margin-top: 1.1rem;
+  padding-top: .65rem;
+  border-top: 1px solid var(--line);
+  text-align: end;
+}
+
+@media (max-width: 27rem) {
+  .signal-actions .button {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .signal-pulse {
+    animation: signal-travel 5.6s linear 3;
+  }
+}
+
+@keyframes signal-travel {
+  0% { opacity: 0; stroke-dashoffset: 8; }
+  6% { opacity: .9; }
+  35% { opacity: .9; }
+  42%, 100% { opacity: 0; stroke-dashoffset: -100; }
+}

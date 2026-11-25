@@ -4,7 +4,11 @@
     intensity: .9,      // Helligkeit und Dichte der Strömung, zwischen 0 und 1.
     mistLimit: 24,      // Maximale Zahl gleichzeitig sichtbarer Nebelschlieren.
     sparkLimit: 64,     // Maximale Zahl gleichzeitig sichtbarer Lichtpunkte.
-    trailLimit: 20,     // Maximale Stützpunkte der fliessenden Spur.
+    trailLimit: 44,     // Stützpunkte inklusive unsichtbarer Reserve am Ende.
+    trailLife: 3900,    // Lebensdauer eines Spurpunkts in Millisekunden.
+    trailFadeStart: .16, // Ab diesem Anteil der Strecke vom Kopf aus fällt die Deckkraft.
+    trailFadePower: 1.25, // Stärkerer Abfall im hinteren Bereich des Smoothstep-Verlaufs.
+    trailMinWidth: .16, // Anteil der ursprünglichen Breite am Ende der Spur.
     trailWidth: 1.35,   // Breitenfaktor für die Lichtspur. 1 entspricht der ursprünglichen Breite.
     particleSpeed: 1,   // Faktor für die Drift von Nebel und Lichtpunkten.
     lifetime: [1800, 4200], // Lebensdauer von Nebel und Lichtpunkten in Millisekunden.
@@ -31,6 +35,7 @@
     sparks: Math.floor(settings.sparkLimit * budget),
     trail: Math.floor(settings.trailLimit * budget),
   };
+  const trailReserve = lowBudget ? 4 : 6;
   const mist = [];
   const sparks = [];
   const trail = [];
@@ -147,13 +152,21 @@
     const [minLife, maxLife] = settings.lifetime;
     const speed = (16 + strength * 29) * settings.particleSpeed;
     const angle = Math.atan2(dy, dx);
+    const origin = {
+      x, y, born: now, life: settings.trailLife,
+      vx: dx * 17, vy: dy * 12 - 10, phase: randomBetween(0, Math.PI * 2),
+      strength, sweep, tailOpacity: 0,
+    };
+    // The next frame can advance several samples at once. Never evict a point
+    // that contributed visible light in the previous frame.
+    if (trail.length < limits.trail || trail[0].tailOpacity === 0) add(trail, limits.trail, origin);
     add(mist, limits.mist, {
       x: x + randomBetween(-9, 9), y: y + randomBetween(-7, 7), born: now,
       life: randomBetween(minLife, maxLife), vx: dx * speed * .53, vy: dy * speed * .49 - 12,
       radius: randomBetween(30, 62) + strength * 18, spin: randomBetween(-.5, .5),
       angle: angle + randomBetween(-.38, .38), phase: randomBetween(0, Math.PI * 2),
       alpha: intensity * Math.min(.25, settings.mistOpacity) * (.58 + strength * .42),
-      brush: brushes.mist[Math.random() < .25 ? 1 : 0],
+      brush: brushes.mist[Math.random() < .25 ? 1 : 0], origin,
     });
 
     const sparkCount = strength > .58 && Math.random() < intensity * budget ? 2 : 1;
@@ -164,14 +177,9 @@
         life: randomBetween(minLife, maxLife), vx: dx * speed - dy * bend, vy: dy * speed + dx * bend - 9,
         radius: randomBetween(1.65, 3.7), phase: randomBetween(0, Math.PI * 2),
         alpha: intensity * glow * randomBetween(.34, .79),
-        brush: brushes.sparks[Math.floor(Math.random() ** 1.55 * brushes.sparks.length)],
+        brush: brushes.sparks[Math.floor(Math.random() ** 1.55 * brushes.sparks.length)], origin,
       });
     }
-
-    add(trail, limits.trail, {
-      x, y, born: now, life: Math.min(maxLife, minLife + 300 + strength * 700),
-      vx: dx * 17, vy: dy * 12 - 10, phase: randomBetween(0, Math.PI * 2), strength, sweep,
-    });
   }
 
   function schedule() {
@@ -241,7 +249,10 @@
     let active = 0;
     for (const particle of list) {
       const elapsed = Math.max(0, now - particle.born);
-      if (elapsed >= particle.life) continue;
+      if (elapsed >= particle.life) {
+        if (list === trail) particle.tailOpacity = 0;
+        continue;
+      }
       const curl = Math.sin(particle.phase + elapsed * .007);
       particle.elapsed = elapsed;
       particle.progress = elapsed / particle.life;
@@ -266,11 +277,44 @@
     return (1 - progress) ** 2 * (1 + 2 * progress);
   }
 
+  function prepareTrail() {
+    const sections = [];
+    const visibleFrom = Math.max(0, trail.length - limits.trail + trailReserve);
+    for (let index = 0; index < visibleFrom; index += 1) trail[index].tailOpacity = 0;
+
+    // Each uninterrupted pointer sweep tapers independently. Use travelled
+    // distance so changes in sampling density don't change the shape of the fade.
+    for (let end = trail.length - 1; end >= visibleFrom;) {
+      const newest = trail[end];
+      newest.distance = 0;
+      let start = end;
+      while (start > visibleFrom && trail[start - 1].sweep === newest.sweep) {
+        const from = trail[start];
+        const to = trail[--start];
+        to.distance = from.distance + Math.hypot(to.x - from.x, to.y - from.y);
+      }
+
+      const length = trail[start].distance;
+      for (let index = start; index <= end; index += 1) {
+        const point = trail[index];
+        const ratio = length ? point.distance / length : 0;
+        const fade = Math.max(0, (ratio - settings.trailFadeStart) / (1 - settings.trailFadeStart));
+        point.tailOpacity = fadeOpacity(fade) ** settings.trailFadePower;
+        point.opacity = intensity * glow * foregroundOpacity(point.x, point.y)
+          * fadeOpacity(point.progress) * (.13 + point.strength * .14) * point.tailOpacity;
+      }
+      if (length) sections.push({ start, end });
+      end = start - 1;
+    }
+    return sections.reverse();
+  }
+
   function drawParticles() {
     for (const particle of mist) {
       const spread = particle.radius * (1 + particle.progress * .58);
       context.globalAlpha = particle.alpha * foregroundOpacity(particle.x, particle.y)
-        * Math.min(1, .18 + particle.elapsed / 130) * fadeOpacity(particle.progress);
+        * Math.min(1, .18 + particle.elapsed / 130) * fadeOpacity(particle.progress)
+        * (.3 + .7 * particle.origin.tailOpacity);
       context.save();
       context.translate(particle.x, particle.y);
       context.rotate(particle.angle + particle.progress * particle.spin);
@@ -280,31 +324,45 @@
     for (const particle of sparks) {
       const radius = particle.radius * (1 - .3 * particle.progress);
       context.globalAlpha = particle.alpha * foregroundOpacity(particle.x, particle.y)
-        * Math.min(1, .12 + particle.elapsed / 95) * fadeOpacity(particle.progress);
+        * Math.min(1, .12 + particle.elapsed / 95) * fadeOpacity(particle.progress)
+        * (.3 + .7 * particle.origin.tailOpacity);
       context.drawImage(particle.brush, particle.x - radius, particle.y - radius, radius * 2, radius * 2);
     }
   }
 
-  function drawTrail() {
+  function drawTrail(sections) {
+    context.globalAlpha = 1;
     context.lineCap = 'round';
-    for (let index = 1; index < trail.length; index += 1) {
-      const previous = trail[index - 1];
-      const point = trail[index];
-      const following = trail[index + 1];
-      const next = following?.sweep === point.sweep ? following : point;
-      if (previous.sweep !== point.sweep || Math.hypot(point.x - previous.x, point.y - previous.y) > 62) continue;
-      const middleY = point.y + Math.sin(point.phase + point.progress * 4) * point.progress * 8;
-      context.globalAlpha = intensity * glow * foregroundOpacity(point.x, point.y)
-        * fadeOpacity(point.progress) * (.13 + point.strength * .14);
-      context.beginPath();
-      context.moveTo((previous.x + point.x) / 2, (previous.y + point.y) / 2);
-      context.quadraticCurveTo(point.x, middleY, (point.x + next.x) / 2, (point.y + next.y) / 2);
-      context.lineWidth = (3.4 + point.strength * 2.8) * settings.trailWidth;
-      context.strokeStyle = '#266bff';
-      context.stroke();
-      context.lineWidth = (.85 + point.strength * .7) * settings.trailWidth;
-      context.strokeStyle = '#7dcaff';
-      context.stroke();
+    for (const { start, end } of sections) {
+      for (let index = start; index <= end; index += 1) {
+        const point = trail[index];
+        const previous = index === start ? point : trail[index - 1];
+        const next = index === end ? point : trail[index + 1];
+        const x0 = (previous.x + point.x) / 2;
+        const y0 = (previous.y + point.y) / 2;
+        const x1 = (point.x + next.x) / 2;
+        const y1 = (point.y + next.y) / 2;
+        if (x0 === x1 && y0 === y1) continue;
+
+        // Adjacent curves use the same alpha at the shared midpoint. Both the
+        // core and the surrounding glow start at exactly zero on the tail.
+        const from = index === start ? 0 : (previous.opacity + point.opacity) / 2;
+        const to = (point.opacity + next.opacity) / 2;
+        const taper = settings.trailMinWidth + (1 - settings.trailMinWidth) * Math.sqrt(point.tailOpacity);
+        const widthFactor = taper * settings.trailWidth;
+        const middleY = point.y + Math.sin(point.phase + point.progress * 4) * point.progress * 8;
+        context.beginPath();
+        context.moveTo(x0, y0);
+        context.quadraticCurveTo(point.x, middleY, x1, y1);
+        for (const [color, width] of [['38,107,255', 3.4 + point.strength * 2.8], ['125,202,255', .85 + point.strength * .7]]) {
+          const paint = context.createLinearGradient(x0, y0, x1, y1);
+          paint.addColorStop(0, `rgba(${color},${from})`);
+          paint.addColorStop(1, `rgba(${color},${to})`);
+          context.lineWidth = width * widthFactor;
+          context.strokeStyle = paint;
+          context.stroke();
+        }
+      }
     }
   }
 
@@ -316,9 +374,10 @@
     age(mist, now, dt);
     age(sparks, now, dt);
     age(trail, now, dt);
+    const sections = prepareTrail();
     context.clearRect(0, 0, width, height);
     drawParticles();
-    drawTrail();
+    drawTrail(sections);
     context.globalAlpha = 1;
     if (following || mist.length || sparks.length || trail.length) schedule();
     else {

@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Contact Blackridge Technical by email or WhatsApp with questions about the project, planned PC services or to share feedback.">
+  <meta name="theme-color" content="#0a0f16">
+  <title>Contact | Blackridge Technical</title>
+  <link rel="icon" href="../../assets/logo/blackridge-favicon.png" type="image/png" sizes="64x64">
+  <link rel="stylesheet" href="../../css/style.css">
+  <script src="../../js/main.js" defer></script>
+  <script type="module" src="../../js/contact-form.js"></script>
+  <!-- language-meta:start -->
+  <link rel="canonical" href="https://dario-exe.ch/blackridge/en/contact/">
+  <link rel="alternate" hreflang="de-CH" href="https://dario-exe.ch/blackridge/kontakt/">
+  <link rel="alternate" hreflang="en" href="https://dario-exe.ch/blackridge/en/contact/">
+  <link rel="alternate" hreflang="x-default" href="https://dario-exe.ch/blackridge/kontakt/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Blackridge Technical">
+  <meta property="og:title" content="Contact | Blackridge Technical">
+  <meta property="og:description" content="Contact Blackridge Technical by email or WhatsApp with questions about the project, planned PC services or to share feedback.">
+  <meta property="og:url" content="https://dario-exe.ch/blackridge/en/contact/">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:locale:alternate" content="de_CH">
+  <meta property="og:image" content="https://dario-exe.ch/blackridge/assets/images/hero-setup-eisblau.webp">
+  <!-- language-meta:end -->
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header site-header-mountains">
+    <div class="container header-inner" data-menu-root>
+      <a class="brand" href="../">
+        <img class="brand-mark" src="../../assets/logo/blackridge.png" width="107" height="50" alt="">
+        <span class="brand-copy">
+          <span class="brand-name brand-name-stacked">BLACKRIDGE <span>TECHNICAL</span></span>
+          <span class="brand-company">Hasler – Blackridge Technical</span>
+        </span>
+      </a>
+      <button class="nav-toggle" type="button" aria-controls="primary-navigation" aria-expanded="false" aria-label="Menu" data-menu-toggle hidden>
+        <svg class="icon menu-open-icon" aria-hidden="true"><use href="../../assets/icons/icons.svg#menu"></use></svg>
+        <svg class="icon menu-close-icon" aria-hidden="true"><use href="../../assets/icons/icons.svg#x"></use></svg>
+      </button>
+      <nav class="site-nav" id="primary-navigation" aria-label="Main navigation" data-menu>
+        <ul>
+          <li><a href="../">Home</a></li>
+          <li><a href="../services/">Services</a></li>
+          <li><a href="../pricing/">Pricing</a></li>
+          <li><a href="../about/">About Blackridge</a></li>
+          <li><a class="button button-primary" href="./" aria-current="page">Contact</a></li>
+        </ul>
+      </nav>
+      <!-- language-switch:start -->
+      <nav class="language-switch" aria-label="Language">
+        <a href="../../kontakt/" lang="de-CH" hreflang="de-CH" aria-label="Deutsch">DE</a>
+        <span aria-hidden="true">|</span>
+        <a href="./" lang="en" hreflang="en" aria-label="English" aria-current="true">EN</a>
+      </nav>
+      <!-- language-switch:end -->
+    </div>
+  </header>
+
+  <main id="main-content" tabindex="-1">
+    <section class="section contact-section" id="kontakt" aria-labelledby="contact-title" tabindex="-1">
+      <div class="container contact-panel">
+        <div class="contact-copy" data-reveal="left">
+          <h1 class="section-title" id="contact-title">Get in Touch</h1>
+          <p>Have a question about Blackridge Technical or want to know more about the project?</p>
+          <p>General questions and feedback are welcome by email or WhatsApp.</p>
+        </div>
+        <div class="contact-channel" id="contact-channel" data-reveal="right" data-reveal-step="1">
+          <form class="contact-form" id="blackridge-contact-form" method="post" aria-labelledby="contact-title" hidden>
+            <fieldset class="contact-fields" data-contact-fields disabled>
+              <legend class="sr-only">Your message details</legend>
+              <div class="contact-field">
+                <label for="contact-name">Name (optional)</label>
+                <input id="contact-name" name="name" type="text" autocomplete="name" minlength="2" maxlength="120">
+              </div>
+              <div class="contact-field">
+                <label for="contact-email">Email Address</label>
+                <input id="contact-email" name="email" type="email" autocomplete="email" maxlength="254" required>
+              </div>
+              <div class="contact-field">
+                <label for="contact-subject">Subject</label>
+                <div class="contact-select">
+                  <select id="contact-subject" name="subject" required>
+                    <option value="" disabled selected>Select a subject</option>
+                    <option value="Allgemeine Anfrage">General Enquiry</option>
+                    <option value="PC-Zusammenstellung">PC Planning</option>
+                    <option value="PC-Beratung">PC Advice</option>
+                    <option value="PC-Reinigung &amp; Wartung">PC Cleaning &amp; Maintenance</option>
+                    <option value="Feedback zur Website">Website Feedback</option>
+                    <option value="Sonstiges">Other</option>
+                  </select>
+                  <svg class="icon" aria-hidden="true"><use href="../../assets/icons/icons.svg#chevron-down"></use></svg>
+                </div>
+              </div>
+              <div class="contact-field">
+                <label for="contact-message">Message</label>
+                <textarea id="contact-message" name="message" rows="5" minlength="10" maxlength="4000" aria-describedby="contact-message-help" required></textarea>
+                <small id="contact-message-help">Please include only the information we need to respond to your enquiry. Do not send passwords, login credentials or confidential information about other people.</small>
+              </div>
+              <div class="contact-privacy">
+                <input id="contact-privacy" name="privacy" type="checkbox" value="accepted" required>
+                <label for="contact-privacy">I have read and acknowledged the <a href="../privacy/" target="_blank" rel="noopener" aria-describedby="contact-new-tab">Privacy Notice</a>.</label>
+              </div>
+              <div hidden aria-hidden="true">
+                <label for="contact-website">Leave this field empty</label>
+                <input id="contact-website" name="_gotcha" type="text" tabindex="-1" autocomplete="off">
+              </div>
+              <button class="button button-primary contact-submit" type="submit" data-contact-submit disabled>
+                <svg class="icon" aria-hidden="true"><use href="../../assets/icons/icons.svg#mail"></use></svg>
+                <span data-contact-submit-label>Send Message</span>
+              </button>
+            </fieldset>
+          </form>
+          <div class="contact-form-status" role="status" aria-atomic="true" data-contact-status data-state="unconfigured">
+            <strong data-contact-status-title>The contact form is currently unavailable.</strong>
+            <p data-contact-status-message>You can reach me <a href="mailto:dario.werner.hasler@gmail.com">by email</a> or <a href="#kontakt-whatsapp">on WhatsApp</a>.</p>
+          </div>
+        </div>
+        <section class="whatsapp-card" id="kontakt-whatsapp" aria-labelledby="whatsapp-title" data-reveal="up" data-reveal-step="2">
+          <div class="whatsapp-card-heading">
+            <span class="contact-icon">
+              <svg class="icon" aria-hidden="true"><use href="../../assets/icons/icons.svg#whatsapp"></use></svg>
+            </span>
+            <h2 id="whatsapp-title">Contact via WhatsApp</h2>
+          </div>
+          <p>Message me directly if you have questions about the project or the planned PC services.</p>
+          <a class="button button-whatsapp" href="https://wa.me/41794670062?text=Hello%2C%20I%20visited%20your%20Blackridge%20Technical%20website%20and%20have%20a%20question." target="_blank" rel="noopener noreferrer" aria-describedby="contact-new-tab">
+            <svg class="icon" aria-hidden="true"><use href="../../assets/icons/icons.svg#whatsapp"></use></svg>
+            Contact via WhatsApp
+          </a>
+          <span class="sr-only" id="contact-new-tab">Opens in a new tab.</span>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="closing-cta-art" aria-hidden="true">
+      <img class="closing-cta-ridge closing-cta-ridge-left" src="../../assets/images/abschluss-berge-links.webp" width="1120" height="320" alt="" loading="lazy" decoding="async">
+      <img class="closing-cta-ridge closing-cta-ridge-right" src="../../assets/images/abschluss-berge-rechts.webp" width="1120" height="320" alt="" loading="lazy" decoding="async">
+    </div>
+    <div class="container footer-layout">
+      <a class="brand" href="../">
+        <img class="brand-mark" src="../../assets/logo/blackridge.png" width="107" height="50" alt="">
+        <span class="brand-copy">
+          <span class="brand-name">BLACKRIDGE TECHNICAL</span>
+          <span class="brand-company">Hasler – Blackridge Technical</span>
+        </span>
+      </a>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <ul>
+          <li><a href="../">Home</a></li>
+          <li><a href="../services/">Services</a></li>
+          <li><a href="../pricing/">Pricing</a></li>
+          <li><a href="../about/">About Blackridge</a></li>
+          <li><a href="./" aria-current="page">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="footer-bottom">
+        <div class="footer-meta">
+          <p class="copyright">© <time data-current-year>2026</time> Hasler – Blackridge Technical</p>
+          <p class="footer-credit">Design &amp; Development: <a href="https://dario-exe.ch/">DARIO.exe</a></p>
+        </div>
+        <nav class="footer-legal" aria-label="Legal information">
+          <ul>
+            <li><a href="../imprint/">Imprint</a></li>
+            <li><a href="../privacy/">Privacy</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

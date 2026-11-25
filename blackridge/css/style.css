@@ -183,6 +183,36 @@ button, input, select, textarea {
   gap: 1rem;
 }
 
+.header-inner > .site-nav {
+  margin-inline-start: auto;
+}
+
+.language-switch {
+  display: flex;
+  flex: none;
+  align-items: center;
+  color: var(--subtle);
+  font-size: .8rem;
+  font-weight: 650;
+}
+
+.language-switch a {
+  display: grid;
+  min-width: 2rem;
+  min-height: 2.75rem;
+  place-items: center;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.language-switch a:hover {
+  color: var(--text);
+}
+
+.language-switch a[aria-current="true"] {
+  color: var(--accent);
+}
+
 .brand {
   display: inline-flex;
   flex: none;
@@ -338,6 +368,10 @@ button, input, select, textarea {
   inline-size: 100%;
   block-size: 100%;
   pointer-events: none;
+  mask-image:
+    linear-gradient(90deg, transparent, #000 1.5rem, #000 calc(100% - 1.5rem), transparent),
+    linear-gradient(transparent, #000 1.5rem, #000 calc(100% - 1.5rem), transparent);
+  mask-composite: intersect;
 }
 
 .hero-visual::after {
@@ -1868,7 +1902,7 @@ button, input, select, textarea {
   }
 }
 
-@media (max-width: 52rem) {
+@media (max-width: 58rem) {
   html:not([data-menu-ready]) .site-header {
     position: relative;
   }
@@ -1876,9 +1910,37 @@ button, input, select, textarea {
   .header-inner {
     min-height: 4.125rem;
     flex-wrap: wrap;
+    gap: .45rem;
+  }
+
+  .header-inner > .brand {
+    flex: 0 1 auto;
+    min-width: 0;
+    max-width: calc(100% - 4.75rem);
+  }
+
+  .header-inner .brand-copy {
+    min-width: 0;
+  }
+
+  html[data-menu-ready] .header-inner {
+    flex-wrap: nowrap;
+  }
+
+  .header-inner > .nav-toggle {
+    margin-inline-start: auto;
+  }
+
+  .header-inner > .language-switch {
+    margin-inline-start: auto;
+  }
+
+  html[data-menu-ready] .header-inner > .language-switch {
+    margin-inline-start: 0;
   }
 
   .site-nav {
+    order: 1;
     flex-basis: 100%;
     margin-bottom: .75rem;
   }
@@ -1925,7 +1987,9 @@ button, input, select, textarea {
   html[data-menu-ready] .site-nav .button {
     margin-top: .35rem;
   }
+}
 
+@media (max-width: 52rem) {
   .hero-inner {
     min-height: 31rem;
   }
