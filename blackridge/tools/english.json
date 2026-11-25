@@ -266,10 +266,12 @@
     "Schliessen": "Close"
   },
   "kontakt/": {
-    "Kontaktieren Sie Blackridge Technical per E-Mail oder WhatsApp für Fragen zum Projekt, zu geplanten PC-Dienstleistungen und für Feedback.": "Contact Blackridge Technical by email or WhatsApp with questions about the project, planned PC services or to share feedback.",
+    "Kontaktieren Sie Blackridge Technical per Formular, E-Mail oder WhatsApp für Fragen zum Projekt, zu geplanten PC-Dienstleistungen und für Feedback.": "Contact Blackridge Technical by form, email or WhatsApp with questions about the project, planned PC services or to share feedback.",
     "Kontakt | Blackridge Technical": "Contact | Blackridge Technical",
     "Haben Sie eine Frage zu Blackridge Technical oder möchten Sie mehr über das Projekt erfahren?": "Have a question about Blackridge Technical or want to know more about the project?",
-    "Allgemeine Fragen und Feedback sind per E-Mail oder WhatsApp willkommen.": "General questions and feedback are welcome by email or WhatsApp.",
+    "Allgemeine Fragen und Feedback sind per Formular, per": "General questions and feedback are welcome via the contact form, by",
+    "E-Mail": "email",
+    "oder über WhatsApp willkommen.": "or on WhatsApp.",
     "Angaben zu Ihrer Nachricht": "Your message details",
     "Name (optional)": "Name (optional)",
     "E-Mail-Adresse": "Email Address",
