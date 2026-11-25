@@ -7,6 +7,12 @@
     ? location.pathname.slice(base.pathname.length) : "";
   const english = relativePath === "en" || relativePath.startsWith("en/");
 
+  function mountAssistant() {
+    import(new URL("js/faq-assistant.mjs", base))
+      .then(({ mountFaqAssistant }) => mountFaqAssistant())
+      .catch(() => { /* Keep the error page usable if the widget cannot load. */ });
+  }
+
   function localize(view) {
     view.querySelector('[data-signal-language="de"]').hidden = english;
     view.querySelector('[data-signal-language="en"]').hidden = !english;
@@ -19,6 +25,7 @@
 
   if (!loader.hasAttribute("data-signal-router")) {
     localize(document.querySelector(".signal-frame"));
+    mountAssistant();
     return;
   }
 
@@ -72,6 +79,7 @@
       document.body.className = "signal-lost";
       document.body.replaceChildren(document.adoptNode(view));
       mounted = true;
+      mountAssistant();
     } catch {
       // The existing DARIO page is the fallback if the Blackridge files are unavailable.
     } finally {

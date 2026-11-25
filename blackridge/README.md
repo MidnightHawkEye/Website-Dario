@@ -73,7 +73,7 @@ Die technische Aktivierung des Formulars und die Prüfung der Konto- und Vertrag
 
 ## Eignung von GitHub Pages
 
-Die Nutzung als Informations- und Lernprojekt mit allgemeinen Kontaktmöglichkeiten und ohne kostenpflichtige Auftragsannahme, Bestellfunktion oder Zahlungen erscheint mit den veröffentlichten Pages-Bedingungen vereinbar. GitHub Pages schränkt das Betreiben von Online-Geschäften sowie Websites ein, die hauptsächlich kommerzielle Transaktionen ermöglichen oder kommerzielles SaaS anbieten. Prüfe die Hosting-Eignung erneut, bevor du bezahlte Aufträge, verbindliche Buchungen, Bestellungen oder Zahlungen über die Website anbietest. Falls die geplante Nutzung unter die Beschränkung fällt, wähle dafür einen geeigneten anderen Host. [GitHub-Pages-Vertragsbedingungen](https://docs.github.com/en/site-policy/github-terms/github-terms-for-additional-products-and-features#pages) · [GitHub-Pages-Nutzungsgrenzen](https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits#usage-limits)
+Die Website stellt Dienstleistungen und Richtpreise vor und nimmt unverbindliche Anfragen entgegen. Aufträge werden individuell vereinbart. Vor einem geschäftlichen Start die Eignung des Hostings für die konkrete Nutzung klären. GitHub Pages schränkt unter anderem den Betrieb von Online-Geschäften und Websites ein, deren Hauptzweck kommerzielle Transaktionen sind. [GitHub-Pages-Vertragsbedingungen](https://docs.github.com/en/site-policy/github-terms/github-terms-for-additional-products-and-features#pages) · [GitHub-Pages-Nutzungsgrenzen](https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits#usage-limits)
 
 ## Weitere Hinweise zur Veröffentlichung
 
@@ -99,6 +99,15 @@ Pflege die deutschen Inhalte in den bestehenden HTML-Seiten und die englischen T
 Führe im Blackridge-Ordner `node tools/build-languages.cjs` aus. Der Befehl erzeugt die englischen HTML-Seiten, Sprachlinks und SEO-Metadaten für beide Sprachen sowie `sitemap.xml`. Die bestehende `noindex`-Einstellung der rechtlichen Seiten gilt auch auf Englisch. GitHub Pages liefert die statischen Dateien direkt aus.
 
 Bei einem Domainumzug die Basis-URL `site` in `tools/build-languages.cjs` aktualisieren und den Befehl erneut ausführen. Die Navigationslinks und gemeinsam genutzten Assets verwenden relative Pfade.
+
+## Blackridge Assistant pflegen
+
+Der zweisprachige FAQ-Assistent wird über die gemeinsamen Blackridge-Skripte geladen. Alle Fragen werden im Browser mit den Einträgen in `js/faq-data.mjs` abgeglichen. Der Chatverlauf bleibt im Arbeitsspeicher der geladenen Seite. Der Assistent hängt von keinen externen Diensten ab.
+
+- Ergänze in `js/faq-data.mjs` einen Eintrag mit eindeutiger `id`, einer Kategorie, den deutschen und englischen Fragen und Antworten, typischen Begriffen in `terms` und den passenden internen `links`. Links bestehen aus dem Routenschlüssel und bei Bedarf einem vorhandenen Fragment, zum Beispiel `services#faq`. Die Liste `suggestions` bestimmt die Fragen beim Öffnen.
+- Verwende `weak` zusammen mit `context` für Begriffe, die erst in Verbindung mit einem PC-Thema aussagekräftig sind. `requires` kann zusätzliche Begriffsgruppen vorgeben, etwa für Anfragen zu mitgebrachten Teilen. `shortQueries` enthält vollständig übereinstimmende Kurzfragen.
+- Preise und die Leistungsübersicht im Assistenten stammen aus der Preis- und FAQ-Seite. Erzeuge nach Änderungen an den Seiten mit `node tools/build-languages.cjs` beide Sprachversionen und `js/faq-facts.mjs` neu. Die übrigen Chat-Antworten sind kurze Fassungen der veröffentlichten Inhalte. Bei Änderungen am Projektstatus diese Texte und bei einer Freigabe des Formulars auch dessen Konfiguration prüfen.
+- Führe `node --test tools/faq-assistant.test.cjs` aus. Der Test prüft unter anderem Fragevarianten, uneindeutige Themen, interne Ziele und den Abgleich der gemeinsamen Fakten.
 
 ## Circuit Challenge pflegen
 

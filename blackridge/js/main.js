@@ -165,6 +165,10 @@ for (const year of document.querySelectorAll("[data-current-year]")) {
 
 setUpNavigation();
 
+import(new URL("faq-assistant.mjs", document.currentScript.src))
+  .then(({ mountFaqAssistant }) => mountFaqAssistant())
+  .catch(() => { /* Navigation remains available if the optional widget cannot load. */ });
+
 // Wait for initial fragment navigation and scroll restoration before measuring the viewport.
 window.addEventListener("pageshow", () => {
   window.requestAnimationFrame(setUpScrollReveal);
